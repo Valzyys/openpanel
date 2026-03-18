@@ -4,59 +4,59 @@ import { Section, SectionHeader } from '@/components/section';
 
 const faqData = [
   {
-    question: 'Does OpenPanel have a free tier?',
+    question: 'What is JKT48Connect?',
     answer:
-      'For our Cloud plan we offer a 30 days free trial, this is mostly for you to be able to try out OpenPanel before committing to a paid plan. OpenPanel is also open-source and you can self-host it for free!\n\nWhy does OpenPanel not have a free tier? We want to make sure that OpenPanel is used by people who are serious about using it. We also need to invest time and resources to maintain the platform and provide support to our users.',
+      'JKT48Connect is a comprehensive API service built for developers and JKT48 fans. It provides real-time access to JKT48 data — including member profiles, theater schedules, live streams, and the latest news — through a REST API and npm package.',
   },
   {
-    question: 'Is everything really unlimited?',
+    question: 'Is JKT48Connect free to use?',
     answer:
-      'Yes! With OpenPanel, you get unlimited websites/apps, unlimited users, unlimited dashboards, unlimited charts, and unlimited tracked profiles.\n\nThe only limit is the number of events you track per month, which you choose based on your needs.',
+      'JKT48Connect offers multiple access tiers. You can get started with a standard API key for development purposes. For official fanbases and larger communities, Priority Access is available with higher rate limits and exclusive features.\n\nCheck our Pricing page for more details.',
   },
   {
-    question: 'What is the difference between web and product analytics?',
+    question: 'How do I get an API key?',
     answer:
-      'Web analytics focuses on website traffic, page views, and visitor behavior. Product analytics goes deeper, tracking user interactions, events, and product usage patterns.\n\nOpenPanel combines both, giving you a complete view of your users and product performance.',
+      'You can sign up and get your API key through our documentation page. Once you have your key, include it in every request header:\n\n`x-api-key: YOUR_API_KEY`\n\nSee the Authentication guide in our docs for the full setup steps.',
   },
   {
-    question: 'Do I need to modify my code to use OpenPanel?',
+    question: 'What data can I access through JKT48Connect?',
     answer:
-      'OpenPanel offers multiple SDKs and integration options. For most frameworks, you can get started with just a few lines of code.\n\nWe provide SDKs for React, Next.js, Vue, Astro, and many more. Check our documentation for your specific framework.',
+      'JKT48Connect provides a wide range of data, including:\n- Full member & trainee profiles\n- Theater schedules and setlists\n- Real-time live stream data from IDN Live & Showroom\n- Latest JKT48 news and announcements\n- Off-air events and handshake schedules\n- Member birthday information',
   },
   {
-    question: 'Is my data GDPR compliant?',
+    question: 'Is there an npm package for Node.js?',
     answer:
-      "Yes! OpenPanel is designed with privacy in mind. We use cookie-less tracking, don't collect personal data without consent, and give you full control over your data.\n\nYou can self-host to ensure complete data sovereignty.",
+      'Yes! We provide the `@jkt48/core` package which you can install with:\n\n`npm install @jkt48/core`\n\nThe package has full TypeScript support and is compatible with React, Vue, Next.js, and other frameworks. It also includes built-in error handling and automatic request caching.',
   },
   {
-    question: 'How does OpenPanel compare to other analytics tools?',
+    question: 'Can I use it to build a Discord bot?',
     answer:
-      'We have a dedicated compare page where you can see how OpenPanel compares to other analytics tools. You can find it [here](/compare). You can also read our comprehensive guide on the [best open source web analytics tools](/articles/open-source-web-analytics).',
+      'Absolutely! JKT48Connect is a great fit for building JKT48 Discord bots. Our npm package is promise-based and lightweight, making it easy to integrate with Discord libraries like discord.js.\n\nMany developers in the community have already built live notification bots, theater schedule bots, and more using JKT48Connect.',
   },
   {
-    question: 'How does OpenPanel compare to Mixpanel?',
+    question: 'What is a Priority Key and who can get one?',
     answer:
-      "OpenPanel offers similar powerful product analytics features as Mixpanel, but with the added benefits of being open-source, more affordable, and including web analytics capabilities.\n\nYou get Mixpanel's power with Plausible's simplicity.",
+      'A Priority Key is an elevated access level granted to official JKT48 fanbases and verified communities. With a Priority Key, you get higher rate limits, priority queue access, and early access to new features.\n\nTo apply for Priority Access, your fanbase or organization will need to go through a verification process with valid supporting documents.',
   },
   {
-    question: 'How does OpenPanel compare to Plausible?',
+    question: 'Is JKT48Connect an official JKT48 product?',
     answer:
-      "OpenPanel shares Plausible's privacy-first approach and simplicity, but adds powerful product analytics capabilities.\n\nWhile Plausible focuses on web analytics, OpenPanel combines both web and product analytics in one platform.",
+      'JKT48Connect is a fan-made project built by fans, for fans — it is not an official product of JKT48 or its management. Data is aggregated from publicly available official JKT48 sources.\n\nJKT48Connect is developed and maintained by a community of JKT48 fan developers.',
   },
   {
-    question: 'How does OpenPanel compare to Google Analytics?',
+    question: 'What platforms are supported?',
     answer:
-      "OpenPanel is a privacy-first alternative to Google Analytics. Unlike GA, we don't use cookies, respect user privacy, and give you full control over your data.\n\nPlus, you get product analytics features that GA doesn't offer.",
+      'JKT48Connect supports any platform capable of making HTTP requests. The REST API can be accessed from Node.js, Python, React, Vue, Next.js, mobile apps, and more.\n\nOur npm package is specifically optimized for the Node.js ecosystem with full TypeScript support.',
   },
   {
-    question: 'Can I export my data?',
+    question: 'How do I report a bug or contribute to the project?',
     answer:
-      'Absolutely! You own your data and can export it anytime. We have API endpoints to get all raw data that we have access to.\n\nIf you self-host, you have direct access and own all your data. For our cloud service, you can always reach out to us if you want a database dump of all your data—perfect if you want to move from cloud to self-hosting.\n\nWe have no lock-in whatsoever.',
+      'JKT48Connect is an open-source project supported by the community. You can report bugs or request new features through GitHub Issues.\n\nPull request contributions are very welcome! Check our GitHub repository for the contribution guide.',
   },
   {
-    question: 'What kind of support do you offer?',
+    question: 'Where can I get help if I run into issues?',
     answer:
-      'We offer support through our documentation, GitHub issues, and Discord community. For paid plans, we provide email support.\n\nOur team is committed to helping you succeed with OpenPanel.',
+      'You can get help through:\n- Official documentation at docs.jkt48connect.com\n- GitHub Issues for bug reports\n- Our Discord community\n\nOur team and the developer community are ready to help you integrate JKT48Connect into your project.',
   },
 ];
 
@@ -66,7 +66,7 @@ export function Faq() {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="col gap-8">
           <SectionHeader
-            description="Some of the most common questions we get asked."
+            description="Some of the most common questions we get asked about JKT48Connect."
             title="FAQ"
           />
           <GetStartedButton className="w-fit max-md:hidden" />
