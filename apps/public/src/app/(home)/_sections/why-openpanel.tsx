@@ -28,16 +28,6 @@ const images = [
     url: 'https://midday.ai',
     logo: 'https://files.catbox.moe/kmsod4.png',
   },
-  {
-    name: 'Screenzen',
-    url: 'https://www.screenzen.co',
-    logo: '/logos/screenzen.png',
-  },
-  {
-    name: 'Tiptip',
-    url: 'https://tiptip.id',
-    logo: '/logos/tiptip.png',
-  },
 ];
 
 const quotes: {
