@@ -1,6 +1,6 @@
 import { FeatureCard } from '@/components/feature-card';
 import { LiveStreamIllustration } from '@/components/illustrations/conversions';
-import { GoogleSearchConsoleIllustration } from '@/components/illustrations/google-search-console';
+import { TheaterEventsIllustration } from '@/components/illustrations/google-search-console';
 import { MemberIllustration } from '@/components/illustrations/revenue';
 import { Section, SectionHeader } from '@/components/section';
 
@@ -33,7 +33,7 @@ const features = [
     title: 'Theater & Events',
     description:
       'Stay updated with Theater JKT48 schedules, setlists, and handshake events. Plan your visits and track ticket availability.',
-    illustration: wrap(<GoogleSearchConsoleIllustration />),
+    illustration: wrap(<TheaterEventsIllustration />),
     link: {
       href: '/features/theater-events',
       children: 'View schedule',
