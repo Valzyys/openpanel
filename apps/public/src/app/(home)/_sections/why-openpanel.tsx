@@ -11,7 +11,7 @@ const images = [
   {
     name: 'Lucide Animated',
     url: 'https://lucide-animated.com',
-    logo: '/logos/lucide-animated.png',
+    logo: 'https://cavallery.id/wp-content/uploads/2025/05/cropped-cropped-LOGO-CAVA-150x150.png',
   },
   {
     name: 'KiddoKitchen',
