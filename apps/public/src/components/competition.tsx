@@ -6,17 +6,10 @@ const brandConfig = {
   'JKT48 Official': '#FF006E',
   'IDN App': '#00D9FF',
   'Showroom': '#00C853',
-  'Twitter Updates': '#1DA1F2',
-  'Instagram Live': '#E4405F',
-  'TikTok Content': '#FF0050',
   'YouTube Streams': '#FF0000',
   'Theater Info': '#FF9500',
   'Member Data': '#AF52DE',
   'Event Calendar': '#FF3B30',
-  'Fan Community': '#34C759',
-  'Live Schedule': '#007AFF',
-  'Performance Stats': '#FF2D55',
-  'Open API': '#5856D6',
   'Real-time Data': '#5AC8FA',
 } as const;
 
