@@ -14,25 +14,25 @@ function wrap(child: React.ReactNode) {
 
 const mediumFeatures = [
   {
-    title: 'Retention',
+    title: 'Theater Schedule',
     description:
-      'Know how many users come back after day 1, day 7, day 30. Identify which behaviors predict long-term retention.',
+      'Access real-time theater schedules and setlists. Know which team is performing, who the senbatsu members are, and when shows go live.',
     illustration: wrap(<RetentionIllustration />),
-    link: { href: '/features/retention', children: 'View retention' },
+    link: { href: '/docs/theater', children: 'View theater API' },
   },
   {
-    title: 'Session Replay',
+    title: 'Live Stream Tracking',
     description:
-      'Watch real user sessions to see exactly what happened — clicks, scrolls, rage clicks. Privacy controls built in.',
+      'Monitor IDN Live and Showroom streams in real-time. Get notified when your oshi goes live and track viewer counts as they happen.',
     illustration: wrap(<SessionReplayIllustration />),
-    link: { href: '/features/session-replay', children: 'See session replay' },
+    link: { href: '/docs/live', children: 'See live stream API' },
   },
   {
-    title: 'Notifications',
+    title: 'Event Notifications',
     description:
-      'Get notified when a funnel is completed. Stay on top of key moments in your product without watching dashboards all day.',
+      'Stay updated on handshake events, off-air shows, and special appearances. Never miss a moment with real-time event alerts.',
     illustration: wrap(<NotificationsIllustration />),
-    link: { href: '/features/notifications', children: 'Set up notifications' },
+    link: { href: '/docs/events', children: 'Set up notifications' },
   },
 ];
 
@@ -41,26 +41,24 @@ export function AnalyticsInsights() {
     <Section className="container">
       <SectionHeader
         className="mb-16"
-        description="From first page view to long-term retention — every touchpoint in one platform. No sampling, no data limits, no guesswork."
-        label="ANALYTICS & INSIGHTS"
-        title="Everything you need to understand your users"
+        description="From member profiles to live stream data — every JKT48 data point in one API. No scraping, no data gaps, no guesswork."
+        label="FEATURES & ENDPOINTS"
+        title="Everything you need to build JKT48 apps"
       />
-
       <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <FeatureCard
           className="px-0 **:data-content:px-6"
-          description="Understand your website performance with privacy-first analytics. Track visitors, referrers, and page views without touching user cookies."
+          description="Access complete JKT48 member data — profiles, generations, social links, and birthday info — all through a single unified REST API endpoint."
           illustration={<WebAnalyticsIllustration />}
-          title="Web Analytics"
+          title="Member Data API"
         />
         <FeatureCard
           className="px-0 **:data-content:px-6"
-          description="Go beyond page views. Track custom events, understand user flows, and explore exactly how people use your product."
+          description="Go beyond basic data. Track news, announcements, and custom events. Understand the full picture of JKT48 activity across all platforms."
           illustration={<ProductAnalyticsIllustration />}
-          title="Product Analytics"
+          title="News & Announcements"
         />
       </div>
-
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {mediumFeatures.map((feature) => (
           <FeatureCard
@@ -73,13 +71,12 @@ export function AnalyticsInsights() {
           />
         ))}
       </div>
-
       <p className="mt-8 text-center">
         <Link
           className="inline-flex items-center gap-1 text-muted-foreground text-sm transition-colors hover:text-foreground"
-          href="/features"
+          href="/docs"
         >
-          Explore all features
+          Explore all endpoints
           <ChevronRightIcon className="size-3.5" />
         </Link>
       </p>
