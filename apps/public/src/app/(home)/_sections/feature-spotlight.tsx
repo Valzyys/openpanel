@@ -1,5 +1,5 @@
 import { FeatureCard } from '@/components/feature-card';
-import { ConversionsIllustration } from '@/components/illustrations/conversions';
+import { LiveStreamIllustration } from '@/components/illustrations/conversions';
 import { GoogleSearchConsoleIllustration } from '@/components/illustrations/google-search-console';
 import { MemberIllustration } from '@/components/illustrations/revenue';
 import { Section, SectionHeader } from '@/components/section';
@@ -23,7 +23,7 @@ const features = [
     title: 'Live Stream Monitoring',
     description:
       'Monitor IDN Live and Showroom streams in real-time. Get notified when your oshi goes live and never miss a moment.',
-    illustration: wrap(<ConversionsIllustration />),
+    illustration: wrap(<LiveStreamIllustration />),
     link: {
       href: '/features/live-streaming',
       children: 'Monitor streams',
