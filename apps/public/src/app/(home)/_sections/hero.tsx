@@ -19,12 +19,12 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const perks = [
-  { text: 'Free trial 30 days', icon: CalendarIcon },
+  { text: 'Free forever tier', icon: CalendarIcon },
   { text: 'No credit card required', icon: CreditCardIcon },
-  { text: 'GDPR compliant', icon: ShieldCheckIcon },
-  { text: 'EU hosted', icon: EuFlag },
-  { text: 'Cookie-less tracking', icon: CookieIcon },
-  { text: 'Open-source', icon: GithubIcon },
+  { text: 'Open API', icon: ShieldCheckIcon },
+  { text: 'Indonesia hosted', icon: EuFlag },
+  { text: 'Real-time data', icon: CookieIcon },
+  { text: 'Community driven', icon: GithubIcon },
 ];
 
 const aspectRatio = 2946 / 1329;
@@ -124,11 +124,11 @@ export function Hero() {
           <GetStartedButton />
           <Button asChild className="px-6" size="lg" variant="outline">
             <Link
-              href="https://jkt48connect.dev/demo"
+              href="https://github.com/jkt48connect/jkt48connect-app/releases"
               rel="noreferrer noopener nofollow"
               target="_blank"
             >
-              View live demo
+              Download JKT48ConnectAPP
             </Link>
           </Button>
         </div>
