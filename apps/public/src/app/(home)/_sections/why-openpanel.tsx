@@ -16,7 +16,7 @@ const images = [
   {
     name: 'KiddoKitchen',
     url: 'https://kiddokitchen.se',
-    logo: '/logos/kiddokitchen.png',
+    logo: 'https://files.catbox.moe/i0qrcx.png',
   },
   {
     name: 'Maneken',
