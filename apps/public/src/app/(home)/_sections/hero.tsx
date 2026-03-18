@@ -112,7 +112,7 @@ export function Hero() {
             TRUSTED BY 10,000+ FANS
           </div>
           <h1 className="font-semibold text-4xl leading-[1.1] md:text-5xl">
-            The ultimate platform for <Competition />
+            All-in-one access to <Competition />
           </h1>
           <p className="text-lg text-muted-foreground">
             Your all-in-one JKT48 data platform. Access member profiles, 
