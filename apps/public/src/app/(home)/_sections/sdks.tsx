@@ -1,6 +1,6 @@
 import { FeatureCardContainer } from '@/components/feature-card';
 import { Section, SectionHeader } from '@/components/section';
-import { frameworks } from '@jkt48connect/sdk-info';
+import { frameworks } from '@openpanel/sdk-info';
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 
