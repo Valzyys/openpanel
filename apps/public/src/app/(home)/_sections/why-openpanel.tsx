@@ -9,24 +9,34 @@ import { cn } from '@/lib/utils';
 
 const images = [
   {
-    name: 'Lucide Animated',
-    url: 'https://lucide-animated.com',
+    name: 'Cavallery',
+    url: 'https://cavallery.id',
     logo: 'https://cavallery.id/wp-content/uploads/2025/05/cropped-cropped-LOGO-CAVA-150x150.png',
   },
   {
-    name: 'KiddoKitchen',
-    url: 'https://kiddokitchen.se',
+    name: 'FritzyForce',
+    url: 'https://fritzyforce.com',
     logo: 'https://files.catbox.moe/i0qrcx.png',
   },
   {
-    name: 'Maneken',
-    url: 'https://maneken.app',
+    name: 'JKT48Connect APP',
+    url: 'https://github.com/jkt48connect/jkt48connect-app',
     logo: 'https://files.catbox.moe/7x3l1y.png',
   },
   {
-    name: 'Midday',
-    url: 'https://midday.ai',
+    name: 'Nayrakuen',
+    url: 'https://nayrakuen.com',
     logo: 'https://files.catbox.moe/kmsod4.png',
+  },
+  {
+    name: 'comingsoon',
+    url: '#',
+    logo: 'https://files.catbox.moe/rguv3l.png',
+  },
+   {
+    name: 'comingsoon',
+    url: '#',
+    logo: 'https://files.catbox.moe/rguv3l.png',
   },
 ];
 
