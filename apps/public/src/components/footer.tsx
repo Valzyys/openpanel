@@ -119,7 +119,7 @@ export async function Footer() {
             <Social />
           </div>
           <div className="md:row container flex flex-col-reverse justify-between gap-8">
-            <div>Copyright © {year} OpenPanel. All rights reserved.</div>
+            <div>Copyright © {year} JKT48Connect. All rights reserved.</div>
             <div className="col lg:row gap-2 md:gap-4">
               <Link href="/sitemap.xml">Sitemap</Link>
               <Link href="/privacy">Privacy Policy</Link>
