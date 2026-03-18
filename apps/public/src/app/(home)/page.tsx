@@ -22,7 +22,7 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       name: OPENPANEL_SITE_NAME,
-      alternateName: ['OpenPanel', 'OpenPanel.dev'],
+      alternateName: ['JKT48Connnect', 'jkt48Connect.com'],
       url: OPENPANEL_BASE_URL,
     },
     {
@@ -30,12 +30,12 @@ const jsonLd = {
       name: OPENPANEL_SITE_NAME,
       url: OPENPANEL_BASE_URL,
       sameAs: [
-        'https://github.com/Openpanel-dev/openpanel',
-        'https://x.com/OpenPanelDev',
+        'https://github.com/jkt48connect',
+        'https://x.com/valzyys',
       ],
       description: OPENPANEL_DESCRIPTION,
       keywords:
-        'openpanel, product analytics, web analytics, mixpanel alternative, open source analytics',
+        'jkt48, restapi, jkt48 data, restapi jkt48',
     },
     {
       '@type': 'SoftwareApplication',
