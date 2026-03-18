@@ -1,7 +1,7 @@
 import { FeatureCard } from '@/components/feature-card';
 import { ConversionsIllustration } from '@/components/illustrations/conversions';
 import { GoogleSearchConsoleIllustration } from '@/components/illustrations/google-search-console';
-import { RevenueIllustration } from '@/components/illustrations/revenue';
+import { MemberIllustration } from '@/components/illustrations/revenue';
 import { Section, SectionHeader } from '@/components/section';
 
 function wrap(child: React.ReactNode) {
@@ -13,7 +13,7 @@ const features = [
     title: 'Member Tracking',
     description:
       'Track your favorite members activities, theater appearances, and live streaming schedules all in one dashboard.',
-    illustration: wrap(<RevenueIllustration />),
+    illustration: wrap(<MemberIllustration />),
     link: {
       href: '/features/member-tracking',
       children: 'Track members',
