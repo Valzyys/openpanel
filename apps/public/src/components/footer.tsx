@@ -157,7 +157,7 @@ function Social() {
     <div className="col gap-4 md:items-end">
       <div className="row gap-4 [&_svg]:size-6">
         <Link
-          href="https://github.com/Openpanel-dev/openpanel"
+          href="https://github.com/jkt48connect"
           rel="noreferrer noopener nofollow"
           title="Go to GitHub"
         >
@@ -172,7 +172,7 @@ function Social() {
           </svg>
         </Link>
         <Link
-          href="https://x.com/openpaneldev"
+          href="https://x.com/valzyys"
           rel="noreferrer noopener nofollow"
           title="Go to X"
         >
@@ -202,7 +202,7 @@ function Social() {
           </svg>
         </Link>
         <Link
-          href="mailto:hello@openpanel.dev"
+          href="mailto:support@jkt48connect.com"
           rel="noreferrer noopener nofollow"
           title="Send an email"
         >
@@ -210,7 +210,7 @@ function Social() {
         </Link>
         <a
           className="row items-center gap-2 rounded-full border px-2 py-1 max-md:ml-auto max-md:self-start"
-          href="https://status.openpanel.dev"
+          href="https://status.jkt48connect.com"
           rel="noreferrer noopener nofollow"
           target="_blank"
         >
