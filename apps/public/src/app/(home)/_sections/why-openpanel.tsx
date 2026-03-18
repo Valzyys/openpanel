@@ -65,7 +65,7 @@ const quotes: {
 export function WhyOpenPanel() {
   return (
     <Section className="container gap-16">
-      <SectionHeader label="Trusted by founders" title="Who uses OpenPanel?" />
+      <SectionHeader label="Trusted by official fanbase & developer" title="Who uses OpenPanel?" />
       <div className="col overflow-hidden">
         <SectionLabel className="z-5 -mb-2 self-start bg-background pr-4 text-muted-foreground">
           USED BY
