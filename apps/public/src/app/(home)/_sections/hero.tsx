@@ -97,7 +97,7 @@ export function Hero() {
         setCurrentUrlIndex((prev) => (prev + 1) % demoUrls.length);
         setIsFading(false);
       }, 500);
-    }, 100000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, []);
