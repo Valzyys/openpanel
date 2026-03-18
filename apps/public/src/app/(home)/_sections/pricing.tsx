@@ -1,21 +1,22 @@
 'use client';
 
 import NumberFlow from '@number-flow/react';
-import { PRICING } from '@openpanel/payments/prices';
+import { PRICING } from '@jkt48connect/payments/prices';
 import { CheckIcon, ServerIcon, StarIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { GetStartedButton } from '@/components/get-started-button';
 import { Section, SectionHeader } from '@/components/section';
 import { Button } from '@/components/ui/button';
-import { cn, formatEventsCount } from '@/lib/utils';
+import { cn, formatApiCallsCount } from '@/lib/utils';
 
 const features = [
-  'Unlimited websites or apps',
-  'Unlimited users',
-  'Unlimited dashboards',
-  'Unlimited charts',
-  'Unlimited tracked profiles',
+  'Unlimited member profiles access',
+  'Unlimited theater schedules',
+  'Unlimited live stream data (IDN & Showroom)',
+  'Unlimited events & news updates',
+  'Unlimited API calls',
+  'Real-time data synchronization',
   'Yes, we have no limits or hidden costs',
 ];
 
@@ -28,7 +29,7 @@ export function Pricing() {
       <div className="col md:row gap-16">
         <div className="col w-full min-w-sm gap-4 rounded-3xl border bg-linear-to-b from-card to-background p-6 md:w-1/3">
           <p className="text-muted-foreground text-sm">
-            Choose how many events you'll track this month
+            Choose how many API calls you'll make this month
           </p>
           <div className="row flex-wrap gap-2">
             {PRICING.map((tier, index) => (
@@ -40,7 +41,7 @@ export function Pricing() {
                 variant={selectedIndex === index ? 'default' : 'outline'}
               >
                 {tier.popular && <StarIcon className="size-4" />}
-                {formatEventsCount(tier.events)}
+                {formatApiCallsCount(tier.apiCalls)}
               </Button>
             ))}
             <Button
@@ -83,8 +84,8 @@ export function Pricing() {
             ) : (
               <div className="text-lg">
                 Contact us at{' '}
-                <a className="underline" href="mailto:hello@openpanel.dev">
-                  hello@openpanel.dev
+                <a className="underline" href="mailto:hello@jkt48connect.dev">
+                  hello@jkt48connect.dev
                 </a>{' '}
                 to get a custom quote.
               </div>
@@ -95,7 +96,7 @@ export function Pricing() {
         <div className="col flex-1 shrink-0 justify-center gap-8">
           <div className="col gap-4">
             <SectionHeader
-              description="Pay only for what you use. Choose your event volume - everything else is unlimited. No surprises, no hidden fees."
+              description="Pay only for what you use. Choose your API call volume - everything else is unlimited. Access real-time JKT48 member data, theater schedules, live streams, and events with no surprises, no hidden fees."
               title="Simple, transparent pricing"
             />
           </div>
@@ -113,14 +114,14 @@ export function Pricing() {
 
           <p className="row items-center gap-2 text-muted-foreground text-sm">
             <ServerIcon className="size-4 shrink-0" />
-            Prefer to self-host?{' '}
+             New to JKT48Connect?{' '}
             <Link
               className="text-primary hover:underline"
               href="/docs/self-hosting/self-hosting"
             >
-              Deploy for free
+              Start with our free tier
             </Link>{' '}
-            with unlimited events.
+            no credit card required.
           </p>
         </div>
       </div>
