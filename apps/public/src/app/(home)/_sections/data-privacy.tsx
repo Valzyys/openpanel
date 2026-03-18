@@ -1,29 +1,27 @@
 import { BoltIcon, GithubIcon, ServerIcon } from 'lucide-react';
-import Link from 'next/link';
 import { FeatureCard } from '@/components/feature-card';
 import { GetStartedButton } from '@/components/get-started-button';
 import { DataOwnershipIllustration } from '@/components/illustrations/data-ownership';
 import { PrivacyIllustration } from '@/components/illustrations/privacy';
 import { Section, SectionHeader } from '@/components/section';
-import { Button } from '@/components/ui/button';
 
 const secondaryFeatures = [
   {
     title: 'Open Source',
     description:
-      'Full transparency. Audit the code, contribute, fork it, or self-host without lock-in.',
+      'Full transparency. Audit the code, contribute, or fork it. Built in the open for the JKT48 developer community.',
     icon: GithubIcon,
   },
   {
-    title: 'Self-hosting',
+    title: 'REST API & npm Package',
     description:
-      'Deploy OpenPanel anywhere - your server, your cloud, or locally. Full flexibility.',
+      'Access JKT48 data your way — via REST API from any platform or our npm package for Node.js.',
     icon: ServerIcon,
   },
   {
     title: 'Lightweight & Fast',
     description:
-      "A tiny, high-performance tracker that won't slow down your site.",
+      'A high-performance API built for speed — real-time data with minimal latency.',
     icon: BoltIcon,
   },
 ];
@@ -32,26 +30,26 @@ export function DataPrivacy() {
   return (
     <Section className="container">
       <SectionHeader
-        description="OpenPanel gives you analytics on your terms - privacy-friendly, open-source, and fully self-hostable. Every part of the platform is designed to put you in control of your data while delivering fast, reliable insights without compromising user trust."
+        description="JKT48Connect gives you access to JKT48 data on your terms — open-source, reliable, and built for the community. Every part of the platform is designed to give developers full control while delivering fast, real-time data without unnecessary friction."
         title={
           <>
-            Built for Control,
+            Built for Developers,
             <br />
-            Transparency & Trust
+            Community & Fans
           </>
         }
       />
       <div className="mt-16 mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <FeatureCard
-          description="GDPR compliant and privacy-friendly analytics without cookies or invasive tracking. Data is EU hosted, and a Data Processing Agreement (DPA) is available to sign."
+          description="Priority Access is available for official JKT48 fanbases and verified communities — with higher rate limits, priority queue access, and early access to new features."
           illustration={<PrivacyIllustration />}
-          title="GDPR compliant"
+          title="Priority Access"
           variant="large"
         />
         <FeatureCard
-          description="You own your data - no vendors, no sharing, no hidden processing. Store analytics on your own infrastructure and stay in full control."
+          description="Access complete JKT48 member data — profiles, generations, social links, and birthday info — all in one unified endpoint. Always in sync with the latest updates."
           illustration={<DataOwnershipIllustration />}
-          title="Data Ownership"
+          title="Complete Member Data"
           variant="large"
         />
       </div>
@@ -67,9 +65,6 @@ export function DataPrivacy() {
       </div>
       <div className="row mt-8 gap-4">
         <GetStartedButton />
-        <Button asChild className="px-6" size="lg" variant="outline">
-          <Link href="/docs/self-hosting/self-hosting">Self-host for free</Link>
-        </Button>
       </div>
     </Section>
   );
