@@ -1,5 +1,4 @@
 import { GetStartedButton } from '@/components/get-started-button';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ChevronRightIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -39,12 +38,12 @@ function Svg({ className }: { className?: string }) {
 export function CtaBanner({
   title = (
     <>
-      Ready to understand your users better?
+      Ready to build something for JKT48?
       <br />
-      Start tracking in minutes
+      Start integrating in minutes
     </>
   ),
-  description = 'Join thousands of companies using OpenPanel. Free 30-day trial, no credit card required. Self-host for free or use our cloud.',
+  description = 'Join developers and fanbases using JKT48Connect. Get your API key for free and start accessing real-time JKT48 data today.',
   ctaText,
   ctaLink,
 }: {
@@ -64,7 +63,6 @@ export function CtaBanner({
         <div className="size-px absolute right-12 top-12 rounded-full shadow-[0_0_250px_80px_var(--color-foreground)]" />
         <Svg className="absolute left-0 bottom-0 -translate-x-1/2 translate-y-1/2 max-md:scale-50 opacity-50" />
         <Svg className="absolute right-0 top-0 translate-x-1/2 -translate-y-1/2 rotate-105 max-md:scale-50 scale-75 opacity-50" />
-
         <div className="absolute inset-0 bg-linear-to-br from-foreground/5 via-transparent to-foreground/5" />
         <div className="container relative z-10 col gap-6 center-center max-w-3xl">
           <h2 className="text-4xl md:text-4xl font-semibold text-center">
