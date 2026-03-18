@@ -26,7 +26,7 @@ const images = [
   {
     name: 'Midday',
     url: 'https://midday.ai',
-    logo: 'https://files.catbox.moe/qryv5m.png',
+    logo: 'https://files.catbox.moe/kmsod4.png',
   },
   {
     name: 'Screenzen',
