@@ -21,7 +21,7 @@ const images = [
   {
     name: 'Maneken',
     url: 'https://maneken.app',
-    logo: '/logos/maneken.png',
+    logo: 'https://files.catbox.moe/uvjo2c.png',
   },
   {
     name: 'Midday',
