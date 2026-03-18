@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Competition } from '@/components/competition';
 import { EuFlag } from '@/components/eu-flag';
 import { GetStartedButton } from '@/components/get-started-button';
@@ -30,6 +30,11 @@ const perks = [
 const aspectRatio = 2946 / 1329;
 const width = 2346;
 const height = width / aspectRatio;
+
+const demoUrls = [
+  'https://cavallery.id',
+  'https://fritzyforce.com',
+];
 
 function HeroImage({ className }: { className?: string }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -82,31 +87,48 @@ function HeroImage({ className }: { className?: string }) {
 }
 
 export function Hero() {
+  const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFading(true);
+      setTimeout(() => {
+        setCurrentUrlIndex((prev) => (prev + 1) % demoUrls.length);
+        setIsFading(false);
+      }, 500);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentUrl = demoUrls[currentUrlIndex];
+
   return (
     <HeroContainer className="-mb-32 max-sm:**:data-children:pb-0">
       <div className="col w-full gap-8 sm:w-1/2 sm:pr-12">
         <div className="col gap-4">
           <div className="font-mono text-muted-foreground text-sm">
-            TRUSTED BY 1,000+ PROJECTS
+            TRUSTED BY 10,000+ FANS
           </div>
           <h1 className="font-semibold text-4xl leading-[1.1] md:text-5xl">
-            The open-source alternative to <Competition />
+            The ultimate platform for <Competition />
           </h1>
           <p className="text-lg text-muted-foreground">
-            An open-source web and product analytics platform that combines the
-            power of Mixpanel with the ease of Plausible and one of the best
-            Google Analytics replacements.
+            Your all-in-one JKT48 data platform. Access member profiles, 
+            theater schedules, live streaming updates, events, and setlists 
+            in real-time. Built for fans, by fans.
           </p>
         </div>
         <div className="row gap-4">
           <GetStartedButton />
           <Button asChild className="px-6" size="lg" variant="outline">
             <Link
-              href="https://demo.openpanel.dev/demo/shoey"
+              href="https://jkt48connect.dev/demo"
               rel="noreferrer noopener nofollow"
               target="_blank"
             >
-              Test live demo
+              View live demo
             </Link>
           </Button>
         </div>
@@ -132,22 +154,29 @@ export function Hero() {
             {/* URL bar */}
             <a
               className="group mx-4 flex flex-1 items-center gap-2 rounded-md border border-border bg-background/20 px-3 py-1 text-sm"
-              href="https://demo.openpanel.dev/demo/shoey"
+              href={currentUrl}
               rel="noreferrer noopener nofollow"
               target="_blank"
             >
               <span className="flex-1 text-muted-foreground">
-                https://demo.openpanel.dev
+                {currentUrl.replace('https://', '')}
               </span>
               <ArrowRightIcon className="size-4 opacity-0 transition-opacity group-hover:opacity-100" />
             </a>
           </div>
-          <iframe
-            className="h-full w-full"
-            scrolling="no"
-            src={'https://demo.openpanel.dev/demo/shoey?range=lastHour'}
-            title="Live preview"
-          />
+          <div
+            className={cn(
+              'h-full w-full transition-opacity duration-500',
+              isFading ? 'opacity-0' : 'opacity-100'
+            )}
+          >
+            <iframe
+              className="h-full w-full"
+              scrolling="no"
+              src={currentUrl}
+              title="Live preview"
+            />
+          </div>
         </div>
       </div>
     </HeroContainer>
