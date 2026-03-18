@@ -1,23 +1,22 @@
 'use client';
 
 import NumberFlow from '@number-flow/react';
-import { PRICING } from '@jkt48connect/payments/prices';
+import { PRICING } from '@openpanel/payments/prices';
 import { CheckIcon, ServerIcon, StarIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { GetStartedButton } from '@/components/get-started-button';
 import { Section, SectionHeader } from '@/components/section';
 import { Button } from '@/components/ui/button';
-import { cn, formatApiCallsCount } from '@/lib/utils';
+import { cn, formatEventsCount } from '@/lib/utils';
 
 const features = [
-  'Unlimited member profiles access',
+  'Unlimited member profiles',
   'Unlimited theater schedules',
-  'Unlimited live stream data (IDN & Showroom)',
-  'Unlimited events & news updates',
-  'Unlimited API calls',
-  'Real-time data synchronization',
-  'Yes, we have no limits or hidden costs',
+  'Unlimited live streaming data',
+  'Unlimited events & setlists',
+  'Unlimited news updates',
+  'Real-time data sync',
 ];
 
 export function Pricing() {
@@ -29,7 +28,7 @@ export function Pricing() {
       <div className="col md:row gap-16">
         <div className="col w-full min-w-sm gap-4 rounded-3xl border bg-linear-to-b from-card to-background p-6 md:w-1/3">
           <p className="text-muted-foreground text-sm">
-            Choose how many API calls you'll make this month
+            Choose your monthly API request volume
           </p>
           <div className="row flex-wrap gap-2">
             {PRICING.map((tier, index) => (
@@ -41,7 +40,7 @@ export function Pricing() {
                 variant={selectedIndex === index ? 'default' : 'outline'}
               >
                 {tier.popular && <StarIcon className="size-4" />}
-                {formatApiCallsCount(tier.apiCalls)}
+                {formatEventsCount(tier.events)}
               </Button>
             ))}
             <Button
@@ -64,7 +63,7 @@ export function Pricing() {
                     className="font-bold text-5xl"
                     format={{
                       style: 'currency',
-                      currency: 'USD',
+                      currency: 'IDR',
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 1,
                     }}
@@ -84,10 +83,10 @@ export function Pricing() {
             ) : (
               <div className="text-lg">
                 Contact us at{' '}
-                <a className="underline" href="mailto:hello@jkt48connect.dev">
+                <a className="underline" href="mailto:support@jkt48connect.com">
                   hello@jkt48connect.dev
                 </a>{' '}
-                to get a custom quote.
+                for custom enterprise pricing.
               </div>
             )}
           </div>
@@ -96,8 +95,8 @@ export function Pricing() {
         <div className="col flex-1 shrink-0 justify-center gap-8">
           <div className="col gap-4">
             <SectionHeader
-              description="Pay only for what you use. Choose your API call volume - everything else is unlimited. Access real-time JKT48 member data, theater schedules, live streams, and events with no surprises, no hidden fees."
-              title="Simple, transparent pricing"
+              description="Access all JKT48 data with simple, transparent pricing. Pay for your API usage - everything else is unlimited. No hidden fees, no surprises."
+              title="Simple pricing for JKT48 data"
             />
           </div>
 
@@ -114,14 +113,13 @@ export function Pricing() {
 
           <p className="row items-center gap-2 text-muted-foreground text-sm">
             <ServerIcon className="size-4 shrink-0" />
-             New to JKT48Connect?{' '}
+            Need help integrating?{' '}
             <Link
               className="text-primary hover:underline"
-              href="/docs/self-hosting/self-hosting"
+              href="/docs/quickstart"
             >
-              Start with our free tier
-            </Link>{' '}
-            no credit card required.
+              Check our quickstart guide
+            </Link>
           </p>
         </div>
       </div>
