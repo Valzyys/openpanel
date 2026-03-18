@@ -1,6 +1,6 @@
 import { FeatureCardContainer } from '@/components/feature-card';
 import { Section, SectionHeader } from '@/components/section';
-import { frameworks } from '@openpanel/sdk-info';
+import { frameworks } from '@jkt48connect/sdk-info';
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 
@@ -8,8 +8,8 @@ export function Sdks() {
   return (
     <Section className="container">
       <SectionHeader
-        title="Get started in minutes"
-        description="Integrate OpenPanel with your favorite framework using our lightweight SDKs. A few lines of code and you're tracking."
+        title="Connect with JKT48 data in minutes"
+        description="Integrate JKT48Connect with your favorite framework using our lightweight SDKs. Access real-time member data, theater schedules, live streams, and events with just a few lines of code."
         className="mb-16"
       />
       <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
