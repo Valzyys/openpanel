@@ -1,38 +1,34 @@
-import { FeatureCard } from '@/components/feature-card';
 import { GetStartedButton } from '@/components/get-started-button';
 import { Section, SectionHeader } from '@/components/section';
-import { Button } from '@/components/ui/button';
 import {
-  ChartBarIcon,
   ChevronRightIcon,
-  DollarSignIcon,
-  LayoutDashboardIcon,
-  RocketIcon,
-  WorkflowIcon,
+  RadioIcon,
+  UsersIcon,
+  WebhookIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { CollaborationChart } from './collaboration-chart';
 
 const features = [
   {
-    title: 'Flexible data visualization',
+    title: 'Real-time Live Stream Data',
     description:
-      'Build line charts, bar charts, sankey flows, and custom dashboards. Combine metrics from any event into a single view.',
-    icon: ChartBarIcon,
-    slug: 'data-visualization',
+      'Monitor active streams from IDN Live and Showroom in real-time. Get viewer counts, stream status, and member info in a single endpoint.',
+    icon: RadioIcon,
+    slug: 'live-stream',
   },
   {
-    title: 'Share & Collaborate',
+    title: 'Member & Fanbase Access',
     description:
-      'Invite unlimited team members with org-wide or project-level access. Share dashboards publicly or lock them behind a password.',
-    icon: LayoutDashboardIcon,
-    slug: 'share-and-collaborate',
+      'Access complete member profiles, trainee lists, and generation data. Priority keys available for official fanbases with higher rate limits.',
+    icon: UsersIcon,
+    slug: 'members',
   },
   {
-    title: 'Integrations & Webhooks',
+    title: 'Webhooks & Integrations',
     description:
-      'Forward events to your own systems or third-party tools. Connect OpenPanel to Slack, your data warehouse, or any webhook endpoint.',
-    icon: WorkflowIcon,
+      'Forward JKT48 events to your own systems or third-party tools. Connect JKT48Connect to Discord bots, your app, or any webhook endpoint.',
+    icon: WebhookIcon,
     slug: 'integrations',
   },
 ];
@@ -44,16 +40,14 @@ export function Collaboration() {
         <CollaborationChart />
         <div>
           <SectionHeader
-            title="Turn data into actionable insights"
-            description="Build interactive dashboards, share insights with your team, and make data-driven decisions faster. OpenPanel helps you understand not just what's happening, but why."
+            title="Everything you need to build JKT48 apps"
+            description="Access live streams, member data, theater schedules, and events through a single unified API. JKT48Connect gives you the tools to build exactly what the community needs."
           />
-
           <GetStartedButton className="mt-6" />
-
           <div className="col gap-6 mt-16">
             {features.map((feature) => (
               <Link
-                href={`/features/${feature.slug}`}
+                href={`/docs/${feature.slug}`}
                 className="group relative col gap-2 pr-10 overflow-hidden"
                 key={feature.title}
               >
