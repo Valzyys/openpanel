@@ -11,7 +11,7 @@ export function DataOwnershipIllustration({
     <div>
       {/* Main layout */}
       <div className="relative grid aspect-2/1 grid-cols-5 gap-3">
-        {/* Left: your server card */}
+        {/* Left: member data card */}
         <div
           className="
             col-span-3 rounded-2xl border border-border bg-card/80
@@ -21,36 +21,36 @@ export function DataOwnershipIllustration({
           "
         >
           <div className="flex items-center justify-between text-xs text-foreground">
-            <span>Your server</span>
+            <span>Member Data</span>
             <span className="flex items-center gap-1 rounded-full bg-card/80 px-2 py-0.5 text-[10px] text-blue-300">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-              In control
+              Live
             </span>
           </div>
 
-          {/* "Server" visual */}
+          {/* Member data visual */}
           <div className="mt-3 space-y-2">
             <div className="flex gap-1.5">
               <div className="flex-1 rounded-xl bg-card/80 border border-border px-3 py-2">
-                <p className="text-[10px] text-muted-foreground">Region</p>
+                <p className="text-[10px] text-muted-foreground">Members</p>
                 <p className="text-xs font-medium text-foreground">
-                  EU / Custom
+                  64 Active
                 </p>
               </div>
               <div className="flex-1 rounded-xl bg-card/80 border border-border px-3 py-2">
-                <p className="text-[10px] text-muted-foreground">Retention</p>
+                <p className="text-[10px] text-muted-foreground">Generation</p>
                 <p className="text-xs font-medium text-foreground">
-                  Configurable
+                  Gen 3 – 14
                 </p>
               </div>
             </div>
 
-            {/* mini "database"/requests strip */}
+            {/* Profiles strip */}
             <div className="mt-1 rounded-xl border border-border bg-card/90 px-3 py-2 text-[11px] text-foreground">
               <div className="flex items-center justify-between">
-                <span>Events stored</span>
+                <span>Profiles synced</span>
                 <span className="text-[10px] text-muted-foreground">
-                  locally
+                  real-time
                 </span>
               </div>
               <div className="mt-2 flex gap-1.5">
@@ -61,8 +61,8 @@ export function DataOwnershipIllustration({
             </div>
             <div className="mt-1 rounded-xl border border-border bg-card/90 px-3 py-2 text-[11px] text-foreground">
               <div className="flex items-center justify-between">
-                <span>CPU</span>
-                <span className="text-[10px] text-muted-foreground">20%</span>
+                <span>API Response</span>
+                <span className="text-[10px] text-muted-foreground">~42ms</span>
               </div>
               <div className="mt-2 flex gap-1.5">
                 <div className="h-1.5 flex-1 rounded-full bg-blue-400/70" />
@@ -73,7 +73,7 @@ export function DataOwnershipIllustration({
           </div>
         </div>
 
-        {/* Right: third-party contrast */}
+        {/* Right: features list */}
         <div
           className="
             col-span-2 rounded-2xl border border-border/80 bg-card/40
@@ -82,28 +82,28 @@ export function DataOwnershipIllustration({
             group-hover:translate-y-1 group-hover:translate-x-0.5 group-hover:opacity-70
           "
         >
-          <p className="text-xs text-muted-foreground mb-2">or use our cloud</p>
+          <p className="text-xs text-muted-foreground mb-2">what's included</p>
 
           <ul className="space-y-1.5">
             <li className="flex items-center gap-1.5">
               <span className="h-1 w-1 rounded-full bg-blue-400" />
-              Zero server setup
+              Profiles & socials
             </li>
             <li className="flex items-center gap-1.5">
               <span className="h-1 w-1 rounded-full bg-blue-400" />
-              Auto-scaling & backups
+              Birthday info
             </li>
             <li className="flex items-center gap-1.5">
               <span className="h-1 w-1 rounded-full bg-blue-400" />
-              99.9% uptime
+              Trainee data
             </li>
             <li className="flex items-center gap-1.5">
               <span className="h-1 w-1 rounded-full bg-blue-400" />
-              24/7 support
+              Generation history
             </li>
             <li className="flex items-center gap-1.5">
               <span className="h-1 w-1 rounded-full bg-blue-400" />
-              Export data anytime
+              Always up to date
             </li>
           </ul>
         </div>
