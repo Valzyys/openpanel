@@ -10,33 +10,33 @@ function wrap(child: React.ReactNode) {
 
 const features = [
   {
-    title: 'Revenue Tracking',
+    title: 'Member Tracking',
     description:
-      'Connect payment events to track MRR and see which referrers drive the most revenue.',
+      'Track your favorite members activities, theater appearances, and live streaming schedules all in one dashboard.',
     illustration: wrap(<RevenueIllustration />),
     link: {
-      href: '/features/revenue-tracking',
-      children: 'Track revenue',
+      href: '/features/member-tracking',
+      children: 'Track members',
     },
   },
   {
-    title: 'Conversion Tracking',
+    title: 'Live Stream Monitoring',
     description:
-      'Monitor conversion rates over time and break down by A/B variant, country, or device. Catch regressions before they cost you.',
+      'Monitor IDN Live and Showroom streams in real-time. Get notified when your oshi goes live and never miss a moment.',
     illustration: wrap(<ConversionsIllustration />),
     link: {
-      href: '/features/conversion',
-      children: 'Track conversions',
+      href: '/features/live-streaming',
+      children: 'Monitor streams',
     },
   },
   {
-    title: 'Google Search Console',
+    title: 'Theater & Events',
     description:
-      'See which search queries bring organic traffic and how visitors convert after landing. Your SEO and product data, in one place.',
+      'Stay updated with Theater JKT48 schedules, setlists, and handshake events. Plan your visits and track ticket availability.',
     illustration: wrap(<GoogleSearchConsoleIllustration />),
     link: {
-      href: '/features/integrations',
-      children: 'View integrations',
+      href: '/features/theater-events',
+      children: 'View schedule',
     },
   },
 ];
@@ -46,9 +46,9 @@ export function FeatureSpotlight() {
     <Section className="container">
       <SectionHeader
         className="mb-16"
-        description="OpenPanel goes beyond page views. Track revenue, monitor conversions, and connect your SEO data — all without switching tools."
-        label="GROWTH TOOLS"
-        title="Built for teams who ship and measure"
+        description="JKT48Connect goes beyond basic fan sites. Track members, monitor live streams, and stay updated with theater events — all in one platform built for fans."
+        label="FAN TOOLS"
+        title="Built for fans who follow and support"
       />
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
