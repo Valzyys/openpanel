@@ -84,7 +84,7 @@ export function Pricing() {
               <div className="text-lg">
                 Contact us at{' '}
                 <a className="underline" href="mailto:support@jkt48connect.com">
-                  hello@jkt48connect.dev
+                  support@jkt48connect.com
                 </a>{' '}
                 for custom enterprise pricing.
               </div>
