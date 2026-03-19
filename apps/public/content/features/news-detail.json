@@ -1,0 +1,157 @@
+{
+  "slug": "news-detail",
+  "short_name": "News Detail",
+  "seo": {
+    "title": "News Detail API - Full JKT48 Announcement Content & HTML",
+    "description": "Access complete JKT48 news article content including HTML-formatted text using the news ID from the News API. Perfect for building full announcement pages and rich content displays.",
+    "keywords": [
+      "jkt48 news detail api",
+      "jkt48 news full content",
+      "jkt48 announcement detail",
+      "jkt48 news html content",
+      "jkt48 news id api",
+      "jkt48 full article api"
+    ]
+  },
+  "hero": {
+    "heading": "Get the full announcement",
+    "subheading": "Access complete JKT48 news article content including HTML-formatted text using the news ID from the News API. Build rich announcement pages with full official content.",
+    "badges": [
+      "Full HTML content",
+      "Images included",
+      "Uses news_id from News API",
+      "Official source content"
+    ]
+  },
+  "definition": {
+    "title": "What is the News Detail API?",
+    "text": "The News Detail API provides the complete content of a specific JKT48 news article or announcement, identified by its `news_id` from the News API.\n\nWhere the News API returns a list of announcements with summary data, News Detail gives you everything — including the full article body in HTML-formatted text, ready to render directly in your app.\n\nThe News Detail response includes:\n\n- **Full title** — the complete headline of the announcement\n- **HTML content** — the full article body in HTML format, preserving the original formatting, paragraph structure, and styling from the official source\n- **Plain text content** — a stripped plain-text version for apps that don't render HTML\n- **Published date** — when the article was officially published\n- **Category** — the news category (member_news, event_announcement, schedule_update, media_appearance, general)\n- **Source URL** — direct link to the original official announcement\n- **Images** — all images included in the article with their alt text and URLs\n- **Related members** — member records linked to this announcement where identifiable\n- **Related events** — links to Event API records if the news references a specific upcoming event\n\nThe HTML content field is designed to be rendered directly — paste it into a `dangerouslySetInnerHTML` or equivalent and get a properly formatted article page without any additional parsing."
+  },
+  "capabilities_section": {
+    "title": "What you can do with News Detail",
+    "intro": "Build full announcement pages, rich content displays, and deep-linked news features with complete article content."
+  },
+  "capabilities": [
+    {
+      "title": "Full HTML article content",
+      "description": "Receive the complete article body in HTML format — paragraphs, formatting, and structure preserved exactly as published. Render directly in your app without parsing or transformation."
+    },
+    {
+      "title": "Plain text fallback",
+      "description": "A stripped plain-text version of the content is included alongside the HTML — for apps that display text only, search indexing, or notification body text."
+    },
+    {
+      "title": "All article images",
+      "description": "Access an array of all images included in the original announcement with their URLs and alt text — for building rich media article layouts."
+    },
+    {
+      "title": "Related member linking",
+      "description": "News Detail includes member_id references for members mentioned in the article, linking directly to the Members API for profile enrichment."
+    },
+    {
+      "title": "Related event linking",
+      "description": "When a news article announces a specific upcoming event, the related_events field links to the corresponding Event API record for structured event data."
+    },
+    {
+      "title": "Linked via news_id",
+      "description": "Uses the news_id field from the News API response as the lookup key — making it seamless to go from a news list to full article content on demand."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the News Detail endpoint works",
+    "intro": "Two steps: get the news_id from the News API, then fetch the full article content.",
+    "steps": [
+      {
+        "title": "Get a news_id from the News API",
+        "description": "Call GET /v1/news to retrieve a list of recent JKT48 announcements. Each news item includes a news_id field that uniquely identifies that article."
+      },
+      {
+        "title": "Call the News Detail endpoint",
+        "description": "Make a GET request to /v1/news/:news_id with your API key and the news_id from step one. The response returns the full article content including HTML body, images, and related records."
+      },
+      {
+        "title": "Render the full article",
+        "description": "Use the html_content field to render the complete article in your app. Use the images array for media display, and related_members for linking to member profiles."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses News Detail",
+    "intro": "Fan developers building full news pages and content-rich announcement features.",
+    "items": [
+      {
+        "title": "Full news article pages",
+        "description": "Build complete news article pages that display the full official announcement content — formatted text, images, and related member links — all rendered from a single API response."
+      },
+      {
+        "title": "Rich notification content",
+        "description": "Use the plain text content from News Detail to populate push notification bodies, Discord embed descriptions, and Telegram message text with complete announcement context."
+      },
+      {
+        "title": "News & event cross-linking",
+        "description": "Use the related_events field to link from a news article directly to its corresponding event record — letting fans click from an announcement to a structured event page with schedule and member data."
+      },
+      {
+        "title": "Member news aggregation",
+        "description": "Filter News API results by member, then fetch full content via News Detail to build comprehensive member news pages with complete official announcement text and images."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "news",
+      "title": "News",
+      "description": "Start here to get news_id values from the latest announcements. News Detail enriches any item from this endpoint with full article content."
+    },
+    {
+      "slug": "events",
+      "title": "Events",
+      "description": "News Detail links to Event records when an announcement references an upcoming event — for seamless cross-linking between content and structured schedule data."
+    },
+    {
+      "slug": "members",
+      "title": "Members",
+      "description": "News Detail includes member_id references for members mentioned in the article. Use the Members API to enrich these with full profiles and photos."
+    },
+    {
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Theater schedule announcements often appear as news items. Use News Detail for the full announcement text and the Theater API for the structured show data."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the News Detail API.",
+    "items": [
+      {
+        "question": "Where do I get the news_id from?",
+        "answer": "The news_id is included in every item returned by the News API (/v1/news). Call the News list endpoint first to get recent announcements, then use any news_id from that response to fetch the full article content from this endpoint."
+      },
+      {
+        "question": "Is the HTML content safe to render directly?",
+        "answer": "The HTML content is sourced from official JKT48 announcements and is sanitized before being returned by the API. However, as with any external HTML content, we recommend passing it through a sanitization library (such as DOMPurify) before rendering with dangerouslySetInnerHTML or equivalent in your app."
+      },
+      {
+        "question": "What does the HTML content look like?",
+        "answer": "The HTML content preserves the original structure of the official announcement — paragraphs, headings, bold text, and line breaks are maintained. Inline images from the original article are replaced with placeholder references in the content body, with full image URLs provided separately in the images array."
+      },
+      {
+        "question": "Is plain text always available alongside HTML?",
+        "answer": "Yes. The plain_text_content field is always populated alongside html_content. It contains the full announcement text with HTML tags stripped — suitable for search indexing, notification body text, or apps that don't render HTML."
+      },
+      {
+        "question": "Are related member and event links always populated?",
+        "answer": "Not always. The related_members and related_events fields are populated where the JKT48Connect system has been able to identify mentioned members or linked events in the article content. General announcements that don't mention specific members or events may return empty arrays for these fields."
+      },
+      {
+        "question": "How far back does news article content go?",
+        "answer": "News Detail is available for all news items in the JKT48Connect database. The availability of historical news content depends on when that article was added to the system. More recent announcements will have full HTML content; older historical items may have limited content availability."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the News Detail API",
+    "href": "https://jkt48connect.com/docs/news-detail"
+  }
+}
