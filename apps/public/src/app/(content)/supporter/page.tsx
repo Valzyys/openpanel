@@ -8,9 +8,11 @@ import { getOgImageUrl, getPageMetadata } from '@/lib/metadata';
 import { SupporterPerks } from 'components/sections/supporter-perks';
 import {
   ClockIcon,
-  GithubIcon,
+  CodeIcon,
   InfinityIcon,
+  KeyRoundIcon,
   MessageSquareIcon,
+  RadioIcon,
   RocketIcon,
   SparklesIcon,
   StarIcon,
@@ -21,9 +23,9 @@ import Link from 'next/link';
 import Script from 'next/script';
 
 export const metadata: Metadata = getPageMetadata({
-  title: 'Become a Supporter',
+  title: 'Upgrade to JKT48Connect Pro',
   description:
-    'Support OpenPanel and get exclusive perks like latest Docker images, prioritized support, and early access to new features.',
+    'Upgrade to JKT48Connect Pro and get full API access, real-time live stream tracking, webhooks, priority support, and more. Starting at Rp 49.000/month.',
   url: url('/supporter'),
   image: getOgImageUrl('/supporter'),
 });
@@ -31,13 +33,13 @@ export const metadata: Metadata = getPageMetadata({
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Become a Supporter',
+  name: 'Upgrade to JKT48Connect Pro',
   description:
-    'Support OpenPanel and get exclusive perks like latest Docker images, prioritized support, and early access to new features.',
+    'Upgrade to JKT48Connect Pro and get full API access, real-time live stream tracking, webhooks, priority support, and more.',
   url: url('/supporter'),
   publisher: {
     '@type': 'Organization',
-    name: 'OpenPanel',
+    name: 'JKT48Connect',
     logo: {
       '@type': 'ImageObject',
       url: url('/logo.png'),
@@ -62,22 +64,22 @@ export default function SupporterPage() {
             className="flex-1"
             title={
               <>
-                Help us build
+                Upgrade to Pro and
                 <br />
-                the future of open analytics
+                unlock the full JKT48Connect API
               </>
             }
-            description="Your support accelerates development, funds infrastructure, and helps us build features faster. Plus, you get exclusive perks and early access to everything we ship."
+            description="Get 100.000 API calls per month, real-time live stream tracking, webhook notifications, and priority support. Everything you need to build production-grade JKT48 apps."
           />
           <div className="col gap-4 justify-center items-center mt-8">
             <Button size="lg" asChild>
-              <Link href="https://buy.polar.sh/polar_cl_Az1CruNFzQB2bYdMOZmGHqTevW317knWqV44W1FqZmV">
-                Become a Supporter
+              <Link href="/pricing">
+                Upgrade to Pro
                 <SparklesIcon className="size-4" />
               </Link>
             </Button>
             <p className="text-sm text-muted-foreground">
-              Starting at $20/month • Cancel anytime
+              Mulai dari Rp 49.000/bulan (≈ $3) • Batalkan kapan saja
             </p>
           </div>
         </div>
@@ -88,38 +90,37 @@ export default function SupporterPage() {
         <div className="grid lg:grid-cols-[1fr_380px] gap-8 mb-16">
           {/* Main Content */}
           <div className="col gap-16">
-            {/* Why Support Section */}
+            {/* Why Upgrade Section */}
             <Section className="my-0">
               <SectionHeader
-                title="Why your support matters"
-                description="We're not a big corporation – just a small team passionate about building something useful for developers. OpenPanel started because we believed analytics tools shouldn't be complicated or locked behind expensive enterprise subscriptions."
+                title="Why upgrade to Pro?"
+                description="The free tier is great for getting started, but Pro gives you the full power of JKT48Connect — higher limits, real-time data, and production-ready features for apps that need reliability at scale."
               />
               <div className="col gap-6 mt-8">
                 <p className="text-muted-foreground">
-                  When you become a supporter, you're directly funding:
+                  When you upgrade to Pro, you're getting:
                 </p>
                 <div className="grid md:grid-cols-2 gap-4">
                   <FeatureCard
-                    title="Active Development"
-                    description="More time fixing bugs, adding features, and improving documentation"
+                    title="100x More API Calls"
+                    description="100.000 API calls per month vs 1.000 on the free tier — room for real apps with real traffic"
                     icon={ZapIcon}
                   />
                   <FeatureCard
-                    title="Infrastructure"
-                    description="Keeping servers running, CI/CD pipelines, and development tools"
-                    icon={ZapIcon}
+                    title="Real-time Live Streams"
+                    description="Sub-second latency for IDN Live and Showroom viewer counts and stream status updates"
+                    icon={RadioIcon}
                   />
                   <FeatureCard
-                    title="Independence"
-                    description="Staying focused on what matters: building a tool developers actually want"
+                    title="Webhook Notifications"
+                    description="Get POST requests to your endpoint the moment a member goes live or an event is announced"
                     icon={ZapIcon}
                   />
                 </div>
                 <p className="text-muted-foreground">
-                  No corporate speak, no fancy promises – just honest work on
-                  making OpenPanel better for everyone. Every contribution, no
-                  matter the size, helps us stay independent and focused on what
-                  matters.
+                  Your subscription directly funds ongoing data maintenance,
+                  new endpoint development, and the infrastructure that keeps
+                  JKT48Connect fast and reliable for every developer using it.
                 </p>
               </div>
             </Section>
@@ -127,35 +128,35 @@ export default function SupporterPage() {
             {/* What You Get Section */}
             <Section className="my-0">
               <SectionHeader
-                title="What you get as a supporter"
-                description="Exclusive perks and early access to everything we ship."
+                title="What you get on Pro"
+                description="Full access to the complete JKT48Connect API with production-ready limits and features."
               />
               <div className="grid md:grid-cols-2 gap-6 mt-8">
                 <FeatureCard
-                  title="Latest Docker Images"
-                  description="Get bleeding-edge builds on every commit. Access new features weeks before public release."
-                  icon={RocketIcon}
+                  title="Full API Access"
+                  description="Unlimited access to all endpoints — members, generations, theater schedules, live streams, events, and announcements."
+                  icon={KeyRoundIcon}
                 >
                   <Link
-                    href="/docs/self-hosting/supporter-access-latest-docker-images"
+                    href="/docs/endpoints"
                     className="text-sm text-primary hover:underline mt-2"
                   >
-                    Learn more →
+                    View all endpoints →
                   </Link>
                 </FeatureCard>
                 <FeatureCard
-                  title="Prioritized Support"
-                  description="Get help faster with priority support in our Discord community. Your questions get answered first."
+                  title="Priority Support"
+                  description="Get faster responses via Discord and email. Integration questions, data issues, and bug reports are handled first for Pro members."
                   icon={MessageSquareIcon}
                 />
                 <FeatureCard
-                  title="Feature Requests"
-                  description="Your ideas and feature requests get prioritized in our roadmap. Shape the future of OpenPanel."
+                  title="Endpoint Requests"
+                  description="Your feature and endpoint requests get prioritized in our development roadmap. Shape what gets built next."
                   icon={SparklesIcon}
                 />
                 <FeatureCard
-                  title="Exclusive Discord Role"
-                  description="Special badge and recognition in our community. Show your support with pride."
+                  title="Pro Discord Role"
+                  description="Exclusive badge and recognition in the JKT48Connect developer community."
                   icon={StarIcon}
                 />
               </div>
@@ -164,24 +165,29 @@ export default function SupporterPage() {
             {/* Impact Section */}
             <Section className="my-0">
               <SectionHeader
-                title="Your impact"
-                description="Every dollar you contribute goes directly into development, infrastructure, and making OpenPanel better. Here's what your support enables:"
+                title="What your subscription enables"
+                description="Every subscription goes directly into keeping JKT48Connect accurate, fast, and growing. Here's what it funds:"
               />
               <div className="grid md:grid-cols-2 gap-6 mt-8">
                 <FeatureCard
-                  title="100% Open Source"
-                  description="Full transparency. Audit the code, contribute, fork it, or self-host without lock-in."
-                  icon={GithubIcon}
+                  title="TypeScript SDK"
+                  description="Ongoing development and maintenance of the official SDK, with new endpoint support added continuously."
+                  icon={CodeIcon}
                 />
                 <FeatureCard
-                  title="24/7 Active Development"
-                  description="Continuous improvements and updates. Your support enables faster development cycles."
+                  title="24/7 Data Freshness"
+                  description="Continuous monitoring of JKT48 data sources to keep member profiles, schedules, and live stream data accurate."
                   icon={ClockIcon}
                 />
                 <FeatureCard
-                  title="Self-Hostable"
-                  description="Deploy OpenPanel anywhere - your server, your cloud, or locally. Full flexibility."
+                  title="New Endpoints"
+                  description="Expanding coverage — new data types, more member details, and deeper integration with JKT48 platforms."
                   icon={InfinityIcon}
+                />
+                <FeatureCard
+                  title="Infrastructure & Uptime"
+                  description="Servers, CDN, and monitoring that keep the API fast and available with 99.9% uptime for production apps."
+                  icon={RocketIcon}
                 />
               </div>
             </Section>
@@ -199,10 +205,10 @@ export default function SupporterPage() {
         </div>
 
         <CtaBanner
-          title="Ready to support OpenPanel?"
-          description="Join our community of supporters and help us build the best open-source alternative to Mixpanel. Every contribution helps accelerate development and make OpenPanel better for everyone."
-          ctaText="Become a Supporter"
-          ctaLink="https://buy.polar.sh/polar_cl_Az1CruNFzQB2bYdMOZmGHqTevW317knWqV44W1FqZmV"
+          title="Ready to upgrade to JKT48Connect Pro?"
+          description="Get 100.000 API calls per month, real-time live stream tracking, webhook support, and priority access. Starting at Rp 49.000/month — cancel anytime."
+          ctaText="Upgrade to Pro"
+          ctaLink="/pricing"
         />
       </div>
 
