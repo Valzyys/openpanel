@@ -1,0 +1,157 @@
+{
+  "slug": "member-detail",
+  "short_name": "Member Detail",
+  "seo": {
+    "title": "Member Detail API - Individual JKT48 Member Profiles & Stats",
+    "description": "Access comprehensive data for individual JKT48 members including statistics, streaming data, theater schedules, and full profile information. Perfect for member profile pages and fan dashboards.",
+    "keywords": [
+      "jkt48 member detail api",
+      "jkt48 member statistics",
+      "jkt48 member profile page",
+      "jkt48 member streaming data",
+      "jkt48 member theater schedule",
+      "jkt48 individual member data"
+    ]
+  },
+  "hero": {
+    "heading": "Everything about one member",
+    "subheading": "Comprehensive data for any individual JKT48 member — full profile, streaming statistics, theater schedule appearances, and activity history. Everything you need to build rich member profile pages and fan dashboards.",
+    "badges": [
+      "Full profile & bio",
+      "Streaming statistics",
+      "Theater appearances",
+      "Activity history"
+    ]
+  },
+  "definition": {
+    "title": "What is the Member Detail API?",
+    "text": "The Member Detail API provides everything there is to know about a single JKT48 member in one comprehensive response.\n\nWhere the Members API gives you a normalized list of all members, Member Detail goes deeper — combining profile data with statistics, streaming history, theater appearances, and activity metrics for a single member identified by their `member_id`.\n\nThe Member Detail response includes:\n\n- **Full profile** — name, nickname, birthday, blood type, hometown, height, profile photo, and bio\n- **Generation & team** — generation number, current team, join date, and graduation date if applicable\n- **Social media links** — all official social accounts including Instagram, Twitter/X, TikTok, and YouTube\n- **Streaming platform data** — IDN Live room ID and Showroom room ID, plus streaming frequency and recent activity\n- **Streaming statistics** — total streams, total watch time across platforms, average viewer count, and peak viewer count\n- **Theater schedule appearances** — upcoming and recent theater shows the member is part of\n- **Recent live streams** — a list of their most recent streams across all platforms with viewer data\n\nThis endpoint is the single most data-rich way to build a comprehensive member profile page — aggregating everything JKT48Connect knows about a member into one call."
+  },
+  "capabilities_section": {
+    "title": "What you can do with Member Detail",
+    "intro": "Build rich, data-driven member profile pages and fan dashboards with a single API call."
+  },
+  "capabilities": [
+    {
+      "title": "Complete member profiles",
+      "description": "Access the full member bio including name, nickname, birthday, blood type, hometown, height, photo, and generation info — all in one response, no extra lookups needed."
+    },
+    {
+      "title": "Streaming statistics",
+      "description": "Get aggregate streaming stats per member — total number of streams, total viewer hours, average viewer count per stream, and all-time peak viewer count across IDN Live and Showroom."
+    },
+    {
+      "title": "Recent live stream history",
+      "description": "Access a list of the member's most recent streams across all platforms, with per-stream viewer counts, durations, and timestamps — ready to display in a streaming history section."
+    },
+    {
+      "title": "Theater schedule appearances",
+      "description": "See which upcoming and recent theater shows include this member — team, setlist name, show date, and senbatsu status — for building member-specific schedule views."
+    },
+    {
+      "title": "Social media & platform links",
+      "description": "All official social media accounts and streaming platform room links in one place — ready to render as social buttons or platform badges on a profile page."
+    },
+    {
+      "title": "Activity & engagement metrics",
+      "description": "Understand how active a member is — streaming frequency, last stream date, and platform preference (IDN vs Showroom) — for building activity indicators and engagement scores."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Member Detail endpoint works",
+    "intro": "One member ID, one call, everything you need.",
+    "steps": [
+      {
+        "title": "Get a member_id",
+        "description": "Retrieve a member_id from the Members list endpoint (/v1/members), from a live stream response, or from any other JKT48Connect endpoint that references members."
+      },
+      {
+        "title": "Call the Member Detail endpoint",
+        "description": "Make a GET request to /v1/members/:member_id with your API key. The response returns the full member detail including profile, stats, recent streams, and theater appearances."
+      },
+      {
+        "title": "Render the member profile",
+        "description": "Use the structured response to build a complete member profile page — photo, bio, social links, streaming stats, recent live history, and upcoming theater shows, all from a single API response."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the Member Detail API",
+    "intro": "Fan developers building member-centric profile pages and analytics features.",
+    "items": [
+      {
+        "title": "Member profile pages",
+        "description": "Build comprehensive member profile pages with photo, full bio, social links, streaming stats, and recent activity — all sourced from a single API call without maintaining your own database."
+      },
+      {
+        "title": "Fan dashboards",
+        "description": "Build personalized oshi dashboards that show a fan's favorite member's upcoming theater schedule, recent streams, viewer trend charts, and latest social media links in one place."
+      },
+      {
+        "title": "Member comparison tools",
+        "description": "Compare streaming statistics, theater appearance frequency, and activity metrics between two or more members. Build side-by-side comparison pages or ranking tables."
+      },
+      {
+        "title": "Activity & engagement trackers",
+        "description": "Monitor member activity over time — streaming frequency, average viewer trends, and theater appearance rates. Build engagement dashboards that highlight which members are most active."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "members",
+      "title": "Members",
+      "description": "Get a list of all JKT48 members and their member_id values to use with the Member Detail endpoint."
+    },
+    {
+      "slug": "recent-live",
+      "title": "Recent Live",
+      "description": "Member Detail includes recent stream summaries. Use Recent Live for the full paginated stream history across all members."
+    },
+    {
+      "slug": "recent-live-detail",
+      "title": "Recent Live Detail",
+      "description": "Combine Member Detail with Recent Live Detail to build the deepest per-stream breakdowns including chat logs and gift data."
+    },
+    {
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Member Detail includes upcoming theater appearances. Use the Theater Schedule endpoint for the full schedule across all teams."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the Member Detail API.",
+    "items": [
+      {
+        "question": "How do I get a member_id to use with this endpoint?",
+        "answer": "You can get member_id values from the Members list endpoint (/v1/members), from any live stream response that includes a member field, or from theater schedule responses. Every JKT48Connect endpoint that references a member includes the member_id."
+      },
+      {
+        "question": "Does Member Detail include graduated members?",
+        "answer": "Yes. Graduated members have full detail records including their profile, generation info, graduation date, and historical streaming statistics. Pass a graduated member's member_id to receive their complete historical data."
+      },
+      {
+        "question": "How current are the streaming statistics?",
+        "answer": "Streaming statistics are recalculated continuously as new streams are completed. Total streams, average viewers, and peak viewer counts reflect all streams captured by JKT48Connect since the member was added to the database."
+      },
+      {
+        "question": "How many recent streams are included in the response?",
+        "answer": "The Member Detail response includes the most recent 10 streams by default. To retrieve a longer streaming history, use the Recent Live endpoint filtered by member_id, which supports pagination."
+      },
+      {
+        "question": "Are theater schedule appearances always accurate?",
+        "answer": "Theater appearances are sourced from official JKT48 schedule data and updated as schedules are announced. Last-minute changes to senbatsu members or show cancellations are reflected as quickly as official sources publish them."
+      },
+      {
+        "question": "Can I use this endpoint to build a birthday feature?",
+        "answer": "Yes. The Member Detail response includes the member's full date of birth. Combine the Members list endpoint to find members with upcoming birthdays, then use Member Detail to enrich each birthday entry with the full profile and streaming stats."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the Member Detail API",
+    "href": "https://jkt48connect.com/docs/members-detail"
+  }
+}
