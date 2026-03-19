@@ -1,0 +1,157 @@
+{
+  "slug": "theater-detail",
+  "short_name": "Theater Detail",
+  "seo": {
+    "title": "Theater Detail API - JKT48 Show Lineups, Setlists & Seitansai",
+    "description": "Access comprehensive data for individual JKT48 theater shows — member lineups, setlist details, seitansai celebrations, and ticket information. Perfect for show detail pages and performance tracking.",
+    "keywords": [
+      "jkt48 theater detail api",
+      "jkt48 show lineup",
+      "jkt48 setlist detail",
+      "jkt48 seitansai",
+      "jkt48 theater member lineup",
+      "jkt48 theater show detail"
+    ]
+  },
+  "hero": {
+    "heading": "What's in tonight's show?",
+    "subheading": "Comprehensive data for any individual JKT48 theater show — full member lineup, setlist details, seitansai celebrations, and ticket information. Everything you need to build rich show detail pages.",
+    "badges": [
+      "Full member lineup",
+      "Setlist details",
+      "Seitansai info",
+      "Ticket status"
+    ]
+  },
+  "definition": {
+    "title": "What is the Theater Detail API?",
+    "text": "The Theater Detail API provides comprehensive information about a single JKT48 theater show, identified by its `show_id` from the Theater Schedule API.\n\nWhere the Theater API gives you a list of shows with summary data, Theater Detail goes deeper — giving you everything there is to know about one specific performance.\n\nThe Theater Detail response includes:\n\n- **Full member lineup** — the complete list of all members performing in the show, not just senbatsu starters\n- **Setlist details** — the show title, setlist name, and show description\n- **Seitansai (birthday celebration)** — if the show features a member's birthday celebration, the honored member and celebration details are included\n- **Show type** — regular show, birthday show (seitansai), special show, request hour, or unit show\n- **Date & time** — exact show time, door opening time, and show start time\n- **Ticket information** — ticket status, lottery details, and ticket purchase links where available\n- **Venue details** — theater name, floor, and location\n- **MC and special segments** — additional show segments or special announcements where available\n\nThis endpoint is the foundation for building comprehensive show detail pages, seitansai trackers, and any feature that needs complete per-show data rather than the summary provided by the Theater list endpoint."
+  },
+  "capabilities_section": {
+    "title": "What you can do with Theater Detail",
+    "intro": "Build rich show detail pages, seitansai trackers, and member lineup features with per-show granular data."
+  },
+  "capabilities": [
+    {
+      "title": "Full member lineup",
+      "description": "Access the complete list of all members performing in the show — beyond the senbatsu starters. See every member on stage for that specific performance."
+    },
+    {
+      "title": "Seitansai (birthday celebration) data",
+      "description": "When a show features a member's seitansai, the Theater Detail response includes the honored member, celebration type, and any special birthday show details."
+    },
+    {
+      "title": "Setlist & show description",
+      "description": "Get the full setlist name, show title, and description — the complete identity of the performance beyond just the team and date."
+    },
+    {
+      "title": "Ticket status & purchase links",
+      "description": "Access current ticket availability, lottery status, and direct purchase links where officially available — ready to display to fans visiting a show detail page."
+    },
+    {
+      "title": "Show timing details",
+      "description": "Access door opening time and show start time alongside the date — all the information fans need to plan their attendance."
+    },
+    {
+      "title": "Linked via show_id",
+      "description": "Uses the show_id field from the Theater API response as the lookup key — making it easy to enrich any theater schedule entry with full show detail on demand."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Theater Detail endpoint works",
+    "intro": "Two steps: get the show_id from the Theater API, then fetch the full detail.",
+    "steps": [
+      {
+        "title": "Get a show_id from the Theater API",
+        "description": "Call GET /v1/theater to get the upcoming show schedule. Each show entry includes a show_id that uniquely identifies that performance."
+      },
+      {
+        "title": "Call the Theater Detail endpoint",
+        "description": "Make a GET request to /v1/theater/:show_id with your API key and the show_id from step one. The response returns comprehensive detail for that specific show."
+      },
+      {
+        "title": "Display the full show page",
+        "description": "Use the member lineup, setlist info, seitansai data, and ticket details to build a complete show detail page — everything fans need to know about a specific performance."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses Theater Detail",
+    "intro": "Fan developers building show detail pages and theater-focused tracking features.",
+    "items": [
+      {
+        "title": "Show detail pages",
+        "description": "Build comprehensive show detail pages that display the full member lineup, setlist name, seitansai info, show timing, and ticket status — giving fans everything they need to decide whether to attend or follow along."
+      },
+      {
+        "title": "Seitansai trackers",
+        "description": "Build dedicated seitansai tracking features that highlight upcoming birthday shows, the honored member, and celebration details. Let fans plan ahead for their oshi's seitansai."
+      },
+      {
+        "title": "Member appearance detail",
+        "description": "Use Theater Detail to show fans not just which shows a member appeared in, but the full context — the complete lineup, the setlist, and whether it was a special show type."
+      },
+      {
+        "title": "Ticket availability pages",
+        "description": "Build show pages with live ticket status and direct purchase links — combining Theater Detail with periodic polling or webhooks to keep availability status current."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Start here to get show_id values from the upcoming schedule. Theater Detail enriches any show entry from this endpoint."
+    },
+    {
+      "slug": "members",
+      "title": "Members",
+      "description": "Theater Detail member lineup entries reference member records. Use the Members API to enrich each lineup entry with photos, generation info, and social links."
+    },
+    {
+      "slug": "member-detail",
+      "title": "Member Detail",
+      "description": "Member Detail includes upcoming theater appearances. Combine with Theater Detail for the most complete show and member data."
+    },
+    {
+      "slug": "events",
+      "title": "Events",
+      "description": "Special theater events like seitansai and request hour shows also appear in the Events API for a different view of the same data."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the Theater Detail API.",
+    "items": [
+      {
+        "question": "Where do I get the show_id from?",
+        "answer": "The show_id is included in every show entry returned by the Theater API (/v1/theater). Call the Theater schedule endpoint first to get a list of upcoming shows, then use any show_id from that response to fetch full detail from this endpoint."
+      },
+      {
+        "question": "What is seitansai and how is it represented in the API?",
+        "answer": "Seitansai is a birthday celebration show where the theater show is dedicated to a member celebrating their birthday. In the Theater Detail response, seitansai shows include a seitansai field with the honored member's details and celebration info. Non-seitansai shows return null for this field."
+      },
+      {
+        "question": "Does Theater Detail include the full member lineup or only senbatsu?",
+        "answer": "Theater Detail includes the complete performing member list for the show — all members on stage, not just the senbatsu starters. The Theater list endpoint returns only the senbatsu summary; Theater Detail gives you the full lineup."
+      },
+      {
+        "question": "How current is the ticket status data?",
+        "answer": "Ticket status is updated as changes are announced officially by JKT48. The status reflects the last known state — available, sold out, lottery, or not yet on sale. For time-sensitive ticket availability, we recommend polling this endpoint periodically rather than relying on cached data."
+      },
+      {
+        "question": "Can I get Theater Detail for past shows?",
+        "answer": "Yes. Past shows retain their full detail records including complete lineups, setlist info, and seitansai data. Pass a past show_id to retrieve the complete historical record for any show that JKT48Connect has data for."
+      },
+      {
+        "question": "Does the API include special show types like request hour?",
+        "answer": "Yes. Request hour events, unit shows, and joint performances are all included with their respective show_type field. Theater Detail for these special shows includes the same comprehensive data as regular shows, with additional fields specific to the show type where available."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the Theater Detail API",
+    "href": "https://jkt48connect.com/docs/theater-detail"
+  }
+}
