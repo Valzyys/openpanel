@@ -1,18 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import NumberFlow from '@number-flow/react';
 
 const STREAMS = [
   {
-    name: 'Adeline Wijaya',
+    name: 'Delynn',
     platform: 'IDN',
     platformColor: '#ef4444',
     viewers: 4821,
     duration: '1:24:07',
-    avatar: 'SN',
-    avatarColor: '#7c3aed',
-    live: true,
+    avatar: 'https://pbs.twimg.com/profile_images/2006653390642884609/npB5-k9f_400x400.jpg',
   },
   {
     name: 'Aralie Abigail',
@@ -20,9 +19,7 @@ const STREAMS = [
     platformColor: '#f97316',
     viewers: 3102,
     duration: '0:47:33',
-    avatar: 'FR',
-    avatarColor: '#0891b2',
-    live: true,
+    avatar: 'https://pbs.twimg.com/profile_images/2006593156415205376/Hx8ypf9C_400x400.jpg',
   },
   {
     name: 'Catherina Vallencia',
@@ -30,9 +27,7 @@ const STREAMS = [
     platformColor: '#ef4444',
     viewers: 1876,
     duration: '0:22:14',
-    avatar: 'ZE',
-    avatarColor: '#be185d',
-    live: true,
+    avatar: 'https://pbs.twimg.com/profile_images/2008169309051506688/g0CO-lhS_400x400.jpg',
   },
 ];
 
@@ -110,12 +105,21 @@ export function SessionReplayIllustration() {
             const pct = Math.round((viewers[i] / maxViewers) * 100);
             return (
               <div key={stream.name} className="row items-center gap-2 px-3 py-2">
-                {/* Avatar */}
-                <div
-                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[7px] font-bold text-white"
-                  style={{ backgroundColor: stream.avatarColor }}
-                >
-                  {stream.avatar}
+                {/* Avatar photo */}
+                <div className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full ring-1 ring-border">
+                  <Image
+                    src={stream.avatar}
+                    alt={stream.name}
+                    width={24}
+                    height={24}
+                    className="h-full w-full object-cover"
+                    unoptimized
+                  />
+                  {/* Live platform dot */}
+                  <span
+                    className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full border border-background"
+                    style={{ backgroundColor: stream.platformColor }}
+                  />
                 </div>
 
                 {/* Info */}
@@ -148,7 +152,7 @@ export function SessionReplayIllustration() {
           })}
         </div>
 
-        {/* Bottom bar — notification hint */}
+        {/* Bottom bar */}
         <div className="row shrink-0 items-center gap-2 border-t border-border bg-muted/10 px-3 py-1.5">
           <div className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
           <span className="text-[7.5px] text-muted-foreground flex-1">
