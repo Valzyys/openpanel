@@ -5,7 +5,7 @@ import NumberFlow from '@number-flow/react';
 
 const STREAMS = [
   {
-    name: 'Shani Indira',
+    name: 'Adeline Wijaya',
     platform: 'IDN',
     platformColor: '#ef4444',
     viewers: 4821,
@@ -15,7 +15,7 @@ const STREAMS = [
     live: true,
   },
   {
-    name: 'Freya JKT48',
+    name: 'Aralie Abigail',
     platform: 'Showroom',
     platformColor: '#f97316',
     viewers: 3102,
@@ -25,7 +25,7 @@ const STREAMS = [
     live: true,
   },
   {
-    name: 'Zee JKT48',
+    name: 'Catherina Vallencia',
     platform: 'IDN',
     platformColor: '#ef4444',
     viewers: 1876,
