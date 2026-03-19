@@ -128,7 +128,7 @@ export function Hero() {
               rel="noreferrer noopener nofollow"
               target="_blank"
             >
-              Download JKT48ConnectAPP
+             JKT48ConnectAPP
             </Link>
           </Button>
         </div>
