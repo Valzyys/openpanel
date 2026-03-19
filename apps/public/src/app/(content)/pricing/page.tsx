@@ -7,7 +7,6 @@ import { Section, SectionHeader } from '@/components/section';
 import { Button } from '@/components/ui/button';
 import { url } from '@/lib/layout.shared';
 import { getOgImageUrl, getPageMetadata } from '@/lib/metadata';
-import { compareSource } from '@/lib/source';
 import { formatEventsCount } from '@/lib/utils';
 import { PRICING } from '@openpanel/payments/prices';
 import type { Metadata } from 'next';
@@ -113,28 +112,59 @@ function PricingTable() {
   );
 }
 
-function ComparisonSection() {
-  const comparisons = compareSource
-    .filter((item) =>
-      ['plausible', 'mixpanel', 'google', 'posthog', 'matomo', 'umami'].some(
-        (name) => item.competitor.name.toLowerCase().includes(name),
-      ),
-    )
-    .sort((a, b) => a.competitor.name.localeCompare(b.competitor.name));
+const JKT48_COMPARISONS = [
+  {
+    slug: 'jkt48-official-app',
+    url: '/compare/jkt48-official-app',
+    name: 'JKT48Connect vs JKT48 Official App',
+    description: 'Compare structured API access against the official app\'s limited data exposure.',
+  },
+  {
+    slug: 'manual-scraping',
+    url: '/compare/manual-scraping',
+    name: 'JKT48Connect vs Manual Scraping',
+    description: 'See why a dedicated API beats fragile scraping scripts for production apps.',
+  },
+  {
+    slug: 'idn-live-api',
+    url: '/compare/idn-live-api',
+    name: 'JKT48Connect vs IDN Live API',
+    description: 'JKT48Connect aggregates IDN Live data alongside Showroom, theater, and member info.',
+  },
+  {
+    slug: 'showroom-api',
+    url: '/compare/showroom-api',
+    name: 'JKT48Connect vs Showroom API',
+    description: 'One unified endpoint vs managing multiple platform APIs separately.',
+  },
+  {
+    slug: 'fansite-databases',
+    url: '/compare/fansite-databases',
+    name: 'JKT48Connect vs Fansite Databases',
+    description: 'Structured, versioned REST API vs manually maintained community databases.',
+  },
+  {
+    slug: 'jkt48-wiki',
+    url: '/compare/jkt48-wiki',
+    name: 'JKT48Connect vs JKT48 Wiki',
+    description: 'Real-time programmatic access vs static wiki pages for member and event data.',
+  },
+];
 
+function ComparisonSection() {
   return (
     <Section className="container">
       <SectionHeader
-        title="How do we compare?"
+        title="How does JKT48Connect compare?"
         description={
           <>
-            See how JKT48Connect stacks up against other JKT48 data sources in
-            our{' '}
+            See how JKT48Connect stacks up against other ways to access JKT48
+            data in our{' '}
             <Link
-              href="/articles/jkt48-data-api-comparison"
+              href="/compare"
               className="underline hover:text-primary transition-colors"
             >
-              comprehensive comparison of JKT48 data solutions
+              full comparison of JKT48 data solutions
             </Link>
             .
           </>
@@ -146,12 +176,12 @@ function ComparisonSection() {
       </Button>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
-        {comparisons.map((comparison) => (
+        {JKT48_COMPARISONS.map((comparison) => (
           <CompareCard
             key={comparison.slug}
             url={comparison.url}
-            name={`JKT48Connect vs ${comparison.competitor.name}`}
-            description={comparison.competitor.short_description}
+            name={comparison.name}
+            description={comparison.description}
           />
         ))}
       </div>
