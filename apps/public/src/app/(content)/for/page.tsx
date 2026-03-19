@@ -8,9 +8,9 @@ import { getPageMetadata } from '@/lib/metadata';
 
 export function generateMetadata(): Metadata {
   return getPageMetadata({
-    title: 'OpenPanel for Your Use Case',
+    title: 'JKT48Connect for Your Use Case',
     description:
-      'Discover how OpenPanel helps startups, developers, and agencies with privacy-first, open-source web and product analytics.',
+      'Discover how JKT48Connect helps developers, fan projects, and content creators build apps with real-time JKT48 data through a single unified API.',
     url: '/for',
   });
 }
@@ -23,6 +23,7 @@ export default async function ForListPage() {
       return data;
     })
   );
+
   const validPages = pages.filter(
     (page): page is NonNullable<typeof page> => page !== null
   );
@@ -31,8 +32,8 @@ export default async function ForListPage() {
     <HeroContainer divider={false}>
       <SectionHeader
         as="h1"
-        description="See how OpenPanel helps different teams and industries with privacy-first, open-source analytics."
-        title="OpenPanel for Your Use Case"
+        description="See how JKT48Connect helps different developers and communities build powerful JKT48 apps with clean, real-time API access."
+        title="JKT48Connect for Your Use Case"
         variant="sm"
       />
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
