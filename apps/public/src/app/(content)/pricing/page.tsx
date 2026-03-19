@@ -7,8 +7,6 @@ import { Section, SectionHeader } from '@/components/section';
 import { Button } from '@/components/ui/button';
 import { url } from '@/lib/layout.shared';
 import { getOgImageUrl, getPageMetadata } from '@/lib/metadata';
-import { formatEventsCount } from '@/lib/utils';
-import { PRICING } from '@openpanel/payments/prices';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Script from 'next/script';
@@ -40,6 +38,50 @@ const jsonLd = {
     },
   },
 };
+
+const PRICING_TABLE = [
+  {
+    plan: 'Free',
+    calls: '1.000',
+    priceIDR: 0,
+    priceUSD: 0,
+    priceIDRYearly: 0,
+    priceUSDYearly: 0,
+  },
+  {
+    plan: 'Pro',
+    calls: '100.000',
+    priceIDR: 49_000,
+    priceUSD: 3,
+    priceIDRYearly: 39_000,
+    priceUSDYearly: 2.5,
+  },
+  {
+    plan: 'Enterprise',
+    calls: 'Unlimited',
+    priceIDR: null,
+    priceUSD: null,
+    priceIDRYearly: null,
+    priceUSDYearly: null,
+  },
+];
+
+function formatIDR(amount: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+function formatUSD(amount: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: amount % 1 !== 0 ? 1 : 0,
+    maximumFractionDigits: 1,
+  }).format(amount);
+}
 
 export default function SupporterPage() {
   return (
@@ -81,32 +123,37 @@ function PricingTable() {
           <thead>
             <tr>
               <th>Plan</th>
-              <th className="text-right">Monthly price</th>
-              <th className="text-right">Yearly price (2 months free)</th>
+              <th className="text-right">API Calls / Bulan</th>
+              <th className="text-right">Harga Bulanan</th>
+              <th className="text-right">Harga Tahunan (2 bulan gratis)</th>
             </tr>
           </thead>
           <tbody>
-            {PRICING.map((price) => (
-              <tr key={price.price}>
-                <td className="font-semibold">
-                  {formatEventsCount(price.events)} API calls per month
+            {PRICING_TABLE.map((row) => (
+              <tr key={row.plan}>
+                <td className="font-semibold">{row.plan}</td>
+                <td className="text-right">{row.calls}</td>
+                <td className="text-right">
+                  {row.priceIDR === null
+                    ? 'Custom'
+                    : row.priceIDR === 0
+                      ? 'Gratis'
+                      : `${formatIDR(row.priceIDR)} (≈ ${formatUSD(row.priceUSD!)})`}
                 </td>
                 <td className="text-right">
-                  {Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                  }).format(price.price)}
-                </td>
-                <td className="text-right">
-                  {Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                  }).format(price.price * 10)}
+                  {row.priceIDRYearly === null
+                    ? 'Custom'
+                    : row.priceIDRYearly === 0
+                      ? 'Gratis'
+                      : `${formatIDR(row.priceIDRYearly)} (≈ ${formatUSD(row.priceUSDYearly!)})`}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <p className="text-xs text-muted-foreground mt-3">
+          * Semua harga dalam Rupiah (IDR). Konversi USD bersifat estimasi dan dapat berubah mengikuti kurs.
+        </p>
       </div>
     </Section>
   );
@@ -117,37 +164,43 @@ const JKT48_COMPARISONS = [
     slug: 'jkt48-official-app',
     url: '/compare/jkt48-official-app',
     name: 'JKT48Connect vs JKT48 Official App',
-    description: 'Compare structured API access against the official app\'s limited data exposure.',
+    description:
+      "Compare structured API access against the official app's limited data exposure.",
   },
   {
     slug: 'manual-scraping',
     url: '/compare/manual-scraping',
     name: 'JKT48Connect vs Manual Scraping',
-    description: 'See why a dedicated API beats fragile scraping scripts for production apps.',
+    description:
+      'See why a dedicated API beats fragile scraping scripts for production apps.',
   },
   {
     slug: 'idn-live-api',
     url: '/compare/idn-live-api',
     name: 'JKT48Connect vs IDN Live API',
-    description: 'JKT48Connect aggregates IDN Live data alongside Showroom, theater, and member info.',
+    description:
+      'JKT48Connect aggregates IDN Live data alongside Showroom, theater, and member info.',
   },
   {
     slug: 'showroom-api',
     url: '/compare/showroom-api',
     name: 'JKT48Connect vs Showroom API',
-    description: 'One unified endpoint vs managing multiple platform APIs separately.',
+    description:
+      'One unified endpoint vs managing multiple platform APIs separately.',
   },
   {
     slug: 'fansite-databases',
     url: '/compare/fansite-databases',
     name: 'JKT48Connect vs Fansite Databases',
-    description: 'Structured, versioned REST API vs manually maintained community databases.',
+    description:
+      'Structured, versioned REST API vs manually maintained community databases.',
   },
   {
     slug: 'jkt48-wiki',
     url: '/compare/jkt48-wiki',
     name: 'JKT48Connect vs JKT48 Wiki',
-    description: 'Real-time programmatic access vs static wiki pages for member and event data.',
+    description:
+      'Real-time programmatic access vs static wiki pages for member and event data.',
   },
 ];
 
