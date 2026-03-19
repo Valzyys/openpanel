@@ -3,11 +3,11 @@ import {
   BellIcon,
   ConeIcon,
   DollarSignIcon,
-  FilterIcon,
   GlobeIcon,
   MonitorIcon,
   MousePointerClickIcon,
   PieChartIcon,
+  RadioIcon,
   RefreshCwIcon,
   ShareIcon,
   UserIcon,
@@ -24,7 +24,7 @@ import { getOgImageUrl, getPageMetadata } from '@/lib/metadata';
 import { featureSource } from '@/lib/source';
 
 const featureIcons: Record<string, LucideIcon> = {
-  conversion: FilterIcon,
+  'all-live': RadioIcon,
   'data-visualization': PieChartIcon,
   'event-tracking': MousePointerClickIcon,
   funnels: ConeIcon,
