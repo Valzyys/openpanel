@@ -39,18 +39,18 @@ const featureIcons: Record<string, LucideIcon> = {
 };
 
 export const metadata: Metadata = getPageMetadata({
-  title: 'Product analytics features',
+  title: 'JKT48Connect API Features',
   description:
-    'Explore OpenPanel features: event tracking, funnels, retention, user profiles, and more. Privacy-first product analytics that just works.',
+    'Explore JKT48Connect features: member profiles, theater schedules, live stream tracking, event notifications, and more. Everything you need to build JKT48 apps.',
   url: url('/features'),
   image: getOgImageUrl('/features'),
 });
 
 const heroData = {
-  heading: 'Product analytics features',
+  heading: 'JKT48Connect API Features',
   subheading:
-    'Everything you need to understand user behavior, conversion, and retention. Simple event-based analytics without the complexity.',
-  badges: ['Privacy-first', 'No cookies required', 'Real-time data'],
+    'Everything you need to build JKT48 apps — member data, real-time live streams, theater schedules, and event notifications. One API, zero scraping.',
+  badges: ['REST API', 'Real-time data', 'Free tier available'],
 };
 
 export default async function FeaturesIndexPage() {
@@ -59,19 +59,17 @@ export default async function FeaturesIndexPage() {
   return (
     <div>
       <FeatureHero hero={heroData} />
-
       <div className="container my-16">
         <WindowImage
-          alt="OpenPanel Dashboard Overview"
-          caption="Get a clear view of your product analytics with real-time insights and customizable dashboards."
+          alt="JKT48Connect API Overview"
+          caption="Access the full JKT48 data ecosystem through a single, well-documented REST API — from member profiles to live stream viewer counts."
           srcDark="/screenshots/overview-dark.webp"
           srcLight="/screenshots/overview-light.webp"
         />
       </div>
-
       <Section className="container">
         <SectionHeader
-          description="Browse our capabilities. Each feature is designed to answer specific questions about your product and users."
+          description="Browse all available endpoints and capabilities. Each feature is designed to give developers clean, structured access to JKT48 data."
           title="All features"
           variant="sm"
         />
@@ -87,12 +85,11 @@ export default async function FeaturesIndexPage() {
           ))}
         </div>
       </Section>
-
       <CtaBanner
-        ctaLink="https://dashboard.openpanel.dev/onboarding"
+        ctaLink="/docs"
         ctaText="Get Started Free"
-        description="Join thousands of teams using OpenPanel for their analytics needs."
-        title="Ready to get started?"
+        description="Join developers and fan projects using JKT48Connect to power their apps."
+        title="Ready to start building?"
       />
     </div>
   );
