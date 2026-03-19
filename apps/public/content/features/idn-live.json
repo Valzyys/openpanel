@@ -1,0 +1,161 @@
+{
+  "slug": "idn-live",
+  "short_name": "IDN Live",
+  "seo": {
+    "title": "IDN Live Tracker - Real-time JKT48 IDN Live Streams",
+    "description": "Track all active JKT48 IDN Live streams in real-time. Get member names, viewer counts, stream duration, thumbnails, and live status — IDN Live only, always accurate.",
+    "keywords": [
+      "jkt48 idn live",
+      "jkt48 idn live api",
+      "jkt48 live stream tracker",
+      "idn live viewer count",
+      "jkt48 live now",
+      "jkt48 idn live real-time"
+    ]
+  },
+  "hero": {
+    "heading": "Who's live on IDN right now?",
+    "subheading": "Track every active JKT48 IDN Live stream in real-time. Member info, viewer counts, stream duration, and thumbnails — all from a single dedicated endpoint.",
+    "badges": [
+      "IDN Live only",
+      "Real-time viewer counts",
+      "All JKT48 members",
+      "Thumbnail & stream URL"
+    ]
+  },
+  "definition": {
+    "title": "What is the IDN Live endpoint?",
+    "text": "The IDN Live endpoint returns a real-time snapshot of every active JKT48 member currently streaming on IDN Live.\n\nUnlike the All Live endpoint which aggregates multiple platforms, this endpoint is focused exclusively on IDN Live — giving you a clean, dedicated response for when you only need IDN Live data in your app.\n\nEvery active IDN Live stream in the response includes:\n\n- **Member info** — name, generation, and profile data linked to the stream\n- **Viewer count** — current live viewer count, updated in real-time\n- **Stream duration** — how long the member has been streaming\n- **Stream URL** — direct link to the IDN Live stream\n- **Thumbnail** — live thumbnail image from the stream\n- **Stream title** — the title the member set for their broadcast\n\nThe endpoint only returns streams that are currently active. Once a stream ends, it is removed from the response immediately. Data is refreshed continuously so what you see always reflects what's actually live on IDN right now.\n\nThis endpoint is ideal for apps that specifically cover IDN Live content and want a lightweight, focused response without data from other platforms mixed in."
+  },
+  "capabilities_section": {
+    "title": "What you can do with IDN Live",
+    "intro": "Build IDN Live-focused features with clean, real-time stream data."
+  },
+  "capabilities": [
+    {
+      "title": "Real-time IDN Live feed",
+      "description": "Get a live-updating list of every JKT48 member currently streaming on IDN Live. Stream starts and ends are reflected immediately — no stale data."
+    },
+    {
+      "title": "Viewer count tracking",
+      "description": "Access current viewer counts for each active IDN Live stream, updated in real-time. Build leaderboards, popularity trackers, and oshi support counters."
+    },
+    {
+      "title": "Thumbnails & stream metadata",
+      "description": "Each stream entry includes a live thumbnail URL, stream title, and direct link — everything you need to build a rich stream card or preview without extra API calls."
+    },
+    {
+      "title": "Member-linked stream data",
+      "description": "Every IDN Live stream is linked to the corresponding JKT48Connect member record, giving you instant access to name, generation, photo, and profile without a separate lookup."
+    },
+    {
+      "title": "Stream duration",
+      "description": "Know how long each member has been live. Display elapsed time in your UI or use it to sort streams by duration for content discovery features."
+    },
+    {
+      "title": "Webhook notifications",
+      "description": "Receive a POST request the moment any JKT48 member goes live on IDN or ends their stream. Build oshi alert bots and notification systems without polling."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the IDN Live endpoint works",
+    "intro": "One endpoint, one platform, always real-time.",
+    "steps": [
+      {
+        "title": "Call the IDN Live endpoint",
+        "description": "Make a GET request to /v1/live/idn with your API key. No extra configuration needed — the response always reflects the current state of IDN Live."
+      },
+      {
+        "title": "Receive normalized stream data",
+        "description": "Get a list of all active IDN Live streams with consistent fields — member info, viewer count, duration, thumbnail, stream URL, and title."
+      },
+      {
+        "title": "Filter by member or generation (optional)",
+        "description": "Pass query parameters to filter streams by member ID or generation. Useful for apps focused on a specific team or generation."
+      },
+      {
+        "title": "Display or trigger actions",
+        "description": "Render a live IDN feed, send push notifications, update a Discord bot, or trigger any action in your app based on who's live and their viewer counts."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the IDN Live endpoint",
+    "intro": "Fan developers building IDN Live-focused JKT48 experiences.",
+    "items": [
+      {
+        "title": "IDN Live dashboards",
+        "description": "Display a real-time grid of all active JKT48 IDN Live streams on your fansite. Show member photos, viewer counts, and stream thumbnails — updated automatically."
+      },
+      {
+        "title": "Oshi live notification bots",
+        "description": "Build Discord or Telegram bots that alert fans the moment their oshi goes live on IDN. Use webhooks for instant notifications without polling."
+      },
+      {
+        "title": "Viewer count leaderboards",
+        "description": "Rank JKT48 members by current IDN Live viewer count. Build real-time popularity trackers and oshi support counters that update as streams grow."
+      },
+      {
+        "title": "IDN Live stream directories",
+        "description": "Build a searchable, filterable directory of all active JKT48 IDN Live streams — sorted by viewer count, generation, or stream duration."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "all-live",
+      "title": "All Live",
+      "description": "Need all platforms at once? All Live aggregates IDN Live, Showroom, and YouTube (JKT48V) into a single endpoint."
+    },
+    {
+      "slug": "members",
+      "title": "Member Profiles",
+      "description": "Each IDN Live stream is linked to a full member record. Access profiles, generations, and social links alongside stream data."
+    },
+    {
+      "slug": "events",
+      "title": "Event Notifications",
+      "description": "Get notified for handshake events, off-air shows, and special appearances alongside IDN Live stream alerts."
+    },
+    {
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Track theater shows alongside IDN Live streams for a complete picture of JKT48 activity."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the IDN Live endpoint.",
+    "items": [
+      {
+        "question": "Does this endpoint include Showroom or YouTube streams?",
+        "answer": "No. The IDN Live endpoint returns only IDN Live streams. If you need Showroom or YouTube (JKT48V) streams as well, use the All Live endpoint which aggregates all three platforms into a single response."
+      },
+      {
+        "question": "How real-time is the viewer count data?",
+        "answer": "Viewer counts are updated continuously. On Pro and Enterprise plans, data latency is under 10 seconds. On the free tier, data is refreshed every 30 seconds. Stream start and end events are detected within seconds across all plans."
+      },
+      {
+        "question": "What happens when a stream ends?",
+        "answer": "Ended streams are removed from the IDN Live response immediately. If you're using webhooks, you'll also receive a stream_end event so your app can update in real-time without polling."
+      },
+      {
+        "question": "Can I filter streams by member or generation?",
+        "answer": "Yes. Pass a member_id or generation query parameter to filter the response. This is useful for apps focused on a specific JKT48 team or generation."
+      },
+      {
+        "question": "How do I get notified when a member goes live on IDN?",
+        "answer": "Use webhooks (available on Pro and Enterprise plans). Register a webhook URL and specify which members to watch. JKT48Connect will send a POST request to your endpoint within seconds of a stream starting on IDN Live."
+      },
+      {
+        "question": "Are all JKT48 generations covered?",
+        "answer": "Yes. The endpoint covers all active JKT48 members across all generations who are currently streaming on IDN Live, with no filtering applied by default."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Try the IDN Live endpoint",
+    "href": "https://jkt48connect.com/docs/live/idn"
+  }
+}
