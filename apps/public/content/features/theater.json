@@ -1,0 +1,161 @@
+{
+  "slug": "theater",
+  "short_name": "Theater",
+  "seo": {
+    "title": "Theater API - JKT48 Show Schedules & Setlists",
+    "description": "Access JKT48 theater show schedules, setlists, senbatsu members, and performance data. Perfect for show schedules, member tracking, and theater attendance applications.",
+    "keywords": [
+      "jkt48 theater api",
+      "jkt48 theater schedule",
+      "jkt48 setlist",
+      "jkt48 senbatsu",
+      "jkt48 theater show",
+      "jkt48 theater performance"
+    ]
+  },
+  "hero": {
+    "heading": "What's on at the theater?",
+    "subheading": "Access JKT48 theater show schedules, setlists, senbatsu member lists, and performance data. Build show calendars, member tracking apps, and theater attendance dashboards.",
+    "badges": [
+      "Show schedules",
+      "Setlist data",
+      "Senbatsu members",
+      "Upcoming & past shows"
+    ]
+  },
+  "definition": {
+    "title": "What is the Theater API?",
+    "text": "The Theater API provides structured data for JKT48 theater shows — regular performances at the JKT48 Theater in Jakarta, including schedules, setlists, and member participation data.\n\nEvery JKT48 theater show is captured as a structured record with full details about what was performed and who was on stage.\n\nEach theater show record includes:\n\n- **Show date & time** — the scheduled start time and door opening time\n- **Team** — which team is performing (Team J, Team KIII, Team T, or unit shows)\n- **Setlist** — the name and title of the show being performed (e.g. \"Pajama Drive\", \"Shonichi\")\n- **Senbatsu members** — the list of members selected for that specific show\n- **Show type** — regular show, birthday show, special show, or request hour\n- **Ticket status** — whether tickets are still available, sold out, or on lottery\n- **Venue details** — theater name and location info\n- **Show status** — upcoming, ongoing, completed, or cancelled\n\nThe Theater API is ideal for building show schedule pages, senbatsu trackers, member appearance counters, and any feature that revolves around JKT48's core activity — performing at the theater."
+  },
+  "capabilities_section": {
+    "title": "What you can do with the Theater API",
+    "intro": "Build show schedules, senbatsu trackers, and member appearance features with structured theater data."
+  },
+  "capabilities": [
+    {
+      "title": "Upcoming show schedule",
+      "description": "Query all upcoming theater shows sorted by date. Filter by team, setlist, or show type to get the exact schedule relevant to your app."
+    },
+    {
+      "title": "Senbatsu member lists",
+      "description": "Access the full list of senbatsu members for each show. Build senbatsu trackers, member appearance counters, and show-specific lineup pages."
+    },
+    {
+      "title": "Setlist data",
+      "description": "Each show is tagged with the setlist being performed — Pajama Drive, Shonichi, and more. Filter shows by setlist to build setlist-specific schedule views."
+    },
+    {
+      "title": "Team schedule filtering",
+      "description": "Filter shows by team (Team J, Team KIII, Team T) to build team-specific schedule pages. Track which team is performing most frequently."
+    },
+    {
+      "title": "Past show history",
+      "description": "Access historical theater show data for building member appearance timelines, setlist performance counts, and theater activity analytics."
+    },
+    {
+      "title": "Ticket status",
+      "description": "Each show record includes ticket availability status — available, sold out, or lottery — so fans can quickly see which upcoming shows still have tickets."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Theater API works",
+    "intro": "Query upcoming shows, filter by team or setlist, and access senbatsu data for each performance.",
+    "steps": [
+      {
+        "title": "Query upcoming shows",
+        "description": "Call GET /v1/theater with optional filters for team, setlist, or date range. Returns upcoming shows sorted by date with full schedule and senbatsu data."
+      },
+      {
+        "title": "Filter by team or setlist",
+        "description": "Pass team=J, team=KIII, or team=T to get team-specific schedules. Pass setlist to filter by the show title being performed."
+      },
+      {
+        "title": "Get show detail",
+        "description": "Call GET /v1/theater/:show_id to retrieve full detail for a specific show — complete senbatsu list, setlist name, ticket status, and venue info."
+      },
+      {
+        "title": "Display in your app",
+        "description": "Render show calendars, senbatsu lineup cards, ticket availability indicators, or member appearance trackers using the structured data returned."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the Theater API",
+    "intro": "Fan developers building theater-focused JKT48 schedule and tracking tools.",
+    "items": [
+      {
+        "title": "Theater show calendars",
+        "description": "Build a complete JKT48 theater schedule that fans can filter by team, setlist, or month. Show upcoming performances with senbatsu lineups and ticket availability at a glance."
+      },
+      {
+        "title": "Senbatsu trackers",
+        "description": "Track how often each member appears in senbatsu across shows and teams. Build member appearance counters, senbatsu frequency charts, and team roster visualizations."
+      },
+      {
+        "title": "Member theater activity pages",
+        "description": "Show a member's full theater appearance history — which shows they performed in, which setlists, and how frequently. Build comprehensive member activity profiles."
+      },
+      {
+        "title": "Ticket availability alerts",
+        "description": "Build apps that notify fans when tickets become available for upcoming shows — using the ticket status field to trigger alerts when a show moves from sold out to available or lottery opens."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "members",
+      "title": "Members",
+      "description": "Theater senbatsu lists reference member records. Use the Members API to enrich each senbatsu entry with full profiles and photos."
+    },
+    {
+      "slug": "member-detail",
+      "title": "Member Detail",
+      "description": "Member Detail includes upcoming theater appearances alongside streaming stats — for building complete member profile pages."
+    },
+    {
+      "slug": "events",
+      "title": "Events",
+      "description": "Special theater events like birthday shows and request hours appear in both the Theater API and the Events API for different levels of detail."
+    },
+    {
+      "slug": "birthday",
+      "title": "Birthday",
+      "description": "Cross-reference theater schedules with birthday data to highlight birthday shows where a member performs on their special day."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the JKT48Connect Theater API.",
+    "items": [
+      {
+        "question": "Which teams and shows are covered?",
+        "answer": "The Theater API covers all regular JKT48 theater performances — Team J, Team KIII, Team T, and unit shows. Special shows including birthday shows, request hour events, and sister group joint performances are also included where data is available."
+      },
+      {
+        "question": "How quickly is the schedule updated after JKT48 announces new shows?",
+        "answer": "Theater schedule data is updated as soon as new shows are officially announced by JKT48. Most schedule updates appear within hours of the official announcement on JKT48's social media and website."
+      },
+      {
+        "question": "Does the API include the full setlist song order?",
+        "answer": "The Theater API includes the setlist name (e.g. Pajama Drive, Shonichi) and show type, but not the individual song order within a setlist. The setlist name and senbatsu data are the primary show-level details provided."
+      },
+      {
+        "question": "Can I filter shows by a specific member's participation?",
+        "answer": "Yes. Pass member_id as a query parameter to retrieve only shows where that member appears in the senbatsu list. This is useful for building member-specific theater history pages and appearance frequency trackers."
+      },
+      {
+        "question": "Are cancelled shows included in the response?",
+        "answer": "Yes. Cancelled shows are retained with a status of 'cancelled' so your app can display cancellation information to fans. Filter with status=upcoming to return only active upcoming shows."
+      },
+      {
+        "question": "Does the API include ticket purchase links?",
+        "answer": "The ticket_status field indicates whether tickets are available, sold out, or on lottery. Direct ticket purchase links are included where officially available, but not all shows have direct ticketing URLs accessible through the API."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the Theater API",
+    "href": "https://jkt48connect.com/docs/theater"
+  }
+}
