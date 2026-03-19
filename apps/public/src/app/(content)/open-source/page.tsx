@@ -12,6 +12,7 @@ import {
   CodeIcon,
   GlobeIcon,
   HeartHandshakeIcon,
+  KeyRoundIcon,
   LinkIcon,
   MailIcon,
   MessageSquareIcon,
@@ -24,23 +25,23 @@ import Link from 'next/link';
 import Script from 'next/script';
 
 export const metadata: Metadata = getPageMetadata({
-  title: 'Free Analytics for Open Source Projects | OpenPanel OSS Program',
+  title: 'Free API Access for Fan Projects | JKT48Connect Developer Program',
   description:
-    "Get free web and product analytics for your open source project. Track up to 2.5M events/month. Apply to OpenPanel's open source program today.",
-  url: url('/open-source'),
-  image: getOgImageUrl('/open-source'),
+    'Get free JKT48Connect API access for fan projects, Discord bots, and community tools. Apply to our developer program and start building today.',
+  url: url('/developer-program'),
+  image: getOgImageUrl('/developer-program'),
 });
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Free Analytics for Open Source Projects | OpenPanel OSS Program',
+  name: 'Free API Access for Fan Projects | JKT48Connect Developer Program',
   description:
-    "Get free web and product analytics for your open source project. Track up to 2.5M events/month. Apply to OpenPanel's open source program today.",
-  url: url('/open-source'),
+    'Get free JKT48Connect API access for fan projects, Discord bots, and community tools.',
+  url: url('/developer-program'),
   publisher: {
     '@type': 'Organization',
-    name: 'OpenPanel',
+    name: 'JKT48Connect',
     logo: {
       '@type': 'ImageObject',
       url: url('/logo.png'),
@@ -48,11 +49,11 @@ const jsonLd = {
   },
   mainEntity: {
     '@type': 'Offer',
-    name: 'Free Analytics for Open Source Projects',
+    name: 'Free API Access for Fan Projects',
     description:
-      'Free analytics service for open source projects up to 2.5M events per month',
+      'Free JKT48Connect API access for fan projects and community tools',
     price: '0',
-    priceCurrency: 'USD',
+    priceCurrency: 'IDR',
   },
 };
 
@@ -73,22 +74,22 @@ export default function OpenSourcePage() {
             className="flex-1"
             title={
               <>
-                Free Analytics for
+                Free API Access for
                 <br />
-                Open Source Projects
+                Fan Projects & Community Tools
               </>
             }
-            description="Track your users, understand adoption, and grow your project - all without cost. Get free analytics for your open source project with up to 2.5M events per month."
+            description="Building a JKT48 fansite, Discord bot, birthday tracker, or community app? Apply to the JKT48Connect Developer Program and get free API access to power your project."
           />
           <div className="col gap-4 justify-center items-center mt-8">
             <Button size="lg" asChild>
-              <Link href="mailto:oss@openpanel.dev">
+              <Link href="mailto:dev@jkt48connect.my.id">
                 Apply for Free Access
                 <MailIcon className="size-4" />
               </Link>
             </Button>
             <p className="text-sm text-muted-foreground">
-              Up to 2.5M events/month • No credit card required
+              Up to 50.000 API calls/month • No credit card required
             </p>
           </div>
         </div>
@@ -100,27 +101,27 @@ export default function OpenSourcePage() {
           <Section className="my-0">
             <SectionHeader
               title="What you get"
-              description="Everything you need to understand your users and grow your open source project."
+              description="Everything you need to build a great JKT48 fan project — for free."
             />
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <FeatureCard
-                title="2.5 Million Events/Month"
-                description="More than enough for most open source projects. Track page views, user actions, and custom events without worrying about limits."
+                title="50.000 API Calls/Month"
+                description="More than enough for most fan projects and community tools. Access member profiles, theater schedules, live streams, and event data without worrying about limits."
                 icon={BarChartIcon}
               />
               <FeatureCard
-                title="Full Feature Access"
-                description="Same powerful capabilities as paid plans. Funnels, retention analysis, custom dashboards, and real-time analytics."
+                title="Full Endpoint Access"
+                description="Same complete API access as paid plans — member profiles, generations, theater schedules, IDN Live and Showroom tracking, and event notifications."
                 icon={ZapIcon}
               />
               <FeatureCard
-                title="Unlimited Team Members"
-                description="Invite your entire contributor team. Collaborate with maintainers and core contributors on understanding your project's growth."
-                icon={UsersIcon}
+                title="TypeScript SDK Included"
+                description="Use our official TypeScript SDK to integrate JKT48Connect into your project faster, with full type safety and documented responses."
+                icon={CodeIcon}
               />
               <FeatureCard
-                title="Priority Support"
-                description="Dedicated help for open source maintainers. Get faster responses and priority assistance when you need it."
+                title="Developer Support"
+                description="Dedicated support for program members. Get help with integration, endpoint questions, and data issues directly from our team."
                 icon={MessageSquareIcon}
               />
             </div>
@@ -130,30 +131,30 @@ export default function OpenSourcePage() {
           <Section className="my-0">
             <SectionHeader
               title="Why we do this"
-              description="OpenPanel is built by and for the open source community. We believe in giving back."
+              description="JKT48Connect exists because of the JKT48 fan community. We want to give back to the people who make it thrive."
             />
             <div className="col gap-6 mt-8">
               <p className="text-muted-foreground">
-                We started OpenPanel because we believed analytics tools
-                shouldn't be complicated or locked behind expensive enterprise
-                subscriptions. As an open source project ourselves, we
-                understand the challenges of building and growing a project
-                without the resources of big corporations.
+                We built JKT48Connect because fan developers shouldn't have to
+                waste hours scraping, parsing HTML, and maintaining brittle
+                scripts just to show who's performing tonight. The JKT48
+                community deserves reliable, production-grade tools — and that
+                starts with giving fan projects access to the data they need.
               </p>
               <div className="grid md:grid-cols-3 gap-4">
                 <FeatureCard
-                  title="Built for OSS"
-                  description="OpenPanel is open source. We know what it's like to build in the open."
-                  icon={CodeIcon}
-                />
-                <FeatureCard
-                  title="No Barriers"
-                  description="Analytics shouldn't be a barrier to understanding your users. We're removing that barrier."
+                  title="Built for Fans"
+                  description="JKT48Connect was built by fans, for fans. We understand what fan projects need."
                   icon={HeartHandshakeIcon}
                 />
                 <FeatureCard
-                  title="Giving Back"
-                  description="We're giving back to the projects that inspire us and the community that supports us."
+                  title="No Barriers"
+                  description="Reliable JKT48 data shouldn't be locked behind expensive subscriptions for community projects."
+                  icon={KeyRoundIcon}
+                />
+                <FeatureCard
+                  title="Community First"
+                  description="We're giving back to the community that makes JKT48 fandom vibrant and creative."
                   icon={SparklesIcon}
                 />
               </div>
@@ -164,73 +165,36 @@ export default function OpenSourcePage() {
           <Section className="my-0">
             <SectionHeader
               title="What we ask in return"
-              description="We keep it simple. Just a small way to help us grow and support more projects."
+              description="We keep it simple. Just a small way to help more developers discover JKT48Connect."
             />
             <div className="row gap-6 mt-8">
               <div className="col gap-6">
                 <FeatureCard
-                  title="Backlink to OpenPanel"
-                  description="A simple link on your website or README helps others discover OpenPanel. It's a win-win for the community."
+                  title="Credit JKT48Connect"
+                  description="A simple mention on your project's website, README, or about page helps other developers discover JKT48Connect."
                   icon={LinkIcon}
                 >
                   <p className="text-sm text-muted-foreground mt-2">
-                    Example: "Analytics powered by{' '}
+                    Example: "Powered by{' '}
                     <Link
-                      href="https://openpanel.dev"
+                      href="https://jkt48connect.my.id"
                       className="text-primary hover:underline"
                     >
-                      OpenPanel
+                      JKT48Connect
                     </Link>
                     "
                   </p>
                 </FeatureCard>
                 <FeatureCard
-                  title="Display a Widget"
-                  description="Showcase your visitor count with our real-time analytics widget. It's completely optional but helps spread the word."
+                  title="Keep It Non-Commercial"
+                  description="Free access is for non-commercial fan projects and community tools. Commercial projects should use a paid plan."
                   icon={GlobeIcon}
-                >
-                  <a
-                    href="https://openpanel.dev"
-                    style={{
-                      display: 'inline-block',
-                      overflow: 'hidden',
-                      borderRadius: '8px',
-                      width: '250px',
-                      height: '48px',
-                    }}
-                  >
-                    <iframe
-                      src="https://dashboard.openpanel.dev/widget/badge?shareId=ancygl&color=%231F1F1F"
-                      height="48"
-                      width="100%"
-                      style={{
-                        border: 'none',
-                        overflow: 'hidden',
-                        pointerEvents: 'none',
-                      }}
-                      title="OpenPanel Analytics Badge"
-                    />
-                  </a>
-                </FeatureCard>
+                />
                 <p className="text-muted-foreground">
-                  That's it. No complicated requirements, no hidden fees, no
-                  catch. We just want to help open source projects succeed.
+                  That's it. No complicated requirements, no hidden conditions.
+                  We just want to help fan projects succeed and the JKT48
+                  community grow.
                 </p>
-              </div>
-              <div>
-                <div className="text-center text-xs text-muted-foreground">
-                  <iframe
-                    title="Realtime Widget"
-                    src="https://dashboard.openpanel.dev/widget/realtime?shareId=26wVGY"
-                    width="300"
-                    height="400"
-                    className="rounded-xl border mb-2"
-                  />
-                  Analytics from{' '}
-                  <a className="underline" href="https://openpanel.dev">
-                    OpenPanel.dev
-                  </a>
-                </div>
               </div>
             </div>
           </Section>
@@ -239,49 +203,48 @@ export default function OpenSourcePage() {
           <Section className="my-0">
             <SectionHeader
               title="Eligibility criteria"
-              description="We want to support legitimate open source projects that are making a difference."
+              description="We want to support genuine fan projects that contribute to the JKT48 community."
             />
             <div className="col gap-4 mt-8">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="flex gap-3">
                   <CheckIcon className="size-5 text-primary mt-0.5 shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">OSI-Approved License</h3>
+                    <h3 className="font-semibold mb-1">JKT48-Related Project</h3>
                     <p className="text-sm text-muted-foreground">
-                      Your project must use an OSI-approved open source license
-                      (MIT, Apache, GPL, etc.)
+                      Your project must be directly related to JKT48 — fansites,
+                      Discord bots, birthday trackers, schedule apps, etc.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <CheckIcon className="size-5 text-primary mt-0.5 shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">Public Repository</h3>
+                    <h3 className="font-semibold mb-1">Non-Commercial Purpose</h3>
                     <p className="text-sm text-muted-foreground">
-                      Your code must be publicly available on GitHub, GitLab, or
-                      similar platforms
+                      The project must be non-commercial. Fan tools and community
+                      apps built without monetization intent qualify.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <CheckIcon className="size-5 text-primary mt-0.5 shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">Active Development</h3>
+                    <h3 className="font-semibold mb-1">Active or In Development</h3>
                     <p className="text-sm text-muted-foreground">
-                      Show evidence of active development and a growing
-                      community
+                      Your project should be actively developed or have a clear
+                      plan to launch. We support projects at any stage.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <CheckIcon className="size-5 text-primary mt-0.5 shrink-0" />
                   <div>
-                    <h3 className="font-semibold mb-1">
-                      Non-Commercial Primary Purpose
-                    </h3>
+                    <h3 className="font-semibold mb-1">Community Benefit</h3>
                     <p className="text-sm text-muted-foreground">
-                      The primary purpose should be non-commercial, though
-                      commercial OSS projects may be considered
+                      The project should benefit the JKT48 fan community —
+                      making data more accessible, shows easier to follow, or
+                      members easier to discover.
                     </p>
                   </div>
                 </div>
@@ -305,10 +268,10 @@ export default function OpenSourcePage() {
                   <p className="text-sm text-muted-foreground">
                     Reach out to{' '}
                     <Link
-                      href="mailto:oss@openpanel.dev"
+                      href="mailto:priority@jkt48connect.com"
                       className="text-primary hover:underline"
                     >
-                      oss@openpanel.dev
+                      priority@jkt48connect.com
                     </Link>{' '}
                     with your project details
                   </p>
@@ -317,26 +280,26 @@ export default function OpenSourcePage() {
                   <div className="size-10 rounded-full bg-primary/10 center-center text-primary font-semibold">
                     2
                   </div>
-                  <h3 className="font-semibold">Include project info</h3>
+                  <h3 className="font-semibold">Describe your project</h3>
                   <p className="text-sm text-muted-foreground">
-                    Share your project URL, license type, and a brief
-                    description of what you're building
+                    Share what you're building, who it's for, and how you plan
+                    to use the JKT48Connect API
                   </p>
                 </div>
                 <div className="col gap-3">
                   <div className="size-10 rounded-full bg-primary/10 center-center text-primary font-semibold">
                     3
                   </div>
-                  <h3 className="font-semibold">We'll review</h3>
+                  <h3 className="font-semibold">We'll review & respond</h3>
                   <p className="text-sm text-muted-foreground">
-                    We'll evaluate your project and respond within a few
-                    business days
+                    We'll evaluate your project and get back to you within a few
+                    business days with your API key
                   </p>
                 </div>
               </div>
               <div className="mt-4">
                 <Button size="lg" asChild>
-                  <Link href="mailto:oss@openpanel.dev?subject=Open Source Program Application">
+                  <Link href="mailto:priority@jkt48connect.com?subject=Developer Program Application">
                     Apply Now
                     <MailIcon className="size-4" />
                   </Link>
@@ -349,57 +312,58 @@ export default function OpenSourcePage() {
           <Section className="my-0">
             <SectionHeader
               title="Frequently asked questions"
-              description="Everything you need to know about our open source program."
+              description="Everything you need to know about the JKT48Connect Developer Program."
             />
             <div className="mt-8">
               <Faqs>
-                <FaqItem question="What counts as an open-source project?">
-                  We consider any project with an OSI-approved open source
-                  license (MIT, Apache, GPL, BSD, etc.) that is publicly
-                  available and actively maintained. The project should have a
-                  non-commercial primary purpose, though we may consider
-                  commercial open source projects on a case-by-case basis.
+                <FaqItem question="What kinds of projects qualify?">
+                  Any non-commercial JKT48 fan project qualifies — fansites,
+                  Discord bots, birthday reminder apps, theater schedule
+                  trackers, member directories, live stream notifiers, and
+                  similar community tools. If you're building something for the
+                  JKT48 fan community without monetization intent, you're likely
+                  eligible.
                 </FaqItem>
-                <FaqItem question="What happens if I exceed 2.5M events per month?">
-                  We understand that successful projects grow. If you
-                  consistently exceed 2.5M events, we'll reach out to discuss
-                  options. We're flexible and want to support your success. In
-                  most cases, we can work out a solution that works for both of
-                  us.
+                <FaqItem question="What happens if I exceed 50.000 API calls per month?">
+                  We understand fan projects can grow quickly. If you
+                  consistently exceed the free limit, we'll reach out to discuss
+                  options. In most cases we can upgrade you to a paid plan at a
+                  discounted rate, or work out a solution that fits your
+                  project's scale.
                 </FaqItem>
-                <FaqItem question="Can commercial open source projects apply?">
-                  Yes, we consider commercial open source projects on a
-                  case-by-case basis. If your project is open source but has
-                  commercial offerings, please mention this in your application
-                  and we'll evaluate accordingly.
+                <FaqItem question="Can I monetize my project while using the free tier?">
+                  No — the free developer program is for non-commercial projects
+                  only. If your project generates revenue (ads, subscriptions,
+                  donations above cost), please use a paid plan. We review
+                  projects periodically and may reach out if a project's
+                  commercial scope changes.
                 </FaqItem>
-                <FaqItem question="How long does the free access last?">
+                <FaqItem question="How long does free access last?">
                   As long as your project remains eligible and active, your free
-                  access continues. We review projects periodically to ensure
-                  they still meet our criteria, but we're committed to
-                  supporting projects long-term.
+                  access continues. We review projects periodically, but we're
+                  committed to supporting genuine fan projects long-term.
                 </FaqItem>
-                <FaqItem question="Do I need to display the widget?">
-                  No, displaying the widget is completely optional. We only
-                  require a backlink to OpenPanel on your website or README. The
-                  widget is just a nice way to showcase your analytics if you
-                  want to.
+                <FaqItem question="Do I need to have a finished project to apply?">
+                  No — we welcome projects at any stage, including early
+                  development. Just describe what you're planning to build and
+                  how you'll use the API. We're happy to support fan projects
+                  from the start.
                 </FaqItem>
-                <FaqItem question="What if my project is very small or just starting?">
-                  We welcome projects of all sizes! Whether you're just getting
-                  started or have a large community, if you meet our eligibility
-                  criteria, we'd love to help. Small projects often benefit the
-                  most from understanding their users early on.
+                <FaqItem question="What if my project is very small?">
+                  We welcome projects of all sizes. Whether you're building a
+                  small personal Discord bot or a larger public fansite, if
+                  you're creating something for the JKT48 community, we'd love
+                  to help.
                 </FaqItem>
               </Faqs>
             </div>
           </Section>
 
           <CtaBanner
-            title="Ready to get free analytics for your open source project?"
-            description="Join other open source projects using OpenPanel to understand their users and grow their communities. Apply today and get started in minutes."
+            title="Ready to build your JKT48 fan project?"
+            description="Join the JKT48Connect Developer Program and get free API access to member data, theater schedules, live streams, and events. Apply today and start building."
             ctaText="Apply for Free Access"
-            ctaLink="mailto:oss@openpanel.dev?subject=Open Source Program Application"
+            ctaLink="mailto:priority@jkt48connect.com?subject=Priority Program Application"
           />
         </div>
       </div>
