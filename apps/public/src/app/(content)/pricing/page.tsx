@@ -15,9 +15,9 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { CompareCard } from '../compare/_components/compare-card';
 
-const title = 'OpenPanel Cloud Pricing';
+const title = 'JKT48Connect API Pricing';
 const description =
-  'Our pricing is as simple as it gets, choose how many events you want to track each month, everything else is unlimited, no tiers, no hidden costs.';
+  'Simple, transparent pricing for every scale. Choose a plan based on your API usage — no hidden fees, no complicated tiers, just clean access to JKT48 data.';
 
 export const metadata: Metadata = getPageMetadata({
   title,
@@ -34,7 +34,7 @@ const jsonLd = {
   url: url('/pricing'),
   publisher: {
     '@type': 'Organization',
-    name: 'OpenPanel',
+    name: 'JKT48Connect',
     logo: {
       '@type': 'ImageObject',
       url: url('/logo.png'),
@@ -74,8 +74,8 @@ function PricingTable() {
   return (
     <Section className="container">
       <SectionHeader
-        title="Full pricing table"
-        description="Here's the full pricing table for all plans. You can use the discount code to get a discount on your subscription."
+        title="Full pricing breakdown"
+        description="All plans include access to the complete JKT48Connect API — member profiles, theater schedules, live streams, and event notifications. Scale up as your app grows."
       />
       <div className="prose mt-8">
         <table className="bg-card">
@@ -90,7 +90,7 @@ function PricingTable() {
             {PRICING.map((price) => (
               <tr key={price.price}>
                 <td className="font-semibold">
-                  {formatEventsCount(price.events)} events per month
+                  {formatEventsCount(price.events)} API calls per month
                 </td>
                 <td className="text-right">
                   {Intl.NumberFormat('en-US', {
@@ -128,12 +128,13 @@ function ComparisonSection() {
         title="How do we compare?"
         description={
           <>
-            See how OpenPanel stacks up against other analytics tools in our{' '}
+            See how JKT48Connect stacks up against other JKT48 data sources in
+            our{' '}
             <Link
-              href="/articles/open-source-web-analytics"
+              href="/articles/jkt48-data-api-comparison"
               className="underline hover:text-primary transition-colors"
             >
-              comprehensive comparison of open source web analytics tools
+              comprehensive comparison of JKT48 data solutions
             </Link>
             .
           </>
@@ -149,7 +150,7 @@ function ComparisonSection() {
           <CompareCard
             key={comparison.slug}
             url={comparison.url}
-            name={`OpenPanel vs ${comparison.competitor.name}`}
+            name={`JKT48Connect vs ${comparison.competitor.name}`}
             description={comparison.competitor.short_description}
           />
         ))}
