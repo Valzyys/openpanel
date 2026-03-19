@@ -59,14 +59,6 @@ export default async function FeaturesIndexPage() {
   return (
     <div>
       <FeatureHero hero={heroData} />
-      <div className="container my-16">
-        <WindowImage
-          alt="JKT48Connect API Overview"
-          caption="Access the full JKT48 data ecosystem through a single, well-documented REST API — from member profiles to live stream viewer counts."
-          srcDark="/screenshots/overview-dark.webp"
-          srcLight="/screenshots/overview-light.webp"
-        />
-      </div>
       <Section className="container">
         <SectionHeader
           description="Browse all available endpoints and capabilities. Each feature is designed to give developers clean, structured access to JKT48 data."
