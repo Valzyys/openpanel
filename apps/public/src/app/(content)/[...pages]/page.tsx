@@ -59,7 +59,7 @@ export default async function Page({
     url: url(page.url),
     publisher: {
       '@type': 'Organization',
-      name: 'OpenPanel',
+      name: 'JKT48Connect',
       logo: {
         '@type': 'ImageObject',
         url: url('/logo.png'),
