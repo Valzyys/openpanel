@@ -10,9 +10,9 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 export const metadata: Metadata = getPageMetadata({
-  title: 'Implementation Guides',
+  title: 'JKT48Connect Integration Guides',
   description:
-    'Step-by-step tutorials for adding privacy-first analytics to your app with OpenPanel.',
+    'Step-by-step tutorials for integrating JKT48 member data, live streams, theater schedules, and event notifications into your app with JKT48Connect.',
   url: url('/guides'),
   image: getOgImageUrl('/guides'),
 });
@@ -22,12 +22,12 @@ export default async function Page() {
     (a, b) => b.data.date.getTime() - a.data.date.getTime(),
   );
 
-  // Create ItemList schema for SEO
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'OpenPanel Implementation Guides',
-    description: 'Step-by-step tutorials for adding analytics to your app',
+    name: 'JKT48Connect Integration Guides',
+    description:
+      'Step-by-step tutorials for integrating JKT48 data into your app',
     itemListElement: guides.map((guide, index) => {
       const slug = guide.url.replace(/^\/guides\//, '').replace(/\/$/, '');
       return {
@@ -46,18 +46,16 @@ export default async function Page() {
           as="h1"
           align="center"
           className="flex-1"
-          title="Implementation Guides"
-          description="Step-by-step tutorials for adding privacy-first analytics to your app with OpenPanel."
+          title="Integration Guides"
+          description="Step-by-step tutorials for integrating JKT48 member data, live streams, theater schedules, and event notifications into your app with JKT48Connect."
         />
       </HeroContainer>
-
       <Script
         strategy="beforeInteractive"
         id="guides-itemlist-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-
       <Section className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {guides.map((item) => (
           <GuideCard
