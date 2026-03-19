@@ -23,14 +23,10 @@ export async function Footer() {
               data={[
                 { title: 'About', url: '/about' },
                 { title: 'Contact', url: '/contact' },
-                { title: 'Become a supporter', url: '/supporter' },
+                { title: 'Become a pro', url: '/supporter' },
                 {
-                  title: 'Free analytics for open source projects',
-                  url: '/open-source',
-                },
-                {
-                  title: 'Open source analytics',
-                  url: '/open-source-analytics',
+                  title: 'Developer program',
+                  url: '/developer-program',
                 },
               ]}
             />
@@ -92,30 +88,6 @@ export async function Footer() {
 
         <div className="col relative mt-16 gap-8 border-t bg-background/70 pt-8 pb-32 text-muted-foreground">
           <div className="col md:row container justify-between gap-8">
-            <div>
-              <a
-                href="https://openpanel.dev"
-                style={{
-                  display: 'inline-block',
-                  overflow: 'hidden',
-                  borderRadius: '8px',
-                  width: '100%',
-                  height: '48px',
-                }}
-              >
-                <iframe
-                  height="48"
-                  src="https://dashboard.openpanel.dev/widget/badge?shareId=ancygl&color=%230B0B0B"
-                  style={{
-                    border: 'none',
-                    overflow: 'hidden',
-                    pointerEvents: 'none',
-                  }}
-                  title="OpenPanel Analytics Badge"
-                  width="100%"
-                />
-              </a>
-            </div>
             <Social />
           </div>
           <div className="md:row container flex flex-col-reverse justify-between gap-8">
