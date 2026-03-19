@@ -30,13 +30,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const data = await getFeatureData(slug);
-
   if (!data) {
     return {
       title: 'Feature Not Found',
     };
   }
-
   return getPageMetadata({
     title: data.seo.title,
     description: data.seo.description,
@@ -52,12 +50,12 @@ export default async function FeaturePage({
 }) {
   const { slug } = await params;
   const data = await getFeatureData(slug);
-
   if (!data) {
     return notFound();
   }
 
   const pageUrl = url(`/features/${slug}`);
+  const screenshots = data.screenshots ?? [];
   const capabilitiesSection = data.capabilities_section ?? {
     title: 'What you can do',
     intro: undefined,
@@ -71,7 +69,7 @@ export default async function FeaturePage({
     url: pageUrl,
     publisher: {
       '@type': 'Organization',
-      name: 'OpenPanel',
+      name: 'JKT48Connect',
       logo: {
         '@type': 'ImageObject',
         url: url('/logo.webp'),
@@ -88,52 +86,42 @@ export default async function FeaturePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <FeatureHero hero={data.hero} />
-
-      {data.screenshots[0] && (
+      {screenshots[0] && (
         <div className="container my-16">
-          <WindowImage {...data.screenshots[0]} />
+          <WindowImage {...screenshots[0]} />
         </div>
       )}
-
       <WhatItIs definition={data.definition} />
-
       <Capabilities
         title={capabilitiesSection.title}
         intro={capabilitiesSection.intro}
         capabilities={data.capabilities}
       />
-
-      {data.screenshots[1] && (
+      {screenshots[1] && (
         <div className="container my-16">
-          <WindowImage {...data.screenshots[1]} />
+          <WindowImage {...screenshots[1]} />
         </div>
       )}
-
       {data.how_it_works && (
         <div id="how-it-works">
           <HowItWorks data={data.how_it_works} />
         </div>
       )}
-
-      {data.screenshots[2] && (
+      {screenshots[2] && (
         <div className="container my-16">
-          <WindowImage {...data.screenshots[2]} />
+          <WindowImage {...screenshots[2]} />
         </div>
       )}
-
       <div id="use-cases">
         <FeatureUseCasesSection useCases={data.use_cases} />
       </div>
-
       <RelatedFeatures related={data.related_features} />
-
       <div id="faq">
         <FeatureFaq faqs={data.faqs} />
       </div>
-
       <CtaBanner
         title="Ready to get started?"
-        description="Track events in minutes. Free 30-day trial, no credit card required."
+        description="Integrate JKT48 data in minutes. Free tier available, no credit card required."
         ctaText={data.cta.label}
         ctaLink={data.cta.href}
       />
