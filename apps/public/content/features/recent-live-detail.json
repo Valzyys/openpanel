@@ -1,0 +1,157 @@
+{
+  "slug": "recent-live-detail",
+  "short_name": "Recent Live Detail",
+  "seo": {
+    "title": "Recent Live Detail - JKT48 Stream Analytics & Chat Logs",
+    "description": "Access comprehensive data about individual JKT48 live streams using data_id from the Recent Live API. Get detailed analytics, chat logs, gift information, and granular stream data.",
+    "keywords": [
+      "jkt48 live stream detail",
+      "jkt48 live chat log",
+      "jkt48 live gifts",
+      "jkt48 stream analytics",
+      "jkt48 live data id",
+      "jkt48 recent live detail api"
+    ]
+  },
+  "hero": {
+    "heading": "What happened inside a stream?",
+    "subheading": "Access comprehensive data about individual JKT48 live streams using the data_id from Recent Live. Detailed analytics, chat logs, gift information, and granular stream data — all in one endpoint.",
+    "badges": [
+      "Chat logs",
+      "Gift data",
+      "Stream analytics",
+      "Uses data_id from Recent Live"
+    ]
+  },
+  "definition": {
+    "title": "What is the Recent Live Detail endpoint?",
+    "text": "The Recent Live Detail endpoint provides comprehensive, granular data about a specific JKT48 live stream that has already ended.\n\nTo use this endpoint, you first retrieve a `data_id` from the Recent Live API response. Pass that `data_id` to this endpoint and get a deep dive into everything that happened during that individual stream.\n\nThe detailed response includes:\n\n- **Stream metadata** — member info, platform, start time, end time, and total duration\n- **Viewer analytics** — peak viewers, average viewers, and viewer count over time\n- **Chat logs** — chronological log of chat messages sent during the stream\n- **Gift data** — all gifts sent during the stream, including gift type, sender, and timestamp\n- **Gift totals** — aggregate gift counts and values for the stream\n- **Highlight moments** — timestamps of notable peaks in viewer count or gift activity\n\nThis endpoint is the most data-rich in the JKT48Connect live stream API family. Use it to build in-depth stream recap pages, gift leaderboards for individual streams, fan engagement analytics, or any feature that requires per-stream granular data rather than summary statistics."
+  },
+  "capabilities_section": {
+    "title": "What you can do with Recent Live Detail",
+    "intro": "Build deep stream analytics, recap pages, and gift trackers using per-stream granular data."
+  },
+  "capabilities": [
+    {
+      "title": "Chat log access",
+      "description": "Retrieve the full chronological chat log from a specific stream. Display replayed chat, analyze fan engagement, or index message content for search."
+    },
+    {
+      "title": "Gift data & totals",
+      "description": "Access all gifts sent during the stream — gift type, sender, quantity, and timestamp. Calculate gift totals and build stream-level gift leaderboards."
+    },
+    {
+      "title": "Viewer analytics",
+      "description": "Get peak viewer count, average viewers, and a time-series of viewer count throughout the stream. Visualize how viewership grew and dropped during the broadcast."
+    },
+    {
+      "title": "Stream metadata",
+      "description": "Full stream metadata including member info, platform, stream title, start/end timestamps, and total duration — the complete record of the stream."
+    },
+    {
+      "title": "Highlight moments",
+      "description": "Identify timestamps where viewer counts or gift activity spiked. Surface the most engaging moments of any stream programmatically."
+    },
+    {
+      "title": "Linked via data_id",
+      "description": "Uses the data_id field from the Recent Live API response as the lookup key — making it easy to enrich any recent stream entry with full detail on demand."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Recent Live Detail endpoint works",
+    "intro": "Two steps: get the data_id from Recent Live, then fetch the full detail.",
+    "steps": [
+      {
+        "title": "Get a data_id from Recent Live",
+        "description": "Call /v1/live/recent to get a list of recently ended streams. Each stream entry includes a data_id field that uniquely identifies that broadcast."
+      },
+      {
+        "title": "Call the Recent Live Detail endpoint",
+        "description": "Make a GET request to /v1/live/recent/:data_id with your API key and the data_id from step one. The response returns the full detail for that specific stream."
+      },
+      {
+        "title": "Parse and use the detailed data",
+        "description": "Use chat logs, gift data, and viewer analytics to build stream recap pages, gift leaderboards, engagement reports, or any feature that needs per-stream granular detail."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses Recent Live Detail",
+    "intro": "Fan developers building in-depth stream analytics and recap features.",
+    "items": [
+      {
+        "title": "Stream recap pages",
+        "description": "Build detailed recap pages for individual streams — showing viewer trends, top gift senders, chat highlights, and key moments. Give fans a way to relive streams they missed."
+      },
+      {
+        "title": "Gift leaderboards per stream",
+        "description": "Display who sent the most gifts during a specific stream. Build per-stream gift rankings and top supporter boards as part of member profile or stream history pages."
+      },
+      {
+        "title": "Fan engagement analytics",
+        "description": "Analyze chat activity and gift data across multiple streams to understand which members generate the most engagement and which types of content drive the most interaction."
+      },
+      {
+        "title": "Stream comparison tools",
+        "description": "Compare detailed analytics between streams — same member across different dates, or different members on the same day. Use viewer trends and gift totals to draw meaningful comparisons."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "recent-live",
+      "title": "Recent Live",
+      "description": "Start here to get data_id values for recently ended streams. Recent Live Detail enriches any entry from this endpoint."
+    },
+    {
+      "slug": "all-live",
+      "title": "All Live",
+      "description": "See who's streaming right now. Combine with Recent Live Detail to build a complete live + history experience."
+    },
+    {
+      "slug": "idn-live",
+      "title": "IDN Live",
+      "description": "Track active IDN Live streams. Recent Live Detail covers IDN Live stream history with full chat and gift data."
+    },
+    {
+      "slug": "showroom-live",
+      "title": "Showroom Live",
+      "description": "Track active Showroom streams. Recent Live Detail covers Showroom stream history with full chat and gift data."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the Recent Live Detail endpoint.",
+    "items": [
+      {
+        "question": "Where do I get the data_id from?",
+        "answer": "The data_id is included in every stream entry returned by the Recent Live endpoint (/v1/live/recent). Call Recent Live first to get a list of recently ended streams, then use any data_id from that response to fetch full detail from this endpoint."
+      },
+      {
+        "question": "Does this endpoint cover all platforms?",
+        "answer": "Yes. The Recent Live Detail endpoint supports streams from IDN Live, Showroom, and YouTube (JKT48V) — whichever platform the stream was originally on. The platform field in the response indicates the source."
+      },
+      {
+        "question": "How complete are the chat logs?",
+        "answer": "Chat logs cover the full duration of the stream and are returned in chronological order. Each log entry includes the message text, sender identifier, and timestamp. Note that chat availability may vary by platform."
+      },
+      {
+        "question": "What gift data is available?",
+        "answer": "Gift data includes the gift type or name, the sender identifier, quantity sent, and timestamp. Aggregate gift totals for the stream are also included so you can display summary stats without processing the full gift list."
+      },
+      {
+        "question": "How long is detailed stream data retained?",
+        "answer": "Detailed stream data is retained based on your plan. Free tier retains data for 7 days. Pro plan retains data for 30 days. Enterprise plans support extended retention. Check the documentation for current retention limits."
+      },
+      {
+        "question": "Can I use this for multiple streams at once?",
+        "answer": "The Recent Live Detail endpoint is designed for single-stream lookup by data_id. To analyze multiple streams, call the endpoint for each data_id. For bulk historical queries, consider the Recent Live endpoint which provides summary data for many streams in one call."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Try the Recent Live Detail endpoint",
+    "href": "https://jkt48connect.com/docs/live/recent-detail"
+  }
+}
