@@ -1,167 +1,161 @@
 {
-  "slug": "conversion",
-  "short_name": "Conversion",
+  "slug": "all-live",
+  "short_name": "All Live",
   "seo": {
-    "title": "Conversion Tracking - Trends Over Time",
-    "description": "Track conversion rates over time, spot trends, and break down by segments. Like funnels but built for monitoring how conversion evolves-perfect for A/B testing and growth.",
+    "title": "All Live - Real-time JKT48 Live Stream Tracker",
+    "description": "Track all JKT48 and JKT48V live streams in real-time across IDN Live, Showroom, and YouTube. Get member names, viewer counts, stream duration, and live status — all in one endpoint.",
     "keywords": [
-      "conversion tracking",
-      "conversion rate trends",
-      "a/b testing analytics",
-      "conversion breakdown",
-      "conversion over time"
+      "jkt48 live stream",
+      "jkt48 idn live",
+      "jkt48 showroom",
+      "jkt48v youtube live",
+      "jkt48 live tracker",
+      "jkt48 real-time api"
     ]
   },
   "hero": {
-    "heading": "Is conversion going up or down?",
-    "subheading": "See how your conversion rates change over days, weeks, and months. Break down by any property to compare variants or campaigns - and catch regressions before they cost you.",
+    "heading": "Who's live right now?",
+    "subheading": "Track every JKT48 and JKT48V live stream in real-time — IDN Live, Showroom, and YouTube — all from a single API endpoint. Know who's on, how many viewers they have, and how long they've been streaming.",
     "badges": [
-      "Conversion over time",
-      "Breakdown by any property",
-      "A/B test comparison",
-      "AI-powered insights"
+      "IDN Live",
+      "Showroom",
+      "YouTube (JKT48V)",
+      "Real-time viewer counts",
+      "All members & generations"
     ]
   },
   "definition": {
-    "title": "What is conversion tracking?",
-    "text": "Conversion tracking measures the rate at which users complete a desired action-like going from `session_start` to `save_recipe`, or from `signup` to `purchase`. You define a **flow** (a start event and an end event), and OpenPanel calculates the conversion rate for every time period you choose.\n\nIf you're familiar with [funnels](/features/funnels), conversions will feel similar. Both measure whether users complete a sequence. The difference is **perspective**:\n\n- **Funnels** are great for understanding *where* users drop off in a multi-step flow. They answer: \"which step loses the most users?\"\n- **Conversions** are great for understanding *trends*. They answer: \"is our conversion getting better or worse over time?\"\n\nWith conversion tracking, you get:\n\n- **Conversion rate over time** - see how your rate trends week over week or day by day. Spot improvements from product changes or regressions from bugs\n- **Average, best, and worst rates** - instantly see your overall average and the specific time periods where conversion peaked or dipped\n- **Breakdowns** - split conversion by any property (device, country, variant, campaign) to compare segments side by side. This is especially powerful for **A/B testing**: break down by experiment variant and see which one converts better, with per-period granularity\n- **Total conversions** - not just rates but absolute numbers, so you understand volume alongside percentage\n\nConversion reports in OpenPanel are built on the same events you already track. Define a flow once, and you get a live, updating chart that shows whether your product is converting more or fewer users over time.\n\nNo sampling, no delayed processing. Every event counts, and results update in real time."
+    "title": "What is the All Live endpoint?",
+    "text": "The All Live endpoint returns a real-time snapshot of every active JKT48 and JKT48V live stream happening right now across all supported platforms.\n\nInstead of querying IDN Live, Showroom, and YouTube separately — each with their own auth, rate limits, and response formats — JKT48Connect aggregates all of it into a single, normalized response.\n\nEvery active stream in the response includes:\n\n- **Member info** — name, generation, and profile data linked to the stream\n- **Platform** — `idn`, `showroom`, or `youtube` (JKT48V)\n- **Viewer count** — current live viewer count, updated in real-time\n- **Stream duration** — how long the stream has been live\n- **Stream URL** — direct link to the live stream\n- **Thumbnail** — live thumbnail image URL where available\n\nThe endpoint covers all active JKT48 members streaming on IDN Live or Showroom, and JKT48V content on YouTube — including unit streams and special broadcasts.\n\nData is refreshed continuously so viewer counts and stream status reflect what's actually happening right now, not cached from minutes ago."
   },
   "capabilities_section": {
-    "title": "What you can do with conversions",
-    "intro": "Monitor, compare, and optimize your most important flows."
+    "title": "What you can do with All Live",
+    "intro": "Build live dashboards, notification systems, and fan apps with real-time JKT48 stream data."
   },
   "capabilities": [
     {
-      "title": "Conversion trends over time",
-      "description": "See your conversion rate plotted over days, weeks, or months. Identify trends, seasonal patterns, and the impact of product changes at a glance."
+      "title": "Aggregate all platforms in one call",
+      "description": "Get IDN Live, Showroom, and YouTube (JKT48V) streams in a single API response. No need to manage separate integrations or normalize different response formats yourself."
     },
     {
-      "title": "Breakdowns for A/B testing",
-      "description": "Split conversion by any property-experiment variant, device, country, or traffic source. Compare lines on the same chart to see which segment converts best."
+      "title": "Real-time viewer counts",
+      "description": "Viewer counts are pulled in real-time, so your app always shows accurate numbers — not cached data from minutes ago. Perfect for live dashboards and leaderboards."
     },
     {
-      "title": "Smart insights",
-      "description": "OpenPanel highlights your best and worst performing periods and breakdowns automatically. See which variant had the highest average rate and when the lowest dip occurred."
+      "title": "Member-linked stream data",
+      "description": "Every stream is linked to the corresponding JKT48Connect member record, giving you instant access to member name, generation, photo, and profile — no extra lookup needed."
     },
     {
-      "title": "Flexible flow definition",
-      "description": "Define a conversion as any two events: a start (e.g. session_start) and a goal (e.g. purchase). Change events or time windows without re-instrumenting."
+      "title": "JKT48V YouTube support",
+      "description": "Covers JKT48V virtual content on YouTube alongside regular member streams on IDN Live and Showroom, so you never miss a broadcast regardless of platform."
     },
     {
-      "title": "Per-period detail table",
-      "description": "Below the chart, a table shows conversion rate for every period (week, day, month) for each segment. Sort and search to find exactly the data point you need."
+      "title": "Filter by platform",
+      "description": "Query only IDN Live streams, only Showroom, or only YouTube — or get all platforms at once. Filter by generation or team to narrow results for your use case."
     },
     {
-      "title": "Save and share reports",
-      "description": "Save conversion reports with their configuration and add them to dashboards. Share with your team so everyone monitors the same metrics."
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/features/feature-conversion.webp",
-      "alt": "Conversion report showing rate over time with average, best, and worst metrics",
-      "caption": "Track conversion trends over time. See average rate, total conversions, and identify your best and worst performing periods."
-    },
-    {
-      "src": "/features/feature-conversion-breakdown.webp",
-      "alt": "Conversion report with breakdown by platform showing Android vs iOS",
-      "caption": "Break down conversion by any property. Compare segments side by side-perfect for A/B tests, platform comparisons, and campaign analysis."
+      "title": "Webhook notifications",
+      "description": "Set up webhooks to receive a POST request the moment any member goes live on any platform. Build oshi notification bots and fan alert systems without polling."
     }
   ],
   "how_it_works": {
-    "title": "How conversion tracking works",
-    "intro": "Set up a conversion report in seconds using events you already track.",
+    "title": "How All Live works",
+    "intro": "One endpoint, all platforms, real-time data.",
     "steps": [
       {
-        "title": "Pick your events",
-        "description": "Choose a start event (e.g. session_start) and a goal event (e.g. save_recipe, purchase). These are events you already send-no extra instrumentation."
+        "title": "Call the All Live endpoint",
+        "description": "Make a single GET request to /v1/live/all with your API key. No extra setup or platform-specific configuration needed."
       },
       {
-        "title": "Choose your time range and granularity",
-        "description": "Select a date range and whether to view conversion by day, week, or month. OpenPanel calculates the rate for each period."
+        "title": "Receive normalized stream data",
+        "description": "Get a unified list of all active streams with consistent fields — platform, member, viewers, duration, URL — regardless of which platform each stream is on."
       },
       {
-        "title": "Add breakdowns (optional)",
-        "description": "Break down by device, country, experiment variant, or any event property. Each breakdown value gets its own line on the chart and row in the table."
+        "title": "Filter by platform or member (optional)",
+        "description": "Pass query parameters to filter by platform (idn, showroom, youtube), generation, or specific member ID. Get exactly the streams relevant to your app."
       },
       {
-        "title": "Monitor trends and act",
-        "description": "Watch your conversion rate over time. Spot regressions early, validate that product changes improve conversion, and compare A/B test variants with real data."
+        "title": "Display or trigger actions",
+        "description": "Render a live dashboard, send push notifications, update a Discord bot, or trigger any action in your app based on who's live and their viewer counts."
       }
     ]
   },
   "use_cases": {
-    "title": "Who uses conversion tracking",
-    "intro": "Teams that need to monitor and improve conversion over time.",
+    "title": "Who uses All Live",
+    "intro": "Fan developers building real-time JKT48 experiences.",
     "items": [
       {
-        "title": "Growth and product teams",
-        "description": "Monitor signup-to-activation or trial-to-paid conversion week over week. Validate that product changes actually move the needle-not just in aggregate, but period by period."
+        "title": "Live dashboards and fansites",
+        "description": "Display a real-time grid of all active JKT48 streams on your fansite. Show member photos, platform badges, and live viewer counts — updated automatically without page refresh."
       },
       {
-        "title": "A/B testing and experimentation",
-        "description": "Break down conversion by experiment variant to see which version wins. Unlike simple A/B tools, you get per-period granularity so you can spot if a variant's advantage changes over time."
+        "title": "Oshi notification bots",
+        "description": "Build Discord or Telegram bots that ping fans the moment their oshi goes live on any platform. Use webhooks for instant notifications without polling the API every minute."
       },
       {
-        "title": "Marketing and campaigns",
-        "description": "Compare conversion rates across traffic sources, campaigns, or landing pages. Find out which channels convert best and whether performance is improving or declining."
+        "title": "Viewer count leaderboards",
+        "description": "Rank members by live viewer count in real-time. Build popular live trackers and oshi support apps that update as streams grow or end."
       },
       {
-        "title": "Mobile and cross-platform teams",
-        "description": "Break down by platform (iOS vs Android), app version, or device type. Catch platform-specific regressions and prioritize fixes where conversion is lowest."
+        "title": "Multi-platform stream aggregators",
+        "description": "Build apps that unify IDN Live, Showroom, and YouTube JKT48V streams into a single feed — so fans never have to check three separate platforms to know who's on."
       }
     ]
   },
   "related_features": [
     {
-      "slug": "funnels",
-      "title": "Funnels",
-      "description": "See where users drop off step by step. Funnels show you which step loses users-conversions show you how rates trend over time."
+      "slug": "members",
+      "title": "Member Profiles",
+      "description": "Each live stream is linked to a full member record. Access profiles, generations, and social links alongside stream data."
     },
     {
-      "slug": "event-tracking",
-      "title": "Event tracking",
-      "description": "Conversions are built on the events you track. Send events once and use them for conversions, funnels, retention, and more."
+      "slug": "events",
+      "title": "Event Notifications",
+      "description": "Get notified for handshake events, off-air shows, and special appearances — not just live streams."
     },
     {
-      "slug": "retention",
-      "title": "Retention",
-      "description": "Conversion measures if users complete an action. Retention measures if they keep coming back."
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Track theater shows alongside live streams. Know which team is performing and when the next show goes live."
     },
     {
-      "slug": "data-visualization",
-      "title": "Data visualization",
-      "description": "Conversion charts are one of many ways to visualize your data in OpenPanel."
+      "slug": "news",
+      "title": "News & Announcements",
+      "description": "Stay updated on JKT48 announcements that may accompany or follow live stream events."
     }
   ],
   "faqs": {
     "title": "Frequently asked questions",
-    "intro": "Common questions about conversion tracking in OpenPanel.",
+    "intro": "Common questions about the All Live endpoint.",
     "items": [
       {
-        "question": "How is this different from funnels?",
-        "answer": "Funnels show you a multi-step sequence and where users drop off at each step. Conversions focus on a single flow (start → goal) and show you how the conversion rate changes over time. Use funnels to diagnose where users get stuck; use conversions to monitor whether things are getting better or worse."
+        "question": "Which platforms are covered?",
+        "answer": "The All Live endpoint covers IDN Live, Showroom, and YouTube (JKT48V). All three platforms are aggregated into a single normalized response with a platform field indicating the source of each stream."
       },
       {
-        "question": "Can I use conversions for A/B testing?",
-        "answer": "Yes. Add a breakdown by your experiment variant property, and you'll see each variant's conversion rate plotted over time with per-period detail. This gives you richer insight than a single aggregate number-you can see if one variant's advantage holds consistently or fluctuates."
+        "question": "How real-time is the viewer count data?",
+        "answer": "Viewer counts are updated continuously. On Pro and Enterprise plans, data latency is under 10 seconds. On the free tier, data is refreshed every 30 seconds. Stream start and end events are detected within seconds across all plans."
       },
       {
-        "question": "What events can I use?",
-        "answer": "Any events you already track. A conversion is defined by two events: a start event and a goal event. Common examples include session_start → signup, signup → purchase, or page_view → add_to_cart."
+        "question": "Does it cover JKT48V (virtual) content?",
+        "answer": "Yes. JKT48V YouTube streams are included alongside regular member streams on IDN Live and Showroom. JKT48V content is tagged with platform: 'youtube' and includes the stream title, thumbnail, and viewer count where available."
       },
       {
-        "question": "Is the data sampled?",
-        "answer": "No. OpenPanel processes every event with no sampling. Your conversion rates are calculated from complete data, so you can trust the numbers even for small segments."
+        "question": "Can I filter streams by generation or team?",
+        "answer": "Yes. Pass generation or team query parameters to filter the response. You can also filter by platform to get only IDN Live, only Showroom, or only YouTube streams."
       },
       {
-        "question": "Can I see absolute numbers alongside rates?",
-        "answer": "Yes. Every conversion report shows both the conversion rate and the total number of conversions. The detail table below the chart includes totals and per-period counts for each segment."
+        "question": "How do I get notified when a member goes live?",
+        "answer": "Use webhooks (available on Pro and Enterprise plans). Register a webhook URL and specify which members or platforms to watch. JKT48Connect will send a POST request to your endpoint within seconds of a stream starting."
+      },
+      {
+        "question": "What happens when a stream ends?",
+        "answer": "Ended streams are removed from the All Live response immediately. If you're using webhooks, you'll also receive a stream_end event so your app can update in real-time without polling."
       }
     ]
   },
   "cta": {
-    "label": "Track your first conversion",
-    "href": "https://dashboard.openpanel.dev/onboarding"
+    "label": "Try the All Live endpoint",
+    "href": "https://jkt48connect.com/docs/live"
   }
 }
