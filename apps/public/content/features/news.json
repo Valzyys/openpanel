@@ -1,0 +1,161 @@
+{
+  "slug": "news",
+  "short_name": "News",
+  "seo": {
+    "title": "News API - JKT48 Official News & Announcements",
+    "description": "Access JKT48 official news and announcements in real-time. Perfect for news feeds, notification systems, and keeping fans updated with the latest JKT48 information.",
+    "keywords": [
+      "jkt48 news api",
+      "jkt48 announcements api",
+      "jkt48 official news",
+      "jkt48 news feed",
+      "jkt48 latest news",
+      "jkt48 news notification"
+    ]
+  },
+  "hero": {
+    "heading": "What's the latest from JKT48?",
+    "subheading": "Access JKT48 official news and announcements in real-time. Build news feeds, notification systems, and keep fans updated with the latest information — all through a single structured API.",
+    "badges": [
+      "Official announcements",
+      "Real-time updates",
+      "Member news",
+      "Event & schedule news"
+    ]
+  },
+  "definition": {
+    "title": "What is the News API?",
+    "text": "The News API provides structured access to official JKT48 news and announcements — aggregated from JKT48's official channels and delivered as clean, queryable JSON.\n\nInstead of scraping the JKT48 website or monitoring multiple social media accounts for announcements, the News API aggregates official content into a consistent format ready to use in your app.\n\nEach news item in the response includes:\n\n- **Title** — the headline of the announcement or news article\n- **Content** — the full announcement text or summary\n- **Category** — the type of news (member news, event announcement, schedule update, media appearance, general announcement)\n- **Published date** — when the news was officially published\n- **Source URL** — link to the original announcement on the official JKT48 site or channel\n- **Related members** — members mentioned or featured in the news item where identifiable\n- **Images** — any images included in the official announcement\n\nThe News API is the cleanest way to build a JKT48 news feed, announcement notification system, or content aggregator — without maintaining your own scraper or monitoring multiple official channels manually."
+  },
+  "capabilities_section": {
+    "title": "What you can do with the News API",
+    "intro": "Build news feeds, notification systems, and content aggregators with structured JKT48 official news."
+  },
+  "capabilities": [
+    {
+      "title": "Real-time news feed",
+      "description": "Access the latest JKT48 official announcements as soon as they are published. Build a live news feed that stays current without manual content management."
+    },
+    {
+      "title": "Category filtering",
+      "description": "Filter news by category — member news, event announcements, schedule updates, media appearances, or general announcements. Surface only the type of news relevant to your app."
+    },
+    {
+      "title": "Member-tagged news",
+      "description": "Each news item is tagged with related members where identifiable. Filter news by member_id to show fans only the announcements that feature their oshi."
+    },
+    {
+      "title": "Full announcement content",
+      "description": "Access the full announcement text and any associated images — not just headlines. Build rich news cards and detailed announcement pages directly from the API response."
+    },
+    {
+      "title": "Historical news archive",
+      "description": "Query past news items by date range or category. Build announcement archives, member news timelines, and historical activity pages."
+    },
+    {
+      "title": "Source linking",
+      "description": "Each news item includes the source URL pointing to the original official announcement — for attribution and for letting fans read the full context on the official source."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the News API works",
+    "intro": "Query the latest news, filter by category or member, and display structured announcements in your app.",
+    "steps": [
+      {
+        "title": "Query the latest news",
+        "description": "Call GET /v1/news to retrieve the most recent JKT48 official announcements, sorted by published date. Returns the latest items by default."
+      },
+      {
+        "title": "Filter by category or member",
+        "description": "Pass category=member or member_id to narrow results. Get only member-related news, only event announcements, or only news featuring a specific member."
+      },
+      {
+        "title": "Get full news detail",
+        "description": "Call GET /v1/news/:news_id to retrieve the full content, images, and metadata for a specific news item — for building detailed announcement pages."
+      },
+      {
+        "title": "Display or trigger notifications",
+        "description": "Render news feeds, announcement cards, or trigger push notifications and Discord bot messages when new items matching your criteria are published."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the News API",
+    "intro": "Fan developers building news feeds, notification systems, and content aggregation tools.",
+    "items": [
+      {
+        "title": "JKT48 news feeds",
+        "description": "Build a curated JKT48 news feed on your fansite — displaying official announcements, member news, and event updates in a clean, always-current format without manual content management."
+      },
+      {
+        "title": "Announcement notification bots",
+        "description": "Build Discord or Telegram bots that automatically post new JKT48 announcements to fan communities. Use polling or webhooks to trigger posts as soon as new news is published."
+      },
+      {
+        "title": "Oshi news trackers",
+        "description": "Let fans follow specific members and see only news that mentions or features their oshi — member promotions, special appearances, merchandise announcements, and personal news."
+      },
+      {
+        "title": "Fan app content sections",
+        "description": "Add a news section to any JKT48 fan app — combining official news with theater schedules, live stream tracking, and event calendars for a comprehensive fan experience."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "events",
+      "title": "Events",
+      "description": "Event announcements often appear in both News and Events. News captures the announcement; Events structures the scheduled occurrence."
+    },
+    {
+      "slug": "members",
+      "title": "Members",
+      "description": "News items are tagged with related member records. Use the Members API to enrich member-tagged news with full profiles and photos."
+    },
+    {
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Theater schedule updates often appear in the news feed. Cross-reference news with the Theater API for the full structured schedule data."
+    },
+    {
+      "slug": "birthday",
+      "title": "Birthday",
+      "description": "Birthday-related news and member announcements are common news categories. Combine with the Birthday API for complete member celebration coverage."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the JKT48Connect News API.",
+    "items": [
+      {
+        "question": "What sources does the News API aggregate from?",
+        "answer": "The News API aggregates from official JKT48 channels — the JKT48 official website and official announcements. Content is sourced from verified official sources only, not fan sites or unofficial accounts."
+      },
+      {
+        "question": "How quickly does new content appear after official publication?",
+        "answer": "The JKT48Connect team monitors official channels continuously. Most new announcements appear in the News API within minutes to hours of official publication, depending on the source."
+      },
+      {
+        "question": "Does the API include historical news?",
+        "answer": "Yes. The News API retains historical news items with full content and metadata. Query past news by date range or category to build announcement archives and member news timelines."
+      },
+      {
+        "question": "Can I filter news by a specific member?",
+        "answer": "Yes. Pass member_id as a query parameter to get only news items tagged with that member. Note that member tagging depends on the content of the announcement — not all news items mention specific members."
+      },
+      {
+        "question": "What news categories are available?",
+        "answer": "News items are categorized as: member_news (promotions, personal announcements), event_announcement (upcoming events, handshake registrations), schedule_update (theater and show schedule changes), media_appearance (TV, radio, digital media), and general (other official announcements)."
+      },
+      {
+        "question": "Does the API include images from announcements?",
+        "answer": "Yes, where available. News items include an images array with URLs for any official images included in the original announcement. Not all announcements include images."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the News API",
+    "href": "https://jkt48connect.com/docs/news"
+  }
+}
