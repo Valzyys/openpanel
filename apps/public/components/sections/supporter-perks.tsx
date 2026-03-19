@@ -1,50 +1,55 @@
 import { cn } from '@/lib/utils';
 import {
   CheckIcon,
-  HeartHandshakeIcon,
-  MessageSquareIcon,
+  CodeIcon,
+  HeartIcon,
+  KeyRoundIcon,
+  LifeBuoyIcon,
   RocketIcon,
-  SparklesIcon,
-  StarIcon,
+  ShieldCheckIcon,
   ZapIcon,
-  PackageIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 
 const perks = [
   {
-    icon: PackageIcon,
-    title: 'Latest Docker Images',
-    description: 'Access to bleeding-edge builds on every commit',
-    href: '/docs/self-hosting/supporter-access-latest-docker-images',
+    icon: KeyRoundIcon,
+    title: 'Full API Access',
+    description: 'Unlimited calls to all endpoints — members, theater, live streams, and events',
+    href: '/docs/endpoints',
     highlight: true,
   },
   {
-    icon: MessageSquareIcon,
-    title: 'Prioritized Support',
-    description: 'Get help faster with priority Discord support',
+    icon: ZapIcon,
+    title: 'Real-time Data',
+    description: 'Live viewer counts, stream status, and event alerts with sub-second latency',
     highlight: true,
   },
   {
     icon: RocketIcon,
-    title: 'Feature Requests',
-    description: 'Your ideas get prioritized in our roadmap',
+    title: 'Priority Roadmap',
+    description: 'Vote and request new endpoints that get prioritized in our development cycle',
     highlight: true,
   },
   {
-    icon: StarIcon,
-    title: 'Exclusive Discord Role',
-    description: 'Special badge and recognition in our community',
+    icon: LifeBuoyIcon,
+    title: 'Developer Support',
+    description: 'Direct access to our team via Discord for integration help',
   },
   {
-    icon: SparklesIcon,
-    title: 'Early Access',
-    description: 'Try new features before public release',
+    icon: ShieldCheckIcon,
+    title: 'SLA Guarantee',
+    description: '99.9% uptime with dedicated infrastructure for production apps',
   },
   {
-    icon: ZapIcon,
-    title: 'Direct Impact',
-    description: 'Your support directly funds development',
+    icon: CodeIcon,
+    title: 'SDK & Webhooks',
+    description: 'Official TypeScript SDK and webhook support for event-driven apps',
+  },
+  {
+    icon: HeartIcon,
+    title: 'Support the Project',
+    description: 'Your subscription directly funds data maintenance and new integrations',
   },
 ];
 
@@ -59,11 +64,11 @@ export function SupporterPerks({ className }: { className?: string }) {
     >
       <div className="col gap-2 mb-2">
         <div className="row gap-2 items-center">
-          <HeartHandshakeIcon className="size-5 text-primary" />
-          <h3 className="font-semibold text-lg">Supporter Perks</h3>
+          <KeyRoundIcon className="size-5 text-primary" />
+          <h3 className="font-semibold text-lg">API Access Perks</h3>
         </div>
         <p className="text-sm text-muted-foreground">
-          Everything you get when you support OpenPanel
+          Everything included in your JKT48Connect subscription
         </p>
       </div>
 
@@ -109,7 +114,7 @@ export function SupporterPerks({ className }: { className?: string }) {
                       href={perk.href}
                       className="text-xs text-primary hover:underline mt-1"
                     >
-                      Learn more →
+                      View endpoints →
                     </Link>
                   )}
                 </div>
@@ -119,12 +124,16 @@ export function SupporterPerks({ className }: { className?: string }) {
         })}
       </div>
 
-      <div className="mt-4 pt-4 border-t">
+      <div className="mt-4 pt-4 border-t col gap-1">
         <p className="text-xs text-muted-foreground text-center">
-          Starting at <strong className="text-foreground">$20/month</strong>
+          Starting at{' '}
+          <strong className="text-foreground">Free</strong>
+          {' '}— scales with usage
+        </p>
+        <p className="text-[10px] text-muted-foreground/60 text-center">
+          No credit card required to get started
         </p>
       </div>
     </div>
   );
 }
-
