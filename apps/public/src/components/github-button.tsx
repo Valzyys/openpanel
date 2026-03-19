@@ -49,7 +49,7 @@ export function GithubButton({ pkg = '@jkt48connect-corp/sdk' }: { pkg?: string 
         >
           <path d="M0 0v24h24V0H0zm19.2 19.2H12v-9.6H7.2v9.6H4.8V4.8h14.4v14.4z" />
         </svg>
-        {formatDownloads(downloads)}/week
+        {formatDownloads(downloads)} use
       </Link>
     </Button>
   );
