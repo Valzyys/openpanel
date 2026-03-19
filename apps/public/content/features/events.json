@@ -1,0 +1,161 @@
+{
+  "slug": "events",
+  "short_name": "Events",
+  "seo": {
+    "title": "Events API - Upcoming JKT48 Events & Performances",
+    "description": "Access upcoming JKT48 events and performances including handshake events, concerts, off-air shows, and special appearances. Perfect for event calendars, concert reminders, and fan schedule apps.",
+    "keywords": [
+      "jkt48 events api",
+      "jkt48 upcoming events",
+      "jkt48 handshake event",
+      "jkt48 concert schedule",
+      "jkt48 off-air show",
+      "jkt48 event calendar api"
+    ]
+  },
+  "hero": {
+    "heading": "What's coming up for JKT48?",
+    "subheading": "Access upcoming JKT48 events and performances — handshake events, concerts, off-air shows, and special appearances. Build event calendars, concert reminders, and fan schedule apps with real JKT48 event data.",
+    "badges": [
+      "Handshake events",
+      "Concerts & off-air shows",
+      "Special appearances",
+      "Upcoming & past events"
+    ]
+  },
+  "definition": {
+    "title": "What is the Events API?",
+    "text": "The Events API provides structured data for JKT48 events and performances — everything from handshake sessions and fan meet-and-greets to concerts, TV appearances, and special off-air shows.\n\nInstead of scraping social media announcements or manually tracking event posts, the Events API aggregates officially announced JKT48 events into a consistent, queryable format.\n\nEach event in the response includes:\n\n- **Event type** — handshake, concert, off-air show, TV appearance, fan event, or special performance\n- **Event name & description** — the official event title and details as announced\n- **Date & time** — start date, time, and duration where available\n- **Location** — venue name, city, and address for in-person events\n- **Participating members** — which members are participating in the event where specified\n- **Ticket & registration info** — links to ticket sales or registration pages where available\n- **Status** — upcoming, ongoing, completed, or cancelled\n\nThe Events API covers both upcoming events (for calendars and reminders) and past events (for historical activity pages and analytics). Use it to build anything from a simple upcoming events widget to a full fan event calendar with member-specific filtering."
+  },
+  "capabilities_section": {
+    "title": "What you can do with the Events API",
+    "intro": "Build event calendars, reminder systems, and fan schedule tools with structured JKT48 event data."
+  },
+  "capabilities": [
+    {
+      "title": "Upcoming event feed",
+      "description": "Query all upcoming JKT48 events sorted by date. Filter by event type, member, or date range to get exactly the events relevant to your app."
+    },
+    {
+      "title": "Event type filtering",
+      "description": "Filter by event type — handshake, concert, off-air, TV appearance, or fan event. Build type-specific views like a handshake calendar or a concerts-only schedule."
+    },
+    {
+      "title": "Member-specific events",
+      "description": "Query events filtered by member participation. Show fans which upcoming events feature their oshi — from handshake slots to special appearances."
+    },
+    {
+      "title": "Past event history",
+      "description": "Access historical event data for building activity timelines, analytics dashboards, and member appearance history pages."
+    },
+    {
+      "title": "Ticket & registration links",
+      "description": "Each event record includes ticket purchase or registration links where available — ready to surface to fans in your app without manual link tracking."
+    },
+    {
+      "title": "Event status tracking",
+      "description": "Events are tagged with their current status — upcoming, ongoing, completed, or cancelled. Build dynamic UIs that reflect real event states."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Events API works",
+    "intro": "Query upcoming events, filter by type or member, and display structured event data in your app.",
+    "steps": [
+      {
+        "title": "Query upcoming events",
+        "description": "Call GET /v1/events with optional query parameters for type, member_id, or date range. By default returns all upcoming events sorted by start date."
+      },
+      {
+        "title": "Filter by type or member",
+        "description": "Pass type=handshake to get only handshake events, or member_id to get events featuring a specific member. Combine filters for precise results."
+      },
+      {
+        "title": "Get event detail",
+        "description": "Call GET /v1/events/:event_id to retrieve full detail for a specific event — complete description, all participating members, venue info, and ticket links."
+      },
+      {
+        "title": "Display in your app",
+        "description": "Render event calendars, upcoming event lists, countdown timers, or push notification triggers based on the structured event data returned."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the Events API",
+    "intro": "Fan developers building event-focused JKT48 tools and schedule applications.",
+    "items": [
+      {
+        "title": "Event calendars & schedules",
+        "description": "Build a comprehensive JKT48 event calendar that fans can filter by event type, month, or member. Display upcoming handshake slots, concerts, and special appearances in one place."
+      },
+      {
+        "title": "Concert & event reminders",
+        "description": "Build reminder apps that notify fans before JKT48 events they care about — with push notifications, Discord alerts, or email reminders triggered by upcoming event data."
+      },
+      {
+        "title": "Oshi event trackers",
+        "description": "Let fans follow specific members and see only the events their oshi is participating in — upcoming handshake slots, TV appearances, and fan meet-and-greet sessions."
+      },
+      {
+        "title": "Fan community bots",
+        "description": "Build Discord or Telegram bots that automatically announce upcoming JKT48 events to fan communities — concerts, handshake registration opens, and special appearances."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "members",
+      "title": "Members",
+      "description": "Events reference member records. Use the Members API to enrich event participant data with full profiles and photos."
+    },
+    {
+      "slug": "member-detail",
+      "title": "Member Detail",
+      "description": "Member Detail includes upcoming event appearances alongside streaming stats and theater schedules — for complete member profile pages."
+    },
+    {
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Theater shows are tracked separately from events. Use the Theater Schedule endpoint for regular show data and the Events API for special appearances."
+    },
+    {
+      "slug": "birthday",
+      "title": "Birthday",
+      "description": "Cross-reference events with birthday data to highlight when a member performs on or near their birthday."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the JKT48Connect Events API.",
+    "items": [
+      {
+        "question": "What types of events are covered?",
+        "answer": "The Events API covers handshake sessions, fan meet-and-greets, concerts, off-air shows, TV appearances, and special performances. Events are tagged with a type field so you can filter by the category you need."
+      },
+      {
+        "question": "How quickly are new events added after announcement?",
+        "answer": "The JKT48Connect team monitors official JKT48 channels and adds events as quickly as possible after they are officially announced. Most events appear within hours of the official announcement."
+      },
+      {
+        "question": "Does the API include past events?",
+        "answer": "Yes. Past events are retained with a status of 'completed'. Query past events by passing a date range that includes past dates, or use the status=completed filter to retrieve historical event data."
+      },
+      {
+        "question": "Can I filter events by a specific member?",
+        "answer": "Yes. Pass member_id as a query parameter to retrieve only events that include that member in the participants list. Note that not all event types specify individual participating members — handshake events typically do, while general concerts may not."
+      },
+      {
+        "question": "Are cancelled events included in the response?",
+        "answer": "Yes. Cancelled events are retained with a status of 'cancelled' so your app can display cancellation notices to fans rather than silently removing events. Filter them out with status=upcoming if you only want active events."
+      },
+      {
+        "question": "Does the API include ticket purchase links?",
+        "answer": "Yes, where available. The ticket_url field is populated when official ticket sale links have been announced. Not all events have ticketing links — fan events and TV appearances typically do not require tickets."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the Events API",
+    "href": "https://jkt48connect.com/docs/events"
+  }
+}
