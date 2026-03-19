@@ -1,0 +1,161 @@
+{
+  "slug": "birthday",
+  "short_name": "Birthday",
+  "seo": {
+    "title": "Birthday API - JKT48 Member Birthday Data & Upcoming Birthdays",
+    "description": "Access JKT48 member birthday data and upcoming birthday lists. Perfect for birthday reminder apps, fan celebration calendars, and special event notifications.",
+    "keywords": [
+      "jkt48 birthday api",
+      "jkt48 member birthday",
+      "jkt48 upcoming birthday",
+      "jkt48 birthday reminder",
+      "jkt48 birthday calendar",
+      "jkt48 birthday notification"
+    ]
+  },
+  "hero": {
+    "heading": "Who's birthday is coming up?",
+    "subheading": "Access JKT48 member birthday data and upcoming birthday lists. Build birthday reminder apps, fan celebration calendars, and special event notifications for every member.",
+    "badges": [
+      "Upcoming birthdays",
+      "All active & graduated members",
+      "Daily & monthly views",
+      "Timezone-aware"
+    ]
+  },
+  "definition": {
+    "title": "What is the Birthday API?",
+    "text": "The Birthday API provides structured birthday data for all JKT48 members, with dedicated endpoints for querying upcoming birthdays by day, week, or month.\n\nRather than filtering through the full member list and calculating dates yourself, the Birthday API gives you pre-sorted, upcoming birthday lists ready to display in your app.\n\nThe Birthday API includes:\n\n- **Today's birthdays** — members whose birthday falls on the current date\n- **Upcoming birthdays** — members with birthdays in the next N days, sorted by how soon they occur\n- **Monthly birthday list** — all members with birthdays in a specified month, sorted by date\n- **Member birthday detail** — full birthday info for a specific member including age and days until next birthday\n- **Birthday countdown** — exact number of days remaining until each member's next birthday\n- **Age information** — current age and age the member will turn on their next birthday\n\nAll birthday queries are timezone-aware. Pass a timezone parameter to get accurate today/upcoming results for users in Indonesia (WIB, WITA, WIT) or anywhere else.\n\nThe Birthday API is the simplest way to build birthday features — from a daily birthday widget to a full fan celebration calendar — without writing your own date calculation logic."
+  },
+  "capabilities_section": {
+    "title": "What you can do with the Birthday API",
+    "intro": "Build birthday reminders, celebration calendars, and fan notification features with clean, ready-to-use birthday data."
+  },
+  "capabilities": [
+    {
+      "title": "Today's birthdays",
+      "description": "Get a list of all JKT48 members whose birthday is today. Timezone-aware so the result is always accurate for your users' location. Perfect for a daily birthday banner or push notification."
+    },
+    {
+      "title": "Upcoming birthday list",
+      "description": "Query members with birthdays in the next 7, 14, or 30 days — sorted by how soon they occur. Build countdown widgets and upcoming birthday sections without any date math."
+    },
+    {
+      "title": "Monthly birthday calendar",
+      "description": "Get all members with birthdays in a specific month, sorted by date. Build full birthday calendars that fans can browse month by month."
+    },
+    {
+      "title": "Birthday countdown",
+      "description": "Access the exact number of days until each member's next birthday. Display live countdowns on member profile pages or oshi tracker apps."
+    },
+    {
+      "title": "Age information",
+      "description": "Access each member's current age and the age they will turn on their next birthday. Display age alongside birthday data on member profiles."
+    },
+    {
+      "title": "Timezone support",
+      "description": "Pass a timezone parameter (e.g. Asia/Jakarta) to get accurate today and upcoming birthday results for users in any Indonesian timezone or region."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Birthday API works",
+    "intro": "Query today's birthdays, upcoming birthdays, or a full monthly calendar — simple and ready to display.",
+    "steps": [
+      {
+        "title": "Query today's or upcoming birthdays",
+        "description": "Call GET /v1/birthdays/today for members celebrating today, or GET /v1/birthdays/upcoming?days=7 for members with birthdays in the next 7 days. Pass timezone=Asia/Jakarta for accurate Indonesia-local results."
+      },
+      {
+        "title": "Build a monthly calendar view",
+        "description": "Call GET /v1/birthdays?month=7 to get all members with birthdays in July, sorted by day of month. Use this to render a full birthday calendar for any month."
+      },
+      {
+        "title": "Get birthday detail for a specific member",
+        "description": "Call GET /v1/birthdays/:member_id to get full birthday detail for one member — date, current age, days until next birthday, and the age they'll turn."
+      },
+      {
+        "title": "Display and notify",
+        "description": "Render birthday banners, countdown timers, calendar views, or trigger push notifications and Discord bot messages when a birthday is today or approaching."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the Birthday API",
+    "intro": "Fan developers building birthday-focused features and celebration tools.",
+    "items": [
+      {
+        "title": "Birthday reminder apps",
+        "description": "Build apps that notify fans when their oshi's birthday is approaching — with countdowns, birthday messages, and a dedicated celebration page on the big day."
+      },
+      {
+        "title": "Fan celebration calendars",
+        "description": "Build a full monthly birthday calendar showing every JKT48 member's birthday. Let fans browse by month and add reminders to their personal calendar."
+      },
+      {
+        "title": "Discord & Telegram birthday bots",
+        "description": "Build bots that automatically post birthday messages in fan community servers when a member's birthday arrives. Use the today endpoint on a daily schedule to trigger announcements."
+      },
+      {
+        "title": "Member profile birthday widgets",
+        "description": "Add birthday countdowns and age information to member profile pages. Show fans exactly how many days until their oshi's next birthday alongside streaming stats and schedule data."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "members",
+      "title": "Members",
+      "description": "Birthday data is linked to full member records. Use the Members API to enrich birthday results with photos, social links, and generation info."
+    },
+    {
+      "slug": "member-detail",
+      "title": "Member Detail",
+      "description": "Member Detail includes birthday information alongside streaming stats and theater appearances — for building complete member profile pages."
+    },
+    {
+      "slug": "events",
+      "title": "Event Notifications",
+      "description": "Combine birthday data with event notifications to alert fans about birthday-related handshake events and special appearances."
+    },
+    {
+      "slug": "theater",
+      "title": "Theater Schedule",
+      "description": "Cross-reference birthday data with theater schedules to highlight when a member performs on or near their birthday."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the JKT48Connect Birthday API.",
+    "items": [
+      {
+        "question": "Does the Birthday API include graduated members?",
+        "answer": "Yes. Graduated members are included in birthday queries by default so fans can still celebrate alumni birthdays. Pass active_only=true to filter the response to currently active members only."
+      },
+      {
+        "question": "How do I get accurate today's birthday results for Indonesian users?",
+        "answer": "Pass timezone=Asia/Jakarta (WIB), Asia/Makassar (WITA), or Asia/Jayapura (WIT) as a query parameter. The API will calculate today's date relative to that timezone so results are always accurate for users in Indonesia."
+      },
+      {
+        "question": "How far ahead can I query upcoming birthdays?",
+        "answer": "The upcoming birthdays endpoint supports any range via the days parameter. Query the next 7, 30, 90 days, or any other range. Results are sorted by how soon each birthday occurs."
+      },
+      {
+        "question": "Does the API handle birthdays that have already passed this year?",
+        "answer": "Yes. The days until next birthday and upcoming birthday calculations automatically roll over to the following year for members whose birthday has already passed in the current calendar year."
+      },
+      {
+        "question": "Can I get birthday data for all members in one call?",
+        "answer": "Yes. Call the Members API (/v1/members) which includes the date_of_birth field for every member. For pre-sorted birthday-specific queries (today, upcoming, monthly), use the dedicated Birthday API endpoints."
+      },
+      {
+        "question": "Can I use this to build an automated birthday bot?",
+        "answer": "Yes. Schedule a daily call to GET /v1/birthdays/today with your preferred timezone. If the response is non-empty, post birthday messages for each member in the list. Combine with webhooks on Pro plans for push-based triggering instead of polling."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the Birthday API",
+    "href": "https://jkt48connect.com/docs/birthday"
+  }
+}
