@@ -1,0 +1,162 @@
+{
+  "slug": "recent-live",
+  "short_name": "Recent Live",
+  "seo": {
+    "title": "Recent Live - JKT48 Historical Live Stream Data",
+    "description": "Access historical data of recently ended JKT48 live streams across IDN Live, Showroom, and YouTube. Track member activity, analyze streaming patterns, and build comprehensive dashboards.",
+    "keywords": [
+      "jkt48 recent live",
+      "jkt48 live history",
+      "jkt48 stream history api",
+      "jkt48 member activity",
+      "jkt48 live stream data",
+      "jkt48 streaming patterns"
+    ]
+  },
+  "hero": {
+    "heading": "Who streamed recently?",
+    "subheading": "Access historical data of recently ended JKT48 live streams across IDN Live, Showroom, and YouTube. Track member activity, analyze streaming patterns, and build comprehensive dashboards.",
+    "badges": [
+      "IDN Live",
+      "Showroom",
+      "YouTube (JKT48V)",
+      "Historical data",
+      "All members & generations"
+    ]
+  },
+  "definition": {
+    "title": "What is the Recent Live endpoint?",
+    "text": "The Recent Live endpoint provides historical data of JKT48 live streams that have recently ended across all supported platforms — IDN Live, Showroom, and YouTube (JKT48V).\n\nWhere the All Live and platform-specific endpoints show you what's happening *right now*, Recent Live shows you what *just happened* — giving you a complete picture of member streaming activity over time.\n\nEvery recently ended stream in the response includes:\n\n- **Member info** — name, generation, and profile data linked to the stream\n- **Platform** — `idn`, `showroom`, or `youtube` (JKT48V)\n- **Peak viewer count** — the highest viewer count the stream reached\n- **Total duration** — how long the stream lasted from start to end\n- **Start and end time** — exact timestamps for when the stream began and ended\n- **Stream URL** — link to the archived or replay content where available\n- **Thumbnail** — captured thumbnail from the stream\n\nThe Recent Live endpoint is the foundation for activity tracking, streaming analytics, and historical dashboards. Use it to understand how often members stream, which platforms they prefer, when they tend to go live, and how their viewer counts have trended over time."
+  },
+  "capabilities_section": {
+    "title": "What you can do with Recent Live",
+    "intro": "Analyze member streaming history, build activity dashboards, and understand patterns across all platforms."
+  },
+  "capabilities": [
+    {
+      "title": "Cross-platform stream history",
+      "description": "Get recently ended streams from IDN Live, Showroom, and YouTube (JKT48V) in a single normalized response — no need to query each platform separately."
+    },
+    {
+      "title": "Member activity tracking",
+      "description": "See which members have streamed recently, how often they go live, and which platforms they use most. Build member activity timelines and streaming frequency reports."
+    },
+    {
+      "title": "Peak viewer analytics",
+      "description": "Access the peak viewer count for each completed stream. Analyze which members attract the most viewers and how viewership trends over time."
+    },
+    {
+      "title": "Stream duration analysis",
+      "description": "See how long each stream lasted. Identify members who stream consistently long sessions vs short ones, and spot patterns in streaming behavior."
+    },
+    {
+      "title": "Streaming pattern insights",
+      "description": "Use start and end timestamps to analyze when members typically stream — by day of week, time of day, or in relation to theater schedules and events."
+    },
+    {
+      "title": "Filter by platform or member",
+      "description": "Filter recent live data by platform (idn, showroom, youtube), member ID, or generation to get exactly the historical data relevant to your use case."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Recent Live endpoint works",
+    "intro": "Query historical stream data across all platforms with a single call.",
+    "steps": [
+      {
+        "title": "Call the Recent Live endpoint",
+        "description": "Make a GET request to /v1/live/recent with your API key. By default, returns streams that ended within the last 24 hours across all platforms."
+      },
+      {
+        "title": "Receive normalized historical data",
+        "description": "Get a list of recently ended streams with consistent fields — member info, platform, peak viewers, duration, start time, end time, and thumbnail."
+      },
+      {
+        "title": "Filter and paginate as needed",
+        "description": "Pass query parameters to filter by platform, member ID, generation, or date range. Paginate through results for comprehensive historical queries."
+      },
+      {
+        "title": "Analyze and display",
+        "description": "Build activity dashboards, streaming frequency charts, viewer trend graphs, or any historical feature your app needs using the structured data returned."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the Recent Live endpoint",
+    "intro": "Fan developers building activity tracking and analytics features for JKT48 apps.",
+    "items": [
+      {
+        "title": "Member activity dashboards",
+        "description": "Show a timeline of each member's recent streaming activity — which platforms they used, how long they streamed, and how many viewers they had. Build comprehensive member profile pages."
+      },
+      {
+        "title": "Streaming frequency trackers",
+        "description": "Analyze how often members go live and on which platforms. Build charts showing streaming frequency by day or week to help fans know when their oshi is likely to stream."
+      },
+      {
+        "title": "Viewer trend analytics",
+        "description": "Track how peak viewer counts change over time for individual members or the group as a whole. Identify growing members and trending content."
+      },
+      {
+        "title": "Activity summary bots",
+        "description": "Build daily or weekly recap bots that post a summary of all JKT48 streams that happened — who went live, on which platform, for how long, and how many viewers tuned in."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "all-live",
+      "title": "All Live",
+      "description": "See who's streaming right now across all platforms. Pair with Recent Live for a complete live + history picture."
+    },
+    {
+      "slug": "idn-live",
+      "title": "IDN Live",
+      "description": "Track active IDN Live streams in real-time. Recent Live covers the same streams after they end."
+    },
+    {
+      "slug": "showroom-live",
+      "title": "Showroom Live",
+      "description": "Track active Showroom streams in real-time. Recent Live covers the same streams after they end."
+    },
+    {
+      "slug": "members",
+      "title": "Member Profiles",
+      "description": "Each recent stream is linked to a full member record. Combine stream history with member data for rich profile pages."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the Recent Live endpoint.",
+    "items": [
+      {
+        "question": "How far back does Recent Live data go?",
+        "answer": "By default, the endpoint returns streams that ended within the last 24 hours. You can extend the range using date query parameters. Pro and Enterprise plans support longer historical ranges — check the documentation for current limits."
+      },
+      {
+        "question": "Which platforms are included in Recent Live?",
+        "answer": "Recent Live covers IDN Live, Showroom, and YouTube (JKT48V) — the same platforms as the All Live endpoint. Each stream entry includes a platform field indicating its source."
+      },
+      {
+        "question": "Is this different from the All Live endpoint?",
+        "answer": "Yes. All Live returns streams that are currently active right now. Recent Live returns streams that have already ended — giving you historical data for activity tracking, analytics, and pattern analysis."
+      },
+      {
+        "question": "Can I filter by a specific member or platform?",
+        "answer": "Yes. Pass member_id, platform (idn, showroom, or youtube), or generation as query parameters to filter the response. You can also specify a custom date range to query streams from a specific time period."
+      },
+      {
+        "question": "Does it include peak viewer count or just the final count?",
+        "answer": "Recent Live includes the peak viewer count recorded during the stream — not the final count at the moment it ended. This gives a more accurate picture of how popular a stream was at its peak."
+      },
+      {
+        "question": "Can I use this to build a member streaming history page?",
+        "answer": "Yes. Query Recent Live filtered by a specific member_id to get their full recent streaming history across all platforms. Combine with the member profile endpoint to build a comprehensive activity page."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Try the Recent Live endpoint",
+    "href": "https://jkt48connect.com/docs/live/recent"
+  }
+}
