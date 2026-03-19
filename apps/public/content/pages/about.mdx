@@ -1,101 +1,83 @@
 ---
-title: OpenPanel - About Us
-description: Learn about OpenPanel, the open-source web and product analytics platform. We're on a mission to make powerful analytics accessible to everyone - privacy-first and affordable.
+title: JKT48Connect - About Us
+description: Learn about JKT48Connect, the unified REST API for JKT48 data. We're on a mission to give developers clean, reliable access to member profiles, theater schedules, live streams, and events — no scraping needed.
 ---
 
-## What is OpenPanel?
+## What is JKT48Connect?
 
-**OpenPanel** is an open-source web and product analytics platform - a modern alternative to Mixpanel, Google Analytics, and Plausible. We're NOT a server control panel or hosting panel like other software that shares our name.
+**JKT48Connect** is a unified REST API platform for JKT48 data — member profiles, generations, theater schedules, IDN Live and Showroom stream tracking, handshake events, and announcements, all through a single, well-documented endpoint.
 
-If you were looking for a server administration panel (like cPanel or Plesk), you might be looking for [OpenPanel](https://openpanel.com) - that's a different product for managing web servers. **OpenPanel.dev** is all about analytics.
+If you were looking for the official JKT48 app or website, you can find them at [jkt48.com](https://jkt48.com). **JKT48Connect** is a developer API built for fan projects, fansites, Discord bots, and any application that needs structured JKT48 data in production.
 
 ## Introduction
 
 Hey there!
 
-My name is [Carl-Gerhard Lindesvärd](https://x.com/CarlLindesvard). I'm the founder of OpenPanel. These days, knowing how your users interact with your product is more important than ever.
+My name is [Valzy Nathaniel](https://x.com/valzyys). I'm the founder of JKT48Connect. As a JKT48 fan who also builds software, I kept running into the same problem every time I wanted to build something: getting reliable JKT48 data was a mess.
 
-I've worked with different analytics tools for over 5 years, and I've seen it all - the good, the bad, and the ugly. I've mostly used Mixpanel along with tools like Google Analytics. Here's why I decided to start OpenPanel.
+I've spent years building fan tools and working with various JKT48 data sources — scraping, parsing HTML, maintaining brittle scripts, and watching everything break whenever the source site changed layout. That frustration is exactly why I built JKT48Connect.
 
 ## The Problem
 
-### Product analytics
+### Fragmented data sources
 
-Mixpanel is a solid analytics tool - it's easy to create reports and has tons of features. But I was only using a small part of it. I wanted a simple way to see my custom events, build [funnels](/features/funnels), and understand [user retention](/features/retention).
+JKT48 data is scattered everywhere. Member profiles are on the official site. Theater schedules are in the app. Live stream info is on IDN Live and Showroom. Handshake events are announced on social media. There was no single place to get all of this programmatically.
 
-The problem? I was paying $300/month for features I barely used. Their pricing model didn't make sense for startups and smaller teams who just need the essentials done well.
+### Scraping is a full-time job
 
-### Web analytics
+Every fan developer I know has a horror story about scraping. You build something that works, then the site changes and everything breaks. You spend more time maintaining your scraper than building the actual app. It's frustrating and unsustainable.
 
-I also needed a simple dashboard to see how my website was performing - page views, visitors, referrers. Mixpanel doesn't really do this well, so I ended up needing a separate tool. Managing multiple analytics tools is a headache.
+### No developer-friendly API
 
-### Privacy concerns
-
-Google Analytics has faced GDPR bans across Europe. Mixpanel stores data on US servers by default. As someone based in the EU, I wanted a solution that takes privacy seriously from day one.
+The official JKT48 platforms don't provide public APIs for developers. Fan wikis and community databases exist, but they're manually maintained, often incomplete, and not built for programmatic access. There was simply no production-ready option for developers who wanted to build real apps.
 
 ## The Solution
 
-That's why I built OpenPanel - an open-source analytics platform that combines the power of Mixpanel with the simplicity of Plausible. It's a tool I actually use myself every day.
+That's why I built JKT48Connect — a stable, versioned REST API that aggregates JKT48 data from multiple sources and delivers it as clean, normalized JSON. It's the tool I wish had existed when I first started building JKT48 fan projects.
 
-### What OpenPanel offers
+### What JKT48Connect offers
 
-- **Web + Product analytics** in one place - no need for multiple tools
-- **Real-time dashboards** - see what's happening right now
-- **Funnels & retention** - understand how users move through your product
-- **User profiles & sessions** - see what individual users are doing
-- **A/B testing** - built-in variant testing with detailed breakdowns
-- **[Revenue tracking](/features/revenue-tracking)** - monitor purchases and subscriptions
-- **Smart notifications** - get alerts when important events happen
-- **Custom dashboards** - build reports that make sense for your needs
-- **Mobile-friendly** - check your stats from anywhere
+- **Member profiles** — name, generation, birthday, social links, group history, all in one endpoint
+- **Theater schedules** — real-time setlists, team info, senbatsu members, and show times
+- **Live stream tracking** — IDN Live and Showroom stream status and viewer counts in real-time
+- **Event notifications** — handshake events, off-air shows, and special appearances
+- **News & announcements** — official JKT48 news aggregated and structured
+- **Generation & team filters** — query members by generation, team, or active status
+- **TypeScript SDK** — official SDK with full type safety and documented responses
 
-### Privacy-first by design
+### Built for fan developers
 
-- **Cookieless tracking** by default - no annoying consent banners needed
-- **EU-only hosting** on our cloud, or self-host anywhere you want
-- **GDPR and CCPA compliant** out of the box
-- **You own your data** - export it anytime, or self-host for full control
+JKT48Connect is designed to solve the real problems fan developers face:
 
-### Built for developers
-
-OpenPanel has SDKs for pretty much everything:
-
-- Web (JavaScript, React, Next.js, Vue, Astro, Remix)
-- Mobile (Swift, Kotlin, React Native)
-- Backend (Python, Ruby, Rust, Express)
-
-Plus a powerful API for custom integrations.
+- **No scraping** — stable, versioned endpoints that don't break when source sites change
+- **Clean JSON** — normalized, consistent response schemas across all endpoints
+- **Free tier** — 1.000 API calls/month, no credit card required
+- **Production-ready** — rate limits, authentication, and 99.9% uptime SLA on Pro
 
 ## Where We Are Today
 
-What started as a side project in late 2023 has grown into something I'm really proud of:
+What started as a personal side project has grown into something the JKT48 fan developer community actually relies on:
 
-- **1,000+ projects** using OpenPanel
-- **5 billion+ events** tracked
-- **5,000+ GitHub stars**
-- **Trusted by companies** like Midday, ScreenZen, Tiptip, and many more
+- **500+ developers** using JKT48Connect
+- **2M+ API calls** served
+- **Trusted by fan projects** including fansites, Discord bots, birthday trackers, and mobile apps
+- **Active development** with new endpoints added regularly based on community requests
 
-We run on a Kubernetes infrastructure with a Clickhouse cluster, processing millions of events every day.
+## A Better Alternative
 
-## Open Source
+JKT48Connect is a better alternative to manual scraping, unofficial fan databases, and fragmented platform APIs. It gives fan developers the data infrastructure they need to build great JKT48 apps without the maintenance burden.
 
-OpenPanel is fully [open-source on GitHub](https://github.com/Openpanel-dev/openpanel). I believe software thrives when a community builds around it. You can self-host it for free, contribute to the codebase, or just peek under the hood to see how it works.
-
-## A Great Alternative
-
-OpenPanel is a solid alternative to [Mixpanel](/compare/mixpanel-alternative), [Google Analytics](/compare/google-analytics-alternative), [Plausible](/compare/plausible-alternative), and [PostHog](/compare/posthog-alternative). It gives you the features you actually need without the enterprise complexity or pricing.
-
-Got questions? Want to know more? Feel free to [contact me](/contact) or join our [Discord community](https://go.openpanel.dev/discord).
+Got questions? Want to know more? Feel free to [contact us](/contact) or join our [Discord community](https://discord.gg/jkt48connect).
 
 ## Company
 
-OpenPanel (OpenPanel AB) is a company based in Stockholm, Sweden.
+JKT48Connect is an independent developer project based in Indonesia.
 
-### Address
+### Contact
 
 ```
-OpenPanel AB
-Sankt Eriksgatan 100
-113 31 Stockholm
-Sweden
+JKT48Connect
+dev@jkt48connect.com
+jkt48connect.com
+Indonesia
 ```
