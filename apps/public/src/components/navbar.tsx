@@ -101,7 +101,6 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <GithubButton />
               {/* Sign in button */}
-              <SignUpButton />
               <ThemeToggle />
               <Button
                 className="-my-2 md:hidden"
