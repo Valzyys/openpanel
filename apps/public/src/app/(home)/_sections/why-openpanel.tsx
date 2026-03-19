@@ -29,9 +29,9 @@ const images = [
     logo: 'https://files.catbox.moe/kmsod4.png',
   },
   {
-    name: 'comingsoon',
-    url: '#',
-    logo: 'https://files.catbox.moe/rguv3l.png',
+    name: 'GISTREAM',
+    url: 'https://gstreamlive.com',
+    logo: 'https://files.catbox.moe/usad8o.png',
   },
    {
     name: 'comingsoon',
