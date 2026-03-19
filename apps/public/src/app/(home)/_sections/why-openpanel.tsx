@@ -33,7 +33,7 @@ const images = [
     url: 'https://gstreamlive.com',
     logo: 'https://files.catbox.moe/usad8o.png',
   },
-   {
+  {
     name: 'comingsoon',
     url: '#',
     logo: 'https://files.catbox.moe/rguv3l.png',
@@ -47,18 +47,19 @@ const quotes: {
 }[] = [
   {
     quote:
-      'After testing several product analytics tools for Strackr, **we chose OpenPanel and we are very satisfied with the product**. We have been using it since the beta, and there are constant updates. Profiles and Conversion Events are our favorite features.',
-    author: 'Julien Hany',
-    site: 'https://strackr.com',
+      'API dari JKT48Connect ini **bener-bener ngebantu banget** buat yang mau bikin web atau aplikasi JKT48. Dokumentasinya jelas, gampang dipahami, dan langsung bisa dipakai tanpa ribet. Datanya juga cukup lengkap, mulai dari member sampai jadwal show, jadi nggak perlu cari manual lagi. Performanya cepat dan stabil, cocok buat berbagai kebutuhan project. Pokoknya **API recommended banget**, apalagi buat fans atau developer yang pengen bikin sesuatu tentang JKT48 🔥',
+    author: 'Cavallery',
+    site: 'https://cavallery.id',
   },
   {
-    quote: `Before OpenPanel, I was using Plausible, and it was ok. **But OpenPanel is like 10 leagues ahead!!** Better UX/UI, many more features, and incredible support from the founder. Bonus point: it's 1 click install on Coolify!! I won't switch to anything else 😎`,
-    author: 'Thomas Sanlis',
-    site: 'https://uneed.best',
+    quote: `Sebelumnya scraping data JKT48 manual dan sering break kalau situsnya update. **Sejak pakai JKT48Connect, semua jadi jauh lebih mudah.** Endpoint-nya konsisten, response-nya bersih, dan tinggal langsung pakai di project tanpa drama. Data member, live stream, sampai jadwal teater semuanya ada. Ini yang selama ini dicari para developer JKT48! 🚀`,
+    author: 'FritzyForce Developer',
+    site: 'https://fritzyforce.com',
   },
   {
-    quote: `We've been using OpenPanel for almost three months and we're extremely happy with it. After paying a lot to PostHog for years, OpenPanel gives us the same, in many ways better, analytics while keeping full ownership of our data. It's truly self-hosted but surprisingly low maintenance: setup and ongoing upkeep are straightforward, so we spend less time managing tooling and more time acting on insights.\n\nOpenPanel delivers the metrics we need to understand our website and app performance and how users actually interact with them. The dashboards are clear, the data is reliable, and the feature set covers everything we relied on before. The support is absolutely fantastic: responsive, helpful, and knowledgeable, and that made the switch effortless. We honestly don’t want to run any business without OpenPanel anymore.`,
-    author: 'Self-hosting users',
+    quote: `JKT48Connect benar-benar mengubah cara kami membangun aplikasi JKT48. **Data yang tersedia sangat lengkap dan selalu up-to-date**, mulai dari profil member, generasi, hingga tracking live stream IDN dan Showroom secara real-time. TypeScript SDK-nya juga sangat membantu, type safety-nya solid dan autocomplete-nya bekerja sempurna.\n\nKami dulu harus maintain scraper sendiri yang sering rusak. Sekarang tinggal call API dan data langsung siap pakai. Waktu yang biasanya habis untuk maintenance scraper sekarang bisa fokus untuk fitur aplikasi. Sangat direkomendasikan untuk siapapun yang ingin membangun sesuatu di ekosistem JKT48.`,
+    author: 'JKT48Connect App Team',
+    site: 'https://github.com/jkt48connect/jkt48connect-app',
   },
 ];
 
