@@ -1,44 +1,30 @@
 'use client';
-import { cn } from '@/lib/utils';
-import { ResponsiveFunnel } from '@nivo/funnel';
-import NumberFlow from '@number-flow/react';
-import { AnimatePresence, motion, useSpring } from 'framer-motion';
+
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { ResponsiveFunnel } from '@nivo/funnel';
 
 function useFunnelSteps() {
   const { resolvedTheme } = useTheme();
   return [
     {
-      id: 'Visitors',
-      label: 'Visitors',
+      id: 'Announcements',
+      label: 'Announcements',
       value: 10000,
-      percentage: 100,
       color: resolvedTheme === 'dark' ? '#333' : '#888',
     },
     {
-      id: 'Add to cart',
-      label: 'Add to cart',
-      value: 7000,
-      percentage: 32,
+      id: 'News',
+      label: 'News',
+      value: 6800,
       color: resolvedTheme === 'dark' ? '#222' : '#999',
     },
     {
-      id: 'Checkout',
-      label: 'Checkout',
-      value: 5000,
-      percentage: 8.9,
+      id: 'Events',
+      label: 'Events',
+      value: 4200,
       color: resolvedTheme === 'dark' ? '#111' : '#e1e1e1',
     },
   ];
-}
-
-export function ProductAnalyticsIllustration() {
-  return (
-    <div className="aspect-video">
-      <FunnelVisualization />
-    </div>
-  );
 }
 
 export const PartLabel = ({ part }: { part: any }) => {
@@ -69,11 +55,11 @@ function Labels(props: any) {
 
 function FunnelVisualization() {
   const funnelSteps = useFunnelSteps();
-  const colors = funnelSteps.map((stage) => stage.color);
-  const nivoData = funnelSteps.map((stage) => ({
-    id: stage.id,
-    value: stage.value,
-    label: stage.label,
+  const colors = funnelSteps.map((s) => s.color);
+  const nivoData = funnelSteps.map((s) => ({
+    id: s.id,
+    value: s.value,
+    label: s.label,
   }));
 
   return (
@@ -96,6 +82,14 @@ function FunnelVisualization() {
         tooltip={() => null}
         layers={['parts', Labels]}
       />
+    </div>
+  );
+}
+
+export function ProductAnalyticsIllustration() {
+  return (
+    <div className="aspect-video">
+      <FunnelVisualization />
     </div>
   );
 }
