@@ -1,0 +1,161 @@
+{
+  "slug": "members",
+  "short_name": "Members",
+  "seo": {
+    "title": "Members API - Complete JKT48 Member Profiles & Data",
+    "description": "Access comprehensive JKT48 member data including active and graduated members. Profiles, social media links, streaming platform data, generations, and group info — all in one API.",
+    "keywords": [
+      "jkt48 members api",
+      "jkt48 member profiles",
+      "jkt48 member data",
+      "jkt48 graduated members",
+      "jkt48 member directory",
+      "jkt48 social media links api"
+    ]
+  },
+  "hero": {
+    "heading": "Every JKT48 member, in one API",
+    "subheading": "Comprehensive profiles for all JKT48 members — active and graduated. Social media links, streaming platform data, generation info, and group details. Everything you need to build member directories, fan apps, and analytics dashboards.",
+    "badges": [
+      "Active & graduated members",
+      "Social media links",
+      "IDN & Showroom profiles",
+      "Generations & teams"
+    ]
+  },
+  "definition": {
+    "title": "What is the Members API?",
+    "text": "The Members API provides comprehensive, structured data for all JKT48 members — both currently active members and those who have graduated.\n\nInstead of manually maintaining your own member database or scraping profile pages that change without warning, JKT48Connect keeps member data up-to-date so you don't have to.\n\nEach member record includes:\n\n- **Basic profile** — full name, nickname, date of birth, blood type, and profile photo\n- **Generation & team** — which generation the member belongs to and their current team assignment\n- **Active status** — whether the member is currently active or has graduated, with graduation date where applicable\n- **Social media links** — Instagram, Twitter/X, TikTok, and other official social accounts\n- **Streaming profiles** — IDN Live room ID and Showroom room name/ID for direct integration with live stream tracking\n- **Group info** — main group (JKT48) and sub-unit or sister group affiliations where applicable\n\nThe Members API is the foundation that other JKT48Connect endpoints build on. Live stream endpoints link to member records. Theater schedules reference member IDs. Notifications and events reference the same member data. Use the Members API to enrich any JKT48Connect response with full member context."
+  },
+  "capabilities_section": {
+    "title": "What you can do with the Members API",
+    "intro": "Build member directories, fan apps, and data-rich dashboards with complete JKT48 member data."
+  },
+  "capabilities": [
+    {
+      "title": "Full member profiles",
+      "description": "Access complete profiles for every JKT48 member — name, nickname, birthday, blood type, profile photo, and all identifying details in a single normalized record."
+    },
+    {
+      "title": "Active & graduated members",
+      "description": "Query all members or filter by active status. Graduated member records are preserved with graduation dates, so your app can show complete historical rosters."
+    },
+    {
+      "title": "Generation & team data",
+      "description": "Filter and group members by generation (1st through 13th and beyond) or team assignment. Build generation-specific views, team rosters, and cohort comparisons."
+    },
+    {
+      "title": "Social media links",
+      "description": "Access official social media accounts for each member — Instagram, Twitter/X, TikTok, and more. Display links on member profile pages without manual maintenance."
+    },
+    {
+      "title": "Streaming platform IDs",
+      "description": "Each member record includes their IDN Live room ID and Showroom room name and ID — ready to use for direct integration with the IDN Live and Showroom Live endpoints."
+    },
+    {
+      "title": "Filter & search",
+      "description": "Query members by generation, team, active status, or name. Build searchable member directories and filtered rosters without processing the full member list client-side."
+    }
+  ],
+  "screenshots": [],
+  "how_it_works": {
+    "title": "How the Members API works",
+    "intro": "Query all members or look up specific ones — simple, consistent, and always up-to-date.",
+    "steps": [
+      {
+        "title": "List all members",
+        "description": "Call GET /v1/members to retrieve a paginated list of all JKT48 members. By default includes all active members. Pass include_graduated=true to include graduated members."
+      },
+      {
+        "title": "Filter by generation, team, or status",
+        "description": "Pass query parameters like generation, team, or is_active to narrow results. Useful for building team rosters, generation pages, or alumni directories."
+      },
+      {
+        "title": "Look up a specific member",
+        "description": "Call GET /v1/members/:member_id to retrieve the full profile for a single member. The member_id is returned in all JKT48Connect responses that reference members."
+      },
+      {
+        "title": "Enrich other endpoint responses",
+        "description": "Use member_id values from live stream, theater, and event endpoints to fetch full member context. Or use streaming platform IDs from member records to query live stream endpoints directly."
+      }
+    ]
+  },
+  "use_cases": {
+    "title": "Who uses the Members API",
+    "intro": "Fan developers building member-centric JKT48 apps and tools.",
+    "items": [
+      {
+        "title": "Member directories & profile pages",
+        "description": "Build a complete, searchable JKT48 member directory with photos, bios, social links, and generation info — all sourced from a single API without manual data entry."
+      },
+      {
+        "title": "Birthday trackers & reminders",
+        "description": "Use birthday data from member profiles to build daily birthday reminders, birthday countdown apps, and automated social media posts for member birthdays."
+      },
+      {
+        "title": "Generation & team rosters",
+        "description": "Build filterable rosters by generation or team. Display who belongs to Team J, Team KIII, or Team T, and how the roster has changed over time including graduated members."
+      },
+      {
+        "title": "Fan apps & dashboards",
+        "description": "Combine member profiles with live stream data, theater schedules, and event information to build comprehensive fan apps that give a full picture of each member's activity."
+      }
+    ]
+  },
+  "related_features": [
+    {
+      "slug": "all-live",
+      "title": "All Live",
+      "description": "Every live stream is linked to a member record. Use the Members API to enrich live stream data with full profiles."
+    },
+    {
+      "slug": "idn-live",
+      "title": "IDN Live",
+      "description": "IDN Live room IDs in member records link directly to IDN Live stream tracking."
+    },
+    {
+      "slug": "showroom-live",
+      "title": "Showroom Live",
+      "description": "Showroom room IDs in member records link directly to Showroom Live stream tracking."
+    },
+    {
+      "slug": "recent-live",
+      "title": "Recent Live",
+      "description": "Combine recent stream history with member profiles to build comprehensive member activity pages."
+    }
+  ],
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions about the JKT48Connect Members API.",
+    "items": [
+      {
+        "question": "Does the API include graduated members?",
+        "answer": "Yes. Graduated member records are preserved in the database with their graduation date and full profile data. By default the list endpoint returns active members only — pass include_graduated=true to include graduated members in the response."
+      },
+      {
+        "question": "How up-to-date is the member data?",
+        "answer": "Member data is maintained by the JKT48Connect team and updated whenever official announcements are made — new member additions, team transfers, graduations, and profile updates. We monitor official JKT48 channels to keep data current."
+      },
+      {
+        "question": "Can I filter members by generation?",
+        "answer": "Yes. Pass a generation query parameter (e.g. generation=13) to retrieve only members from that generation. You can also combine filters — for example, generation=11&is_active=true returns only active members from the 11th generation."
+      },
+      {
+        "question": "Are social media links verified?",
+        "answer": "Social media links are sourced from official JKT48 announcements and verified profiles. We update them when members change their accounts, but recommend linking directly to the profile URL rather than assuming a specific handle is permanent."
+      },
+      {
+        "question": "How do I connect member records to live stream data?",
+        "answer": "Each member record includes an idn_room_id and showroom_room_id. You can use these to query the IDN Live and Showroom Live endpoints for a specific member's stream. Alternatively, all live stream responses include a member_id field that links back to the full member record."
+      },
+      {
+        "question": "Are sub-unit and sister group members included?",
+        "answer": "Yes. Members who are part of JKT48 sub-units or have affiliations with sister groups are included, with their group affiliations noted in the member record."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Explore the Members API",
+    "href": "https://jkt48connect.com/docs/members"
+  }
+}
