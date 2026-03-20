@@ -34,14 +34,6 @@ export default async function CompareIndexPage() {
   return (
     <div>
       <CompareHero hero={heroData} />
-      <div className="container my-16">
-        <WindowImage
-          srcDark="/screenshots/overview-dark.png"
-          srcLight="/screenshots/overview-light.png"
-          alt="JKT48Connect API Overview"
-          caption="The JKT48Connect API dashboard — monitor your usage, explore endpoints, and integrate member, theater, and live stream data into your app in minutes."
-        />
-      </div>
       <Section className="container">
         <SectionHeader
           title="All product comparisons"
