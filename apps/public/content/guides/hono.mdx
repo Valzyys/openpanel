@@ -1,0 +1,405 @@
+---
+title: "How to use JKT48Connect with Hono"
+description: "Build a JKT48 data API server with Hono and JKT48Connect. Serve member info, theater schedules, events, and news through your own endpoints using Bun or Node.js."
+difficulty: beginner
+timeToComplete: 10
+date: 2026-03-20
+updated: 2026-03-20
+cover: /content/cover-default.jpg
+team: JKT48Connect Team
+steps:
+  - name: "Install Hono and set up the project"
+    anchor: "install"
+  - name: "Create the JKT48Connect client"
+    anchor: "client"
+  - name: "Add route handlers"
+    anchor: "routes"
+  - name: "Serve members, theater, and events"
+    anchor: "endpoints"
+  - name: "Handle errors gracefully"
+    anchor: "errors"
+  - name: "Verify your setup"
+    anchor: "verify"
+---
+
+# How to use JKT48Connect with Hono
+
+Hono is a fast, lightweight web framework that runs on Bun, Node.js, Cloudflare Workers, and more. Combining it with JKT48Connect lets you build your own JKT48 data API server — proxying and transforming member info, theater schedules, events, and news through your own endpoints in a clean, type-safe way.
+
+This is useful when you want to add caching, authentication, rate limiting, or custom response shaping on top of the JKT48Connect REST API before it reaches your frontend or bot.
+
+## Prerequisites
+
+- [Bun](https://bun.sh) installed (or Node.js 18+)
+- A JKT48Connect API key from the [JKT48Connect portal](https://www.jkt48connect.my.id/buyapi)
+
+## Install Hono and set up the project [#install]
+
+Create a new project and install Hono. If you're using Bun:
+
+```bash
+mkdir jkt48-hono && cd jkt48-hono
+bun init -y
+bun add hono
+```
+
+If you prefer Node.js:
+
+```bash
+mkdir jkt48-hono && cd jkt48-hono
+npm init -y
+npm install hono @hono/node-server
+```
+
+Store your API key in a `.env` file:
+
+```bash title=".env"
+JKT48_API_KEY=your-api-key-here
+```
+
+## Create the JKT48Connect client [#client]
+
+Create a reusable client module that wraps all fetch calls to the JKT48Connect API. This keeps your route handlers clean and gives you a single place to swap the base URL or add headers later.
+
+```ts title="src/jkt48.ts"
+const BASE_URL = 'https://v2.jkt48connect.com';
+const API_KEY = process.env.JKT48_API_KEY!;
+
+if (!API_KEY) {
+  throw new Error('JKT48_API_KEY environment variable is not set');
+}
+
+async function jkt48Fetch<T>(path: string, params?: Record<string, string>): Promise<T> {
+  const url = new URL(`${BASE_URL}${path}`);
+  url.searchParams.set('apikey', API_KEY);
+
+  if (params) {
+    for (const [key, value] of Object.entries(params)) {
+      url.searchParams.set(key, value);
+    }
+  }
+
+  const res = await fetch(url.toString());
+
+  if (!res.ok) {
+    throw new Error(`JKT48Connect error: HTTP ${res.status} on ${path}`);
+  }
+
+  return res.json() as Promise<T>;
+}
+
+export const jkt48 = {
+  members: () =>
+    jkt48Fetch<object[]>('/api/jkt48/members'),
+
+  memberDetail: (url: string) =>
+    jkt48Fetch<object>('/api/jkt48/member-detail', { url }),
+
+  theater: (page = '1', perpage = '10') =>
+    jkt48Fetch<object>('/api/jkt48/theater', { page, perpage }),
+
+  events: () =>
+    jkt48Fetch<object[]>('/api/jkt48/events'),
+
+  news: (page = '1', perpage = '10') =>
+    jkt48Fetch<object>('/api/jkt48/news', { page, perpage }),
+
+  newsDetail: (id: string) =>
+    jkt48Fetch<object>('/api/jkt48/news-detail', { id }),
+
+  birthday: () =>
+    jkt48Fetch<object[]>('/api/jkt48/birthday'),
+};
+```
+
+## Add route handlers [#routes]
+
+Set up the Hono app and register your routes. Each route calls the matching method on the `jkt48` client and returns the result as JSON.
+
+### Bun entry point
+
+```ts title="src/index.ts"
+import { Hono } from 'hono';
+import { logger } from 'hono/logger';
+import { jkt48 } from './jkt48';
+
+const app = new Hono();
+
+app.use('*', logger());
+
+// Health check
+app.get('/', (c) => c.json({ status: true, message: 'JKT48 Hono API' }));
+
+export default {
+  port: 3000,
+  fetch: app.fetch,
+};
+```
+
+### Node.js entry point
+
+```ts title="src/index.ts"
+import { Hono } from 'hono';
+import { logger } from 'hono/logger';
+import { serve } from '@hono/node-server';
+import { jkt48 } from './jkt48';
+
+const app = new Hono();
+
+app.use('*', logger());
+
+app.get('/', (c) => c.json({ status: true, message: 'JKT48 Hono API' }));
+
+serve({ fetch: app.fetch, port: 3000 }, () => {
+  console.log('Server running on http://localhost:3000');
+});
+```
+
+## Serve members, theater, and events [#endpoints]
+
+Add individual route files for each resource, then mount them on the app.
+
+### Members
+
+```ts title="src/routes/members.ts"
+import { Hono } from 'hono';
+import { jkt48 } from '../jkt48';
+
+const members = new Hono();
+
+// GET /members — full roster
+members.get('/', async (c) => {
+  const data = await jkt48.members();
+  return c.json(data);
+});
+
+// GET /members/active — non-graduated members only
+members.get('/active', async (c) => {
+  const data = await jkt48.members() as any[];
+  const active = data.filter((m) => !m.is_graduate);
+  return c.json(active);
+});
+
+// GET /members/:url — single member detail
+members.get('/:url', async (c) => {
+  const url = c.req.param('url');
+  const data = await jkt48.memberDetail(url);
+  return c.json(data);
+});
+
+export default members;
+```
+
+### Theater
+
+```ts title="src/routes/theater.ts"
+import { Hono } from 'hono';
+import { jkt48 } from '../jkt48';
+
+const theater = new Hono();
+
+// GET /theater?page=1&perpage=10
+theater.get('/', async (c) => {
+  const page = c.req.query('page') ?? '1';
+  const perpage = c.req.query('perpage') ?? '10';
+  const data = await jkt48.theater(page, perpage);
+  return c.json(data);
+});
+
+// GET /theater/today — shows happening today
+theater.get('/today', async (c) => {
+  const data = await jkt48.theater('1', '50') as any;
+  const today = new Date().toDateString();
+  const todayShows = data.theater.filter(
+    (show: any) => new Date(show.date).toDateString() === today
+  );
+  return c.json({ shows: todayShows, count: todayShows.length });
+});
+
+// GET /theater/seitansai — shows with birthday celebrations
+theater.get('/seitansai', async (c) => {
+  const data = await jkt48.theater('1', '50') as any;
+  const seitansaiShows = data.theater.filter(
+    (show: any) => show.seitansai && show.seitansai.length > 0
+  );
+  return c.json({ shows: seitansaiShows, count: seitansaiShows.length });
+});
+
+export default theater;
+```
+
+### Events
+
+```ts title="src/routes/events.ts"
+import { Hono } from 'hono';
+import { jkt48 } from '../jkt48';
+
+const events = new Hono();
+
+// GET /events — all upcoming events
+events.get('/', async (c) => {
+  const data = await jkt48.events();
+  return c.json(data);
+});
+
+// GET /events/week — events in the next 7 days
+events.get('/week', async (c) => {
+  const data = await jkt48.events() as any[];
+  const now = new Date();
+  const weekLater = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+  const thisWeek = data.filter((event) => {
+    const eventDate = new Date(event.date);
+    return eventDate >= now && eventDate <= weekLater;
+  });
+
+  return c.json({ events: thisWeek, count: thisWeek.length });
+});
+
+export default events;
+```
+
+### News
+
+```ts title="src/routes/news.ts"
+import { Hono } from 'hono';
+import { jkt48 } from '../jkt48';
+
+const news = new Hono();
+
+// GET /news?page=1&perpage=10
+news.get('/', async (c) => {
+  const page = c.req.query('page') ?? '1';
+  const perpage = c.req.query('perpage') ?? '10';
+  const data = await jkt48.news(page, perpage);
+  return c.json(data);
+});
+
+// GET /news/:id — single article detail
+news.get('/:id', async (c) => {
+  const id = c.req.param('id');
+  const data = await jkt48.newsDetail(id);
+  return c.json(data);
+});
+
+export default news;
+```
+
+### Mount all routes
+
+```ts title="src/index.ts"
+import { Hono } from 'hono';
+import { logger } from 'hono/logger';
+import members from './routes/members';
+import theater from './routes/theater';
+import events from './routes/events';
+import news from './routes/news';
+import { jkt48 } from './jkt48';
+
+const app = new Hono();
+
+app.use('*', logger());
+
+app.get('/', (c) => c.json({ status: true, message: 'JKT48 Hono API' }));
+
+app.route('/members', members);
+app.route('/theater', theater);
+app.route('/events', events);
+app.route('/news', news);
+
+// Birthday shortcut
+app.get('/birthday', async (c) => {
+  const data = await jkt48.birthday();
+  return c.json(data);
+});
+
+export default {
+  port: 3000,
+  fetch: app.fetch,
+};
+```
+
+## Handle errors gracefully [#errors]
+
+Add a global error handler so any unhandled exception from the JKT48Connect client returns a clean JSON response instead of crashing the server.
+
+```ts title="src/index.ts"
+import { HTTPException } from 'hono/http-exception';
+
+// Catch HTTP exceptions (e.g. from c.notFound())
+app.onError((err, c) => {
+  if (err instanceof HTTPException) {
+    return c.json({ status: false, message: err.message }, err.status);
+  }
+
+  console.error(err);
+  return c.json({ status: false, message: 'Internal server error' }, 500);
+});
+
+// 404 fallback
+app.notFound((c) =>
+  c.json({ status: false, message: `Route ${c.req.path} not found` }, 404)
+);
+```
+
+For route-level error handling, wrap JKT48Connect calls in try/catch and return a structured error:
+
+```ts
+members.get('/:url', async (c) => {
+  try {
+    const url = c.req.param('url');
+    const data = await jkt48.memberDetail(url);
+    return c.json(data);
+  } catch (err) {
+    return c.json({ status: false, message: 'Member not found' }, 404);
+  }
+});
+```
+
+## Verify your setup [#verify]
+
+Start the server:
+
+```bash
+# Bun
+bun run src/index.ts
+
+# Node.js
+npx tsx src/index.ts
+```
+
+Then test each endpoint with curl or your browser:
+
+```bash
+curl http://localhost:3000/members/active
+curl http://localhost:3000/theater/today
+curl http://localhost:3000/events/week
+curl http://localhost:3000/news?page=1&perpage=5
+curl http://localhost:3000/birthday
+```
+
+You should receive JSON responses from the JKT48Connect API routed through your Hono server. Open the terminal running the server and you'll see each request logged by the Hono logger middleware.
+
+If you get a `JKT48_API_KEY environment variable is not set` error, make sure your `.env` file is present and your runtime is loading it. With Bun, `.env` is loaded automatically. With Node.js, add `--env-file=.env` to your start command or use a package like `dotenv`.
+
+## Next steps
+
+The [JKT48Connect API docs](https://docs.jkt48connect.com/docs/jkt48) lists all available endpoints including IDN Live, SHOWROOM Live, YouTube Live, recent live streams, video call schedules, and chat streams. You can add each one as a new route following the same pattern in this guide. For deploying your Hono server, see the [Hono deployment docs](https://hono.dev/docs/getting-started/basic) for guides on Cloudflare Workers, Vercel, Railway, and Fly.io.
+
+<Faqs>
+<FaqItem question="Should I use Bun or Node.js?">
+Either works. Bun is faster to start and has built-in `.env` loading with no extra config. Node.js is more battle-tested for production. The only difference in this guide is the entry point file and the `@hono/node-server` adapter needed for Node.js.
+</FaqItem>
+
+<FaqItem question="Can I add caching to avoid hitting the JKT48Connect API on every request?">
+Yes. Since member data and events don't change frequently, you can cache responses in memory using a simple Map with a TTL, or use a Redis client for shared cache across multiple instances. Wrap the `jkt48Fetch` calls in your client module with a cache check before making the outbound request.
+</FaqItem>
+
+<FaqItem question="How do I add authentication to my Hono routes?">
+Use Hono's built-in Bearer token middleware or a custom middleware that checks a header before passing the request to your route handlers. Add it with `app.use('/members/*', authMiddleware)` to protect specific route groups.
+</FaqItem>
+
+<FaqItem question="Does this work on Cloudflare Workers?">
+Yes. Remove the `@hono/node-server` adapter and export `app.fetch` directly. The `jkt48.ts` client uses the standard `fetch` API which is available natively on Workers. Make sure your `JKT48_API_KEY` is set as a Cloudflare Worker secret via `wrangler secret put JKT48_API_KEY`.
+</FaqItem>
+</Faqs>
