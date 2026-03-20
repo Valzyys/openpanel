@@ -2,178 +2,178 @@
   "slug": "developers",
   "audience": "developers",
   "seo": {
-    "title": "Analytics for Developers — Open Source, API-First, Self-Hostable",
-    "description": "OpenPanel is the open-source analytics platform built for developers. 16 SDKs, REST API, Docker self-hosting, TypeScript-first. Track events, funnels, and users without cookies.",
+    "title": "JKT48Connect for Developers — REST API, TypeScript SDK, Real-time Data",
+    "description": "JKT48Connect is the JKT48 data API built for developers. TypeScript SDK, REST API, real-time live streams, member profiles, theater schedules, and event data. Free tier available, no scraping needed.",
     "noindex": false
   },
   "hero": {
-    "heading": "Analytics for Developers",
-    "subheading": "An open-source analytics platform that respects your stack and your users' privacy. 16 SDKs, a clean REST API, Docker Compose self-hosting, and a 2.3 KB script. No cookies, no consent banners, no vendor lock-in.",
+    "heading": "JKT48 Data API for Developers",
+    "subheading": "A unified REST API for JKT48 data — member profiles, live streams, theater schedules, events, news, and birthdays. TypeScript SDK included. Free tier available. No scraping, no maintenance, no guesswork.",
     "badges": [
-      "Open source (AGPL-3.0)",
-      "16 SDKs",
-      "Self-host with Docker",
-      "2.3 KB script"
+      "REST API",
+      "TypeScript SDK",
+      "Real-time data",
+      "Free tier available"
     ]
   },
   "problem": {
-    "title": "Why developers hate their analytics setup",
-    "intro": "Most analytics tools are built for marketers. They feel wrong when you're a developer who cares about performance, privacy, and owning your infrastructure.",
+    "title": "Why building JKT48 apps is painful without JKT48Connect",
+    "intro": "Every JKT48 fan developer has hit the same wall — getting reliable data is a full-time job before you even start building.",
     "items": [
       {
-        "title": "Google Analytics is a black box",
-        "description": "Proprietary code you can't inspect, heavy scripts that slow your site, sampled data you can't trust, and a UI designed for marketers who think in 'dimensions' and 'metrics'."
+        "title": "Scraping breaks constantly",
+        "description": "Build a scraper today, watch it fail next week when the source site updates its layout. You spend more time maintaining scrapers than building the actual app."
       },
       {
-        "title": "No self-hosting option",
-        "description": "Most analytics tools are cloud-only. Your data lives on someone else's servers. No way to run it in your own VPC, no access to raw data, no control over retention or processing."
+        "title": "Data is scattered everywhere",
+        "description": "Member profiles are on the official site. Theater schedules are in the app. Live stream data is on IDN and Showroom separately. News is on social media. There's no single source of truth."
       },
       {
-        "title": "Heavy SDKs and slow scripts",
-        "description": "The average analytics script is 30–80 KB. That's real performance impact on every page load. Plus the third-party network requests and cookie overhead."
+        "title": "No official developer API",
+        "description": "JKT48 platforms don't provide public APIs for developers. Fan wikis and community databases exist but are manually maintained, incomplete, and not built for programmatic access."
       },
       {
-        "title": "Cookie consent ruins your UX",
-        "description": "Cookie-based analytics means consent banners on every page. 30-40% of users reject cookies, giving you incomplete data and a worse user experience."
+        "title": "Inconsistent data formats",
+        "description": "Even when you manage to pull data from multiple sources, the formats are different — different date formats, different member name spellings, different ID schemes. Normalizing it all takes weeks."
       }
     ]
   },
   "features": {
     "title": "Built the way developers expect",
-    "intro": "OpenPanel is TypeScript-first, API-driven, and designed to fit into modern development workflows.",
+    "intro": "JKT48Connect is TypeScript-first, REST API-driven, and designed to integrate cleanly into any fan project or production app.",
     "items": [
       {
-        "title": "16 SDKs for every framework",
-        "description": "JavaScript, React, Next.js, Vue, Nuxt, Astro, Remix, Express, React Native, Python, Ruby, Rust, Kotlin, Swift — plus a script tag and REST API."
-      },
-      {
-        "title": "2.3 KB tracking script",
-        "description": "The web script is tiny. No Lighthouse penalty, no performance impact, no bundle bloat. Async loading by default."
+        "title": "TypeScript SDK",
+        "description": "Official TypeScript SDK with full type safety, autocomplete for all endpoints, and documented response types. Install via npm and start fetching data in minutes."
       },
       {
         "title": "REST API for everything",
-        "description": "Track events, query data, manage projects, and export analytics — all via a documented REST API. Build custom dashboards or pipe data into your own systems."
+        "description": "Every data type has a dedicated endpoint — members, live streams, theater schedules, events, news, and birthdays. Consistent response schemas across all endpoints."
       },
       {
-        "title": "Docker Compose self-hosting",
-        "description": "One command to deploy. PostgreSQL, ClickHouse, and Redis included. Run it on any VPS, in your Kubernetes cluster, or via Coolify/Dokploy."
+        "title": "Real-time live stream data",
+        "description": "IDN Live and Showroom viewer counts updated in real-time. Stream start and end events detected within seconds. YouTube (JKT48V) included."
       },
       {
-        "title": "Cookieless by default",
-        "description": "No cookies means no consent banners and no blocked requests. Every user is tracked accurately, with full privacy compliance built in."
+        "title": "Versioned endpoints",
+        "description": "All endpoints are versioned (/v1/). Breaking changes never silently affect your integration. Deprecation notices are given in advance."
       },
       {
-        "title": "Open source (AGPL-3.0)",
-        "description": "Read the code, report bugs, submit PRs. No proprietary black boxes. The self-hosted version is identical to cloud — no artificial feature limits."
+        "title": "Webhook support",
+        "description": "Register webhook URLs to receive POST requests when members go live, events are announced, or new news is published. Build event-driven apps without polling."
       },
       {
-        "title": "Event-based data model",
-        "description": "Track any event with arbitrary properties. No predefined schema, no reserved event names, no property limits. Your data model, your rules."
+        "title": "Free tier available",
+        "description": "1.000 API calls per month on the free tier — no credit card required. Upgrade to Pro for 100.000 calls/month with real-time latency and webhooks."
       },
       {
-        "title": "Real-time event stream",
-        "description": "See events as they fire. Debug tracking issues by watching live data flow through your system. No sampling, no delays."
+        "title": "Normalized data model",
+        "description": "Consistent member IDs, date formats, and field names across all endpoints. A member_id from the Members API works in live stream, theater, event, and news endpoints."
       },
       {
-        "title": "Declarative tracking with data attributes",
-        "description": "Add data-track attributes to HTML elements for zero-JavaScript event tracking. Perfect for static sites or server-rendered pages."
+        "title": "Cross-platform aggregation",
+        "description": "IDN Live, Showroom, and YouTube data are normalized into unified response schemas — one integration covers all platforms."
+      },
+      {
+        "title": "Historical data access",
+        "description": "Recent live streams, past theater shows, historical news, and completed events are all queryable — not just current data."
       }
     ]
   },
   "benefits": {
-    "title": "Why developers choose OpenPanel",
-    "intro": "Analytics that fits your workflow instead of fighting against it.",
+    "title": "Why developers choose JKT48Connect",
+    "intro": "Stop building infrastructure. Start building features.",
     "items": [
       {
-        "title": "Own your data completely",
-        "description": "Self-host on your infrastructure. Access raw events in ClickHouse. Export anything via API. No vendor lock-in, ever."
+        "title": "Skip weeks of data work",
+        "description": "No scraping setup, no normalization, no maintenance. JKT48Connect handles all the data collection so you can focus on building your app from day one."
       },
       {
-        "title": "Ship tracking in minutes, not days",
-        "description": "npm install, add your client ID, and tracking starts. Automatic page view tracking out of the box. Custom events are one line of code."
+        "title": "Integrate in minutes",
+        "description": "npm install jkt48connect-sdk, add your API key, and start fetching member data. The TypeScript SDK has autocomplete for every endpoint and response type."
       },
       {
-        "title": "No impact on site performance",
-        "description": "The 2.3 KB async script loads without blocking rendering. No cookies means no additional HTTP overhead. Your Lighthouse score stays perfect."
+        "title": "Never break on source changes",
+        "description": "JKT48Connect abstracts the source data layer. When JKT48's website updates, we fix it — your integration keeps working without any changes on your end."
       },
       {
-        "title": "Works with your deployment pipeline",
-        "description": "Docker Compose for local dev, Kubernetes for production, or Coolify/Dokploy for managed self-hosting. Fits however you deploy."
+        "title": "One API key, all data",
+        "description": "Members, live streams, theater schedules, events, news, birthdays — all from one API key and one base URL. No juggling multiple service accounts or platform credentials."
       },
       {
-        "title": "Product analytics included",
-        "description": "Funnels, retention, user profiles, and cohort analysis alongside web analytics. No need for a separate Mixpanel or Amplitude subscription."
+        "title": "Production-ready from day one",
+        "description": "Rate limiting, authentication, versioning, and 99.9% uptime SLA on Pro plans. Build fan projects or production apps with the same confidence."
       },
       {
-        "title": "Transparent and auditable",
-        "description": "Every line of code is on GitHub. No tracking pixels you can't inspect, no data processing you can't verify."
+        "title": "Community-driven roadmap",
+        "description": "New endpoints and data types are prioritized based on what fan developers actually need. Pro subscribers get input on the roadmap."
       }
     ]
   },
   "faqs": {
     "title": "Frequently asked questions",
-    "intro": "Technical questions from developers evaluating OpenPanel.",
+    "intro": "Technical questions from developers evaluating JKT48Connect.",
     "items": [
       {
-        "question": "How does self-hosting work?",
-        "answer": "Clone the repo, configure environment variables, and run docker compose up. The stack includes PostgreSQL (config), ClickHouse (events), and Redis (caching/queues). A 4 vCPU / 8 GB RAM VPS handles most workloads. Deployment guides exist for Docker Compose, Kubernetes, Coolify, and Dokploy."
-      },
-      {
-        "question": "What's the data architecture?",
-        "answer": "OpenPanel uses a three-database strategy: PostgreSQL for relational data (users, projects, dashboards), ClickHouse for analytics events (OLAP, high-volume reads/writes), and Redis for caching, job queues, and real-time pub/sub. Events are ingested via the API, queued in Redis, and batch-written to ClickHouse by background workers."
-      },
-      {
-        "question": "Can I access raw event data?",
-        "answer": "Yes. Self-hosted users can query ClickHouse directly with SQL. Cloud users can export data via the REST API. There's no data sampling — you always see the full dataset."
-      },
-      {
-        "question": "How does cookieless tracking work?",
-        "answer": "OpenPanel uses a combination of hashed IP address, user agent, and other browser signals to create anonymous session identifiers. No cookies are set, no local storage is used, and no personally identifiable information is stored. This approach is GDPR compliant without requiring consent."
+        "question": "How do I get started?",
+        "answer": "Register at jkt48connect.com to get a free API key. Install the TypeScript SDK via npm install jkt48connect or call the REST endpoints directly. The free tier gives you 1.000 API calls/month with no credit card required. Full documentation is at jkt48connect.com/docs."
       },
       {
         "question": "Is there a TypeScript SDK?",
-        "answer": "Yes. All JavaScript/TypeScript SDKs (web, React, Next.js, Vue, Nuxt, Astro, Express) are written in TypeScript with full type definitions. The tracking API is type-safe with autocomplete for event names and properties if you extend the types."
+        "answer": "Yes. The official TypeScript SDK covers all JKT48Connect endpoints with full type definitions and autocomplete. Install via npm. The SDK is compatible with Node.js, browser environments, and edge runtimes."
       },
       {
-        "question": "Can I track server-side events?",
-        "answer": "Yes. Use the Express SDK, the Python/Ruby/Rust SDKs, or call the REST API directly from any server-side language. Server-side tracking is useful for backend events like payments, API usage, or background job completions."
+        "question": "How does the real-time live stream data work?",
+        "answer": "JKT48Connect continuously monitors IDN Live, Showroom, and YouTube for JKT48 member streams. Viewer counts are updated with sub-10 second latency on Pro plans. Stream start and end events trigger webhooks within seconds of detection."
       },
       {
-        "question": "How does OpenPanel compare to PostHog for developers?",
-        "answer": "PostHog offers more tools (feature flags, experiments, error tracking) but requires more infrastructure to self-host (minimum 4 vCPU, 16 GB RAM). OpenPanel focuses on analytics — events, funnels, retention — with a lighter footprint and simpler deployment. Choose PostHog if you need an all-in-one platform; choose OpenPanel if you want focused analytics that's easy to run."
+        "question": "What's the rate limit?",
+        "answer": "Free tier: 10 requests/minute, 1.000 calls/month. Pro tier: 300 requests/minute, 100.000 calls/month. Enterprise: custom limits. Rate limit headers are included in every response so you can track usage programmatically."
       },
       {
-        "question": "What's the tracking script size?",
-        "answer": "2.3 KB gzipped. For comparison, Google Analytics is ~28 KB, Mixpanel is ~32 KB, and PostHog is ~60 KB. The script loads asynchronously and doesn't block page rendering."
+        "question": "Can I use JKT48Connect in a production app?",
+        "answer": "Yes. Pro and Enterprise plans include 99.9% uptime SLA, versioned endpoints with advance deprecation notices, and priority support. JKT48Connect is designed for production fan apps and fansites, not just prototypes."
+      },
+      {
+        "question": "Can I call the API from the browser?",
+        "answer": "Yes, but we recommend proxying API calls through your backend to avoid exposing your API key in client-side code. The REST API supports CORS for browser requests. For server-side rendering with Next.js or similar frameworks, call the API from your server-side functions."
+      },
+      {
+        "question": "How do webhooks work?",
+        "answer": "Register a webhook URL via the dashboard or API. Specify which events to watch (member_live_start, member_live_end, new_news, new_event, etc.). JKT48Connect sends a POST request to your URL with a JSON payload when the event occurs. Webhook payloads are signed with HMAC-SHA256 for verification. Available on Pro and Enterprise plans."
+      },
+      {
+        "question": "What happens when JKT48's source sites change?",
+        "answer": "JKT48Connect monitors for data source changes and updates our integration layer when source sites change structure. Your API integration is unaffected — that's the core value of using JKT48Connect over building your own scraper."
       }
     ]
   },
   "related_links": {
     "guides": [
-      { "title": "Next.js analytics setup", "url": "/guides/nextjs-analytics" },
-      { "title": "React analytics setup", "url": "/guides/react-analytics" },
-      { "title": "Node.js analytics setup", "url": "/guides/nodejs-analytics" },
-      { "title": "Python analytics setup", "url": "/guides/python-analytics" }
+      { "title": "Next.js JKT48 app setup", "url": "/guides/nextjs-setup" },
+      { "title": "React JKT48 member directory", "url": "/guides/react-member-directory" },
+      { "title": "Discord bot setup", "url": "/guides/discord-bot" },
+      { "title": "Node.js live stream tracker", "url": "/guides/nodejs-live-tracker" }
     ],
     "articles": [
-      { "title": "How to self-host OpenPanel", "url": "/articles/how-to-self-host-openpanel" },
-      { "title": "Best open source analytics tools", "url": "/articles/open-source-web-analytics" },
-      { "title": "Cookieless analytics explained", "url": "/articles/cookieless-analytics" }
+      { "title": "Building a JKT48 fansite with JKT48Connect", "url": "/articles/building-jkt48-fansite" },
+      { "title": "Why scraping JKT48 data is a bad idea", "url": "/articles/why-not-scraping" },
+      { "title": "JKT48Connect API overview", "url": "/articles/api-overview" }
     ],
     "comparisons": [
-      { "title": "OpenPanel vs PostHog", "url": "/compare/posthog-alternative" },
-      { "title": "OpenPanel vs Plausible", "url": "/compare/plausible-alternative" },
-      { "title": "OpenPanel vs Umami", "url": "/compare/umami-alternative" }
+      { "title": "JKT48Connect vs Manual Scraping", "url": "/compare/manual-scraping" },
+      { "title": "JKT48Connect vs IDN Live API", "url": "/compare/idn-live-api" },
+      { "title": "JKT48Connect vs Fansite Databases", "url": "/compare/fansite-databases" }
     ]
   },
   "ctas": {
     "primary": {
-      "label": "Try OpenPanel Free",
-      "href": "https://dashboard.openpanel.dev/onboarding"
+      "label": "Get your free API key",
+      "href": "https://jkt48connect.com/register"
     },
     "secondary": {
-      "label": "View Source on GitHub",
-      "href": "https://github.com/Openpanel-dev/openpanel"
+      "label": "Read the docs",
+      "href": "https://jkt48connect.com/docs"
     }
   }
 }
