@@ -1,0 +1,487 @@
+{
+  "slug": "manual-scraping",
+  "page_type": "alternative",
+  "seo": {
+    "title": "JKT48Connect vs Manual Scraping - Why Use an API Instead",
+    "description": "Stop maintaining fragile JKT48 scrapers. JKT48Connect delivers member profiles, live streams, theater schedules, and events through a stable REST API — no scraping, no maintenance, no breakage.",
+    "noindex": false
+  },
+  "hero": {
+    "heading": "JKT48Connect vs Manual Scraping",
+    "subheading": "Manual scraping JKT48 data means constant maintenance, unpredictable breakage, and inconsistent data. JKT48Connect gives you a stable, versioned REST API so you can focus on building instead of fighting data sources.",
+    "badges": [
+      "No scraping needed",
+      "Stable versioned API",
+      "Real-time data",
+      "Free tier available"
+    ]
+  },
+  "competitor": {
+    "name": "Manual Scraping",
+    "logo": "/logos/scraping.svg",
+    "url": null,
+    "short_description": "Fetching JKT48 data by parsing HTML from official websites, apps, and social media platforms using custom scripts.",
+    "founded": null,
+    "headquarters": null
+  },
+  "overview": {
+    "title": "Why JKT48Connect is better than scraping?",
+    "paragraphs": [
+      "Every JKT48 fan developer has gone through the same journey: you want to build something cool, so you write a scraper to pull member data from the official site. It works — until the site updates its layout, changes its DOM structure, or adds bot protection. Then you spend hours fixing the scraper instead of building features.",
+      "Manual scraping is a maintenance treadmill. You're not solving the data problem once — you're committing to solving it repeatedly, every time a source changes. And JKT48 data lives across multiple platforms: the official site, IDN Live, Showroom, YouTube, and social media. Each one has different structures, different authentication requirements, and different rate limits.",
+      "JKT48Connect solves this at the infrastructure level. We maintain the data collection layer so you don't have to. Member profiles, theater schedules, IDN Live and Showroom stream data, events, news, and birthdays are all normalized into consistent REST endpoints that don't change without versioning notices. When a source site updates, we fix it — your integration keeps working.",
+      "Beyond reliability, JKT48Connect provides data that scrapers fundamentally cannot: real-time viewer counts, webhook notifications when members go live, and cross-platform stream aggregation from IDN Live, Showroom, and YouTube in a single normalized response."
+    ]
+  },
+  "summary_comparison": {
+    "title": "JKT48Connect vs Manual Scraping: Which is right for you?",
+    "intro": "Manual scraping gives you full control but requires constant maintenance. JKT48Connect gives you production-ready data through a stable API without the infrastructure burden.",
+    "one_liner": "Manual scraping is free but fragile and high-maintenance; JKT48Connect is a stable, versioned API that handles data collection so you can focus on building.",
+    "best_for_openpanel": [
+      "Developers who want to ship features, not maintain scrapers",
+      "Apps that need real-time live stream viewer counts",
+      "Projects requiring webhook notifications when members go live",
+      "Teams building production apps that can't afford unexpected downtime",
+      "Developers who need cross-platform data (IDN + Showroom + YouTube) in one call"
+    ],
+    "best_for_competitor": [
+      "One-off scripts where long-term maintenance doesn't matter",
+      "Developers who need data types not yet covered by JKT48Connect",
+      "Projects with zero budget and high tolerance for maintenance overhead",
+      "Research or archival purposes where scraping specific pages is the goal"
+    ]
+  },
+  "highlights": {
+    "title": "Key differences at a glance",
+    "intro": "Here's how JKT48Connect and manual scraping compare on the factors that matter most.",
+    "items": [
+      {
+        "label": "Reliability",
+        "openpanel": "Stable versioned API — never breaks on source changes",
+        "competitor": "Breaks every time source sites update layout or structure",
+        "notes": "JKT48Connect abstracts the source data layer. When JKT48's site changes, we fix it. Your integration keeps working with zero changes on your end."
+      },
+      {
+        "label": "Maintenance burden",
+        "openpanel": "Zero — we maintain the data layer",
+        "competitor": "Ongoing — every source update requires scraper fixes",
+        "notes": "Manual scrapers require constant monitoring and patching. One site redesign can break weeks of work. JKT48Connect eliminates this entirely."
+      },
+      {
+        "label": "Real-time data",
+        "openpanel": "Yes — live viewer counts updated in real-time",
+        "competitor": "Difficult — rate limits and anti-bot measures block frequent polling",
+        "notes": "JKT48Connect provides real-time IDN Live and Showroom viewer counts. Scraping these platforms frequently triggers rate limits and bot detection."
+      },
+      {
+        "label": "Data consistency",
+        "openpanel": "Normalized — consistent IDs, dates, and field names",
+        "competitor": "Inconsistent — encoding issues, missing fields, format variations",
+        "notes": "Scraped data often has encoding problems, inconsistent member name spellings, and missing fields. JKT48Connect normalizes everything into a consistent schema."
+      },
+      {
+        "label": "Cross-platform aggregation",
+        "openpanel": "One call — IDN Live + Showroom + YouTube combined",
+        "competitor": "Requires separate scrapers for each platform",
+        "notes": "Getting data from IDN Live, Showroom, and YouTube requires three separate scrapers with different structures. JKT48Connect combines all three in one response."
+      },
+      {
+        "label": "Webhooks & notifications",
+        "openpanel": "Yes — push notifications when members go live",
+        "competitor": "Not possible — requires constant polling",
+        "notes": "JKT48Connect webhooks notify your app the moment a member goes live. Scrapers must poll repeatedly, wasting requests and still missing events."
+      }
+    ]
+  },
+  "feature_comparison": {
+    "title": "Feature comparison",
+    "intro": "A direct comparison of what JKT48Connect provides vs what you get from building and maintaining scrapers.",
+    "groups": [
+      {
+        "group": "Data Availability",
+        "features": [
+          {
+            "name": "Member profiles & generations",
+            "openpanel": true,
+            "competitor": true,
+            "notes": "Scraping member data is possible but breaks when the official site updates"
+          },
+          {
+            "name": "Theater schedules",
+            "openpanel": true,
+            "competitor": true,
+            "notes": "Scraping schedules works until the schedule page structure changes"
+          },
+          {
+            "name": "IDN Live stream data",
+            "openpanel": true,
+            "competitor": "partial",
+            "notes": "IDN Live has anti-scraping measures that frequently block automated requests"
+          },
+          {
+            "name": "Showroom stream data",
+            "openpanel": true,
+            "competitor": "partial",
+            "notes": "Showroom data can be scraped but requires session handling and breaks often"
+          },
+          {
+            "name": "Real-time viewer counts",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Real-time viewer counts require frequent polling which triggers rate limits on both platforms"
+          },
+          {
+            "name": "News & announcements",
+            "openpanel": true,
+            "competitor": true,
+            "notes": "Scraping the official site for news is possible but fragile"
+          },
+          {
+            "name": "Birthday data",
+            "openpanel": true,
+            "competitor": true,
+            "notes": "Birthday data can be scraped once and cached, but requires maintenance when new members join"
+          },
+          {
+            "name": "Event data",
+            "openpanel": true,
+            "competitor": "partial",
+            "notes": "Event data is scattered across social media and the official site, making reliable scraping difficult"
+          }
+        ]
+      },
+      {
+        "group": "Reliability & Stability",
+        "features": [
+          {
+            "name": "Versioned API (no silent breaking changes)",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Source sites change without notice. Scrapers break silently."
+          },
+          {
+            "name": "Consistent response schema",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Scraped data varies in structure, encoding, and field availability"
+          },
+          {
+            "name": "Uptime SLA",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "99.9% uptime on Pro plans. Scrapers depend entirely on source site availability."
+          },
+          {
+            "name": "No bot detection issues",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect handles authentication with source platforms. Scrapers frequently get blocked."
+          },
+          {
+            "name": "Automatic data refresh",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect continuously maintains data freshness. Scrapers require scheduled jobs and monitoring."
+          }
+        ]
+      },
+      {
+        "group": "Developer Experience",
+        "features": [
+          {
+            "name": "TypeScript SDK",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Official SDK with type safety and autocomplete. Scrapers require building your own client."
+          },
+          {
+            "name": "Webhook support",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Real push notifications for live stream events. Scrapers can only poll."
+          },
+          {
+            "name": "Documentation",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Full API documentation with examples. Scrapers require reverse-engineering source sites."
+          },
+          {
+            "name": "Normalized member IDs",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Consistent member_id across all endpoints. Scrapers return raw names that vary in spelling."
+          },
+          {
+            "name": "Rate limit handling",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect manages rate limits with source platforms. Scrapers must implement their own throttling."
+          },
+          {
+            "name": "Historical data access",
+            "openpanel": true,
+            "competitor": "partial",
+            "notes": "JKT48Connect retains historical stream and show data. Scrapers only capture data when running."
+          }
+        ]
+      },
+      {
+        "group": "Cost & Maintenance",
+        "features": [
+          {
+            "name": "Zero maintenance after setup",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect requires no ongoing maintenance. Scrapers need constant monitoring and updates."
+          },
+          {
+            "name": "Free to start",
+            "openpanel": true,
+            "competitor": true,
+            "notes": "JKT48Connect free tier: 1.000 calls/month. Scraping: free but costs developer time."
+          },
+          {
+            "name": "No infrastructure to manage",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect is a hosted API. Scrapers require servers, cron jobs, and monitoring."
+          },
+          {
+            "name": "Scales without extra work",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Upgrade your JKT48Connect plan. Scale scrapers requires rebuilding infrastructure."
+          }
+        ]
+      }
+    ]
+  },
+  "technical_comparison": {
+    "title": "Technical comparison",
+    "intro": "For developers evaluating the tradeoffs, here's how the implementations compare in practice.",
+    "items": [
+      {
+        "label": "Setup time",
+        "openpanel": "< 5 minutes — npm install + API key",
+        "competitor": "Days to weeks — scraper development and testing",
+        "notes": null
+      },
+      {
+        "label": "Ongoing maintenance",
+        "openpanel": "None — JKT48Connect handles source changes",
+        "competitor": "Continuous — every source update requires fixes",
+        "notes": null
+      },
+      {
+        "label": "Data freshness",
+        "openpanel": "Real-time (Pro) or 30s (free tier)",
+        "competitor": "Depends on polling frequency and bot detection",
+        "notes": null
+      },
+      {
+        "label": "Platforms covered",
+        "openpanel": "IDN Live, Showroom, YouTube, official site, social",
+        "competitor": "Each platform requires a separate scraper",
+        "notes": null
+      },
+      {
+        "label": "Response format",
+        "openpanel": "Normalized JSON with consistent schema",
+        "competitor": "Raw HTML requiring parsing — varies per source",
+        "notes": null
+      },
+      {
+        "label": "Member identification",
+        "openpanel": "Consistent member_id across all endpoints",
+        "competitor": "Raw names that vary in spelling across sources",
+        "notes": null
+      },
+      {
+        "label": "Error handling",
+        "openpanel": "Standard HTTP status codes with error messages",
+        "competitor": "Must detect and handle source site changes manually",
+        "notes": null
+      },
+      {
+        "label": "Webhook support",
+        "openpanel": "Yes — HMAC-signed webhooks for live events",
+        "competitor": "Not possible — requires constant polling",
+        "notes": null
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Pricing comparison",
+    "intro": "Manual scraping is technically free but has significant hidden costs in developer time and infrastructure.",
+    "openpanel": {
+      "model": "API call volume-based, transparent",
+      "description": "Free tier: 1.000 calls/month, no credit card required. Pro: Rp 49.000/month (~$3) for 100.000 calls. All features included at every tier."
+    },
+    "competitor": {
+      "model": "Free (but costs developer time & infrastructure)",
+      "description": "No licensing cost, but requires developer time to build and maintain scrapers, server infrastructure for running them, and ongoing fixes when sources change. Hidden cost is significant.",
+      "free_tier": "Free to build, but ongoing maintenance cost is high",
+      "pricing_url": null
+    }
+  },
+  "migration": {
+    "title": "Migrating from scrapers to JKT48Connect",
+    "intro": "Replacing scrapers with JKT48Connect is straightforward. Most migrations take less than a day.",
+    "difficulty": "easy",
+    "estimated_time": "1–4 hours",
+    "steps": [
+      {
+        "title": "Get your API key",
+        "description": "Register at jkt48connect.com and get your free API key. No credit card required for the free tier."
+      },
+      {
+        "title": "Install the TypeScript SDK",
+        "description": "Run npm install jkt48connect-sdk and add your API key. The SDK covers all endpoints with full type safety."
+      },
+      {
+        "title": "Replace scraper calls with API calls",
+        "description": "Identify what data each scraper fetches and replace those calls with the corresponding JKT48Connect endpoint. Member data, theater schedules, and news have direct equivalents."
+      },
+      {
+        "title": "Update data models",
+        "description": "JKT48Connect returns normalized data with consistent IDs and field names. Update your data models to use member_id instead of raw scraped names."
+      },
+      {
+        "title": "Set up webhooks (optional)",
+        "description": "Replace any polling loops for live stream detection with JKT48Connect webhooks. Register your endpoint and receive instant notifications when members go live."
+      },
+      {
+        "title": "Decommission scrapers",
+        "description": "Once verified, shut down your scraping scripts and any associated cron jobs or servers. Enjoy the maintenance-free life."
+      }
+    ],
+    "sdk_compatibility": {
+      "similar_api": false,
+      "notes": "JKT48Connect uses a REST API with normalized JSON responses. Scrapers return raw HTML that requires parsing. The migration involves replacing parsing logic with clean API calls."
+    },
+    "historical_data": {
+      "can_import": false,
+      "notes": "Historical data from scrapers is not importable into JKT48Connect. JKT48Connect maintains its own historical records. Start fresh with the API for all new data."
+    }
+  },
+  "use_cases": {
+    "title": "When to choose JKT48Connect over manual scraping",
+    "intro": "JKT48Connect is the better choice for any project that needs reliability, real-time data, or long-term maintainability.",
+    "items": [
+      {
+        "title": "Production Fan Apps",
+        "description": "Any fan app used by real users needs to be reliable. Scrapers break unexpectedly and take your app down with them. JKT48Connect provides the stability production apps require.",
+        "icon": "rocket"
+      },
+      {
+        "title": "Real-time Live Stream Features",
+        "description": "Scraping IDN Live or Showroom for real-time viewer counts is impractical — frequent polling triggers bot detection. JKT48Connect provides sub-10 second latency viewer counts without any rate limit concerns.",
+        "icon": "radio"
+      },
+      {
+        "title": "Discord & Telegram Bots",
+        "description": "Bots that notify fans when members go live need instant detection. JKT48Connect webhooks trigger within seconds of a stream starting — something polling-based scrapers can't match.",
+        "icon": "bell"
+      },
+      {
+        "title": "Multi-Platform Data Aggregation",
+        "description": "Getting data from IDN Live, Showroom, and YouTube requires three separate scrapers. JKT48Connect aggregates all three in one normalized API call, dramatically reducing integration complexity.",
+        "icon": "layers"
+      },
+      {
+        "title": "Long-term Projects",
+        "description": "For any project you plan to maintain over months or years, the accumulated time cost of scraper maintenance far exceeds JKT48Connect's subscription cost. The API pays for itself quickly.",
+        "icon": "trending-up"
+      }
+    ]
+  },
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions from developers evaluating JKT48Connect vs building scrapers.",
+    "items": [
+      {
+        "question": "Is scraping JKT48 data legal?",
+        "answer": "Scraping JKT48's official website and platforms may violate their terms of service, particularly when done at scale or for commercial purposes. JKT48Connect aggregates publicly available data in compliance with platform terms, providing a safer alternative for developers building fan apps."
+      },
+      {
+        "question": "My scraper works fine right now — why switch?",
+        "answer": "Scrapers work until they don't. Every JKT48 fan developer has experienced a scraper breaking unexpectedly after a site update, sometimes right before a major event. JKT48Connect eliminates this risk entirely. The question isn't whether your scraper will break — it's when."
+      },
+      {
+        "question": "Can JKT48Connect replace all my scrapers?",
+        "answer": "JKT48Connect covers the most common JKT48 data needs: member profiles, theater schedules, IDN Live, Showroom, YouTube (JKT48V), events, news, and birthdays. If you scrape data types not yet covered, you may need to keep those specific scrapers while using JKT48Connect for everything else."
+      },
+      {
+        "question": "What's the real cost of maintaining scrapers?",
+        "answer": "Developer time is expensive. Even a simple scraper that breaks twice a year requires debugging and fixing, typically 1–4 hours each time. For three scrapers breaking twice a year at a conservative $30/hr developer rate, that's $180–720/year — far more than JKT48Connect's Pro plan at Rp 49.000/month (~$36/year)."
+      },
+      {
+        "question": "Does JKT48Connect have a free tier?",
+        "answer": "Yes. The free tier provides 1.000 API calls/month with no credit card required — enough to prototype and test your integration. Non-commercial fan projects can also apply to the JKT48Connect Developer Program for 50.000 calls/month free."
+      },
+      {
+        "question": "What happens if JKT48Connect is down?",
+        "answer": "Pro and Enterprise plans include a 99.9% uptime SLA. For context, scrapers have no uptime guarantee and depend entirely on source site availability — which is often less reliable than a dedicated API service."
+      },
+      {
+        "question": "How long does it take to migrate from scrapers to JKT48Connect?",
+        "answer": "Most migrations take 1–4 hours. Install the TypeScript SDK, map your existing scraper data to the corresponding API endpoints, and replace the scraper calls. The biggest effort is usually updating your data models to use JKT48Connect's normalized member_id."
+      },
+      {
+        "question": "Can I use both JKT48Connect and scrapers together?",
+        "answer": "Yes. Many developers migrate incrementally — replacing scrapers one by one with JKT48Connect endpoints. Start with the most frequently-breaking scrapers (typically live stream data) and migrate others over time."
+      }
+    ]
+  },
+  "related_links": {
+    "guides": [
+      {
+        "title": "TypeScript SDK quickstart",
+        "url": "/docs/sdk/quickstart"
+      },
+      {
+        "title": "Building a member directory",
+        "url": "/guides/member-directory"
+      },
+      {
+        "title": "Live stream tracking setup",
+        "url": "/guides/live-stream-tracking"
+      }
+    ],
+    "articles": [
+      {
+        "title": "Why not to scrape JKT48 data",
+        "url": "/articles/why-not-scraping"
+      },
+      {
+        "title": "JKT48Connect API overview",
+        "url": "/articles/api-overview"
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "JKT48 Official App",
+        "url": "/compare/jkt48-official-app"
+      },
+      {
+        "name": "IDN Live API",
+        "url": "/compare/idn-live-api"
+      },
+      {
+        "name": "Fansite Databases",
+        "url": "/compare/fansite-databases"
+      }
+    ]
+  },
+  "ctas": {
+    "primary": {
+      "label": "Get your free API key",
+      "href": "https://jkt48connect.com/register"
+    },
+    "secondary": {
+      "label": "Read the docs",
+      "href": "https://jkt48connect.com/docs"
+    }
+  }
+}
