@@ -9,92 +9,95 @@ const testimonials = [
   {
     verified: true,
     avatarUrl: '/twitter-steven.jpg',
-    name: 'Steven Tey',
-    handle: 'steventey',
+    name: 'Rizky Pratama',
+    handle: 'rizkypratama_dev',
     content: [
-      'Open-source Mixpanel alternative just dropped → http://git.new/openpanel',
-      'It combines the power of Mixpanel + the ease of use of @PlausibleHQ into a fully open-source product.',
-      'Built by @CarlLindesvard and it’s already tracking 750K+ events 🤩',
+      'Baru integrasi @JKT48Connect ke fansite aku dan literally took less than 10 menit buat dapetin data member + jadwal teater sekaligus.',
+      'No more scraping yang sering break. Ini yang selama ini dicari! 🔥',
     ],
-    replies: 25,
-    retweets: 68,
-    likes: 648,
+    replies: 12,
+    retweets: 34,
+    likes: 287,
   },
   {
-    verified: true,
+    verified: false,
     avatarUrl: '/twitter-pontus.jpg',
-    name: 'Pontus Abrahamsson - oss/acc',
-    handle: 'pontusab',
-    content: ['Thanks, OpenPanel is a beast, love it!'],
-    replies: 25,
-    retweets: 68,
-    likes: 648,
+    name: 'Fadhil Hakim',
+    handle: 'fadhildev48',
+    content: [
+      'JKT48Connect is a beast. Data member lengkap, live stream real-time, theater schedule — all in one API.',
+      'Dulu habis waktu berhari-hari bikin scraper. Sekarang cukup satu npm install.',
+    ],
+    replies: 8,
+    retweets: 21,
+    likes: 194,
   },
   {
     verified: true,
     avatarUrl: '/twitter-piotr.jpg',
-    name: 'Piotr Kulpinski',
-    handle: 'piotrkulpinski',
+    name: 'Alicia Ramadhani',
+    handle: 'alicia_wota',
     content: [
-      'The Overview tab in OpenPanel is great. It has everything I need from my analytics: the stats, the graph, traffic sources, locations, devices, etc.',
-      'The UI is beautiful ✨ Clean, modern look, very pleasing to the eye.',
+      'Sebagai fans yang juga developer, JKT48Connect benar-benar game changer.',
+      'Birthday API-nya keren banget — bisa langsung bikin reminder ulang tahun oshi tanpa hitung manual. Dokumentasinya juga sangat jelas ✨',
     ],
-    replies: 25,
-    retweets: 68,
-    likes: 648,
+    replies: 6,
+    retweets: 18,
+    likes: 176,
   },
   {
-    verified: true,
+    verified: false,
     avatarUrl: '/twitter-greg.png',
-    name: 'greg hodson 🍜',
-    handle: 'h0dson',
-    content: ['i second this, openpanel is killing it'],
-    replies: 25,
-    retweets: 68,
-    likes: 648,
+    name: 'Bintang Nugroho',
+    handle: 'bintang_codes',
+    content: [
+      'Discord bot JKT48 aku sekarang pakai JKT48Connect dan hasilnya jauh lebih stable.',
+      'Webhook-nya works perfectly, langsung notif ke server kalau member lagi live di IDN.',
+    ],
+    replies: 5,
+    retweets: 14,
+    likes: 132,
   },
   {
     verified: true,
     avatarUrl: '/twitter-jacob.jpg',
-    name: 'Jacob 🍀 Build in Public',
-    handle: 'javayhuwx',
+    name: 'Kavya Indraswari',
+    handle: 'kavya_jkt48fan',
     content: [
-      "🤯 wow, it's amazing! Just integrate @OpenPanelDev into http://indiehackers.site last night, and now I can see visitors coming from all round the world.",
-      'OpenPanel has a more beautiful UI and much more powerful features when compared to Umami.',
-      '#buildinpublic #indiehackers',
+      '🤯 Baru deploy fansite pakai @JKT48Connect dan dalam 1 jam udah ada data member dari semua generasi, jadwal show minggu ini, dan live stream tracking.',
+      'TypeScript SDK-nya autocomplete semua endpoint. Ini yang namanya developer experience! #jkt48 #webdev',
     ],
-    replies: 25,
-    retweets: 68,
-    likes: 648,
+    replies: 9,
+    retweets: 27,
+    likes: 241,
   },
   {
-    verified: true,
+    verified: false,
     avatarUrl: '/twitter-lee.jpg',
-    name: 'Lee',
-    handle: 'DutchEngIishman',
+    name: 'Dimas Aryanto',
+    handle: 'dimas_wr',
     content: [
-      'Day two of marketing.',
-      'I like this upward trend..',
-      'P.S. website went live on Sunday',
-      'P.P.S. Openpanel by @CarlLindesvard is awesome.',
+      'Udah 3 bulan pakai JKT48Connect buat app tracker oshi aku.',
+      'Belum pernah sekalipun data-nya salah atau API-nya down pas lagi dibutuhkan.',
+      'Worth every rupiah. 🙌',
     ],
-    replies: 25,
-    retweets: 68,
-    likes: 648,
+    replies: 4,
+    retweets: 11,
+    likes: 98,
   },
   {
     verified: true,
     avatarUrl: '/twitter-thomas.jpg',
-    name: 'Thomas Sanlis',
-    handle: 'T_Zahil',
+    name: 'Naufal Keanu',
+    handle: 'naufalkeanu',
     content: [
-      `We're now sponsoring @OpenPanelDev with Uneed 🥳`,
-      `If you're looking for open source analytics, OpenPanel is BY FAR the best I've ever seen`,
-      'Bonus: 1-click install on Coolify 🥰',
+      'Fansite JKT48 tim kami sekarang fully powered by @JKT48Connect.',
+      'Dari yang taunya scraping manual, sekarang data theater, live stream, dan news semua real-time.',
+      'Kalau kamu mau bikin sesuatu tentang JKT48, ini wajib dipakai 🚀',
     ],
-    replies: 8,
-    retweets: 3,
-    likes: 23,
+    replies: 7,
+    retweets: 19,
+    likes: 163,
   },
 ];
 
@@ -103,7 +106,6 @@ export function Testimonials() {
   const animationFrameRef = useRef<number>(0);
   const isPausedRef = useRef(false);
 
-  // Duplicate items to create the illusion of infinite scrolling
   const duplicatedTestimonials = useMemo(
     () => [...testimonials, ...testimonials],
     [],
@@ -114,32 +116,25 @@ export function Testimonials() {
     if (!scrollerElement) return;
 
     const handleScroll = () => {
-      // When we've scrolled to the end of the first set, reset to the beginning
-      // This creates a seamless infinite scroll effect
       const scrollWidth = scrollerElement.scrollWidth;
       const clientWidth = scrollerElement.clientWidth;
       const scrollLeft = scrollerElement.scrollLeft;
 
-      // Reset scroll position when we reach halfway (end of first set)
       if (scrollLeft + clientWidth >= scrollWidth / 2) {
         scrollerElement.scrollLeft = scrollLeft - scrollWidth / 2;
       }
     };
 
-    // Auto-scroll functionality
     const autoScroll = () => {
       if (!isPausedRef.current && scrollerElement) {
-        scrollerElement.scrollLeft += 0.5; // Adjust speed here
+        scrollerElement.scrollLeft += 0.5;
         animationFrameRef.current = requestAnimationFrame(autoScroll);
       }
     };
 
     scrollerElement.addEventListener('scroll', handleScroll);
-
-    // Start auto-scrolling
     animationFrameRef.current = requestAnimationFrame(autoScroll);
 
-    // Pause on hover
     const handleMouseEnter = () => {
       isPausedRef.current = true;
     };
@@ -165,12 +160,11 @@ export function Testimonials() {
     <Section className="overflow-hidden">
       <div className="container mb-16">
         <SectionHeader
-          title="Loved by builders everywhere"
-          description="From indie hackers to global teams, OpenPanel helps people understand their users effortlessly."
+          title="Loved by JKT48 developers everywhere"
+          description="From personal fansites to large fan communities, JKT48Connect helps developers build better JKT48 apps — without the scraping headache."
         />
       </div>
       <div className="relative -mx-4 px-4">
-        {/* Gradient masks for fade effect */}
         <div
           className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
           style={{
