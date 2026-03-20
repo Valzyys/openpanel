@@ -26,11 +26,15 @@ export function baseOptions(): BaseLayoutProps {
 export const authors = [
   {
     name: 'OpenPanel Team',
-    url: 'https://openpanel.com',
+    url: 'https://jkt48connect.com',
+  },
+  {
+    name: 'JKT48Connect Team',
+    url: 'https://jkt48connect.com',
   },
   {
     name: 'Carl-Gerhard Lindesvärd',
-    url: 'https://openpanel.com',
+    url: 'https://jkt48connect.com',
     image: '/twitter-carl.jpg',
   },
 ];
