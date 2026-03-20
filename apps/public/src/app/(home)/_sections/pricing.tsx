@@ -1,14 +1,23 @@
 'use client';
 
 import NumberFlow from '@number-flow/react';
-import { PRICING } from '@openpanel/payments/prices';
 import { CheckIcon, ServerIcon, StarIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { GetStartedButton } from '@/components/get-started-button';
 import { Section, SectionHeader } from '@/components/section';
 import { Button } from '@/components/ui/button';
-import { cn, formatEventsCount } from '@/lib/utils';
+import { cn } from '@/lib/utils';
+
+const PRICING = [
+  { calls: 1_000, label: '1K', price: 0, popular: false },
+  { calls: 10_000, label: '10K', price: 15_000, popular: false },
+  { calls: 50_000, label: '50K', price: 29_000, popular: false },
+  { calls: 100_000, label: '100K', price: 49_000, popular: true },
+  { calls: 250_000, label: '250K', price: 99_000, popular: false },
+  { calls: 500_000, label: '500K', price: 179_000, popular: false },
+  { calls: 1_000_000, label: '1M', price: 299_000, popular: false },
+];
 
 const features = [
   'Unlimited member profiles',
@@ -19,28 +28,34 @@ const features = [
   'Real-time data sync',
 ];
 
+function formatCallsLabel(calls: number): string {
+  if (calls >= 1_000_000) return `${calls / 1_000_000}M calls`;
+  if (calls >= 1_000) return `${calls / 1_000}K calls`;
+  return `${calls} calls`;
+}
+
 export function Pricing() {
-  const [selectedIndex, setSelectedIndex] = useState(2);
-  const selected = PRICING[selectedIndex];
+  const [selectedIndex, setSelectedIndex] = useState(3);
+  const selected = selectedIndex >= 0 ? PRICING[selectedIndex] : null;
 
   return (
     <Section className="container">
       <div className="col md:row gap-16">
         <div className="col w-full min-w-sm gap-4 rounded-3xl border bg-linear-to-b from-card to-background p-6 md:w-1/3">
           <p className="text-muted-foreground text-sm">
-            Choose your monthly API request volume
+            Choose your monthly API call volume
           </p>
           <div className="row flex-wrap gap-2">
             {PRICING.map((tier, index) => (
               <Button
                 className={cn('relative h-8 rounded-full border px-4')}
-                key={tier.price}
+                key={tier.calls}
                 onClick={() => setSelectedIndex(index)}
                 size="sm"
                 variant={selectedIndex === index ? 'default' : 'outline'}
               >
-                {tier.popular && <StarIcon className="size-4" />}
-                {formatEventsCount(tier.events)}
+                {tier.popular && <StarIcon className="size-3 mr-1" />}
+                {tier.label}
               </Button>
             ))}
             <Button
@@ -52,41 +67,58 @@ export function Pricing() {
               Custom
             </Button>
           </div>
+
           <div className="col mt-8 w-full items-baseline md:mt-auto">
-            {selected ? (
+            {selected !== null ? (
               <>
-                <span className="mb-2 rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary text-xs">
-                  30-day free trial
-                </span>
-                <div className="row items-end gap-3">
-                  <NumberFlow
-                    className="font-bold text-5xl"
-                    format={{
-                      style: 'currency',
-                      currency: 'IDR',
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 1,
-                    }}
-                    locales={'en-US'}
-                    value={selected.price}
-                  />
-                </div>
-                <div className="row w-full justify-between">
-                  <span className="-mt-2 text-muted-foreground/80 text-sm">
-                    Per month
-                  </span>
-                  <span className="-mt-2 text-muted-foreground/80 text-sm">
-                    + VAT if applicable
-                  </span>
-                </div>
+                {selected.price === 0 ? (
+                  <>
+                    <span className="mb-2 rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary text-xs">
+                      Gratis selamanya
+                    </span>
+                    <div className="font-bold text-5xl">Gratis</div>
+                    <div className="row w-full justify-between">
+                      <span className="-mt-2 text-muted-foreground/80 text-sm">
+                        {formatCallsLabel(selected.calls)} / bulan
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span className="mb-2 rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary text-xs">
+                      {formatCallsLabel(selected.calls)} / bulan
+                    </span>
+                    <div className="row items-end gap-1">
+                      <span className="font-bold text-2xl">Rp</span>
+                      <NumberFlow
+                        className="font-bold text-5xl"
+                        format={{
+                          style: 'decimal',
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        }}
+                        locales="id-ID"
+                        value={selected.price}
+                      />
+                    </div>
+                    <div className="row w-full justify-between">
+                      <span className="-mt-2 text-muted-foreground/80 text-sm">
+                        Per bulan
+                      </span>
+                      <span className="-mt-2 text-muted-foreground/80 text-sm">
+                        ≈ ${(selected.price / 16000).toFixed(1)} USD
+                      </span>
+                    </div>
+                  </>
+                )}
               </>
             ) : (
               <div className="text-lg">
-                Contact us at{' '}
+                Hubungi kami di{' '}
                 <a className="underline" href="mailto:support@jkt48connect.com">
                   support@jkt48connect.com
                 </a>{' '}
-                for custom enterprise pricing.
+                untuk harga Enterprise.
               </div>
             )}
           </div>
@@ -95,8 +127,8 @@ export function Pricing() {
         <div className="col flex-1 shrink-0 justify-center gap-8">
           <div className="col gap-4">
             <SectionHeader
-              description="Access all JKT48 data with simple, transparent pricing. Pay for your API usage - everything else is unlimited. No hidden fees, no surprises."
-              title="Simple pricing for JKT48 data"
+              description="Akses semua data JKT48 dengan harga yang transparan. Bayar sesuai volume API yang kamu butuhkan — semua fitur sudah termasuk. Tanpa biaya tersembunyi."
+              title="Harga sederhana untuk data JKT48"
             />
           </div>
 
@@ -113,12 +145,12 @@ export function Pricing() {
 
           <p className="row items-center gap-2 text-muted-foreground text-sm">
             <ServerIcon className="size-4 shrink-0" />
-            Need help integrating?{' '}
+            Butuh bantuan integrasi?{' '}
             <Link
               className="text-primary hover:underline"
               href="/docs/quickstart"
             >
-              Check our quickstart guide
+              Lihat quickstart guide
             </Link>
           </p>
         </div>
