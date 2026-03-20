@@ -14,7 +14,6 @@ import { TechnicalComparison } from './_components/technical-comparison';
 import { UseCases } from './_components/use-cases';
 import { WhoShouldChoose } from './_components/who-should-choose';
 import { CtaBanner } from '@/app/(home)/_sections/cta-banner';
-import { WindowImage } from '@/components/window-image';
 import { getAllCompareSlugs, getCompareData } from '@/lib/compare';
 import { url } from '@/lib/layout.shared';
 import { getOgImageUrl, getPageMetadata } from '@/lib/metadata';
@@ -60,7 +59,6 @@ export default async function ComparePage({
 
   const pageUrl = url(`/compare/${slug}`);
 
-  // Create JSON-LD schema
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -69,7 +67,7 @@ export default async function ComparePage({
     url: pageUrl,
     publisher: {
       '@type': 'Organization',
-      name: 'OpenPanel',
+      name: 'JKT48Connect',
       logo: {
         '@type': 'ImageObject',
         url: url('/logo.webp'),
@@ -77,7 +75,6 @@ export default async function ComparePage({
     },
   };
 
-  // Build ToC items
   const tocItems = [
     ...(data.overview ? [{ id: 'overview', label: data.overview.title }] : []),
     { id: 'who-should-choose', label: data.summary_comparison.title },
@@ -107,15 +104,6 @@ export default async function ComparePage({
       />
       <CompareHero hero={data.hero} tocItems={tocItems} />
 
-      <div className="container my-16">
-        <WindowImage
-          alt="OpenPanel Dashboard Overview"
-          caption="This is our web analytics dashboard, its an out-of-the-box experience so you can start understanding your traffic and engagement right away."
-          srcDark="/screenshots/overview-dark.webp"
-          srcLight="/screenshots/overview-light.webp"
-        />
-      </div>
-
       {data.overview && (
         <div id="overview">
           <CompareOverview overview={data.overview} />
@@ -129,15 +117,6 @@ export default async function ComparePage({
         />
       </div>
 
-      <div className="container my-16">
-        <WindowImage
-          alt="OpenPanel Dashboard"
-          caption="Comprehensive analytics dashboard with real-time insights and customizable views."
-          srcDark="/screenshots/dashboard-dark.webp"
-          srcLight="/screenshots/dashboard-light.webp"
-        />
-      </div>
-
       <div id="comparison">
         <ComparisonTable
           competitorName={data.competitor.name}
@@ -145,17 +124,9 @@ export default async function ComparePage({
           highlights={data.highlights}
         />
       </div>
+
       <div id="features">
         <FeaturesShowcase featureComparison={data.feature_comparison} />
-      </div>
-
-      <div className="container my-16">
-        <WindowImage
-          alt="OpenPanel Real-time Analytics"
-          caption="Track events in real-time as they happen with instant updates and live monitoring."
-          srcDark="/screenshots/realtime-dark.webp"
-          srcLight="/screenshots/realtime-light.webp"
-        />
       </div>
 
       {data.technical_comparison && (
@@ -184,35 +155,16 @@ export default async function ComparePage({
         <UseCases useCases={data.use_cases} />
       </div>
 
-      <div className="container my-16">
-        <WindowImage
-          alt="OpenPanel Reports"
-          caption="Generate detailed reports and insights with customizable metrics and visualizations."
-          srcDark="/screenshots/report-dark.webp"
-          srcLight="/screenshots/report-light.webp"
-        />
-      </div>
-
       {data.benefits_section && (
-        <>
-          <div id="benefits">
-            <BenefitsSection
-              benefits={data.benefits_section.benefits}
-              cta={data.benefits_section.cta}
-              description={data.benefits_section.description}
-              label={data.benefits_section.label}
-              title={data.benefits_section.title}
-            />
-          </div>
-          <div className="container my-16">
-            <WindowImage
-              alt="OpenPanel User Profiles"
-              caption="Deep dive into individual user profiles with complete event history and behavior tracking."
-              srcDark="/screenshots/profile-dark.webp"
-              srcLight="/screenshots/profile-light.webp"
-            />
-          </div>
-        </>
+        <div id="benefits">
+          <BenefitsSection
+            benefits={data.benefits_section.benefits}
+            cta={data.benefits_section.cta}
+            description={data.benefits_section.description}
+            label={data.benefits_section.label}
+            title={data.benefits_section.title}
+          />
+        </div>
       )}
 
       <div id="faq">
@@ -226,8 +178,8 @@ export default async function ComparePage({
       <CtaBanner
         ctaLink={data.ctas.primary.href}
         ctaText={data.ctas.primary.label}
-        description="Test OpenPanel free for 30 days, you'll not be charged anything unless you upgrade to a paid plan."
-        title={'Ready to make the switch?'}
+        description="Get started with JKT48Connect for free. No credit card required — just sign up and start building."
+        title="Ready to build with real JKT48 data?"
       />
     </div>
   );
