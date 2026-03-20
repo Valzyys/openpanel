@@ -68,7 +68,7 @@ export function PricingSection({
           <div className="pointer-events-none absolute inset-0 bg-linear-to-br opacity-100 blur-2xl dark:from-emerald-500/5 dark:via-transparent dark:to-green-500/5 light:from-emerald-800/10 light:via-transparent light:to-green-900/10 group-hover:opacity-150 transition-opacity duration-500" />
           <div className="col gap-3 relative z-10">
             <div className="col gap-2">
-              <h3 className="text-xl font-semibold">OpenPanel</h3>
+              <h3 className="text-xl font-semibold">JKT48Connnect</h3>
               <p className="text-sm text-muted-foreground font-medium">
                 {pricing.openpanel.model}
               </p>
