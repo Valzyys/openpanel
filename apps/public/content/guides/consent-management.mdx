@@ -1,18 +1,18 @@
 ---
-title: "Consent management with OpenPanel"
-description: "Learn how to queue analytics events and session replays until the user gives consent, then flush everything at once with a single call."
+title: "Consent management with JKT48Connect in Next.js"
+description: "Learn how to queue JKT48Connect API calls and analytics events until the user gives consent, then flush everything at once with a single call in your Next.js app."
 difficulty: beginner
 timeToComplete: 15
 date: 2026-03-02
 updated: 2026-03-02
 cover: /content/cover-default.jpg
-team: OpenPanel Team
+team: JKT48Connect Team
 steps:
-  - name: "Initialise with disabled: true"
+  - name: "Initialise with consent check"
     anchor: "disable"
   - name: "Build a consent banner"
     anchor: "banner"
-  - name: "Call ready() on consent"
+  - name: "Enable tracking on consent"
     anchor: "ready"
   - name: "Handle decline"
     anchor: "decline"
@@ -20,71 +20,96 @@ steps:
     anchor: "persist"
 ---
 
-# Consent management with OpenPanel
+# Consent management with JKT48Connect in Next.js
 
-Privacy regulations like GDPR and CCPA require that you obtain explicit user consent before tracking behaviour or recording sessions. This guide shows how to use OpenPanel's built-in queue to hold all tracking until the user makes a choice, then flush everything at once—or discard it silently on decline.
+Privacy regulations like GDPR and CCPA require that you obtain explicit user consent before tracking behaviour or collecting user data. This guide shows how to gate your JKT48Connect analytics integration behind a consent check in Next.js — holding all tracking until the user makes a choice, then enabling everything at once — or discarding it silently on decline.
 
 ## Prerequisites
 
-- OpenPanel installed via the `@openpanel/web` npm package or the script tag
-- Your Client ID from the [OpenPanel dashboard](https://dashboard.openpanel.dev/onboarding)
+- A Next.js project (App Router or Pages Router)
+- Your JKT48Connect API key from the [JKT48Connect portal](https://www.jkt48connect.my.id/buyapi)
 
-## Initialise with `disabled: true` [#disable]
+## Initialise with consent check [#disable]
 
-Pass `disabled: true` when creating the OpenPanel instance. All tracking calls (`track`, `identify`, `screenView`, session replay chunks) are held in an in-memory queue instead of being sent to the API.
+Create a client-side module that reads the stored consent choice before initialising the JKT48Connect client. If consent hasn't been granted yet, set a flag to disable tracking so no data leaves the browser prematurely.
 
-### Script tag
+```ts title="lib/jkt48.ts"
+'use client';
 
-```html title="index.html"
-<script>
-  window.op=window.op||function(){var n=[];return new Proxy(function(){arguments.length&&n.push([].slice.call(arguments))},{get:function(t,r){return"q"===r?n:function(){n.push([r].concat([].slice.call(arguments)))}} ,has:function(t,r){return"q"===r}}) }();
-  window.op('init', {
-    clientId: 'YOUR_CLIENT_ID',
-    trackScreenViews: true,
-    disabled: true,
+const BASE_URL = 'https://v2.jkt48connect.com';
+const API_KEY = process.env.NEXT_PUBLIC_JKT48_API_KEY!;
+
+let trackingEnabled = false;
+const eventQueue: Array<{ endpoint: string; payload?: object }> = [];
+
+export function isTrackingEnabled() {
+  return trackingEnabled;
+}
+
+export async function jkt48Track(endpoint: string, payload?: object) {
+  if (!trackingEnabled) {
+    eventQueue.push({ endpoint, payload });
+    return;
+  }
+  await sendEvent(endpoint, payload);
+}
+
+async function sendEvent(endpoint: string, payload?: object) {
+  await fetch(`${BASE_URL}${endpoint}?apikey=${API_KEY}`, {
+    method: 'GET',
+    ...payload,
   });
-</script>
-<script src="https://openpanel.dev/op1.js" defer async></script>
+}
+
+export function enableTracking() {
+  trackingEnabled = true;
+  // Flush all queued events
+  while (eventQueue.length > 0) {
+    const item = eventQueue.shift()!;
+    sendEvent(item.endpoint, item.payload);
+  }
+}
 ```
 
-### NPM package
-
-```ts title="op.ts"
-import { OpenPanel } from '@openpanel/web';
-
-export const op = new OpenPanel({
-  clientId: 'YOUR_CLIENT_ID',
-  trackScreenViews: true,
-  disabled: true,
-});
-```
-
-From this point on, any `op.track(...)` calls elsewhere in your app are safely queued and not transmitted.
+From this point on, any `jkt48Track(...)` calls elsewhere in your app are safely queued and not transmitted until consent is given.
 
 ## Build a consent banner [#banner]
 
-How you build the UI is up to you. The key is to call `op.ready()` when the user accepts, and do nothing (or call `op.clear()`) when they decline.
+Create a Client Component for the consent UI. The key is to call `enableTracking()` when the user accepts, and do nothing when they decline.
 
-```tsx title="ConsentBanner.tsx"
-import { op } from './op';
+```tsx title="components/ConsentBanner.tsx"
+'use client';
+
+import { useEffect, useState } from 'react';
+import { enableTracking } from '@/lib/jkt48';
 
 export function ConsentBanner() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('jkt48_consent');
+    if (!stored) setVisible(true);
+    if (stored === 'granted') enableTracking();
+  }, []);
+
   function handleAccept() {
-    localStorage.setItem('consent', 'granted');
-    op.ready(); // flushes the queue and enables all future tracking
-    hideBanner();
+    localStorage.setItem('jkt48_consent', 'granted');
+    enableTracking(); // flushes the queue and enables all future tracking
+    setVisible(false);
   }
 
   function handleDecline() {
-    localStorage.setItem('consent', 'denied');
-    hideBanner(); // queue is discarded on page unload
+    localStorage.setItem('jkt48_consent', 'denied');
+    setVisible(false); // queue is discarded, nothing is sent
   }
+
+  if (!visible) return null;
 
   return (
     <div role="dialog" aria-label="Cookie consent">
       <p>
-        We use analytics to improve our product. Do you consent to anonymous
-        usage tracking?
+        We use JKT48Connect to display JKT48 data in this app. Do you consent
+        to anonymous usage tracking?
       </p>
       <button type="button" onClick={handleAccept}>Accept</button>
       <button type="button" onClick={handleDecline}>Decline</button>
@@ -93,104 +118,136 @@ export function ConsentBanner() {
 }
 ```
 
-## Call `ready()` on consent [#ready]
+## Call `enableTracking()` on consent [#ready]
 
-`op.ready()` does two things:
+`enableTracking()` does two things:
 
-1. Clears the `disabled` flag so all future events are sent immediately
-2. Flushes the entire queue — every event and session replay chunk buffered since page load is sent at once
+1. Sets the `trackingEnabled` flag so all future fetch calls are sent immediately
+2. Flushes the entire queue — every event buffered since the module was loaded is sent at once
 
-This means you don't lose any events that happened before the user made their choice. The screen view for the page they landed on, any clicks they made while the banner was visible—all of it is captured and sent the moment they consent.
+This means you don't lose any events that happened before the user made their choice. Any data requests made while the banner was visible are captured and sent the moment they consent.
 
-## Handle session replay [#replay]
+## Mount the banner in your layout [#layout]
 
-If you have session replay enabled, the recorder starts capturing DOM changes as soon as the page loads (so no interactions are missed), but no data leaves the browser until `ready()` is called.
+Add the `ConsentBanner` to your root layout so it appears on every page. Because it's a Client Component, it won't affect server rendering.
 
-```ts title="op.ts"
-export const op = new OpenPanel({
-  clientId: 'YOUR_CLIENT_ID',
-  trackScreenViews: true,
-  disabled: true,
-  sessionReplay: {
-    enabled: true,
-  },
-});
+### App Router
+
+```tsx title="app/layout.tsx"
+import { ConsentBanner } from '@/components/ConsentBanner';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <ConsentBanner />
+      </body>
+    </html>
+  );
+}
 ```
 
-On `op.ready()`, buffered replay chunks flush along with the queued events. The full session from the start of the page load is preserved.
+### Pages Router
+
+```tsx title="pages/_app.tsx"
+import type { AppProps } from 'next/app';
+import { ConsentBanner } from '@/components/ConsentBanner';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Component {...pageProps} />
+      <ConsentBanner />
+    </>
+  );
+}
+```
 
 ## Handle decline [#decline]
 
-If the user declines, don't call `ready()`. The queue lives only in memory and is automatically discarded when the tab closes or the page navigates away. No data is ever sent.
-
-If you want to be explicit, you can clear the queue immediately:
+If the user declines, don't call `enableTracking()`. The queue lives only in memory and is automatically discarded when the tab closes or the page navigates away. No data is ever sent to the JKT48Connect API.
 
 ```ts
 function handleDecline() {
-  localStorage.setItem('consent', 'denied');
-  // op stays disabled — nothing will be sent
+  localStorage.setItem('jkt48_consent', 'denied');
+  // trackingEnabled stays false — nothing will be sent
   // The in-memory queue will be garbage collected
 }
 ```
 
 ## Persist consent across page loads [#persist]
 
-The `disabled` flag resets on every page load. You need to check the stored consent choice on initialisation and skip `disabled: true` if consent was already granted.
+The `trackingEnabled` flag resets on every page load because Next.js re-imports modules fresh on navigation. You need to read the stored consent choice inside a `useEffect` on initialisation and call `enableTracking()` immediately if consent was already granted.
 
-```ts title="op.ts"
-import { OpenPanel } from '@openpanel/web';
+The `ConsentBanner` component already handles this in its `useEffect`:
 
-const hasConsent = localStorage.getItem('consent') === 'granted';
-
-export const op = new OpenPanel({
-  clientId: 'YOUR_CLIENT_ID',
-  trackScreenViews: true,
-  disabled: !hasConsent,
-});
+```ts
+useEffect(() => {
+  const stored = localStorage.getItem('jkt48_consent');
+  if (!stored) setVisible(true);          // no choice yet — show banner
+  if (stored === 'granted') enableTracking(); // already accepted — enable immediately
+}, []);
 ```
 
-And in your banner component, only show it when no choice has been stored:
-
-```tsx title="ConsentBanner.tsx"
-export function ConsentBanner() {
-  const stored = localStorage.getItem('consent');
-  if (stored) return null; // already decided, don't show
-
-  // ... render banner
-}
-```
+This ensures returning visitors never see the banner again and tracking resumes instantly without re-prompting.
 
 ## Full example
 
-```ts title="op.ts"
-import { OpenPanel } from '@openpanel/web';
+```ts title="lib/jkt48.ts"
+'use client';
 
-const hasConsent = localStorage.getItem('consent') === 'granted';
+const BASE_URL = 'https://v2.jkt48connect.com';
+const API_KEY = process.env.NEXT_PUBLIC_JKT48_API_KEY!;
 
-export const op = new OpenPanel({
-  clientId: 'YOUR_CLIENT_ID',
-  trackScreenViews: true,
-  disabled: !hasConsent,
-  sessionReplay: {
-    enabled: true,
-  },
-});
+let trackingEnabled = false;
+const eventQueue: Array<{ endpoint: string; payload?: object }> = [];
+
+export function enableTracking() {
+  trackingEnabled = true;
+  while (eventQueue.length > 0) {
+    const item = eventQueue.shift()!;
+    fetch(`${BASE_URL}${item.endpoint}?apikey=${API_KEY}`);
+  }
+}
+
+export async function jkt48Fetch(endpoint: string) {
+  if (!trackingEnabled) {
+    eventQueue.push({ endpoint });
+    return null;
+  }
+  const res = await fetch(`${BASE_URL}${endpoint}?apikey=${API_KEY}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
 ```
 
-```tsx title="ConsentBanner.tsx"
-import { op } from './op';
+```tsx title="components/ConsentBanner.tsx"
+'use client';
+
+import { useEffect, useState } from 'react';
+import { enableTracking } from '@/lib/jkt48';
 
 export function ConsentBanner() {
-  if (localStorage.getItem('consent')) return null;
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('jkt48_consent');
+    if (!stored) setVisible(true);
+    if (stored === 'granted') enableTracking();
+  }, []);
+
+  if (!visible) return null;
 
   return (
     <div role="dialog" aria-label="Cookie consent">
-      <p>We use analytics to improve our product. Do you consent?</p>
+      <p>We use JKT48Connect to power this app. Do you consent?</p>
       <button
         type="button"
         onClick={() => {
-          localStorage.setItem('consent', 'granted');
-          op.ready();
+          localStorage.setItem('jkt48_consent', 'granted');
+          enableTracking();
+          setVisible(false);
         }}
       >
         Accept
@@ -198,7 +255,8 @@ export function ConsentBanner() {
       <button
         type="button"
         onClick={() => {
-          localStorage.setItem('consent', 'denied');
+          localStorage.setItem('jkt48_consent', 'denied');
+          setVisible(false);
         }}
       >
         Decline
@@ -208,26 +266,41 @@ export function ConsentBanner() {
 }
 ```
 
+```tsx title="app/layout.tsx"
+import { ConsentBanner } from '@/components/ConsentBanner';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <ConsentBanner />
+      </body>
+    </html>
+  );
+}
+```
+
 ## Related
 
-- [Consent management docs](/docs/consent-management) — quick reference for `disabled` and `waitForProfile`
-- [Session replay](/docs/session-replay) — privacy controls for what gets recorded
-- [Identify users](/docs/get-started/identify-users) — link events to a user profile
+- [JKT48Connect API docs](https://docs.jkt48connect.com/docs/jkt48) — full endpoint reference
+- [Next.js Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) — when and how to use `'use client'`
+- [next/headers cookies](https://nextjs.org/docs/app/api-reference/functions/cookies) — server-side alternative for storing consent in cookies
 
 <Faqs>
-<FaqItem question="Are events lost if the user declines?">
-No events are sent if the user declines and you never call `ready()`. The queue lives in memory and is discarded when the page unloads.
+<FaqItem question="Are queued requests lost if the user declines?">
+No requests are sent if the user declines and you never call `enableTracking()`. The queue lives in memory and is discarded when the page unloads or the component unmounts.
 </FaqItem>
 
-<FaqItem question="What happens to events tracked before the banner appears?">
-They sit in the queue. If the user later accepts, they are all flushed. If the user declines, they are discarded.
+<FaqItem question="What happens to fetch calls made before the banner appears?">
+They sit in the queue. If the user later accepts, they are all flushed. If the user declines, they are discarded silently.
 </FaqItem>
 
-<FaqItem question="Does session replay start before consent?">
-The recorder starts capturing DOM changes immediately so the full session can be reconstructed, but nothing is transmitted until `ready()` is called.
+<FaqItem question="Does this work with Next.js App Router and Pages Router?">
+Yes. The `lib/jkt48.ts` module is framework-agnostic. Only the layout file differs — use `app/layout.tsx` for App Router or `pages/_app.tsx` for Pages Router.
 </FaqItem>
 
-<FaqItem question="Do I need to handle this differently for the script tag vs npm?">
-No. The `disabled` option and `ready()` method work the same in both.
+<FaqItem question="Should I use cookies instead of localStorage for consent?">
+localStorage is the simplest option for client-only apps. If you need the consent choice available on the server (e.g. to conditionally render analytics scripts in `<head>`), store it in a cookie instead using Next.js `cookies()` or a `Set-Cookie` response header.
 </FaqItem>
 </Faqs>
