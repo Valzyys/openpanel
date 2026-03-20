@@ -1,17 +1,18 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   BellIcon,
-  ConeIcon,
-  DollarSignIcon,
-  GlobeIcon,
-  MonitorIcon,
-  MousePointerClickIcon,
-  PieChartIcon,
+  BookOpenIcon,
+  CalendarIcon,
+  CakeIcon,
+  GiftIcon,
+  LibraryIcon,
+  ListVideoIcon,
+  MonitorPlayIcon,
+  NewspaperIcon,
   RadioIcon,
-  RefreshCwIcon,
-  ShareIcon,
   UserIcon,
-  WorkflowIcon,
+  UsersIcon,
+  VideoIcon,
 } from 'lucide-react';
 import type { Metadata } from 'next';
 import { FeatureCardLink } from './_components/feature-card';
@@ -24,18 +25,26 @@ import { getOgImageUrl, getPageMetadata } from '@/lib/metadata';
 import { featureSource } from '@/lib/source';
 
 const featureIcons: Record<string, LucideIcon> = {
-  'all-live': RadioIcon,
-  'data-visualization': PieChartIcon,
-  'event-tracking': MousePointerClickIcon,
-  funnels: ConeIcon,
-  'identify-users': UserIcon,
-  integrations: WorkflowIcon,
-  notifications: BellIcon,
-  retention: RefreshCwIcon,
-  'revenue-tracking': DollarSignIcon,
-  'session-tracking': MonitorIcon,
-  'share-and-collaborate': ShareIcon,
-  'web-analytics': GlobeIcon,
+  // Live stream endpoints
+  'all-live': RadioIcon,            // semua platform live sekaligus
+  'idn-live': MonitorPlayIcon,      // IDN Live spesifik
+  'showroom-live': VideoIcon,       // Showroom spesifik
+  'recent-live': ListVideoIcon,     // riwayat stream yang sudah selesai
+  'recent-live-detail': GiftIcon,   // detail stream: chat, gift, analytics
+
+  // Member endpoints
+  'members': UsersIcon,             // daftar semua member
+  'member-detail': UserIcon,        // profil lengkap satu member
+
+  // Schedule & events
+  'theater': LibraryIcon,           // jadwal teater regular
+  'theater-detail': BookOpenIcon,   // detail satu show: lineup, seitansai
+  'events': CalendarIcon,           // handshake, konser, off-air, special
+  'birthday': CakeIcon,             // data ulang tahun member
+
+  // Content & news
+  'news': NewspaperIcon,            // berita & pengumuman resmi
+  'news-detail': BellIcon,          // konten penuh artikel berita
 };
 
 export const metadata: Metadata = getPageMetadata({
