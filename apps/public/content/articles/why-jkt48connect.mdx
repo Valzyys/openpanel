@@ -1,0 +1,307 @@
+---
+title: "Why Developers Should Use JKT48Connect in 2026"
+description: "An honest look at why JKT48Connect is the best way to access JKT48 data in 2026. Compare scraping, unofficial APIs, and JKT48Connect across reliability, speed, and ease of use."
+date: 2026-03-20
+updated: 2026-03-20
+cover: /content/cover-jkt48connect.jpg
+tag: Comparison
+team: JKT48Connect Team
+---
+import { Faqs, FaqItem } from '@/components/faq';
+import { Figure } from '@/components/figure'
+
+If you've ever tried to build a JKT48 fan app, Discord bot, or fanbase website, you've likely hit the same wall: **where do I get reliable, up-to-date JKT48 data?** The answer in 2026 is **JKT48Connect** — a production-ready REST API and npm package that gives developers and fans a single, stable source for everything from member profiles and theater schedules to live stream data and official news.
+
+This article explains why JKT48Connect is the right choice for any project that needs JKT48 data, who it's built for, what it covers, and how it compares to the alternatives developers typically reach for first.
+
+Here's a quick summary of your options:
+
+| Approach | Reliability | Maintenance | Speed to Ship | Cost | Best For |
+|----------|-------------|-------------|---------------|------|----------|
+| [**JKT48Connect API**](#jkt48connect) | ✅ High | None | Minutes | Free / Paid key | Any project needing JKT48 data |
+| [**Scraping jkt48.com**](#scraping) | ❌ Fragile | High | Days | Free | Nothing in production |
+| [**Scraping SHOWROOM**](#showroom) | ⚠️ Unstable | High | Days | Free | Nothing in production |
+| [**@jkt48/core npm**](#npm) | ✅ High | None | Minutes | Free / Paid key | Node.js / TypeScript projects |
+| [**Building your own**](#own) | ⚠️ Depends | Very High | Weeks | Server costs | Teams with specific needs |
+
+## What is JKT48Connect?
+
+JKT48Connect is a comprehensive API service built by and for the JKT48 developer community. It aggregates data from official JKT48 sources — the official website, SHOWROOM, IDN Live, and YouTube — and exposes it all through a clean, consistent REST API and an npm package (`@jkt48/core`) with full TypeScript support.
+
+The project is maintained by **JKT48ConnectCORP** and has been adopted by fan Discord bots, fanbase websites, and mobile apps across the Indonesian JKT48 community.
+
+- Homepage: [**https://jkt48connect.my.id**](https://www.jkt48connect.my.id)
+- Documentation: [**https://docs.jkt48connect.com**](https://docs.jkt48connect.com)
+- Base API URL: **https://v2.jkt48connect.com**
+- npm: **@jkt48/core**
+
+## What data does JKT48Connect provide?
+
+Before diving into the "why", it's worth understanding the full scope of what JKT48Connect actually covers. Most developers are surprised by how comprehensive it is.
+
+| Category | Endpoints | What you get |
+|----------|-----------|--------------|
+| **Members** | `/api/jkt48/members`, `/api/jkt48/member-detail` | Full roster, profiles, social links, generation, graduation status |
+| **Theater** | `/api/jkt48/theater`, `/api/jkt48/theater-detail` | Show schedules, setlist names, member counts, seitansai info |
+| **News** | `/api/jkt48/news`, `/api/jkt48/news-detail` | Official announcements, categorized, paginated |
+| **Events** | `/api/jkt48/events` | Off-air shows, concerts, fan events |
+| **Live** | `/api/jkt48/idn`, `/api/jkt48/showroom`, `/api/jkt48/youtube` | Real-time live stream data per platform |
+| **Recent Live** | `/api/jkt48/recent`, `/api/jkt48/recent-detail` | Past streams with viewer and gift stats |
+| **Birthday** | `/api/jkt48/birthday` | Upcoming member birthdays |
+| **Video Call** | `/api/jkt48/video-call` | VC event schedules |
+| **Chat** | `/api/jkt48/idn-chat`, `/api/jkt48/showroom-chat` | Live chat stream data |
+| **Replay** | `/api/jkt48/replay` | YouTube theater replay links |
+
+That's ten categories of data, all accessible through the same base URL, same authentication pattern, and same JSON response format. No switching between unofficial scrapers or stitching together three different data sources manually.
+
+## JKT48Connect API [#jkt48connect]
+
+<Figure
+  src="/content/tools/jkt48connect.png"
+  caption="JKT48Connect documentation — clean, organized, and developer-friendly"
+/>
+
+### Summary
+
+JKT48Connect is the fastest path from idea to working JKT48 app. Pass your API key as a query parameter, get back clean JSON. That's it. There's no SDK required, no authentication dance, no pagination quirks to reverse-engineer. The same API that powers community Discord bots with thousands of members is available to any developer who registers for a key.
+
+For Node.js developers, the `@jkt48/core` package wraps every endpoint with TypeScript types and a clean method API so you're not constructing URL strings by hand.
+
+```js
+// REST API — works in any language or framework
+const res = await fetch(
+  'https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_KEY'
+);
+const members = await res.json();
+
+// npm package — cleaner for Node.js / TypeScript
+import { JKT48Connect } from '@jkt48/core';
+
+const client = new JKT48Connect({ apiKey: process.env.JKT48_API_KEY });
+const members = await client.getMembers();
+const schedule = await client.getSchedule();
+```
+
+### Pricing
+
+JKT48Connect API keys are available from [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi). Standard keys come with rate limits suitable for most fan projects and bots. For higher throughput — such as official fanbase websites or apps serving large communities — you can apply for Priority Access.
+
+| Access Tier | Rate Limit | Who It's For | How to Get |
+|-------------|------------|--------------|------------|
+| Standard Key | Rate-limited | Personal projects, bots, fan apps | Buy via portal |
+| Priority Key | Unlimited requests | Official fanbases, verified devs, media partners | Apply via [Google Form](https://forms.gle/KeqJF9nAeEq7hxWP9) |
+
+Priority Access is free for verified organizations — official fanbase groups, certified developers, and accredited media partners. The verification process takes 3–5 business days and requires a valid social media presence or website.
+
+### Pros
+
+- Zero setup — register for a key and start fetching data in minutes
+- Consistent JSON responses across all endpoints, no format surprises
+- Covers all major JKT48 data in one place — no stitching multiple sources
+- Real-time live stream data from IDN, SHOWROOM, and YouTube simultaneously
+- npm package (`@jkt48/core`) with TypeScript support for Node.js projects
+- Priority Access available for high-traffic official fanbase projects
+- Active maintenance by the JKT48ConnectCORP team
+
+### Cons
+
+- Standard keys have rate limits that may not suit high-traffic production apps
+- Priority Access requires verification (3–5 business days)
+- No webhooks — you must poll endpoints for live data changes
+- Data depends on official source availability; if jkt48.com is down, some data may lag
+
+---
+
+## The alternative: scraping jkt48.com yourself [#scraping]
+
+### Why developers try it
+
+Scraping seems attractive at first. No API key to register for, no rate limits, no cost. You write a fetch + cheerio script, parse the HTML, and you have your data.
+
+### Why it breaks
+
+JKT48's official website is not designed to be scraped. HTML structure changes without notice whenever the site is updated — and when it does, your parser silently returns wrong data or crashes entirely. You won't know until a user reports that your bot is posting the wrong theater setlist.
+
+Beyond fragility, scraping at scale means dealing with IP throttling, CAPTCHAs, and session handling. You're spending engineering time on infrastructure that has nothing to do with your actual product.
+
+```js
+// What scraping looks like — and why it's a trap
+import * as cheerio from 'cheerio';
+
+const html = await fetch('https://jkt48.com/theater/schedule').then(r => r.text());
+const $ = cheerio.load(html);
+
+// This selector breaks every time the site redesigns
+const shows = $('.theater-schedule-item').map((i, el) => ({
+  title: $(el).find('.show-title').text(),  // ← will silently return '' after any HTML update
+  date: $(el).find('.show-date').text(),
+})).get();
+```
+
+Compare that to the JKT48Connect equivalent:
+
+```js
+const res = await fetch('https://v2.jkt48connect.com/api/jkt48/theater?apikey=YOUR_KEY');
+const { theater } = await res.json();
+// theater is a typed array of show objects — always the same shape
+```
+
+### Verdict
+
+Scraping is fine for a one-off data collection task. It is not a foundation for a production bot or app that users depend on. Every hour you spend maintaining a scraper is an hour not spent on features.
+
+---
+
+## The alternative: scraping SHOWROOM or IDN directly [#showroom]
+
+### The appeal
+
+SHOWROOM and IDN Live have their own internal APIs that power their mobile apps. Reverse-engineering these gives you live stream data — viewer counts, gift totals, room IDs — without going through a third party.
+
+### The reality
+
+Internal mobile app APIs are undocumented by design. They use rotating tokens, change endpoints without notice, and have no stability guarantees. The JKT48Connect team has already done this reverse-engineering work and wraps it in a stable, versioned API. You get the same live data — member live status across IDN, SHOWROOM, and YouTube simultaneously — without maintaining any of the underlying integration yourself.
+
+```js
+// JKT48Connect live endpoint — one call, three platforms
+const res = await fetch('https://v2.jkt48connect.com/api/jkt48/idn?apikey=YOUR_KEY');
+const liveData = await res.json();
+// Returns current IDN Live streams with member info, viewer count, and room data
+```
+
+If SHOWROOM changes their internal API tomorrow, JKT48Connect updates their integration. Your code doesn't change.
+
+---
+
+## The @jkt48/core npm package [#npm]
+
+For Node.js and TypeScript projects, the `@jkt48/core` package is the cleanest integration path. It wraps the REST API with a typed client so you get autocomplete, type checking, and a method-based API instead of URL strings.
+
+```bash
+npm install @jkt48/core
+```
+
+```ts
+import { JKT48Connect } from '@jkt48/core';
+
+const client = new JKT48Connect({
+  apiKey: process.env.JKT48_API_KEY!,
+});
+
+// Fully typed — your IDE knows the shape of every response
+const members = await client.getMembers();
+const activeMembers = members.filter(m => !m.is_graduate);
+
+// Works seamlessly with React hooks
+function useMemberData() {
+  const [members, setMembers] = useState([]);
+
+  useEffect(() => {
+    client.getMembers().then(setMembers);
+  }, []);
+
+  return members;
+}
+```
+
+TypeScript types are bundled with the package — no `@types/` install needed.
+
+---
+
+## Building your own data aggregator [#own]
+
+### When it makes sense
+
+A small number of teams have needs specific enough to justify building their own JKT48 data pipeline — usually large-scale research projects, official JKT48 tooling, or applications with very specific data requirements not covered by JKT48Connect.
+
+### The real cost
+
+Building a reliable JKT48 data aggregator means: monitoring the official website for structure changes, maintaining reverse-engineered SHOWROOM and IDN Live integrations, running your own server to store and serve the data, handling uptime and data freshness, and doing all of this in your spare time as a side project.
+
+For the vast majority of fan projects, bots, and fanbase websites, this cost is not justified. JKT48Connect exists precisely so that the community doesn't have to solve this problem over and over again.
+
+---
+
+## Head-to-head: JKT48Connect vs the alternatives
+
+| | JKT48Connect API | Self-scraping | DIY aggregator |
+|--|--|--|--|
+| **Time to first data** | ~5 minutes | Hours–days | Weeks |
+| **Ongoing maintenance** | None | High | Very high |
+| **Breaks on site updates** | No — JKT48Connect handles it | Yes | Yes |
+| **Live stream data** | ✅ IDN + SHOWROOM + YouTube | ⚠️ Per-platform, fragile | Depends on your build |
+| **TypeScript support** | ✅ via @jkt48/core | ❌ DIY | DIY |
+| **Stability guarantee** | ✅ Versioned API | ❌ None | ❌ None |
+| **Priority access** | ✅ Free for verified orgs | N/A | N/A |
+| **Cost** | Free key / priority access | Free (your time isn't) | Server + dev hours |
+
+---
+
+## Who is JKT48Connect built for?
+
+JKT48Connect is useful at every scale of project:
+
+**Discord bots** — The most common use case. Commands like `/theater`, `/member shani`, `/live` become three fetch calls to JKT48Connect instead of three separate scrapers. Several community bots with thousands of members in JKT48 fan servers run on JKT48Connect.
+
+**Fanbase websites** — Official and unofficial fanbase sites use JKT48Connect to display member rosters, upcoming theater schedules, and news feeds without maintaining their own data pipelines.
+
+**Mobile apps** — The REST API works from any HTTP client, so React Native, Flutter, and native Android/iOS apps can all consume JKT48Connect data directly.
+
+**Notification systems** — Poll the events and theater endpoints to build birthday reminders, show alerts, and live stream notifications for fan communities.
+
+**Research and analytics** — The recent live endpoint returns viewer counts, gift stats, and duration data for past streams — useful for anyone analyzing JKT48's digital presence.
+
+---
+
+## How to get started
+
+Getting your first response from JKT48Connect takes about five minutes:
+
+1. Get an API key from [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi)
+2. Make your first request:
+
+```bash
+curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_KEY"
+```
+
+3. Read the [full API documentation](https://docs.jkt48connect.com/docs/jkt48) to explore all available endpoints.
+
+If you're building with Node.js, install `@jkt48/core` and follow the [npm package docs](https://docs.jkt48connect.com/docs/package) instead.
+
+For official fanbases and high-traffic applications, [apply for Priority Access](https://forms.gle/KeqJF9nAeEq7hxWP9) to get unlimited requests with no rate limits.
+
+---
+
+## How to choose
+
+**Use JKT48Connect if** you're building anything that needs JKT48 data — a bot, a website, an app, or a notification system. It covers every major data category, is actively maintained, and gets you shipping in minutes instead of days.
+
+**Use scraping if** you need a one-time data snapshot for a personal project and don't need it to keep working. Don't build a user-facing product on top of a scraper.
+
+**Build your own if** you have requirements that JKT48Connect genuinely doesn't cover and you have the engineering capacity to maintain it long-term. This is rarely the right call for fan projects.
+
+<Faqs>
+<FaqItem question="Is JKT48Connect free to use?">
+Standard API keys are available for purchase from the JKT48Connect portal, and Priority Access — which removes rate limits entirely — is free for verified organizations including official fanbase groups, certified developers, and accredited media partners. The verification process takes 3–5 business days.
+</FaqItem>
+
+<FaqItem question="What's the difference between the REST API and the @jkt48/core npm package?">
+The REST API is a plain HTTP interface accessible from any language or platform — JavaScript, Python, Go, Dart, or a curl command. The `@jkt48/core` npm package wraps the same API with a TypeScript client, giving you method-based access, full type definitions, and IDE autocomplete. Both point to the same data; the npm package is just more ergonomic for Node.js projects.
+</FaqItem>
+
+<FaqItem question="How current is the data? Is it truly real-time?">
+Live stream data (IDN, SHOWROOM, YouTube) is real-time. Theater schedules and news are updated as soon as new information appears on official JKT48 sources. Member data is updated when roster changes are announced. For time-sensitive features like live notifications, poll the live endpoints at your desired interval — JKT48Connect does not push webhooks.
+</FaqItem>
+
+<FaqItem question="What happens if JKT48Connect goes down?">
+For critical production applications, implement a local cache so your app degrades gracefully rather than failing outright. Most endpoints return data that changes infrequently — member rosters and theater schedules are safe to cache for an hour or more. The JKT48Connect team maintains the service actively for the community.
+</FaqItem>
+
+<FaqItem question="Can I use JKT48Connect for a commercial project?">
+Yes. There are no restrictions on using JKT48Connect data in commercial projects. For high-traffic commercial use, apply for Priority Access to ensure you have sufficient request capacity.
+</FaqItem>
+
+<FaqItem question="Does JKT48Connect cover KLP48 data too?">
+Yes. JKT48Connect also has a separate KLP48 API endpoint group for KLP48 data. Check the [KLP48 API documentation](https://docs.jkt48connect.com/docs/klp48) for available endpoints.
+</FaqItem>
+</Faqs>
