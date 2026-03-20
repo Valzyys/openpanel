@@ -1,0 +1,326 @@
+---
+title: "How to integrate JKT48Connect into your JavaScript app"
+description: "Access JKT48 data in your JavaScript app with JKT48Connect. Fetch member info, theater schedules, news, and live stream data with a simple REST API."
+difficulty: beginner
+timeToComplete: 5
+date: 2025-12-14
+cover: /content/cover-default.jpg
+team: JKT48Connect Team
+steps:
+  - name: "Get your API key"
+    anchor: "apikey"
+  - name: "Make your first request"
+    anchor: "setup"
+  - name: "Fetch member data"
+    anchor: "members"
+  - name: "Get theater schedule"
+    anchor: "theater"
+  - name: "Fetch news and events"
+    anchor: "news"
+  - name: "Verify your setup"
+    anchor: "verify"
+---
+
+# How to integrate JKT48Connect into your JavaScript app
+
+Integrating JKT48Connect into your JavaScript project lets you access real-time JKT48 data — from member profiles and theater schedules to live streams and official news. This guide walks you through making your first API request and consuming the most common endpoints in about five minutes.
+
+JKT48Connect works well in any JavaScript environment because it's a plain REST API that returns JSON. No special SDK required — just standard `fetch` calls. It works seamlessly in Node.js, browser apps, React, Vue, or any other JS framework.
+
+## Prerequisites
+
+- A JavaScript project (Node.js, browser, or any framework)
+- A JKT48Connect account ([get your API key](https://www.jkt48connect.my.id/buyapi))
+- Your API key from the JKT48Connect dashboard
+
+## Get your API key [#apikey]
+
+Before making any requests, obtain your API key from the [JKT48Connect portal](https://www.jkt48connect.my.id/buyapi). This key authenticates every request you make to the API.
+
+Store your key in an environment variable rather than hardcoding it in your source files.
+
+```bash
+# .env
+JKT48_API_KEY=your-api-key-here
+```
+
+## Make your first request [#setup]
+
+All JKT48Connect API requests go to the same base URL. Pass your API key as the `apikey` query parameter on every request.
+
+```js
+const API_KEY = process.env.JKT48_API_KEY;
+const BASE_URL = 'https://v2.jkt48connect.com';
+
+async function jkt48Fetch(endpoint) {
+  const response = await fetch(`${BASE_URL}${endpoint}?apikey=${API_KEY}`);
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+```
+
+The `jkt48Fetch` helper above is the foundation for all examples in this guide. It handles the base URL and API key automatically so you don't repeat yourself.
+
+## Fetch member data [#members]
+
+The members endpoint returns the full JKT48 roster including active members, trainees, and graduates. Each member object includes profile images, social media links, generation info, and SHOWROOM/IDN Live details.
+
+```js
+async function getAllMembers() {
+  return jkt48Fetch('/api/jkt48/members');
+}
+
+// Filter to active (non-graduated) members only
+function getActiveMembers(members) {
+  return members.filter(member => !member.is_graduate);
+}
+
+// Filter by generation
+function getMembersByGeneration(members, generation) {
+  return members.filter(member => member.generation === generation);
+}
+
+// Find a member by their nickname
+function findMemberByNickname(members, nickname) {
+  return members.find(member =>
+    member.nicknames.some(nick => nick.toLowerCase() === nickname.toLowerCase())
+  );
+}
+
+// Usage
+const members = await getAllMembers();
+const active = getActiveMembers(members);
+console.log(`Active members: ${active.length}`);
+```
+
+Each member object looks like this:
+
+```json
+{
+  "_id": "65ce68ed1dd7aa2c8c0ca76c",
+  "name": "Abigail Rachel",
+  "nicknames": ["Aralie"],
+  "img": "https://static.showroom-live.com/image/room/cover/...",
+  "img_alt": "https://res.cloudinary.com/.../abigail_rachel.jpg",
+  "url": "aralie",
+  "group": "jkt48",
+  "socials": [
+    { "title": "X", "url": "https://twitter.com/Aralie_JKT48" },
+    { "title": "Instagram", "url": "https://www.instagram.com/jkt48.aralie/" },
+    { "title": "SHOWROOM", "url": "https://www.showroom-live.com/JKT48_Aralie" }
+  ],
+  "room_id": 509985,
+  "sr_exists": true,
+  "is_graduate": false,
+  "generation": "gen12-jkt48",
+  "idn_username": "jkt48_aralie"
+}
+```
+
+You can also extract a member's social link for a specific platform from the `socials` array:
+
+```js
+function getMemberSocialLink(member, platform) {
+  const social = member.socials.find(
+    s => s.title.toLowerCase() === platform.toLowerCase()
+  );
+  return social ? social.url : null;
+}
+
+// Get Instagram link for a member
+const igLink = getMemberSocialLink(member, 'Instagram');
+```
+
+### Caching member data
+
+Member data doesn't change frequently, so caching it locally reduces unnecessary API calls.
+
+```js
+const CACHE_DURATION = 1000 * 60 * 60; // 1 hour
+
+async function getCachedMembers() {
+  const cached = localStorage.getItem('jkt48_members');
+  const cacheTime = localStorage.getItem('jkt48_members_time');
+
+  if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < CACHE_DURATION) {
+    return JSON.parse(cached);
+  }
+
+  const members = await getAllMembers();
+  localStorage.setItem('jkt48_members', JSON.stringify(members));
+  localStorage.setItem('jkt48_members_time', Date.now().toString());
+
+  return members;
+}
+```
+
+## Get theater schedule [#theater]
+
+The theater endpoint returns JKT48 theater shows with their setlist titles, member counts, dates, and seitansai (birthday) celebrations.
+
+```js
+async function getTheaterShows(page = 1, perpage = 10) {
+  return jkt48Fetch(`/api/jkt48/theater&page=${page}&perpage=${perpage}`);
+}
+
+// Check if a show is happening today
+function isShowToday(showDate) {
+  return new Date(showDate).toDateString() === new Date().toDateString();
+}
+
+// Check if a show is still upcoming
+function isUpcoming(showDate) {
+  return new Date(showDate) > new Date();
+}
+
+// Get shows with seitansai celebrations
+function getShowsWithSeitansai(shows) {
+  return shows.filter(show => show.seitansai && show.seitansai.length > 0);
+}
+
+// Usage
+const data = await getTheaterShows();
+const { theater: shows, total_count } = data;
+
+const todayShows = shows.filter(show => isShowToday(show.date));
+const seitansaiShows = getShowsWithSeitansai(shows);
+
+todayShows.forEach(show => {
+  console.log(`${show.title} — ${show.member_count} members`);
+
+  if (show.seitansai?.length > 0) {
+    const names = show.seitansai.map(m => m.name).join(', ');
+    console.log(`  🎂 Seitansai: ${names}`);
+  }
+});
+```
+
+A theater show object includes:
+
+```json
+{
+  "id": "2963",
+  "title": "Cara Meminum Ramune",
+  "banner": "https://res.cloudinary.com/.../banner.png",
+  "poster": "https://res.cloudinary.com/.../poster.jpg",
+  "member_count": 16,
+  "seitansai": [
+    {
+      "id": 190,
+      "name": "Gita Sekar Andarini",
+      "img": "https://res.cloudinary.com/.../gita.jpg",
+      "url_key": "gita"
+    }
+  ],
+  "url": "2963",
+  "date": "2025-07-03T12:00:00.000Z"
+}
+```
+
+Both the `page` and `perpage` query parameters are supported on this endpoint, letting you paginate through the full show archive. The response also includes `total_count` so you can calculate the number of available pages.
+
+## Fetch news and events [#news]
+
+The news endpoint returns official JKT48 announcements sorted by publication date. Use the `page` and `perpage` parameters to paginate through the archive.
+
+```js
+async function getJKT48News(page = 1, perpage = 10) {
+  return jkt48Fetch(`/api/jkt48/news&page=${page}&perpage=${perpage}`);
+}
+
+// Map icon paths to readable category names
+function getCategoryFromLabel(label) {
+  const categories = {
+    cat1: 'Member Updates',
+    cat2: 'Events & Concerts',
+    cat3: 'General',
+    cat4: 'Merchandise',
+    cat5: 'Special Events',
+    cat8: 'Member Status',
+  };
+
+  const match = label.match(/cat(\d+)/);
+  return match ? categories[`cat${match[1]}`] || 'General' : 'General';
+}
+
+// Check if an article was published within the last 7 days
+function isRecentNews(dateStr) {
+  const diffMs = Date.now() - new Date(dateStr).getTime();
+  return diffMs < 7 * 24 * 60 * 60 * 1000;
+}
+
+// Usage
+const data = await getJKT48News();
+const { news, total_count } = data;
+
+news.forEach(article => {
+  const category = getCategoryFromLabel(article.label);
+  const isNew = isRecentNews(article.date) ? ' 🆕' : '';
+  console.log(`[${category}] ${article.title}${isNew}`);
+});
+```
+
+A news article object looks like this:
+
+```json
+{
+  "_id": "685e7adedc1fff4e792c3d0a",
+  "id": "1926",
+  "date": "2025-06-26T17:00:00.000Z",
+  "label": "/images/icon.cat2.png",
+  "title": "Pengumuman Mengenai Stage Activity dan Mini-Live Performance di JKT48 \"ALL IN TOUR\" 2025"
+}
+```
+
+The `label` field contains an icon path whose filename encodes the category (e.g. `icon.cat2.png` = Events & Concerts). Use `getCategoryFromLabel` shown above to convert it into a human-readable string.
+
+### Filtering news by category
+
+```js
+function getNewsByCategory(news, category) {
+  return news.filter(article => getCategoryFromLabel(article.label) === category);
+}
+
+// Get only member status updates (hiatus, graduation, etc.)
+const statusNews = getNewsByCategory(news, 'Member Status');
+```
+
+## Verify your setup [#verify]
+
+Open your browser's developer console or run your Node.js script and call one of the endpoints above. You should receive a JSON response immediately.
+
+```js
+// Quick sanity check
+const members = await getAllMembers();
+console.log(`Fetched ${members.length} members ✓`);
+
+const newsData = await getJKT48News();
+console.log(`Fetched ${newsData.total_count} news articles ✓`);
+
+const theaterData = await getTheaterShows();
+console.log(`Fetched ${theaterData.total_count} theater shows ✓`);
+```
+
+If you see errors, check the following: your API key is correct and present in every request, you're using `https://v2.jkt48connect.com` as the base URL, and no ad blocker or firewall is blocking requests to the domain. You can also inspect the Network tab in DevTools to see the raw request and response.
+
+## Next steps
+
+The [JKT48Connect documentation](https://docs.jkt48connect.com/docs/jkt48) covers additional endpoints including live stream data (IDN, SHOWROOM, YouTube), member detail pages, birthday information, video call schedules, and chat streams. If you're building a Node.js bot or want TypeScript support, check out the [`@jkt48/core` npm package](https://docs.jkt48connect.com/docs/package) which wraps all of these endpoints with a typed client.
+
+<Faqs>
+<FaqItem question="Does JKT48Connect work in the browser without a backend?">
+Yes. The API supports cross-origin requests, so you can call it directly from browser JavaScript. Keep in mind that your API key will be visible in client-side code, so for production apps consider proxying requests through your own backend.
+</FaqItem>
+
+<FaqItem question="How often is the data updated?">
+Live stream data is updated in real time. Theater schedules and news are updated as soon as new information is available from official JKT48 sources. Member data is updated when roster changes occur.
+</FaqItem>
+
+<FaqItem question="Is there a rate limit on the API?">
+Yes. Standard API keys have rate limits. If your application needs higher throughput, you can apply for priority access at [docs.jkt48connect.com](https://docs.jkt48connect.com) — priority keys are available for verified fanbases, developers, and media partners with no rate limits.
+</FaqItem>
+</Faqs>
