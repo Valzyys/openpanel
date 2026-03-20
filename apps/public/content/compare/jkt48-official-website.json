@@ -1,0 +1,470 @@
+{
+  "slug": "jkt48-official-website",
+  "page_type": "alternative",
+  "seo": {
+    "title": "JKT48Connect vs JKT48 Official Website - API Access for Developers",
+    "description": "Compare JKT48Connect and the JKT48 Official Website. JKT48Connect provides a structured REST API for developers to access member data, live streams, theater schedules, and events programmatically.",
+    "noindex": false
+  },
+  "hero": {
+    "heading": "JKT48Connect vs JKT48 Official Website",
+    "subheading": "The JKT48 Official Website is great for fans — but it has no developer API. JKT48Connect gives developers programmatic access to the same data through a stable REST API with TypeScript SDK, webhooks, and real-time stream tracking.",
+    "badges": [
+      "REST API",
+      "TypeScript SDK",
+      "Real-time data",
+      "Free tier available"
+    ]
+  },
+  "competitor": {
+    "name": "JKT48 Official Website",
+    "logo": "/logos/jkt48-official.svg",
+    "url": "https://jkt48.com",
+    "short_description": "The official JKT48 web app and website providing news, member profiles, theater schedules, and merchandise for fans.",
+    "founded": null,
+    "headquarters": "Jakarta, Indonesia"
+  },
+  "overview": {
+    "title": "Why use JKT48Connect instead of the official website?",
+    "paragraphs": [
+      "The JKT48 Official Website is the go-to destination for fans — it has member profiles, theater schedules, news, and merchandise. But it's built for fans to consume content, not for developers to build applications. There is no public API, no documented endpoints, and no way to access the data programmatically without scraping.",
+      "JKT48Connect is built specifically for developers. Every data type available in the official website — and more — is accessible through clean, documented REST endpoints with consistent schemas, versioning, and a TypeScript SDK. You don't need to scrape, you don't need to maintain HTML parsers, and you don't need to worry about bot detection.",
+      "Beyond what the official website offers, JKT48Connect adds capabilities that are fundamentally impossible through the official website: real-time IDN Live and Showroom viewer counts, webhook notifications when members go live, cross-platform stream aggregation, and historical stream analytics including chat logs and gift data.",
+      "If you want to build a JKT48 fansite, Discord bot, birthday tracker, or web app, the official website gives you nothing to work with programmatically. JKT48Connect gives you everything."
+    ]
+  },
+  "summary_comparison": {
+    "title": "JKT48Connect vs JKT48 Official Website: Which is right for you?",
+    "intro": "The official website is for fans consuming content. JKT48Connect is for developers building applications.",
+    "one_liner": "The JKT48 Official Website has no developer API; JKT48Connect is a REST API built specifically for developers who want to build JKT48 apps.",
+    "best_for_openpanel": [
+      "Developers building JKT48 fansites or fan apps",
+      "Discord and Telegram bot developers",
+      "Teams needing real-time live stream viewer counts",
+      "Apps requiring webhook notifications when members go live",
+      "Developers who want normalized, consistent data schemas"
+    ],
+    "best_for_competitor": [
+      "Fans who want to browse JKT48 content casually",
+      "Users who want the official, curated JKT48 experience",
+      "Merchandise and ticket purchases through official channels",
+      "Fans who don't need to build anything programmatically"
+    ]
+  },
+  "highlights": {
+    "title": "Key differences at a glance",
+    "intro": "Here's how JKT48Connect and the JKT48 Official Website compare on developer-relevant factors.",
+    "items": [
+      {
+        "label": "Developer API",
+        "openpanel": "Full REST API with TypeScript SDK",
+        "competitor": "None — no public API available",
+        "notes": "The official website has no documented API. JKT48Connect is built as a developer-first API platform."
+      },
+      {
+        "label": "Real-time live stream data",
+        "openpanel": "Yes — IDN Live, Showroom, YouTube viewer counts",
+        "competitor": "No — only displayed on the website, not accessible programmatically",
+        "notes": "JKT48Connect aggregates live stream data from all platforms in real-time. The official website shows this on the website but provides no API access."
+      },
+      {
+        "label": "Webhook notifications",
+        "openpanel": "Yes — instant push notifications for live events",
+        "competitor": "No — push notifications only to the official website",
+        "notes": "JKT48Connect webhooks let you build your own notification systems. The official website only sends push notifications to its own users."
+      },
+      {
+        "label": "Data format",
+        "openpanel": "Normalized JSON with consistent schemas and member IDs",
+        "competitor": "Not accessible — visual display only",
+        "notes": "JKT48Connect returns structured, normalized JSON with consistent member_id across all endpoints. The official website only displays data visually."
+      },
+      {
+        "label": "Cross-platform aggregation",
+        "openpanel": "IDN Live + Showroom + YouTube in one API",
+        "competitor": "Not available programmatically",
+        "notes": "JKT48Connect aggregates data from multiple platforms. The official website may show some of this, but none of it is API-accessible."
+      },
+      {
+        "label": "Pricing",
+        "openpanel": "Free tier available, Pro from Rp 49.000/month",
+        "competitor": "Free to use (fan consumption only)",
+        "notes": "The official website is free for fans. JKT48Connect has a free developer tier and paid plans for higher API usage."
+      }
+    ]
+  },
+  "feature_comparison": {
+    "title": "Feature comparison",
+    "intro": "A direct comparison of what developers can access through JKT48Connect vs what's available via the JKT48 Official Website.",
+    "groups": [
+      {
+        "group": "Member Data",
+        "features": [
+          {
+            "name": "Member profiles",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Official website displays profiles but has no API for programmatic access"
+          },
+          {
+            "name": "Generation & team data",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Visible on the website but not accessible via API"
+          },
+          {
+            "name": "Birthday data",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Official website shows birthdays but no API or countdown data"
+          },
+          {
+            "name": "Social media links",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Some social links shown on the website, not accessible via API"
+          },
+          {
+            "name": "Graduated member history",
+            "openpanel": true,
+            "competitor": "partial",
+            "notes": "JKT48Connect preserves graduated member data; official website may remove or archive"
+          },
+          {
+            "name": "Normalized member IDs",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect uses consistent member_id across all endpoints"
+          }
+        ]
+      },
+      {
+        "group": "Theater & Events",
+        "features": [
+          {
+            "name": "Theater schedule",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Schedule shown on the website but no developer API"
+          },
+          {
+            "name": "Senbatsu member lists",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Lineup shown on the website but not queryable via API"
+          },
+          {
+            "name": "Seitansai data",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Birthday show info visible on the website but not API-accessible"
+          },
+          {
+            "name": "Handshake events",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "Event info shown on the website, no programmatic access"
+          },
+          {
+            "name": "Ticket availability API",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect includes ticket status in theater data; official website redirects to purchase"
+          },
+          {
+            "name": "Historical show data",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect retains past show records; official website typically only shows upcoming"
+          }
+        ]
+      },
+      {
+        "group": "Live Streams",
+        "features": [
+          {
+            "name": "IDN Live stream data",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Official website does not provide IDN Live data; JKT48Connect includes real-time IDN stream tracking"
+          },
+          {
+            "name": "Showroom stream data",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Showroom is a separate platform; no official website integration"
+          },
+          {
+            "name": "YouTube (JKT48V) streams",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect includes YouTube JKT48V tracking"
+          },
+          {
+            "name": "Real-time viewer counts",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "No viewer count data accessible from the official website"
+          },
+          {
+            "name": "Stream history & analytics",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect retains recent live stream history with viewer and duration data"
+          },
+          {
+            "name": "Chat logs & gift data",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Available via the Recent Live Detail endpoint; not accessible from the official website"
+          }
+        ]
+      },
+      {
+        "group": "Developer Tools",
+        "features": [
+          {
+            "name": "REST API",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect is a REST API by design; the official website has none"
+          },
+          {
+            "name": "TypeScript SDK",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Official npm package with full type safety"
+          },
+          {
+            "name": "Webhook support",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Webhooks for live events, news, and announcements"
+          },
+          {
+            "name": "API documentation",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Full documentation at jkt48connect.com/docs"
+          },
+          {
+            "name": "Versioned endpoints",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "Stable versioned API; official website has no API to version"
+          },
+          {
+            "name": "Free developer tier",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "1.000 API calls/month free; official website not designed for developers"
+          }
+        ]
+      },
+      {
+        "group": "News & Content",
+        "features": [
+          {
+            "name": "News & announcements",
+            "openpanel": true,
+            "competitor": "view-only",
+            "notes": "JKT48Connect provides news via API with full HTML content; official website displays only"
+          },
+          {
+            "name": "Full article content",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect News Detail endpoint returns full HTML content for programmatic use"
+          },
+          {
+            "name": "Historical news archive",
+            "openpanel": true,
+            "competitor": false,
+            "notes": "JKT48Connect retains historical news; official website may not archive older content"
+          }
+        ]
+      }
+    ]
+  },
+  "technical_comparison": {
+    "title": "Technical comparison",
+    "intro": "For developers, here's what the integration looks like in practice.",
+    "items": [
+      {
+        "label": "Integration method",
+        "openpanel": "REST API + TypeScript SDK (npm install)",
+        "competitor": "None — no developer integration available",
+        "notes": null
+      },
+      {
+        "label": "Setup time",
+        "openpanel": "< 5 minutes — npm install + API key",
+        "competitor": "Not applicable",
+        "notes": null
+      },
+      {
+        "label": "Data format",
+        "openpanel": "Normalized JSON with consistent schemas",
+        "competitor": "Not accessible",
+        "notes": null
+      },
+      {
+        "label": "Authentication",
+        "openpanel": "API key (bearer token)",
+        "competitor": "Not applicable",
+        "notes": null
+      },
+      {
+        "label": "Rate limits",
+        "openpanel": "10 req/min (free), 300 req/min (Pro)",
+        "competitor": "Not applicable",
+        "notes": null
+      },
+      {
+        "label": "Webhook support",
+        "openpanel": "Yes — HMAC-signed POST requests",
+        "competitor": "Not available",
+        "notes": null
+      },
+      {
+        "label": "Versioning",
+        "openpanel": "Versioned endpoints (/v1/) with deprecation notices",
+        "competitor": "Not applicable",
+        "notes": null
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Pricing comparison",
+    "intro": "The official website is free for fans. JKT48Connect has a free developer tier and paid plans for higher usage.",
+    "openpanel": {
+      "model": "API call volume-based, transparent",
+      "description": "Free tier: 1.000 API calls/month, no credit card required. Pro: Rp 49.000/month (~$3) for 100.000 calls. Enterprise: custom pricing for unlimited usage. All features included at every tier."
+    },
+    "competitor": {
+      "model": "Free (fan consumption only)",
+      "description": "The JKT48 Official Website is free for fans to use. There is no developer pricing because there is no developer API. If you want JKT48 data for building apps, you need JKT48Connect.",
+      "free_tier": "Free for fans, not applicable for developers",
+      "pricing_url": null
+    }
+  },
+  "use_cases": {
+    "title": "What developers build with JKT48Connect",
+    "intro": "Everything the official website shows — and more — available programmatically for building fan applications.",
+    "items": [
+      {
+        "title": "Fan Websites & Fansites",
+        "description": "Build rich JKT48 fansites with member directories, theater schedules, live stream trackers, and news feeds — all powered by JKT48Connect's API without scraping the official site.",
+        "icon": "globe"
+      },
+      {
+        "title": "Discord & Telegram Bots",
+        "description": "Create bots that announce when members go live, share daily theater schedules, post birthday messages, and summarize JKT48 news — using JKT48Connect webhooks and API endpoints.",
+        "icon": "bell"
+      },
+      {
+        "title": "Mobile Fan Apps",
+        "description": "Build web or mobile fan apps with real-time live stream tracking, personalized member profiles, and push notifications for upcoming shows — features the official website doesn't expose to third-party developers.",
+        "icon": "smartphone"
+      },
+      {
+        "title": "Birthday & Schedule Trackers",
+        "description": "Build dedicated birthday reminder apps and theater schedule trackers using JKT48Connect's Birthday API and Theater endpoints — with data that stays accurate without manual maintenance.",
+        "icon": "calendar"
+      },
+      {
+        "title": "Live Stream Analytics",
+        "description": "Build viewer count leaderboards, streaming activity trackers, and oshi support dashboards using real-time IDN Live and Showroom data — completely unavailable through the official website.",
+        "icon": "bar-chart"
+      }
+    ]
+  },
+  "faqs": {
+    "title": "Frequently asked questions",
+    "intro": "Common questions from developers comparing JKT48Connect with the official website.",
+    "items": [
+      {
+        "question": "Does JKT48 have an official API for developers?",
+        "answer": "No. JKT48 does not provide a public API for developers. The official website and website are designed for fan consumption only. JKT48Connect is an independent API service that aggregates JKT48 data and delivers it through a developer-friendly REST API."
+      },
+      {
+        "question": "Is JKT48Connect affiliated with JKT48?",
+        "answer": "No. JKT48Connect is an independent developer project, not affiliated with JKT48 or its management. JKT48Connect aggregates publicly available information about JKT48 and provides it through a structured API for fan developers."
+      },
+      {
+        "question": "Does JKT48Connect have the same data as the official website?",
+        "answer": "JKT48Connect covers most of the same data categories as the official website — member profiles, theater schedules, events, and news — plus additional data not available in the official website, such as real-time IDN Live and Showroom viewer counts, stream history, and cross-platform live stream aggregation."
+      },
+      {
+        "question": "Can I build a commercial app using JKT48Connect?",
+        "answer": "Yes. Commercial use is supported on Pro and Enterprise plans. Keep in mind that JKT48 member names, images, and related content belong to their respective owners. JKT48Connect provides data infrastructure; you are responsible for ensuring your application complies with relevant terms of service and intellectual property considerations."
+      },
+      {
+        "question": "Why can't I just scrape the official JKT48 app?",
+        "answer": "Scraping the official website is technically difficult (it uses website APIs, not web pages) and may violate JKT48's terms of service. JKT48Connect provides a legal, stable, and maintained alternative that doesn't require scraping."
+      },
+      {
+        "question": "How accurate is JKT48Connect's data compared to official sources?",
+        "answer": "JKT48Connect aggregates data from official JKT48 sources and updates continuously. Member data, theater schedules, and events are sourced from official announcements. Live stream data is aggregated directly from IDN Live and Showroom in real-time."
+      },
+      {
+        "question": "What data does JKT48Connect have that the official website doesn't show?",
+        "answer": "JKT48Connect provides data not visible in the official website: real-time IDN Live and Showroom viewer counts, stream history with duration and peak viewer data, chat logs and gift data from individual streams, cross-platform stream aggregation, and webhook notifications for developer use cases."
+      },
+      {
+        "question": "Is there a free tier for developers?",
+        "answer": "Yes. JKT48Connect offers 1.000 API calls/month free with no credit card required — enough to prototype and test your fan app. Non-commercial fan projects can also apply to the Developer Program for extended free access."
+      }
+    ]
+  },
+  "related_links": {
+    "guides": [
+      {
+        "title": "TypeScript SDK quickstart",
+        "url": "/docs/sdk/quickstart"
+      },
+      {
+        "title": "Building a member directory",
+        "url": "/guides/member-directory"
+      },
+      {
+        "title": "Discord bot setup guide",
+        "url": "/guides/discord-bot"
+      }
+    ],
+    "articles": [
+      {
+        "title": "Building JKT48 apps with JKT48Connect",
+        "url": "/articles/building-jkt48-apps"
+      },
+      {
+        "title": "Why not to scrape JKT48 data",
+        "url": "/articles/why-not-scraping"
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "Manual Scraping",
+        "url": "/compare/manual-scraping"
+      },
+      {
+        "name": "IDN Live API",
+        "url": "/compare/idn-live-api"
+      },
+      {
+        "name": "Fansite Databases",
+        "url": "/compare/fansite-databases"
+      }
+    ]
+  },
+  "ctas": {
+    "primary": {
+      "label": "Get your free API key",
+      "href": "https://jkt48connect.com/register"
+    },
+    "secondary": {
+      "label": "Read the docs",
+      "href": "https://jkt48connect.com/docs"
+    }
+  }
+}
