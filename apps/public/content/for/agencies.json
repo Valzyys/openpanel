@@ -2,176 +2,178 @@
   "slug": "agencies",
   "audience": "agencies",
   "seo": {
-    "title": "Analytics for Agencies — Manage All Client Sites in One Place",
-    "description": "OpenPanel helps agencies manage analytics for all client websites from one account. Privacy-first, no cookie banners, unlimited projects, and affordable per-client pricing from $2.50/mo.",
+    "title": "JKT48Connect for Fansite Teams — Manage Multiple JKT48 Projects in One Place",
+    "description": "JKT48Connect helps fansite teams and fan communities manage multiple JKT48 data integrations from one account. Member data, live streams, theater schedules, and events. Free tier available.",
     "noindex": false
   },
   "hero": {
-    "heading": "Analytics for Agencies",
-    "subheading": "Manage web and product analytics for every client from one account. No cookie consent banners to configure, no per-seat pricing, and transparent costs that make sense for agency billing. From $2.50/month per project.",
+    "heading": "JKT48Connect for Fansite Teams",
+    "subheading": "Manage multiple JKT48 fan projects from one API account. One API key, all endpoints, consistent data across every project you build — from fansites to Discord bots to mobile apps.",
     "badges": [
-      "Unlimited projects",
-      "No per-seat fees",
-      "No cookie banners needed",
-      "Open source"
+      "One account, multiple projects",
+      "Consistent data across all apps",
+      "Free tier available",
+      "TypeScript SDK included"
     ]
   },
   "problem": {
-    "title": "Why analytics is painful for agencies",
-    "intro": "Managing analytics across dozens of client sites creates problems that most tools weren't designed to solve.",
+    "title": "Why building multiple JKT48 fan projects is painful",
+    "intro": "Fan developers who build more than one JKT48 app quickly run into the same problems — managing data sources, keeping things updated, and scaling across projects.",
     "items": [
       {
-        "title": "Google Analytics access management is a nightmare",
-        "description": "Creating GA4 properties, managing user permissions, switching between accounts, and dealing with Google's constantly changing interface. Multiply this by 20+ clients and it's a full-time job."
+        "title": "Maintaining scrapers for every project",
+        "description": "Each fan project ends up with its own scraping logic. When JKT48's site changes, every project breaks at the same time — and you're fixing the same scraper in multiple places."
       },
       {
-        "title": "Cookie consent for every single client",
-        "description": "Every client site needs its own cookie consent banner configured correctly. Different jurisdictions, different requirements, different implementations — and one mistake can mean a GDPR fine."
+        "title": "Inconsistent data across apps",
+        "description": "Different projects pull data from different sources at different times. Member names, generation numbers, and profile data end up inconsistent between your own apps."
       },
       {
-        "title": "Per-seat pricing kills agency margins",
-        "description": "Most analytics tools charge per user. When your team of 10 needs access to analytics for client reporting, the cost adds up fast. Then the client wants access too."
+        "title": "Hard to hand off to other developers",
+        "description": "When community members join a fan project, they have to understand a custom scraping setup from scratch. There's no standardized integration they can just pick up and use."
       },
       {
-        "title": "No easy way to show clients their data",
-        "description": "Clients want to see their analytics without logging into your tools. Exporting PDFs is tedious, sharing login credentials is insecure, and building custom dashboards takes time you don't have."
+        "title": "No way to share data between projects",
+        "description": "Member IDs and stream data from one project can't be easily reused in another. Every project rebuilds the same data layer independently."
       }
     ]
   },
   "features": {
-    "title": "Analytics built for multi-client workflows",
-    "intro": "OpenPanel is designed to work the way agencies do — multiple projects, multiple team members, one simple interface.",
+    "title": "Built for teams running multiple JKT48 fan projects",
+    "intro": "JKT48Connect is designed to power multiple fan projects from a single API account — consistent data, shared member IDs, and one integration to maintain.",
     "items": [
       {
-        "title": "Unlimited projects per account",
-        "description": "Add every client as a separate project under one account. No extra cost per project — just one monthly bill based on total event volume."
+        "title": "One API key, all projects",
+        "description": "Use the same JKT48Connect API key across all your fan projects. Consistent member IDs, stream data, and event records are shared automatically."
       },
       {
-        "title": "No per-seat pricing",
-        "description": "Invite your entire team at no extra cost. Account managers, developers, strategists — everyone gets access. No reason to share logins or limit who can see data."
+        "title": "Consistent member IDs across all apps",
+        "description": "A member_id from JKT48Connect works the same in your fansite, Discord bot, and mobile app. No translating between custom ID schemes between projects."
       },
       {
-        "title": "No cookie consent required",
-        "description": "OpenPanel uses cookieless tracking by default. No consent banners to set up for any client, regardless of their location or audience. Saves hours of implementation per client."
+        "title": "TypeScript SDK for faster team onboarding",
+        "description": "New developers joining a fan project can install the SDK, add the API key, and start building immediately — no custom scraping architecture to learn."
       },
       {
-        "title": "Simple, instant dashboards",
-        "description": "Every project gets a complete analytics dashboard out of the box. No custom report building needed — clients get useful data from day one."
+        "title": "Centralized data for all projects",
+        "description": "Members, live streams, theater schedules, events, and news are all maintained in one place by JKT48Connect. All your projects benefit when we update the data."
       },
       {
-        "title": "Privacy compliance built in",
-        "description": "GDPR and CCPA compliant by design. No cookies, EU data hosting, and data minimization mean you can confidently deploy analytics for clients in any market."
+        "title": "Webhooks for event-driven multi-project architecture",
+        "description": "Register one webhook endpoint to receive events across all your fan projects — member goes live, event is announced, new news published. Available on Pro plans."
       },
       {
-        "title": "Web + product analytics combined",
-        "description": "Pageviews, referrers, and campaigns alongside events, funnels, and user profiles. One tool replaces both Google Analytics and Mixpanel for clients who need deeper insights."
+        "title": "Predictable pricing as you scale",
+        "description": "Pro plan gives you 100.000 API calls/month across all your projects for Rp 49.000. Scale up to Enterprise for unlimited calls when your apps grow."
       },
       {
-        "title": "Quick setup for new clients",
-        "description": "Add a script tag or install an SDK. Page views start tracking automatically. Most client setups take under 15 minutes including custom event configuration."
+        "title": "Versioned API for stable multi-project builds",
+        "description": "All endpoints are versioned. Breaking changes never silently affect your projects. Deprecation notices give you time to update across all your apps."
       },
       {
-        "title": "Self-hosting for full control",
-        "description": "Agencies handling sensitive industries can self-host OpenPanel on their own infrastructure. Complete data sovereignty for clients who require it."
+        "title": "No maintenance when sources change",
+        "description": "When JKT48's website updates, JKT48Connect fixes the integration — not you. All your fan projects keep working without any changes on your end."
       },
       {
-        "title": "Export and API access",
-        "description": "Pull data via the REST API for custom client reports. Export events for clients who want their own data. Integrate with your existing reporting stack."
+        "title": "Historical data for all projects",
+        "description": "Recent live streams, past shows, news archives, and completed events — all queryable across all your projects from the same API."
       }
     ]
   },
   "benefits": {
-    "title": "Why agencies choose OpenPanel",
-    "intro": "Simpler analytics management means more time for the work clients actually pay you for.",
+    "title": "Why fan developer teams choose JKT48Connect",
+    "intro": "Spend less time on data infrastructure and more time building features your community will love.",
     "items": [
       {
-        "title": "One account for all clients",
-        "description": "Switch between client projects in one click. No separate logins, no Google account juggling, no access management headaches."
+        "title": "One integration, every project",
+        "description": "Integrate JKT48Connect once, use the same patterns across all your fan projects. No duplicated scraping logic, no per-project data pipelines."
       },
       {
-        "title": "Predictable costs for easy billing",
-        "description": "Flat tiers based on total event volume. Pass the cost through to clients or absorb it in your retainer — the pricing is simple enough to do either."
+        "title": "Onboard new contributors faster",
+        "description": "New developers joining a fan project get a documented API with TypeScript types — not a custom scraper they have to reverse engineer. Contribution velocity improves immediately."
       },
       {
-        "title": "Ship cookie-free analytics for every client",
-        "description": "Stop spending hours configuring consent banners. OpenPanel works without cookies, so there's nothing to configure for GDPR or CCPA."
+        "title": "Consistent data that fans can trust",
+        "description": "All your projects pull from the same JKT48Connect data source, so member profiles, stream data, and schedules are always consistent across your ecosystem of fan apps."
       },
       {
-        "title": "Impress clients with real-time data",
-        "description": "Show clients their live analytics in real time during calls. Events, pageviews, and conversions updating as you speak."
+        "title": "Fix one integration, fix all projects",
+        "description": "When something changes upstream, JKT48Connect handles it. You don't have to patch the same data issue across five separate projects."
       },
       {
-        "title": "Open source trust factor",
-        "description": "Clients in regulated industries appreciate that the analytics code is fully auditable. Open source means transparency about exactly what's being tracked."
+        "title": "Scale from free tier to production",
+        "description": "Start on the free tier across all your projects. Upgrade to Pro when you need more calls — one plan covers all your fan apps."
       },
       {
-        "title": "Affordable at scale",
-        "description": "At $20/month for 100K events across all projects, OpenPanel is dramatically cheaper than running separate Mixpanel or GA4 properties per client."
+        "title": "Community developer program",
+        "description": "Non-commercial fan projects can apply for our Developer Program for extended free access. Build for the community with the tools the community deserves."
       }
     ]
   },
   "faqs": {
     "title": "Frequently asked questions",
-    "intro": "Common questions from agencies evaluating OpenPanel.",
+    "intro": "Common questions from fan developer teams evaluating JKT48Connect.",
     "items": [
       {
-        "question": "How does pricing work with multiple client projects?",
-        "answer": "You pay based on total event volume across all projects, not per project. For example, if you have 20 client sites generating a combined 100K events/month, you pay $20/month total. All projects share the same plan."
+        "question": "Can I use one API key across multiple fan projects?",
+        "answer": "Yes. Your JKT48Connect API key can be used across multiple projects. API usage is tracked in aggregate across all your apps, so one plan covers everything. For production apps with sensitive data, you can generate separate API keys per project from the dashboard."
       },
       {
-        "question": "Can clients see their own analytics without a login?",
-        "answer": "OpenPanel supports team invitations so clients can be added to their specific project. They'll only see their own data. You can also use the API to build custom dashboards or export reports for client presentations."
+        "question": "How does pricing work when I have multiple projects?",
+        "answer": "Pricing is based on total API calls across all your projects. The Pro plan gives you 100.000 calls/month for Rp 49.000 — whether that's one project using all the calls or ten projects sharing them. You don't pay per project."
       },
       {
-        "question": "Do I need cookie consent banners for client sites?",
-        "answer": "No. OpenPanel uses cookieless tracking by default, which doesn't require consent under GDPR, CCPA, or PECR. This eliminates one of the most common compliance headaches for agency deployments."
+        "question": "Can other developers on my team use the same account?",
+        "answer": "Yes. You can add team members to your JKT48Connect account so multiple developers can access usage stats, manage webhooks, and view documentation — all from the same account."
       },
       {
-        "question": "How do I set up tracking for a new client?",
-        "answer": "Create a new project in your OpenPanel dashboard, copy the script tag, and add it to the client's website. Page views start tracking immediately. Custom events are one line of JavaScript each. Most setups take under 15 minutes."
+        "question": "Is there a free option for non-commercial fan projects?",
+        "answer": "Yes. The free tier gives you 1.000 API calls/month with no credit card required. Non-commercial fan projects can also apply to the JKT48Connect Developer Program for extended free access — see the developer program page for eligibility."
       },
       {
-        "question": "Can I self-host for agency use?",
-        "answer": "Yes. Self-hosting is free and has no project or event limits. Run OpenPanel on your own server to keep all client data under your control. Docker Compose deployment takes about 10 minutes."
+        "question": "How do I share data between multiple fan apps?",
+        "answer": "Because all apps use the same JKT48Connect member_id and data schema, sharing data between projects is straightforward. Store member_id in your own database and use it consistently across all your apps — the same ID works in every JKT48Connect endpoint."
       },
       {
-        "question": "How does OpenPanel compare to Google Analytics for agencies?",
-        "answer": "OpenPanel is simpler to manage across multiple clients (one account, no Google permissions), privacy-compliant without cookies, and includes product analytics features that GA4 lacks. GA4 has more advanced attribution modeling and integrates with Google Ads. For most agency use cases, OpenPanel saves significant time on setup and compliance."
+        "question": "What happens if my total API calls exceed the plan limit?",
+        "answer": "We'll notify you when you're approaching your monthly limit. Calls over the limit will be rate-limited rather than hard-blocked, giving you time to upgrade. We don't silently cut off your fan projects without warning."
       },
       {
-        "question": "Is there an API for building custom reports?",
-        "answer": "Yes. OpenPanel has a REST API for querying analytics data, managing projects, and exporting events. You can use it to build custom client dashboards, integrate with your reporting tools, or automate monthly reports."
+        "question": "Can I use JKT48Connect for a commercial fan product?",
+        "answer": "Yes. Commercial use is supported on Pro and Enterprise plans. The free tier and Developer Program are for non-commercial fan projects. If you're building a commercial product, use a paid plan to ensure stable service."
       },
       {
-        "question": "Can I white-label the analytics dashboard?",
-        "answer": "White-labeling is not currently available as a built-in feature. However, since OpenPanel is open source, agencies who self-host can customize the dashboard appearance, including branding. Cloud users can use the API to build branded dashboards."
+        "question": "How do I build a consistent multi-project architecture?",
+        "answer": "We recommend using a shared utility module in your projects that wraps the JKT48Connect SDK — so API key management, error handling, and caching are consistent across all apps. The TypeScript SDK makes this straightforward to set up once and reuse everywhere."
       }
     ]
   },
   "related_links": {
     "guides": [
-      { "title": "Script tag SDK setup", "url": "/docs/sdks/script" },
-      { "title": "Migrate from Google Analytics", "url": "/guides/migrate-from-google-analytics" }
+      { "title": "TypeScript SDK setup", "url": "/docs/sdk" },
+      { "title": "Building a member directory", "url": "/guides/member-directory" },
+      { "title": "Discord bot integration", "url": "/guides/discord-bot" },
+      { "title": "Multi-project architecture", "url": "/guides/multi-project" }
     ],
     "articles": [
-      { "title": "Cookieless analytics explained", "url": "/articles/cookieless-analytics" },
-      { "title": "How to self-host OpenPanel", "url": "/articles/how-to-self-host-openpanel" },
-      { "title": "Best open source analytics tools", "url": "/articles/open-source-web-analytics" }
+      { "title": "Building JKT48 apps with JKT48Connect", "url": "/articles/building-jkt48-apps" },
+      { "title": "Why scraping JKT48 data is a bad idea", "url": "/articles/why-not-scraping" },
+      { "title": "JKT48Connect Developer Program", "url": "/open-source" }
     ],
     "comparisons": [
-      { "title": "OpenPanel vs Google Analytics", "url": "/compare/google-analytics-alternative" },
-      { "title": "OpenPanel vs Plausible", "url": "/compare/plausible-alternative" },
-      { "title": "OpenPanel vs Matomo", "url": "/compare/matomo-alternative" }
+      { "title": "JKT48Connect vs Manual Scraping", "url": "/compare/manual-scraping" },
+      { "title": "JKT48Connect vs Fansite Databases", "url": "/compare/fansite-databases" },
+      { "title": "JKT48Connect vs IDN Live API", "url": "/compare/idn-live-api" }
     ]
   },
   "ctas": {
     "primary": {
-      "label": "Try OpenPanel Free",
-      "href": "https://dashboard.openpanel.dev/onboarding"
+      "label": "Get your free API key",
+      "href": "https://jkt48connect.com/register"
     },
     "secondary": {
-      "label": "View Source on GitHub",
-      "href": "https://github.com/Openpanel-dev/openpanel"
+      "label": "Read the docs",
+      "href": "https://jkt48connect.com/docs"
     }
   }
 }
