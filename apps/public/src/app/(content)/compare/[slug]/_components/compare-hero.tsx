@@ -35,11 +35,11 @@ export function CompareHero({ hero, tocItems = [] }: CompareHeroProps) {
             <GetStartedButton />
             <Button size="lg" variant="outline" asChild>
               <Link
-                href={'https://demo.openpanel.dev'}
+                href={'https://github.com/jkt48connect/jkt48connect-apps/releases'}
                 target="_blank"
                 rel="noreferrer noopener nofollow"
               >
-                See live demo
+                JKT48ConnectAPP
               </Link>
             </Button>
           </div>
