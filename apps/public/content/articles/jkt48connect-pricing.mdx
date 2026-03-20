@@ -1,0 +1,257 @@
+---
+title: "JKT48Connect Pricing 2026: Plans, Limits & Full Breakdown"
+description: "Complete guide to JKT48Connect pricing in 2026. Basic (Rp 5.000), Premium (Rp 15.000), Enterprise (Rp 50.000), Premium Plus (Unlimited), hidden costs, and how to pick the right plan."
+tag: Guide
+team: JKT48Connect Team
+date: 2026-03-20
+updated: 2026-03-20
+cover: /content/jkt48connect-pricing-cover.jpg
+---
+
+JKT48Connect pricing starts at **Rp 5.000** for the Basic plan with 1,000 API requests over 30 days. The Premium plan costs **Rp 15.000** for 5,000 requests over 60 days. Enterprise runs **Rp 50.000** for 25,000 requests over 152 days. Premium Plus is **Rp 150.000** for unlimited requests with no expiry.
+
+Here's the quick overview:
+
+| Plan | Requests | Duration | Price | Best For |
+|------|----------|----------|-------|----------|
+| **Basic** | 1,000 | 30 days | Rp 5.000 | New developers, personal projects |
+| **Premium** | 5,000 | 60 days | Rp 15.000 | Apps with moderate traffic |
+| **Enterprise** | 25,000 | 152 days | Rp 50.000 | Large-scale applications |
+| **Premium Plus** | Unlimited | Forever | Rp 150.000 | Maximum access, no limits |
+
+Now let's break down exactly what you get at each tier, what the gotchas are, and which plan is right for your use case.
+
+## How JKT48Connect Pricing Works
+
+JKT48Connect uses **request-based pricing**. You pay based on the number of API calls your application makes, not the number of team members or projects. Each call to any endpoint — fetching members, checking theater schedules, querying live data — counts as one request toward your plan's quota.
+
+This model is predictable for low-to-medium traffic projects. A Discord bot that responds to a dozen commands per hour will burn through far fewer requests than a website that polls the live stream endpoint every few seconds. Knowing your expected request volume before picking a plan will save you from hitting limits unexpectedly.
+
+Plans also have a **rate limit** — the maximum number of requests per minute you can make — in addition to the total quota. Both matter: quota determines how long your plan lasts, and rate limit determines how fast your app can fetch data.
+
+## JKT48Connect Basic Plan
+
+**Rp 5.000 — 1,000 requests over 30 days**
+
+The Basic plan is the entry point for developers exploring JKT48Connect or building personal projects with light usage. It covers all the foundational endpoints and is priced low enough that experimenting costs almost nothing.
+
+What's included in Basic:
+
+- **1,000 API requests per 30 days** — resets after the period ends
+- **Access to all basic endpoints** — members, theater schedules, news, events, birthday data
+- **Rate limit: 10 requests per minute** — suitable for bots with light command usage
+- **Email support** — response from the JKT48Connect team
+- **Full documentation access** — every endpoint documented at docs.jkt48connect.com
+
+What Basic does **not** include:
+
+- **No priority support** — standard email queue only
+- **No webhook notifications** — you must poll endpoints manually
+- **No custom integrations** — out-of-the-box API access only
+- **No realtime livestream data** — live IDN/SHOWROOM/YouTube data requires Premium or higher
+- **No analytics dashboard** — no request usage visualizations
+
+The 10 req/min rate limit is the most important constraint to understand. A Discord bot responding to `/member` or `/theater` commands from a small server will stay well within this. A website that loads member photos on every page visit for hundreds of concurrent users may hit this ceiling quickly.
+
+Basic works well for: personal Discord bots, prototype fan apps, learning the API, and hobby projects with predictable low traffic.
+
+## JKT48Connect Premium Plan
+
+**Rp 15.000 — 5,000 requests over 60 days**
+
+Premium is the most popular plan for developers running active fan bots and small-to-medium fanbase websites. It triples the rate limit to 30 req/min and unlocks webhook notifications and realtime live stream data — the two features that enable genuinely real-time JKT48 applications.
+
+What Premium adds over Basic:
+
+- **5,000 API requests per 60 days** — 5× the quota of Basic at 3× the price
+- **Rate limit: 30 req/min** — handles moderate concurrent usage comfortably
+- **Priority email support** — faster response times than standard email
+- **Webhook notifications** — get pushed updates instead of polling
+- **Analytics dashboard** — see your request usage, peak times, and remaining quota
+- **Realtime livestream data** — access live IDN, SHOWROOM, and YouTube stream data
+
+What Premium does **not** include:
+
+- **No custom SLA** — uptime guarantees are standard, not negotiated
+- **No dedicated support channel** — priority email, not a direct Slack/WhatsApp line
+- **No advanced analytics** — usage dashboard only, not deeper request breakdowns
+- **No team collaboration tools** — single-key access
+
+The webhook feature is worth calling out specifically. On Basic, if you want to alert your Discord server when a JKT48 member goes live, you need to poll the live endpoint repeatedly — consuming requests and adding latency. On Premium, webhooks push the notification to you the moment the event happens, with zero polling requests consumed.
+
+Premium works well for: active Discord bots serving medium-sized communities, fanbase websites with regular visitors, and apps that need realtime live stream notifications.
+
+## JKT48Connect Enterprise Plan
+
+**Rp 50.000 — 25,000 requests over 152 days (~5 months)**
+
+Enterprise is designed for large-scale applications — official fanbase websites with high traffic, bots serving multiple large servers, or production apps with demanding usage patterns. The 100 req/min rate limit is 10× Basic and handles significant concurrent load.
+
+What Enterprise adds over Premium:
+
+- **25,000 API requests over 152 days** — 5× the quota of Premium at 3.3× the price
+- **Rate limit: 100 req/min** — handles high-concurrency production workloads
+- **Priority support 24/7** — around-the-clock response for production issues
+- **Custom webhook events** — configure specific triggers for your use case
+- **Advanced analytics** — deeper request monitoring and usage breakdowns
+- **Team collaboration tools** — manage access across your development team
+- **API monitoring dashboard** — production-grade visibility into your integration health
+
+What Enterprise does **not** include:
+
+- **No unlimited requests** — still quota-based, just a much larger quota
+- **No dedicated account manager** — that's Premium Plus
+- **No white-label options** — API responses aren't customizable per client
+- **No no-rate-limit access** — 100 req/min is high but still capped
+- **No custom SLA guarantee** — standard uptime without negotiated terms
+
+The 152-day duration (about 5 months) gives Enterprise users runway without requiring frequent renewals. At 25,000 requests spread over 152 days, that's roughly 164 requests per day on average — plenty of headroom for a busy production app that doesn't waste requests on unnecessary polling.
+
+Enterprise works well for: official fanbase websites with thousands of daily visitors, multi-server Discord bots, mobile apps with an active user base, and production systems where 24/7 support matters.
+
+## JKT48Connect Premium Plus Plan
+
+**Rp 150.000 — Unlimited requests, forever**
+
+Premium Plus is the ceiling of JKT48Connect's offering. Unlimited requests, no rate limits, no expiry date, a dedicated account manager, and white-label options. It's a one-time payment for permanent, unrestricted access.
+
+What Premium Plus includes on top of Enterprise:
+
+- **Unlimited API requests** — no quota, no counting, no resets
+- **Access forever (no expiry)** — pay once, use indefinitely
+- **No rate limits** — fetch as fast as your application needs
+- **Dedicated account manager** — a named contact for your project
+- **Custom SLA guarantee** — negotiated uptime and response time commitments
+- **White-label options** — surface JKT48Connect data under your own branding
+- **Direct line support** — not a support queue, a dedicated channel (WhatsApp/Discord)
+- **Early access to new features** — test new endpoints before general release
+- **Custom integration assistance** — hands-on help from the JKT48Connect team
+
+The "forever" and "no rate limit" combination is what makes Premium Plus distinct. Every other plan has a finite quota and a requests-per-minute ceiling. Premium Plus removes both constraints permanently. For projects that are genuinely resource-intensive — real-time chat stream processing, analytics pipelines, or multi-platform integrations polling many endpoints simultaneously — this removes the mental overhead of managing quotas entirely.
+
+Premium Plus works well for: organizations needing guaranteed uptime SLAs, projects that have outgrown Enterprise quotas, white-label applications serving other developers or businesses, and teams that want hands-on integration support.
+
+## Free vs Paid: What's the Difference?
+
+JKT48Connect does not currently offer a perpetually free plan. All API access requires a paid key. However, Priority Access — which functions similarly to Premium Plus — is available **free of charge** for verified organizations:
+
+- Verified JKT48 fan communities and official fanbase groups
+- Certified developers building JKT48-related applications
+- Accredited media organizations covering JKT48
+
+If your project qualifies, [apply for Priority Access](https://forms.gle/KeqJF9nAeEq7hxWP9). Approval takes 3–5 business days and requires a valid social media presence or official website. This is a meaningful option for community projects that need high request volumes but don't have budget for Premium Plus.
+
+## Full Feature Comparison
+
+| Feature | Basic | Premium | Enterprise | Premium Plus |
+|---------|-------|---------|------------|-------------|
+| **API requests** | 1,000 | 5,000 | 25,000 | Unlimited |
+| **Duration** | 30 days | 60 days | 152 days | Forever |
+| **Rate limit** | 10 req/min | 30 req/min | 100 req/min | No limit |
+| **Basic endpoints** | ✅ | ✅ | ✅ | ✅ |
+| **Realtime livestream data** | ❌ | ✅ | ✅ | ✅ |
+| **Webhook notifications** | ❌ | ✅ | ✅ | ✅ |
+| **Custom webhook events** | ❌ | ❌ | ✅ | ✅ |
+| **Analytics dashboard** | ❌ | ✅ | ✅ | ✅ |
+| **Advanced analytics** | ❌ | ❌ | ✅ | ✅ |
+| **API monitoring dashboard** | ❌ | ❌ | ✅ | ✅ |
+| **Team collaboration tools** | ❌ | ❌ | ✅ | ✅ |
+| **White-label options** | ❌ | ❌ | ❌ | ✅ |
+| **Dedicated account manager** | ❌ | ❌ | ❌ | ✅ |
+| **Custom SLA guarantee** | ❌ | ❌ | ❌ | ✅ |
+| **Early feature access** | ❌ | ❌ | ❌ | ✅ |
+| **Custom integration help** | ❌ | ❌ | ❌ | ✅ |
+| **Support** | Email | Priority email | 24/7 | Dedicated line |
+| **Price** | Rp 5.000 | Rp 15.000 | Rp 50.000 | Rp 150.000 |
+
+## When You'll Hit Your Limit
+
+Understanding your request consumption before choosing a plan prevents surprises. Here are realistic usage scenarios:
+
+**A small Discord bot** with `/member`, `/theater`, and `/live` commands, serving a 200-member server, might receive 30–50 commands per day. At one API call per command, that's roughly 1,200–1,500 requests per month. Basic's 1,000 request quota over 30 days would be tight — Premium is a safer fit.
+
+**A fanbase website** that displays the theater schedule, member roster, and latest news on three separate pages. If 100 unique visitors per day each trigger three page loads with one API call each, that's 300 requests per day or ~9,000 per month. Enterprise (25,000 over 152 days, ~165/day average) handles this comfortably.
+
+**A live notification bot** that polls the IDN live endpoint every 60 seconds to alert a Discord server when a member goes live. That's 1,440 requests per day from polling alone — before any member commands. Premium Plus is the only plan where this doesn't eventually drain a quota.
+
+**A multi-server bot** deployed across 10 Discord servers with active fans. Even conservative usage of 50 commands per server per day is 500 requests daily, or ~15,000 per month. Enterprise covers this; Premium Plus eliminates the worry entirely.
+
+## Tips for Managing Your Request Quota
+
+Regardless of which plan you choose, these practices stretch your quota further:
+
+**Cache responses locally.** Member data and theater schedules don't change every minute. Cache the response for 30–60 minutes and serve subsequent requests from your cache rather than hitting the API again. A member roster fetched once per hour costs 24 requests per day instead of hundreds.
+
+**Poll only what changes.** Live stream data changes frequently; member profiles rarely do. Reserve your API calls for genuinely dynamic data and cache everything else aggressively.
+
+**Upgrade before you run out.** When your remaining quota drops below 20%, upgrade or renew rather than waiting for a 429 error to surface in production. JKT48Connect allows upgrading at any time with remaining limits adjusted proportionally.
+
+**Use webhooks on Premium and above.** If you're on Premium or higher, replace polling loops with webhooks for live stream events. One webhook trigger per event costs zero polling requests.
+
+**Audit unused calls.** Over time, applications accumulate API calls that aren't surfaced anywhere in the UI. Log which endpoints you're actually calling and remove any that aren't serving a real user need.
+
+## Payment and Billing
+
+JKT48Connect accepts payment via Indonesian bank transfer and e-wallets including GoPay, OVO, and DANA. There are no international payment methods listed at present — if your project is based outside Indonesia, contact the team via [WhatsApp](https://wa.me/6285701479245) to discuss options.
+
+**Upgrades and downgrades** are supported at any time. Remaining quota and time are adjusted proportionally when you change plans — you don't lose what you've already paid for.
+
+**Refund policy:** JKT48Connect offers a 100% refund within the first 7 days if you're not satisfied. After 7 days, no refund is available.
+
+**What happens when you hit the limit:** The API returns a `429 Too Many Requests` error. Your application should handle this gracefully — implement retry logic with backoff and alert yourself when you're approaching the quota ceiling so you can upgrade proactively.
+
+## How to Choose the Right Plan
+
+**Choose Basic if** you're a developer trying out JKT48Connect for the first time, building a personal project, or running a low-traffic bot for a small community. The Rp 5.000 entry point makes it easy to start without commitment.
+
+**Choose Premium if** you're running an active Discord bot, a fanbase website with regular traffic, or any application that needs realtime live stream data or webhook notifications. Most production fan projects land here.
+
+**Choose Enterprise if** you're running a high-traffic production app, an official fanbase website serving thousands of daily visitors, or a bot deployed across multiple large Discord servers. The 24/7 support is also worth factoring in if your project is community-critical.
+
+**Choose Premium Plus if** you've outgrown Enterprise quotas, you need no rate limits for intensive polling or streaming use cases, you want a dedicated account manager and custom SLA, or you're building a white-label product on top of JKT48Connect data. The permanent access with no expiry makes it the best value for long-running production projects.
+
+**Apply for Priority Access if** your project is an official fanbase, a verified JKT48 fan community, or you're an accredited developer or media partner. Free unlimited access for qualifying organizations is the best deal available — it just requires verification.
+
+You can get your API key at [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi). For questions about which plan fits your project, reach out via [WhatsApp](https://wa.me/6285701479245) for a free consultation before committing.
+
+<Faqs>
+<FaqItem question="Berapa harga JKT48Connect di 2026?">
+JKT48Connect menawarkan empat plan berbayar: Basic Rp 5.000 (1.000 request/30 hari), Premium Rp 15.000 (5.000 request/60 hari), Enterprise Rp 50.000 (25.000 request/152 hari), dan Premium Plus Rp 150.000 (unlimited request, selamanya). Priority Access tersedia gratis untuk organisasi terverifikasi seperti fanbase resmi dan developer bersertifikat.
+</FaqItem>
+
+<FaqItem question="Apakah JKT48Connect punya free plan?">
+Tidak ada free plan permanen. Namun, Priority Access — yang memberikan akses unlimited tanpa rate limit — tersedia gratis untuk fanbase JKT48 terverifikasi, developer bersertifikat, dan mitra media terakreditasi. Proses verifikasi membutuhkan 3–5 hari kerja dan memerlukan akun media sosial atau website resmi yang valid.
+</FaqItem>
+
+<FaqItem question="Apa yang dihitung sebagai satu request di JKT48Connect?">
+Setiap panggilan ke endpoint manapun dihitung sebagai satu request — mengambil data member, mengecek jadwal theater, query live stream, fetch berita, semuanya masing-masing satu request. Jika aplikasi kamu polling endpoint live setiap menit, itu 1.440 request per hari dari polling saja.
+</FaqItem>
+
+<FaqItem question="Apa yang terjadi jika quota request habis?">
+API akan mengembalikan error 429 (Too Many Requests). Kamu bisa upgrade plan kapan saja — sisa limit dan waktu akan disesuaikan secara proporsional. Sebaiknya upgrade sebelum quota habis agar aplikasi tidak terganggu di production.
+</FaqItem>
+
+<FaqItem question="Apakah ada refund jika tidak puas?">
+Ya. JKT48Connect menyediakan refund 100% dalam 7 hari pertama jika kamu tidak puas dengan layanan. Setelah 7 hari, refund tidak tersedia.
+</FaqItem>
+
+<FaqItem question="Metode pembayaran apa yang diterima JKT48Connect?">
+Pembayaran dapat dilakukan via transfer bank dan e-wallet Indonesia termasuk GoPay, OVO, dan DANA. Untuk pertanyaan metode pembayaran lain, hubungi tim JKT48Connect via WhatsApp di +62 857-0147-9245.
+</FaqItem>
+
+<FaqItem question="Apa perbedaan rate limit dan quota request?">
+Quota adalah total jumlah request yang bisa kamu buat selama durasi plan (misal 1.000 request dalam 30 hari). Rate limit adalah batas kecepatan per menit (misal 10 req/menit di Basic). Keduanya penting: quota menentukan seberapa lama plan-mu bertahan, rate limit menentukan seberapa cepat aplikasimu bisa fetch data secara bersamaan.
+</FaqItem>
+
+<FaqItem question="Kapan sebaiknya upgrade ke Premium Plus daripada Enterprise?">
+Upgrade ke Premium Plus jika kamu: (1) sudah sering kehabisan quota Enterprise, (2) butuh no rate limit untuk polling intensif atau streaming, (3) butuh dedicated account manager dan custom SLA untuk proyek production-critical, atau (4) membangun aplikasi white-label di atas data JKT48Connect. Akses selamanya tanpa expiry juga menjadikan Premium Plus nilai terbaik untuk proyek jangka panjang.
+</FaqItem>
+
+<FaqItem question="Bisakah saya upgrade atau downgrade plan kapan saja?">
+Ya. Upgrade dan downgrade didukung kapan saja. Sisa quota dan waktu akan disesuaikan secara proporsional saat kamu ganti plan — kamu tidak kehilangan apa yang sudah kamu bayar.
+</FaqItem>
+
+<FaqItem question="Realtime livestream data tersedia di plan mana?">
+Realtime livestream data — termasuk data live dari IDN Live, SHOWROOM, dan YouTube — tersedia mulai dari plan Premium (Rp 15.000) ke atas. Plan Basic hanya mencakup endpoint data statis seperti member, jadwal theater, berita, dan events.
+</FaqItem>
+</Faqs>
