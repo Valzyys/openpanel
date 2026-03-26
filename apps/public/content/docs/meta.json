@@ -2,17 +2,15 @@
   "pages": [
     "---Introduction---",
     "index",
-    "---Get started---",
+    "---Memulai---",
     "...get-started",
-    "---Tracking---",
-    "...(tracking)",
-    "---API---",
+    "---API Reference---",
     "...api",
-    "---Dashboard---",
+    "---Contoh Kode---",
+    "...(tracking)",
+    "---Panduan---",
     "...dashboard",
-    "---Self-hosting---",
-    "...self-hosting",
-    "---Migration---",
-    "...migration"
+    "---FAQ & Lainnya---",
+    "...self-hosting"
   ]
 }

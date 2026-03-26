@@ -1,81 +1,72 @@
 ---
-title: Install OpenPanel
-description: Get started with OpenPanel in less than 2 minutes.
+title: Quick Start
+description: Panduan cepat untuk mulai menggunakan JKT48Connect REST API. Dapatkan API key dan kirim request pertamamu dalam hitungan menit.
 ---
 
-import { Cards, Card } from 'fumadocs-ui/components/card';
-import { Code, Globe, Layout, Smartphone, FileJson } from 'lucide-react';
+## Mulai Menggunakan JKT48Connect API
 
-The quickest way to get started with OpenPanel is to use our Web SDK. It works with any website.
+JKT48Connect API menyediakan akses ke data JKT48 melalui endpoint REST yang sederhana. Ikuti langkah-langkah berikut untuk memulai.
 
-## Quick Start
+### Langkah 1: Dapatkan API Key
 
-Simply add this script tag to your website's `<head>` section.
+Untuk mengakses semua endpoint JKT48Connect API, kamu memerlukan API key.
 
-```html title="index.html"
-<script>
-  window.op=window.op||function(){var n=[];return new Proxy(function(){arguments.length&&n.push([].slice.call(arguments))},{get:function(t,r){return"q"===r?n:function(){n.push([r].concat([].slice.call(arguments)))}} ,has:function(t,r){return"q"===r}}) }();
-  window.op('init', {
-    clientId: 'YOUR_CLIENT_ID',
-    trackScreenViews: true,
-    trackOutgoingLinks: true,
-    trackAttributes: true,
-  });
-</script>
-<script src="https://openpanel.dev/op1.js" defer async></script>
+1. Kunjungi [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi)
+2. Pilih paket yang sesuai kebutuhanmu
+3. Selesaikan proses pembelian
+4. Simpan API key yang diberikan
+
+> **Penting**: Jangan bagikan API key-mu kepada orang lain. API key bersifat rahasia dan terikat pada akunmu.
+
+### Langkah 2: Tentukan Base URL
+
+Semua request ke JKT48Connect API menggunakan base URL berikut:
+
+```
+https://v2.jkt48connect.com
 ```
 
-That's it! OpenPanel will now automatically track:
-- Page views
-- Visit duration
-- Referrers
-- Device and browser information
-- Location
+### Langkah 3: Kirim Request Pertamamu
 
-## Using a Framework?
+Tambahkan API key sebagai query parameter `apikey` di setiap request:
 
-If you are using a specific framework or platform, we have dedicated SDKs that provide a better developer experience.
+```bash
+curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
+```
 
-<Cards>
-  <Card
-    href="/docs/sdks/nextjs"
-    title="Next.js"
-    icon={<Globe />}
-    description="Optimized for App Router and Server Components"
-  />
-  <Card
-    href="/docs/sdks/react"
-    title="React"
-    icon={<Layout />}
-    description="Components and hooks for React applications"
-  />
-  <Card
-    href="/docs/sdks/vue"
-    title="Vue"
-    icon={<Layout />}
-    description="Integration for Vue.js applications"
-  />
-  <Card
-    href="/docs/sdks/javascript"
-    title="JavaScript"
-    icon={<FileJson />}
-    description="Universal JavaScript/TypeScript SDK"
-  />
-  <Card
-    href="/docs/sdks/react-native"
-    title="React Native"
-    icon={<Smartphone />}
-    description="Track mobile apps with React Native"
-  />
-  <Card
-    href="/docs/sdks/python"
-    title="Python"
-    icon={<Code />}
-    description="Server-side tracking for Python"
-  />
-</Cards>
+### Langkah 4: Terima Response
 
-## Explore all SDKs
+Semua response dikirim dalam format JSON yang terstruktur:
 
-We support many more platforms. Check out our [SDKs Overview](/docs/sdks) for the full list.
+```json
+[
+  {
+    "name": "Shani Indira Natio",
+    "generation": "JKT48 Gen 1",
+    "status": "active"
+  },
+  {
+    "name": "Fritzy",
+    "generation": "JKT48 Gen 12",
+    "status": "active"
+  }
+]
+```
 
+## Endpoint yang Tersedia
+
+| Endpoint | Deskripsi |
+|----------|-----------|
+| `GET /api/jkt48/members` | Data semua member |
+| `GET /api/jkt48/live` | Member yang sedang live streaming |
+| `GET /api/jkt48/live/idn` | Live streaming dari IDN saja |
+| `GET /api/jkt48/theater` | Jadwal pertunjukan teater |
+| `GET /api/jkt48/news` | Berita terbaru |
+| `GET /api/jkt48/events` | Daftar event |
+| `GET /api/jkt48/birthday` | Ulang tahun member |
+
+## Langkah Selanjutnya
+
+- [Pelajari autentikasi lebih detail](/docs/get-started/track-events)
+- [Buat request pertama secara lengkap](/docs/get-started/identify-users)
+- [Lihat referensi semua endpoint](/docs/api/authentication)

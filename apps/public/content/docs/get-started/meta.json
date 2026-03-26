@@ -2,7 +2,7 @@
   "pages": [
     "install-openpanel",
     "track-events",
-    "identify-users",
-    "revenue-tracking"
-  ]
+    "identify-users"
+  ],
+  "title": "Memulai"
 }

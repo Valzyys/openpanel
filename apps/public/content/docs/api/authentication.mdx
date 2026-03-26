@@ -1,78 +1,140 @@
 ---
-title: Authentication
-description: Learn how to authenticate with the OpenPanel API using client credentials.
+title: Endpoint Members
+description: Dokumentasi lengkap endpoint /api/jkt48/members untuk mengambil data profil semua member JKT48.
 ---
 
-## Authentication
+## GET /api/jkt48/members
 
-To authenticate with the OpenPanel API, you need to use your `clientId` and `clientSecret`. Different API endpoints may require different access levels:
+Endpoint ini mengembalikan daftar lengkap semua member JKT48, termasuk member aktif, trainee, dan member yang sudah graduate.
 
-- **Track API**: Default client works with `write` mode
-- **Export API**: Requires `read` or `root` mode
-- **Insights API**: Requires `read` or `root` mode
-- **Manage API**: Requires `root` mode only
+### Request
 
-The default client (created with a project) has `write` mode and does not have access to the Export, Insights, or Manage APIs. You'll need to create additional clients with appropriate access levels.
+```
+GET https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY
+```
 
-## Headers
+| Parameter | Tipe | Wajib | Deskripsi |
+|-----------|------|-------|-----------|
+| `apikey` | string | ✅ | API key untuk autentikasi |
 
-Include the following headers with your API requests:
-
-- `openpanel-client-id`: Your OpenPanel client ID
-- `openpanel-client-secret`: Your OpenPanel client secret
-
-## Example
+### Contoh Request
 
 ```bash
-curl 'https://api.openpanel.dev/insights/{projectId}/metrics' \
-  -H 'openpanel-client-id: YOUR_CLIENT_ID' \
-  -H 'openpanel-client-secret: YOUR_CLIENT_SECRET'
+curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
 ```
 
-## Security Best Practices
-
-1. **Store credentials securely**: Never expose your `clientId` and `clientSecret` in client-side code
-2. **Use HTTPS**: Always use HTTPS to ensure secure communication
-3. **Rotate credentials**: Regularly rotate your API credentials
-4. **Limit access**: Use the minimum required access level for your use case
-
-## Error Responses
-
-If authentication fails, you'll receive a `401 Unauthorized` response:
+### Contoh Response
 
 ```json
-{
-  "error": "Unauthorized",
-  "message": "Invalid client credentials"
-}
+[
+  {
+    "name": "Shani Indira Natio",
+    "img": "https://jkt48.com/images/member/shani.jpg",
+    "generation": "JKT48 Gen 1",
+    "status": "active",
+    "is_graduate": false
+  },
+  {
+    "name": "Fritzy",
+    "img": "https://jkt48.com/images/member/fritzy.jpg",
+    "generation": "JKT48 Gen 12",
+    "status": "active",
+    "is_graduate": false
+  },
+  {
+    "name": "Melody Nurramdhani Laksani",
+    "img": "https://jkt48.com/images/member/melody.jpg",
+    "generation": "JKT48 Gen 1",
+    "status": "graduated",
+    "is_graduate": true
+  }
+]
 ```
 
-Common authentication errors:
-- Invalid client ID or secret
-- Client doesn't have required permissions (e.g., trying to access Manage API with a non-root client)
-- Malformed client ID (must be a valid UUIDv4)
-- Client type mismatch (e.g., `write` client trying to access Export API)
+### Struktur Response
 
-## Client Types
+| Field | Tipe | Deskripsi |
+|-------|------|-----------|
+| `name` | string | Nama lengkap member |
+| `img` | string | URL foto profil member |
+| `generation` | string | Generasi member (mis: "JKT48 Gen 12") |
+| `status` | string | Status member: `active`, `trainee`, `graduated` |
+| `is_graduate` | boolean | `true` jika member sudah graduate |
 
-OpenPanel supports three client types with different access levels:
+### Contoh Penggunaan
 
-| Type | Description | Access |
-|------|-------------|--------|
-| `write` | Write access | Track API only |
-| `read` | Read-only access | Export API, Insights API |
-| `root` | Full access | All APIs including Manage API |
+#### JavaScript
 
-**Note**: Root clients have organization-wide access and can manage all resources. Use root clients carefully and store their credentials securely.
+```javascript
+const API_KEY = 'YOUR_API_KEY';
 
-## Rate Limiting
+async function getMembers() {
+  const response = await fetch(
+    `https://v2.jkt48connect.com/api/jkt48/members?apikey=${API_KEY}`
+  );
+  const members = await response.json();
+  
+  // Filter hanya member aktif
+  const activeMembers = members.filter(m => !m.is_graduate);
+  console.log(`Total member aktif: ${activeMembers.length}`);
+  
+  activeMembers.forEach(member => {
+    console.log(`${member.name} (${member.generation})`);
+  });
+}
 
-The API implements rate limiting to prevent abuse. Rate limits vary by endpoint:
+getMembers();
+```
 
-- **Track API**: Higher limits for [event tracking](/features/event-tracking)
-- **Export/Insights APIs**: 100 requests per 10 seconds
-- **Manage API**: 20 requests per 10 seconds
+#### Python
 
-If you exceed the rate limit, you'll receive a `429 Too Many Requests` response. Implement exponential backoff for retries.
+```python
+import requests
 
-Remember to replace `YOUR_CLIENT_ID` and `YOUR_CLIENT_SECRET` with your actual OpenPanel API credentials.
+API_KEY = 'YOUR_API_KEY'
+
+def get_members():
+    response = requests.get(
+        f"https://v2.jkt48connect.com/api/jkt48/members?apikey={API_KEY}"
+    )
+    response.raise_for_status()
+    members = response.json()
+    
+    # Filter hanya member aktif
+    active = [m for m in members if not m.get('is_graduate', False)]
+    print(f"Total member aktif: {len(active)}")
+    
+    for member in active:
+        print(f"{member['name']} ({member.get('generation', 'N/A')})")
+
+get_members()
+```
+
+#### PHP
+
+```php
+<?php
+$apiKey = 'YOUR_API_KEY';
+$url = "https://v2.jkt48connect.com/api/jkt48/members?apikey={$apiKey}";
+
+$response = file_get_contents($url);
+$members = json_decode($response, true);
+
+// Filter member aktif
+$activeMembers = array_filter($members, function($m) {
+    return !$m['is_graduate'];
+});
+
+echo "Total member aktif: " . count($activeMembers) . "\n";
+
+foreach ($activeMembers as $member) {
+    echo "{$member['name']} ({$member['generation']})\n";
+}
+?>
+```
+
+### Tips
+
+- Data member di-update secara berkala mengikuti informasi resmi dari JKT48
+- Gunakan field `is_graduate` untuk memfilter member aktif dan alumni
+- Response berupa array JSON, jadi pastikan parsing-mu mendukung array
