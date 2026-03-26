@@ -1,70 +1,149 @@
 ---
 title: JavaScript
-description: General usage of standard Vanilla JavaScript (ES6+ API fetches) for both JKT48 and KLP48 integrations.
+description: Vanilla JavaScript (ES6+) examples for both JKT48 and KLP48 APIs.
 ---
 
-## JavaScript (Vanilla)
+## JavaScript (Vanilla Fetch)
 
-JavaScript's native `fetch` provides the most universally compatible approach, requiring precisely zero external modules.
+All endpoints use the same base URL: `https://v2.jkt48connect.com/api`
 
-### Utilizing KLP48 Priority Tokens
+---
 
-Since the KLP48 API relies heavily on custom Headers, you simply construct your Request object appropriately.
+### JKT48 API — Get Members
 
 ```javascript
-const KLP48_API_URL = 'https://your-api-domain.com/klp48/news';
-const KLP48_TOKEN = 'P-XYZ123';
+const JKT48_API_KEY = 'YOUR_API_KEY';
 
-async function logKLP48News() {
+async function getJKT48Members() {
   try {
-    const res = await fetch(`${KLP48_API_URL}?page=1&perpage=5`, {
-      method: 'GET',
-      headers: {
-        'x-priority-token': KLP48_TOKEN,
-        'Content-Type': 'application/json'
-      }
+    const res = await fetch(
+      `https://v2.jkt48connect.com/api/jkt48/members?apikey=${JKT48_API_KEY}`
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const members = await res.json(); // Returns plain array
+    console.log(`Found ${members.length} JKT48 members`);
+
+    members.slice(0, 5).forEach(m => {
+      console.log(`- ${m.name} (${m.generation})`);
     });
-    
-    // Explicitly parse JSON response architecture mapping
-    const payload = await res.json();
-    
-    if (!payload.success) {
-       throw new Error(`KLP48 Server Rejected: ${payload.message}`);
-    }
-    
-    console.log(`Found ${payload.total} total news items.`);
-    payload.data.forEach((article, idx) => {
-       console.log(`${idx+1}. ${article.headline} - ${article.publish_date}`);
-    });
-    
   } catch (err) {
-    console.error("Networking Failure Caught:", err.message);
+    console.error('JKT48 Error:', err.message);
   }
 }
 
-logKLP48News();
+getJKT48Members();
 ```
 
-### Utilizing JKT48 Regular API Keys
-
-The JKT48 API passes queries identically through generic URL parameters.
+### JKT48 API — Check Live Streams
 
 ```javascript
-const JKT_KEY = 'J-XYZ123';
+async function checkJKT48Live() {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/jkt48/live?apikey=${JKT48_API_KEY}`
+  );
+  const streams = await res.json();
 
-async function logJKT48Members() {
-  const url = `https://v2.jkt48connect.com/api/jkt48/members?apikey=${JKT_KEY}`;
-  
+  if (streams.length === 0) {
+    console.log('No JKT48 members are live right now.');
+    return;
+  }
+
+  streams.forEach(s => {
+    console.log(`🔴 ${s.name} is live on ${s.type} — started ${s.started_at}`);
+  });
+}
+```
+
+---
+
+### KLP48 API — Get Members (Priority Token)
+
+```javascript
+const PRIORITY_TOKEN = 'P-ABCD1234';
+
+async function getKLP48Members() {
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Throttled Limits Exceeded HTTP 403 or 429!");
-    
-    const members = await res.json();
-    console.log(`JKT48 System recognized ${members.length} members`);
-  } catch(err) {
-    console.warn("JKT48 Network Failure:", err.message);
+    const res = await fetch(
+      'https://v2.jkt48connect.com/api/klp48/members', {
+        headers: { 'x-priority-token': PRIORITY_TOKEN }
+      }
+    );
+    const payload = await res.json(); // Returns { success, total, data, message }
+
+    if (!payload.success) throw new Error(payload.message);
+
+    console.log(`Found ${payload.total} KLP48 members`);
+    payload.data.forEach(m => {
+      console.log(`- ${m.name} (Gen ${m.generation})`);
+    });
+  } catch (err) {
+    console.error('KLP48 Error:', err.message);
   }
 }
 
-logJKT48Members();
+getKLP48Members();
+```
+
+### KLP48 API — Get Schedule with Filters
+
+```javascript
+async function getKLP48Schedule(status = 'upcoming') {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/klp48/schedule?status=${status}`, {
+      headers: { 'x-priority-token': PRIORITY_TOKEN }
+    }
+  );
+  const payload = await res.json();
+
+  if (!payload.success) {
+    console.error('Error:', payload.message);
+    return;
+  }
+
+  console.log(`📅 ${payload.total} ${status} events:`);
+  payload.data.forEach(event => {
+    console.log(`  - ${event.title} on ${event.date}`);
+  });
+}
+
+getKLP48Schedule('upcoming');
+```
+
+### KLP48 API — Get News with Pagination
+
+```javascript
+async function getKLP48News(page = 1, perpage = 5) {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/klp48/news?page=${page}&perpage=${perpage}`, {
+      headers: { 'x-priority-token': PRIORITY_TOKEN }
+    }
+  );
+  const payload = await res.json();
+
+  if (payload.success) {
+    payload.data.forEach(article => {
+      console.log(`📰 ${article.headline}`);
+    });
+  }
+}
+```
+
+### KLP48 API — Get Birthdays by Month
+
+```javascript
+async function getKLP48Birthdays(month) {
+  const url = month
+    ? `https://v2.jkt48connect.com/api/klp48/birthdays/${month}`
+    : 'https://v2.jkt48connect.com/api/klp48/birthdays';
+
+  const res = await fetch(url, {
+    headers: { 'x-priority-token': PRIORITY_TOKEN }
+  });
+  const payload = await res.json();
+
+  if (payload.success) {
+    payload.data.forEach(m => console.log(`🎂 ${m.name} — ${m.birthdate}`));
+  }
+}
 ```

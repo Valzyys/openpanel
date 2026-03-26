@@ -1,76 +1,156 @@
 ---
 title: TypeScript
-description: Using strict types when querying the APIs via TypeScript.
+description: Type-safe examples for consuming both JKT48 and KLP48 APIs using TypeScript.
 ---
 
 ## TypeScript
 
-TypeScript enhances your REST API integrations by allowing you to define rigid interface structures corresponding precisely to the JSON responses mapped from both the JKT48 and KLP48 API endpoints.
+TypeScript lets you define strict interfaces that mirror each API's response format, catching bugs at compile time.
 
-### Defining Your Interfaces
+**Base URL:** `https://v2.jkt48connect.com/api`
 
-First, write strict interfaces for the generic JSON response architecture utilized by the KLP48 API:
+---
+
+### Interfaces for JKT48 API (plain array responses)
 
 ```typescript
-// Define standard API Response wrapping
-export interface ApiResponse<T> {
+// JKT48 returns plain arrays
+interface JKT48Member {
+  name: string;
+  img: string;
+  generation: string;
+  status: string;
+  is_graduate: boolean;
+}
+
+interface JKT48LiveStream {
+  name: string;
+  img: string;
+  type: 'idn' | 'showroom' | 'youtube';
+  started_at: string;
+  streaming_url_list: { label: string; quality: number; url: string }[];
+}
+```
+
+### Interfaces for KLP48 API (wrapped object responses)
+
+```typescript
+// KLP48 always wraps data in this structure
+interface KLP48Response<T> {
   success: boolean;
   total: number;
   data: T[];
   message: string;
 }
 
-// Define the Member object scheme
-export interface Member {
+interface KLP48Member {
   id: number;
   name: string;
   generation: string;
   birthdate?: string;
 }
+
+interface KLP48NewsItem {
+  id: number;
+  headline: string;
+  publish_date: string;
+  content?: string;
+}
 ```
 
-### Performing the Fetch Request
+---
 
-Invoke the API while enforcing type-safety to significantly minimize runtime crashes:
+### JKT48 API: Fetch Members
 
 ```typescript
-const KLP48_API_URL = "https://your-api-domain.com/klp48";
-const PRIORITY_TOKEN = "P-ABCD1234";
+const JKT48_KEY = 'YOUR_API_KEY';
 
-async function fetchKLP48Members(): Promise<Member[]> {
-  try {
-    const response = await fetch(`${KLP48_API_URL}/members`, {
-      method: 'GET',
-      headers: {
-        'x-priority-token': PRIORITY_TOKEN,
-        'Content-Type': 'application/json'
-      }
-    });
+async function getJKT48Members(): Promise<JKT48Member[]> {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/jkt48/members?apikey=${JKT48_KEY}`
+  );
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    if (!response.ok) {
-      throw new Error(`HTTP Error! Status: ${response.status}`);
+  const members: JKT48Member[] = await res.json();
+  const active = members.filter(m => !m.is_graduate);
+  console.log(`Active JKT48 members: ${active.length}`);
+  return active;
+}
+```
+
+### JKT48 API: Fetch Live Streams
+
+```typescript
+async function getJKT48Live(): Promise<JKT48LiveStream[]> {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/jkt48/live?apikey=${JKT48_KEY}`
+  );
+  const streams: JKT48LiveStream[] = await res.json();
+
+  streams.forEach(s => {
+    console.log(`🔴 ${s.name} on ${s.type.toUpperCase()}`);
+  });
+  return streams;
+}
+```
+
+---
+
+### KLP48 API: Fetch Members (Priority Token)
+
+```typescript
+const PRIORITY_TOKEN = 'P-ABCD1234';
+
+async function getKLP48Members(): Promise<KLP48Member[]> {
+  const res = await fetch(
+    'https://v2.jkt48connect.com/api/klp48/members', {
+      headers: { 'x-priority-token': PRIORITY_TOKEN }
     }
+  );
 
-    // Cast response directly securely utilizing TypeScript Interfaces
-    const result: ApiResponse<Member> = await response.json();
+  const result: KLP48Response<KLP48Member> = await res.json();
 
-    if (!result.success) {
-      throw new Error(result.message);
+  if (!result.success) throw new Error(result.message);
+  console.log(`KLP48 members: ${result.total}`);
+  return result.data;
+}
+```
+
+### KLP48 API: Fetch News with Pagination
+
+```typescript
+async function getKLP48News(page = 1): Promise<KLP48NewsItem[]> {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/klp48/news?page=${page}&perpage=10`, {
+      headers: { 'x-priority-token': PRIORITY_TOKEN }
     }
+  );
 
-    console.log(`Fetched ${result.total} members successfully.`);
-    return result.data;
+  const result: KLP48Response<KLP48NewsItem> = await res.json();
+  if (!result.success) throw new Error(result.message);
 
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('Failed fetching data:', error.message);
+  result.data.forEach(n => console.log(`📰 ${n.headline}`));
+  return result.data;
+}
+```
+
+### Generic Reusable Helper
+
+```typescript
+async function fetchKLP48<T>(endpoint: string, params = ''): Promise<T[]> {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/klp48/${endpoint}${params ? '?' + params : ''}`, {
+      headers: { 'x-priority-token': PRIORITY_TOKEN }
     }
-    return [];
-  }
+  );
+  const result: KLP48Response<T> = await res.json();
+
+  if (!result.success) throw new Error(result.message);
+  return result.data;
 }
 
-// Usage execution mapping output reliably
-fetchKLP48Members().then(members => {
-  members.forEach(m => console.log(`${m.name} - Gen ${m.generation}`));
-});
+// Usage
+const schedule = await fetchKLP48<any>('schedule', 'status=upcoming');
+const releases = await fetchKLP48<any>('releases');
+const birthdays = await fetchKLP48<any>('birthdays/3');
 ```

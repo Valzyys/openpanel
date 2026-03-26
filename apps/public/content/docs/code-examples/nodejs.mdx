@@ -1,91 +1,143 @@
 ---
 title: Node.js
-description: Request handling via pure Node.js environments architectures perfectly suited for Cronjobs and web servers.
+description: Server-side Node.js examples for both JKT48 and KLP48 APIs using fetch and axios.
 ---
 
 ## Node.js
 
-Node.js effectively operates as a high-speed JavaScript runtime capable of establishing continuous network pooling without bogging down visual UI threads. Here is how you can effectively consume priority endpoints natively.
+Node.js is ideal for building bots, cron jobs, and backend services that consume both APIs.
 
-### Native Node `fetch` (Node 18+)
+**Base URL:** `https://v2.jkt48connect.com/api`
 
-Modern Node.js environments include an experimental natively wrapped `fetch` identical to browser capabilities, dismissing the necessity for installing arbitrary libraries.
+---
+
+### JKT48 API — Fetch Members (Native fetch, Node 18+)
 
 ```javascript
-// Ensure environment variables are loaded (e.g. via dotenv)
-const API_KEY = process.env.PRIORITY_TOKEN || 'P-YOUR-TOKEN';
-const BASE_URL = 'https://your-api-domain.com/klp48';
+const JKT48_KEY = process.env.JKT48_API_KEY || 'YOUR_API_KEY';
 
-async function fetchLatestNews(page = 1) {
-    try {
-        console.log(`Pinging KLP48 News... Page ${page}`);
-        
-        const response = await fetch(`${BASE_URL}/news?page=${page}&perpage=5`, {
-            method: 'GET',
-            headers: {
-                'x-priority-token': API_KEY,
-                'Content-Type': 'application/json'
-            }
-        });
+async function getJKT48Members() {
+  const res = await fetch(
+    `https://v2.jkt48connect.com/api/jkt48/members?apikey=${JKT48_KEY}`
+  );
+  const members = await res.json();
+  console.log(`JKT48: ${members.length} members found`);
 
-        const result = await response.json();
-
-        if (!response.ok || !result.success) {
-            throw new Error(`Integration failed: ${result.message}`);
-        }
-
-        console.log(`Success! Fetched ${result.total} news articles.`);
-        
-        result.data.forEach(item => {
-             console.log(`[${item.publish_date}] ${item.headline}`);
-        });
-
-    } catch (error) {
-        console.error("Critical failure during API synchronization:", error.message);
-    }
+  members.filter(m => !m.is_graduate).forEach(m => {
+    console.log(`  - ${m.name} (${m.generation})`);
+  });
 }
 
-fetchLatestNews(1);
+getJKT48Members();
 ```
 
-### Implementing Axios Interceptors
+### JKT48 API — Live Stream Monitor (Polling)
 
-For robust projects communicating relentlessly with multiple endpoints tracking cookies, states, or default headers — utilizing an Axios Interceptor is highly recommended.
+```javascript
+async function monitorJKT48Live() {
+  while (true) {
+    try {
+      const res = await fetch(
+        `https://v2.jkt48connect.com/api/jkt48/live?apikey=${JKT48_KEY}`
+      );
+      const streams = await res.json();
+
+      if (streams.length > 0) {
+        console.log(`🔴 ${streams.length} members are live!`);
+        streams.forEach(s => console.log(`  ${s.name} on ${s.type}`));
+      } else {
+        console.log('No active streams.');
+      }
+    } catch (err) {
+      console.error('Poll error:', err.message);
+    }
+
+    // Wait 60 seconds between polls to avoid rate limiting
+    await new Promise(r => setTimeout(r, 60000));
+  }
+}
+```
+
+---
+
+### KLP48 API — Using Axios Interceptors
 
 ```javascript
 // npm install axios
-import axios from 'axios';
+const axios = require('axios');
 
-// 1. Create a synchronized template module
-const klp48Api = axios.create({
-    baseURL: 'https://your-api-domain.com/klp48',
-    timeout: 10000 // Force drop connections after 10s timeout
+const PRIORITY_TOKEN = process.env.KLP48_TOKEN || 'P-ABCD1234';
+
+// Create a reusable Axios instance for KLP48
+const klp48 = axios.create({
+  baseURL: 'https://v2.jkt48connect.com/api/klp48',
+  timeout: 10000,
+  headers: { 'x-priority-token': PRIORITY_TOKEN }
 });
 
-// 2. Attach a centralized Request Interceptor
-klp48Api.interceptors.request.use(config => {
-    // Automatically shove Priority Tokens explicitly down the Headers
-    const token = process.env.PRIORITY_TOKEN;
-    if (token) {
-        config.headers['x-priority-token'] = token;
-    }
-    return config;
-}, error => {
-    return Promise.reject(error);
-});
+// Fetch members
+async function getKLP48Members() {
+  const { data } = await klp48.get('/members');
 
-// 3. Simple execution model elsewhere in your system
-async function runBotTask() {
-    try {
-        const { data } = await klp48Api.get('/schedule', { params: { status: 'today' } });
-        
-        if (data.success && data.total > 0) {
-           console.log("Trigger Discord Webhook! Shows scheduled today!");
-        }
-    } catch (error) {
-        console.error('Bot execution failed:', error?.response?.data || error.message);
-    }
+  if (data.success) {
+    console.log(`KLP48: ${data.total} members`);
+    data.data.forEach(m => console.log(`  - ${m.name}`));
+  }
 }
 
-runBotTask();
+// Fetch schedule
+async function getKLP48Schedule(status = 'upcoming') {
+  const { data } = await klp48.get('/schedule', { params: { status } });
+
+  if (data.success) {
+    console.log(`📅 ${data.total} ${status} events`);
+    data.data.forEach(e => console.log(`  - ${e.title} on ${e.date}`));
+  }
+}
+
+// Fetch news with pagination
+async function getKLP48News(page = 1, perpage = 5) {
+  const { data } = await klp48.get('/news', { params: { page, perpage } });
+
+  if (data.success) {
+    data.data.forEach(n => console.log(`📰 ${n.headline}`));
+  }
+}
+
+// Fetch specific news by ID
+async function getKLP48NewsById(id) {
+  const { data } = await klp48.get(`/news/${id}`);
+  if (data.success && data.data.length > 0) {
+    console.log(`Title: ${data.data[0].headline}`);
+    console.log(`Content: ${data.data[0].content}`);
+  }
+}
+
+// Fetch releases
+async function getKLP48Releases() {
+  const { data } = await klp48.get('/releases');
+  if (data.success) {
+    data.data.forEach(r => console.log(`🎵 ${r.title} (${r.type})`));
+  }
+}
+
+// Fetch birthdays
+async function getKLP48Birthdays(month = null) {
+  const url = month ? `/birthdays/${month}` : '/birthdays';
+  const { data } = await klp48.get(url);
+
+  if (data.success) {
+    data.data.forEach(m => console.log(`🎂 ${m.name} — ${m.birthdate}`));
+  }
+}
+
+// Run them all
+(async () => {
+  await getJKT48Members();
+  await getKLP48Members();
+  await getKLP48Schedule('today');
+  await getKLP48News(1, 3);
+  await getKLP48Releases();
+  await getKLP48Birthdays(4);
+})();
 ```

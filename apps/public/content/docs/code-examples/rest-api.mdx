@@ -1,44 +1,112 @@
 ---
 title: REST API (cURL)
-description: Testing endpoints directly using raw REST API cURL commands.
+description: Direct examples using raw cURL commands for both JKT48 and KLP48 APIs.
 ---
 
 ## REST API (cURL)
 
-The most direct and foundational way to interact with both the JKT48 API and the KLP48 API is via your terminal utilizing the `curl` utility. 
+All endpoints are served from the same base domain. Use cURL from your terminal to test requests directly.
 
-### KLP48 API Example (Using Priority Token)
+**Base URL:** `https://v2.jkt48connect.com/api`
 
-When interacting with KLP48 endpoints, you can pass your Priority Token inside the HTTP Headers using the `-H` flag.
+---
+
+### JKT48 API Examples
 
 ```bash
-curl -X GET "https://your-api-domain.com/klp48/members" \
-     -H "x-priority-token: P-ABCD1234"
+# Get all JKT48 members
+curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
+
+# Check who is currently live streaming
+curl "https://v2.jkt48connect.com/api/jkt48/live?apikey=YOUR_API_KEY"
+
+# Get IDN-only live streams
+curl "https://v2.jkt48connect.com/api/jkt48/live/idn?apikey=YOUR_API_KEY"
+
+# Get theater schedule
+curl "https://v2.jkt48connect.com/api/jkt48/theater?apikey=YOUR_API_KEY"
+
+# Get latest news
+curl "https://v2.jkt48connect.com/api/jkt48/news?apikey=YOUR_API_KEY"
+
+# Get events
+curl "https://v2.jkt48connect.com/api/jkt48/events?apikey=YOUR_API_KEY"
+
+# Get birthdays
+curl "https://v2.jkt48connect.com/api/jkt48/birthday?apikey=YOUR_API_KEY"
 ```
 
-Alternatively, you can just pass it directly as a query parameter if you prefer simpler scripts:
+---
+
+### KLP48 API Examples
+
+KLP48 endpoints support authentication via **Priority Token** (header, query, or body) and **Regular API Key** (with IP whitelist).
+
+**Using Priority Token via Header:**
 
 ```bash
-curl "https://your-api-domain.com/klp48/schedule?status=upcoming&priority_token=P-ABCD1234"
+# Get all KLP48 members
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/members"
+
+# Search a specific member by name
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/member/Shania"
+
+# Get schedule (filter: upcoming / past / today)
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/schedule?status=upcoming"
+
+# Get news with pagination
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/news?page=1&perpage=5"
+
+# Get specific news by ID
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/news/1234"
+
+# Get all releases / discography
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/releases"
+
+# Get birthdays this month
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/birthdays"
+
+# Get birthdays for a specific month (e.g. March = 3)
+curl -H "x-priority-token: P-ABCD1234" \
+     "https://v2.jkt48connect.com/api/klp48/birthdays/3"
 ```
 
-### JKT48 API Example 
-
-When consuming the JKT48Connect API, you use standard query bindings for the `apikey`.
+**Using Priority Token via Query Parameter:**
 
 ```bash
-curl "https://v2.jkt48connect.com/api/jkt48/live?apikey=J-XYZ987"
+curl "https://v2.jkt48connect.com/api/klp48/members?priority_token=P-ABCD1234"
 ```
 
-### Sending POST Requests (JSON Body)
-
-If you have an endpoint that requires submitting variables through a JSON Payload body (and auth included within the body), utilize the `-d` parameter:
+**Using Regular API Key (requires IP whitelist):**
 
 ```bash
-curl -X POST "https://your-api-domain.com/klp48/some-action" \
-     -H "Content-Type: application/json" \
-     -d '{
-           "priority_token": "P-ABCD1234",
-           "data": "value"
-         }'
+curl "https://v2.jkt48connect.com/api/klp48/members?apikey=J-XYZ123"
+```
+
+---
+
+### Response Format Comparison
+
+**JKT48 API** returns a plain JSON array:
+```json
+[
+  { "name": "Shani", "generation": "JKT48 Gen 1" }
+]
+```
+
+**KLP48 API** returns a wrapped object:
+```json
+{
+  "success": true,
+  "total": 1,
+  "data": [{ "name": "Maria", "generation": "1" }],
+  "message": "Data retrieved successfully"
+}
 ```
