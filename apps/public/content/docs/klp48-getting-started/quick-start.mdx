@@ -1,0 +1,35 @@
+---
+title: Quick Start (KLP48)
+description: A quick guide to start using the KLP48 REST API system.
+---
+
+## Start Using KLP48 API
+
+The KLP48 API provides access to data related to KLP48 members, schedules, news, releases, and birthdays.
+
+### Endpoint Base URL
+
+All KLP48 API endpoints are served from the following base domain:
+
+```
+https://your-api-domain.com
+```
+
+### Access & Security
+
+Unlike the JKT48 API which relies solely on standard API keys, the KLP48 API implements a **Whitelist & Priority System**.
+
+There are 3 tiers of access:
+1. **Priority Token (P-XXXX)** — Unlimited access, bypasses IP Whitelist restrictions. Recommended for developers.
+2. **Admin Credentials** — Full administrative access.
+3. **Regular API Key (J-XXXX)** — Standard access. Requires your IP address to be pre-registered (Whitelisted) in the system, otherwise the connection will be blocked.
+
+To learn more about how to authenticate your requests, including using the Priority Token, please visit the [Authentication Guide](/docs/klp48-getting-started/authentication).
+
+### Public Endpoints
+
+The KLP48 API also features several public endpoints that **do not require any authentication** or IP whitelisting:
+
+- `/api/codes/verify`
+- `/api/wotatokens/verify`
+- `/api/jkt48connect/`

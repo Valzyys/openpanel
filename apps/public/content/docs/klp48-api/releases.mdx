@@ -1,0 +1,40 @@
+---
+title: Releases & Discography
+description: Pull comprehensive data regarding KLP48 singles, albums, and song releases.
+---
+
+## Releases / Discography API
+
+Endpoint for pulling full discography context of KLP48.
+
+### GET /klp48/releases
+
+Returns a comprehensive array of all musical releases from KLP48 including Singles and Digital Releases. 
+
+**Route:**
+```
+GET https://your-api-domain.com/klp48/releases
+```
+
+**Example Request:**
+```http
+GET /klp48/releases
+x-priority-token: P-CUSTOM123
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "total": 1,
+  "data": [
+    {
+      "id": 1,
+      "title": "Heavy Rotation (KLP48 Version)",
+      "type": "Digital Single",
+      "release_date": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "message": "Data retrieved successfully"
+}
+```

@@ -1,0 +1,80 @@
+---
+title: Members Endpoints
+description: Documentation for the KLP48 API members endpoints.
+---
+
+## Members API
+
+Endpoints to retrieve information regarding KLP48 members.
+
+### GET /klp48/members
+
+Retrieve a comprehensive list of all KLP48 members.
+
+**Request Structure:**
+```http
+GET https://your-api-domain.com/klp48/members
+x-priority-token: P-ABCD1234
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "total": 15,
+  "data": [
+    {
+      "id": 1,
+      "name": "Shania",
+      "generation": "1"
+    },
+    {
+      "id": 2,
+      "name": "Maria",
+      "generation": "1"
+    }
+  ],
+  "message": "Data retrieved successfully"
+}
+```
+
+---
+
+### GET /klp48/member/:name
+
+Retrieve the specific profile of a single member by their name.
+
+**Parameters:**
+- `name` *(Required)* — The full name or nickname of the member.
+
+**Example Request:**
+```http
+GET https://your-api-domain.com/klp48/member/Shania
+x-priority-token: P-ABCD1234
+```
+
+**Example Success Response:**
+```json
+{
+  "success": true,
+  "total": 1,
+  "data": [
+    {
+      "id": 1,
+      "name": "Shania",
+      "generation": "1",
+      "birthdate": "2000-01-01"
+    }
+  ],
+  "message": "Data retrieved successfully"
+}
+```
+
+**Example Error Response:**
+```json
+{
+  "success": false,
+  "message": "Member tidak ditemukan",
+  "error": "Error details if applicable"
+}
+```

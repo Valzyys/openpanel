@@ -1,0 +1,92 @@
+---
+title: Next.js
+description: Using API Routes and Server Components to consume JKT48 & KLP48 APIs securely in Next.js.
+---
+
+## Next.js
+
+Next.js provides an excellent developer experience by balancing Server-Side Rendering (SSR) securely safeguarding your API keys with responsive client-side interactions.
+
+### 1. Using Server Components (App Router)
+
+The most secure approach within modern Next.js `app/` deployments is fetching the data directly from the server. This guarantees your `Priority Token` or `API Keys` are NEVER shipped alongside your JavaScript bundle to the client's browser.
+
+**File:** `app/members/page.tsx`
+
+```tsx
+import { notFound } from 'next/navigation';
+
+const API_KEY = process.env.KLP48_PRIORITY_TOKEN;
+const API_URL = 'https://your-api-domain.com/klp48/members';
+
+async function getMembers() {
+  // Leverage Next.js built-in fetch caching
+  const res = await fetch(API_URL, {
+    method: 'GET',
+    headers: {
+      'x-priority-token': API_KEY as string,
+    },
+    // Cache for 1 hour to prevent API rate limits
+    next: { revalidate: 3600 } 
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch members data');
+  }
+
+  return res.json();
+}
+
+export default async function MembersPage() {
+  const payload = await getMembers();
+
+  if (!payload.success || !payload.data) {
+    return notFound();
+  }
+
+  return (
+    <main className="p-8">
+      <h1 className="text-2xl font-bold mb-6">KLP48 Members Listing</h1>
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {payload.data.map((member: any) => (
+          <li key={member.id} className="border p-4 rounded-lg shadow">
+            <h2 className="font-semibold">{member.name}</h2>
+            <p className="text-gray-600">Generation {member.generation}</p>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}
+```
+
+### 2. Building Next.js API Routes (Proxy Proxy)
+
+If you must distribute data to client-side components (like a live chatting widget that continually polls API data), bridge it using an API Route acting as a secure intermediary proxy.
+
+**File:** `app/api/klp-schedule/route.ts`
+
+```typescript
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const status = searchParams.get('status') || 'upcoming';
+
+  try {
+    const apiReq = await fetch(`https://your-api-domain.com/klp48/schedule?status=${status}`, {
+      headers: {
+        'x-priority-token': process.env.PRIORITY_TOKEN as string
+      }
+    });
+
+    const data = await apiReq.json();
+    return NextResponse.json(data);
+    
+  } catch (error) {
+    return NextResponse.json({ success: false, message: 'Server Proxy Error' }, { status: 500 });
+  }
+}
+```
+
+Then your client-side React component simply calls `/api/klp-schedule` rather than the external domain!

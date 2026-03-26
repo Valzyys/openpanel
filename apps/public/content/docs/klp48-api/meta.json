@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "members",
+    "schedule",
+    "news",
+    "releases",
+    "birthdays"
+  ],
+  "title": "API Reference (KLP48)"
+}

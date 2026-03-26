@@ -1,0 +1,69 @@
+---
+title: Authentication
+description: Learn how to authenticate using Priority Tokens, API Keys, and managing IP Whitelists for the KLP48 API.
+---
+
+## Authentication System
+
+The KLP48 API utilizes a comprehensive Priority and Whitelist-based authentication system to ensure maximum security.
+
+### 1. Priority Token (Unlimited Access)
+
+The most flexible method of accessing the KLP48 API is by using a **Priority Token** (typically starting with `P-XXXX`). Priority tokens bypass all IP Whitelist restrictions and rate limiting.
+
+You can submit your Priority Token in **three different ways**:
+
+**Via Header:**
+```http
+x-priority-token: P-ABCD1234
+```
+
+**Via Query Parameter:**
+```
+GET /klp48/members?priority_token=P-ABCD1234
+```
+
+**Via Request Body (POST/PUT):**
+```json
+{
+  "priority_token": "P-ABCD1234"
+}
+```
+
+> **Note:** Every time a Priority Token is used, an audit notification is routed directly to the administration's Discord server logging the access with a Gold badge, detailing the user's name, email, IP, and the endpoint accessed.
+
+### 2. Regular API Key (Whitelisted)
+
+Standard developer keys generally start with `J-XXXX`. 
+
+If you use a Regular API Key, **your server's IP Address MUST be whitelisted** in the system's database. If you attempt to connect from a dynamic IP or an unregistered server, you will receive an `IP_NOT_WHITELISTED` Error (HTTP 403).
+
+You can pass the API Key identically:
+- Header: `x-api-key: J-XYZ` or `api-key: J-XYZ`
+- Query: `?apikey=J-XYZ`
+- Body: `{"apikey": "J-XYZ"}`
+
+If your IP is correct but usage limits are exhausted, you will receive a `403 Usage limit exceeded` error.
+
+### 3. Admin Credentials
+
+For internal dashboards and administration panels, Admin credentials can be passed dynamically:
+- Headers: `username` and `password` (or `x-admin-username` and `x-admin-password`)
+- Query: `?username=admin&password=secret`
+- JSON Body: `{"username": "admin", "password": "123"}`
+
+### Error and Bypass Flow
+
+1. If you request a public endpoint (`/api/codes/verify`), all auth checks are skipped automatically.
+2. If you pass a valid Priority Token, the system entirely skips checking `admin credentials` and skips checking the `ip_whitelist`.
+3. If the IP whitelist blocks you, you will see this response:
+
+```json
+{
+  "status": false,
+  "message": "Access denied: IP address not whitelisted for this API key",
+  "clientIP": "192.168.1.1",
+  "type": "IP_NOT_WHITELISTED",
+  "hint": "Your IP address is not registered for this API key. Contact 6285189020193 to add your ip."
+}
+```

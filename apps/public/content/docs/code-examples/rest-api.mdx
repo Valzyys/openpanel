@@ -1,0 +1,44 @@
+---
+title: REST API (cURL)
+description: Testing endpoints directly using raw REST API cURL commands.
+---
+
+## REST API (cURL)
+
+The most direct and foundational way to interact with both the JKT48 API and the KLP48 API is via your terminal utilizing the `curl` utility. 
+
+### KLP48 API Example (Using Priority Token)
+
+When interacting with KLP48 endpoints, you can pass your Priority Token inside the HTTP Headers using the `-H` flag.
+
+```bash
+curl -X GET "https://your-api-domain.com/klp48/members" \
+     -H "x-priority-token: P-ABCD1234"
+```
+
+Alternatively, you can just pass it directly as a query parameter if you prefer simpler scripts:
+
+```bash
+curl "https://your-api-domain.com/klp48/schedule?status=upcoming&priority_token=P-ABCD1234"
+```
+
+### JKT48 API Example 
+
+When consuming the JKT48Connect API, you use standard query bindings for the `apikey`.
+
+```bash
+curl "https://v2.jkt48connect.com/api/jkt48/live?apikey=J-XYZ987"
+```
+
+### Sending POST Requests (JSON Body)
+
+If you have an endpoint that requires submitting variables through a JSON Payload body (and auth included within the body), utilize the `-d` parameter:
+
+```bash
+curl -X POST "https://your-api-domain.com/klp48/some-action" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "priority_token": "P-ABCD1234",
+           "data": "value"
+         }'
+```

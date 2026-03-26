@@ -1,0 +1,76 @@
+---
+title: TypeScript
+description: Using strict types when querying the APIs via TypeScript.
+---
+
+## TypeScript
+
+TypeScript enhances your REST API integrations by allowing you to define rigid interface structures corresponding precisely to the JSON responses mapped from both the JKT48 and KLP48 API endpoints.
+
+### Defining Your Interfaces
+
+First, write strict interfaces for the generic JSON response architecture utilized by the KLP48 API:
+
+```typescript
+// Define standard API Response wrapping
+export interface ApiResponse<T> {
+  success: boolean;
+  total: number;
+  data: T[];
+  message: string;
+}
+
+// Define the Member object scheme
+export interface Member {
+  id: number;
+  name: string;
+  generation: string;
+  birthdate?: string;
+}
+```
+
+### Performing the Fetch Request
+
+Invoke the API while enforcing type-safety to significantly minimize runtime crashes:
+
+```typescript
+const KLP48_API_URL = "https://your-api-domain.com/klp48";
+const PRIORITY_TOKEN = "P-ABCD1234";
+
+async function fetchKLP48Members(): Promise<Member[]> {
+  try {
+    const response = await fetch(`${KLP48_API_URL}/members`, {
+      method: 'GET',
+      headers: {
+        'x-priority-token': PRIORITY_TOKEN,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP Error! Status: ${response.status}`);
+    }
+
+    // Cast response directly securely utilizing TypeScript Interfaces
+    const result: ApiResponse<Member> = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.message);
+    }
+
+    console.log(`Fetched ${result.total} members successfully.`);
+    return result.data;
+
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Failed fetching data:', error.message);
+    }
+    return [];
+  }
+}
+
+// Usage execution mapping output reliably
+fetchKLP48Members().then(members => {
+  members.forEach(m => console.log(`${m.name} - Gen ${m.generation}`));
+});
+```

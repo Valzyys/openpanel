@@ -1,115 +1,70 @@
 ---
-title: JavaScript & Node.js
-description: Examples of using the JKT48Connect API with JavaScript (Browser, Node.js, React).
+title: JavaScript
+description: General usage of standard Vanilla JavaScript (ES6+ API fetches) for both JKT48 and KLP48 integrations.
 ---
 
-## JavaScript / Node.js
+## JavaScript (Vanilla)
 
-JavaScript is one of the most popular languages for interacting with REST APIs. The JKT48Connect API is easy to access from both the client-side (browser) and the server-side (Node.js).
+JavaScript's native `fetch` provides the most universally compatible approach, requiring precisely zero external modules.
 
-### Using the native `fetch` API
+### Utilizing KLP48 Priority Tokens
 
-This is the simplest, most standardized way, requiring no external libraries:
+Since the KLP48 API relies heavily on custom Headers, you simply construct your Request object appropriately.
 
 ```javascript
-const API_KEY = 'YOUR_API_KEY';
-const BASE_URL = 'https://v2.jkt48connect.com';
+const KLP48_API_URL = 'https://your-api-domain.com/klp48/news';
+const KLP48_TOKEN = 'P-XYZ123';
 
-async function getJKT48Data(endpoint) {
+async function logKLP48News() {
   try {
-    const response = await fetch(`${BASE_URL}/api/jkt48/${endpoint}?apikey=${API_KEY}`);
+    const res = await fetch(`${KLP48_API_URL}?page=1&perpage=5`, {
+      method: 'GET',
+      headers: {
+        'x-priority-token': KLP48_TOKEN,
+        'Content-Type': 'application/json'
+      }
+    });
     
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    // Explicitly parse JSON response architecture mapping
+    const payload = await res.json();
+    
+    if (!payload.success) {
+       throw new Error(`KLP48 Server Rejected: ${payload.message}`);
     }
     
-    return await response.json();
-  } catch (error) {
-    console.error('An error occurred:', error.message);
-    return null;
+    console.log(`Found ${payload.total} total news items.`);
+    payload.data.forEach((article, idx) => {
+       console.log(`${idx+1}. ${article.headline} - ${article.publish_date}`);
+    });
+    
+  } catch (err) {
+    console.error("Networking Failure Caught:", err.message);
   }
 }
 
-// Executing the function
-(async () => {
-  // Fetch member data
-  const members = await getJKT48Data('members');
-  console.log(`Found ${members?.length || 0} members.`);
-})();
+logKLP48News();
 ```
 
-### Using `axios` (Node.js / React)
+### Utilizing JKT48 Regular API Keys
 
-If you use the `axios` library, the process is very straightforward:
+The JKT48 API passes queries identically through generic URL parameters.
 
 ```javascript
-// npm install axios
-const axios = require('axios');
+const JKT_KEY = 'J-XYZ123';
 
-const API_KEY = 'YOUR_API_KEY';
-
-axios.get('https://v2.jkt48connect.com/api/jkt48/live', {
-  params: {
-    apikey: API_KEY
+async function logJKT48Members() {
+  const url = `https://v2.jkt48connect.com/api/jkt48/members?apikey=${JKT_KEY}`;
+  
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Throttled Limits Exceeded HTTP 403 or 429!");
+    
+    const members = await res.json();
+    console.log(`JKT48 System recognized ${members.length} members`);
+  } catch(err) {
+    console.warn("JKT48 Network Failure:", err.message);
   }
-})
-.then(response => {
-  const liveMembers = response.data;
-  console.log('Members currently live:', liveMembers.map(m => m.name));
-})
-.catch(error => {
-  console.error('API Error:', error.response?.data?.message || error.message);
-});
-```
-
-### Example in React.js
-
-Here is a sample React component that displays the theater schedule data:
-
-```jsx
-import React, { useState, useEffect } from 'react';
-
-const API_KEY = process.env.REACT_APP_JKT48_API_KEY;
-
-export default function TheaterSchedule() {
-  const [schedule, setSchedule] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`https://v2.jkt48connect.com/api/jkt48/theater?apikey=${API_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        // Filter upcoming shows only
-        setSchedule(data.filter(s => s.is_upcoming));
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>Loading theater schedule...</p>;
-
-  return (
-    <div className="theater-schedule">
-      <h2>🎭 JKT48 Theater Schedule</h2>
-      {schedule.length === 0 ? (
-        <p>No schedules announced yet.</p>
-      ) : (
-        <ul>
-          {schedule.map((show, idx) => (
-            <li key={idx}>
-              <strong>{show.title} ({show.setlist})</strong> - {show.date} {show.time}
-              <br/>
-              Performing: {show.members.join(', ')}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
 }
-```
 
-> **Security Note**: If you call the API directly from a front-end React application, your API Key could be exposed to users. Ensure you understand the risks or use a back-end as a secure intermediary layer.
+logJKT48Members();
+```

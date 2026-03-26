@@ -1,11 +1,15 @@
 {
   "pages": [
+    "rest-api",
     "javascript",
+    "typescript",
+    "nodejs",
+    "react",
+    "nextjs",
     "python",
     "php",
-    "go",
-    "java",
-    "csharp"
+    "kotlin",
+    "swift"
   ],
   "title": "Code Examples"
 }

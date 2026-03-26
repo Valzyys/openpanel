@@ -1,87 +1,80 @@
 ---
 title: Python
-description: Examples of using the JKT48Connect API with Python.
+description: Connecting python bots to JKT48 and KLP48 endpoints comprehensively.
 ---
 
 ## Python
 
-Python is an excellent choice for processing data from REST APIs. It is highly recommended to use the `requests` library to make API calls effortlessly.
+Python's elegant simplicity renders it the undisputed champion for swiftly designing data-scraping workflows or Telegram automation Bots utilizing REST architectures.
 
-### Installing the Library
+### Using the `requests` library
 
-Ensure you have installed the `requests` module:
-
-```bash
-pip install requests
-```
-
-### Basic Example: Get Members
+The standard process leverages `requests` passing headers effortlessly.
 
 ```python
 import requests
 import json
+import os
 
-API_KEY = 'YOUR_API_KEY'
-BASE_URL = 'https://v2.jkt48connect.com'
+# Configuration Parameters
+PRIORITY_TOKEN = os.environ.get('KLP48_TOKEN', 'P-YOUR-TOKEN')
+KLP_BASE = 'https://your-api-domain.com/klp48/releases'
 
-def get_members():
-    url = f"{BASE_URL}/api/jkt48/members"
-    params = {'apikey': API_KEY}
+def fetch_discography():
+    # Embed Priority Token inside standard dictionary headers
+    headers = {
+        'x-priority-token': PRIORITY_TOKEN,
+        'Accept': 'application/json'
+    }
     
     try:
-        response = requests.get(url, params=params)
+        response = requests.get(KLP_BASE, headers=headers)
         
-        # Raise an exception if the status != 200
+        # Abort if HTTP Status throws an unauthorized 401 or 403
         response.raise_for_status()
         
-        data = response.json()
-        print(f"Successfully fetched {len(data)} members.")
+        payload = response.json()
         
-        # Display the first 3 member names
-        for member in data[:3]:
-            print(f"- {member['name']} ({member.get('generation', '')})")
+        if not payload.get('success'):
+            print(f"Server rejection message: {payload.get('message')}")
+            return
             
-        return data
+        print(f"Total Albums/Singles found: {payload.get('total')}")
         
-    except requests.exceptions.HTTPError as err:
-        print(f"HTTP Error: {err}")
-    except Exception as err:
-        print(f"Other error: {err}")
+        for index, track in enumerate(payload.get('data', [])[:5]):
+            print(f"{index + 1}. {track.get('title')} [{track.get('type')}]")
+            
+    except requests.exceptions.RequestException as e:
+        print(f"Network / Validation Error occurred: {e}")
 
 if __name__ == "__main__":
-    get_members()
+    fetch_discography()
 ```
 
-### Advanced Example: Simple Telegram Bot
+### Discord / Telegram Bot Automation Logic
 
-Below is a code snippet demonstrating how to check if any members are live via a Telegram bot (requires `python-telegram-bot`):
+Implementing timed intervals utilizing `time.sleep` while polling live data ensures you don't breach Server Throttling Policies intentionally avoiding IP bans.
 
 ```python
+import time
 import requests
 
-API_KEY = 'YOUR_API_KEY'
-
-def get_live_status():
-    url = f"https://v2.jkt48connect.com/api/jkt48/live?apikey={API_KEY}"
-    try:
-        data = requests.get(url).json()
-        
-        if not data:
-            return "No members are currently live right now."
+def check_live_status():
+    while True:
+        try:
+            # Pinging normal JKT48 endpoint polling
+            response = requests.get("https://v2.jkt48connect.com/api/jkt48/live?apikey=J-YOURKEY")
+            data = response.json()
             
-        message = "🔴 JKT48 Members Currently Live:\n\n"
+            if len(data) > 0:
+                print(f"ALERT! {len(data)} members just initiated a Live Stream!")
+                # trigger_telegram_bot_message_dispatch()
+            else:
+                print("No active streamers. Going dormant...")
         
-        for member in data:
-            platform = member.get('type', 'Unknown').upper()
-            urls = member.get('streaming_url_list', [])
-            link = urls[0]['url'] if urls else ""
-            message += f"📺 [{platform}] {member['name']}\nLink: {link}\n\n"
+        except Exception as e:
+            print(f"Polling failure logged: {e}")
             
-        return message
-    except:
-        return "Failed to fetch live data."
-
-# Telegram function call (pseudo-code example)
-# async def live_command(update, context):
-#     await update.message.reply_text(get_live_status())
+        # VERY IMPORTANT: Standardize at least a 60-second cooldown timeout constraint per interval cycle
+        time.sleep(60) 
 ```

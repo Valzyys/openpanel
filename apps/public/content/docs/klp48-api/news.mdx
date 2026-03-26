@@ -1,0 +1,75 @@
+---
+title: News Endpoints
+description: Retrieve paginated KLP48 news articles and detailed announcements.
+---
+
+## News API
+
+Access the detailed listing and dynamic paginated repository of KLP48 News.
+
+### GET /klp48/news
+
+Retrieves the list of news articles. By default, it returns page 1 limiting to 10 news articles per page.
+
+**Route:**
+```
+GET https://your-api-domain.com/klp48/news
+```
+
+**Optional Pagination Parameters:**
+- `page` — The requested page number indexing (default: `1`)
+- `perpage` — The total amount of items delivered per page (default: `10`)
+
+**Example Request:**
+```http
+GET /klp48/news?page=2&perpage=5
+x-priority-token: P-XYZ123
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "total": 5,
+  "data": [
+    {
+      "id": 12,
+      "headline": "KLP48 Officially Begins Operations",
+      "publish_date": "2025-01-01T10:00:00Z"
+    }
+  ],
+  "message": "Data retrieved successfully"
+}
+```
+
+---
+
+### GET /klp48/news/:id
+
+Fetches the complete content, metadata, and HTML details of a specific single news article by identifying its News ID.
+
+**Parameters:**
+- `id` *(Required)* — The integer ID tied to the news item
+
+**Example Request:**
+```http
+GET /klp48/news/1234
+x-priority-token: P-XYZ123
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "total": 1,
+  "data": [
+    {
+      "id": 1234,
+      "headline": "KLP48 Auditions Open",
+      "content": "<p>We are officially opening auditions...</p>",
+      "publish_date": "2024-05-15T08:00:00Z"
+    }
+  ],
+  "message": "Data retrieved successfully"
+}
+```

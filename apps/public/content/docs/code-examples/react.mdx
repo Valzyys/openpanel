@@ -1,0 +1,79 @@
+---
+title: React.js
+description: Standard React Hooks implementation for fetching JSON streams gracefully.
+---
+
+## React.js
+
+When developing exclusively with standard Client-Side React (Create React App, Vite React), data is classically pulled directly from within a `useEffect` hook.
+
+> **⚠️ Security Warning:** Embedding regular API Keys natively into your React application effectively exposes those keys directly within the public browser network tab. Consider proxying them via your own backend as depicted in the `React -> Next.js / Node.js Proxy` implementations if you are storing Priority Tokens.
+
+### Custom Hook Implementations (`useFetchMembers`)
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+// For Vite projects, use import.meta.env
+const JKT_API_KEY = process.env.REACT_APP_JKT48_API_KEY;
+
+export default function LiveStreamingWidget() {
+  const [streams, setStreams] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    // Defines the async function
+    const fetchLive = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://v2.jkt48connect.com/api/jkt48/live?apikey=${JKT_API_KEY}`
+        );
+
+        if (!response.ok) {
+            throw new Error(`HTTP Check Failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        setStreams(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLive();
+  }, []); // Empty dependency array ensures it runs once on mount.
+
+  // Render Loading States reliably
+  if (loading) return <div>Checking live statuses...</div>;
+  if (error) return <div className="error-text">Connection Error: {error}</div>;
+
+  return (
+    <div className="live-container mt-4">
+      <h3>🔴 Members Currently Streaming</h3>
+      {streams.length === 0 ? (
+        <p>No streams available right now. Check back later!</p>
+      ) : (
+        <div className="stream-grid">
+          {streams.map((user, idx) => (
+             <div key={idx} className="card p-2">
+                 <img src={user.img} alt={user.name} width="100%" />
+                 <h4>{user.name}</h4>
+                 <p className="badge">Platform: {user.type}</p>
+             </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Tips for React Rendering
+
+1. Treat rendering arrays gracefully. Always define an empty array `[]` as the default `useState` initialization variable.
+2. Display a loading spinner to prevent UI flashes.
+3. Don't construct continuous Polling mechanisms (`setInterval`) calling the API directly at high speeds (e.g. 1-second loops). Always impose a logical delay timeout (min. 30 seconds) to prevent throttling bans (Rate Limit 429).

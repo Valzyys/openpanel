@@ -1,0 +1,55 @@
+---
+title: Schedule & Events
+description: Fetch KLP48 schedules and upcoming events via the API.
+---
+
+## Schedule & Events API
+
+Endpoints dedicated to retrieving KLP48 schedules and event agendas.
+
+### GET /klp48/schedule
+
+Fetches the complete schedule data. You can filter the schedule using the `status` query parameter.
+
+**Route:**
+```
+GET https://your-api-domain.com/klp48/schedule
+```
+
+**Optional Query Parameters:**
+- `status` — Filters the event lists. Accepts three potential values:
+  - `upcoming`: Shows only future events.
+  - `past`: Shows only finished events.
+  - `today`: Shows strictly events occurring today.
+
+**Examples:**
+```http
+GET /klp48/schedule?status=upcoming
+GET /klp48/schedule?status=past
+GET /klp48/schedule?status=today
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "total": 2,
+  "data": [
+    {
+      "id": 101,
+      "title": "KLP48 Gen 1 Debut Stage",
+      "date": "2025-08-01T19:00:00Z",
+      "status": "upcoming"
+    },
+    {
+      "id": 102,
+      "title": "Meet & Greet KLP",
+      "date": "2025-08-05T12:00:00Z",
+      "status": "upcoming"
+    }
+  ],
+  "message": "Data retrieved successfully"
+}
+```
+
+> **Note:** Dates returned by the KLP48 API are consistently formatted using the standard **ISO 8601** formatting. Ensure your frontend application is parsed to handle standard ISO parsing to local timeframes.

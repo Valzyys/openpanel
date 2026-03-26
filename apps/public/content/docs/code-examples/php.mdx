@@ -1,137 +1,84 @@
 ---
 title: PHP
-description: Examples of integrating and using the JKT48Connect API using basic PHP and cURL.
+description: Basic to Advanced PHP integrations covering Authentication tokens and standard queries.
 ---
 
 ## PHP
 
-PHP is one of the oldest and most widely used server-side languages. Interacting with the JKT48Connect API can be done minimally using standard functions or robustly through `cURL` for more advanced setups.
+Integrating API calls inside PHP enables swift executions directly on the backend avoiding exposing critical variables on Frontend clients.
 
-### Using `file_get_contents` (The Easy Way)
+### Advanced: Using `cURL` with Priority Tokens
 
-The quickest way in PHP is to use `file_get_contents()`. Ensure that `allow_url_fopen` is enabled in your `php.ini` configuration.
+The standard `file_get_contents()` doesn't allow setting explicit headers easily. Using cURL ensures full robust control perfectly fitted for consuming the **KLP48 Priority Tokens**.
 
 ```php
 <?php
 
-$apiKey = 'YOUR_API_KEY';
-$endpoint = 'members';
-$url = "https://v2.jkt48connect.com/api/jkt48/{$endpoint}?apikey={$apiKey}";
+$endpoint = "https://your-api-domain.com/klp48/birthdays";
+$priorityToken = "P-ABCD1234";
 
-// Fetch data
-$jsonResponse = file_get_contents($url);
+// 1. Initialize cURL Session securely
+$ch = curl_init();
 
-if ($jsonResponse === false) {
-    die('Failed to fetch data from the API.');
+// 2. Set necessary headers array string formatting
+$headers = [
+    "x-priority-token: " . $priorityToken,
+    "Content-Type: application/json"
+];
+
+curl_setopt($ch, CURLOPT_URL, $endpoint);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); // Inject Headers specifically here
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Returns data string rather than outputting directly
+curl_setopt($ch, CURLOPT_USERAGENT, "MyKLP48App/1.0");
+
+// 3. Execution & Fetch logic
+$responseBody = curl_exec($ch);
+$httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlError = curl_error($ch);
+
+// 4. Teardown gracefully
+curl_close($ch);
+
+// 5. Validation Architecture corresponding to JSON 
+if ($responseBody === false) {
+    echo "cURL failed entirely: {$curlError}\n";
+    exit;
 }
 
-// Decode the JSON string into an associative array
-$data = json_decode($jsonResponse, true);
-
-if (json_last_error() !== JSON_ERROR_NONE) {
-    die('JSON parsing failed: ' . json_last_error_msg());
+if ($httpStatusCode !== 200) {
+    echo "HTTP Status Exception ({$httpStatusCode}): Response blocked from KLP48 Servers.\n";
+    exit;
 }
 
-$total = count($data);
-echo "Successfully fetched {$total} members.\n";
+// 6. Associative Decoupling JSON Format Array
+$dataList = json_decode($responseBody, true);
 
-// Display names
-foreach ($data as $member) {
-    echo "- " . $member['name'] . "\n";
+if (isset($dataList['success']) && $dataList['success'] === true) {
+    echo "Success Retrieving Payload! Total Array Objects: " . $dataList['total'] . "\n\n";
+    
+    // Cycle Data Loop
+    foreach($dataList['data'] as $member) {
+       // Using the ternary/null-coalescing approach handles empty/omitted field scenarios flawlessly
+       echo "Celebrating this month: " . ($member['name'] ?? 'Undefined') . "\n";
+    }
+} else {
+    echo "Auth Check Validation Error: " . ($dataList['message'] ?? 'Unknown Error') . "\n";
 }
 ```
 
-### Using `cURL` (Recommended Approach)
+### Basic `file_get_contents` Approach
 
-If you are building a serious application, it is highly recommended to use the cURL extension, which handles HTTP requests and responses more robustly:
-
-```php
-<?php
-
-function getJKT48Data($endpoint) {
-    $apiKey = 'YOUR_API_KEY';
-    $baseUrl = 'https://v2.jkt48connect.com';
-    $url = "{$baseUrl}/api/jkt48/{$endpoint}?apikey={$apiKey}";
-
-    $ch = curl_init();
-    
-    // Set cURL options
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    
-    // Execute cURL request
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $errorInfo = curl_error($ch);
-    
-    // Close the connection
-    curl_close($ch);
-    
-    if ($response === false) {
-        throw new Exception("cURL Error: " . $errorInfo);
-    }
-    
-    if ($httpCode !== 200) {
-        throw new Exception("HTTP Error Code: " . $httpCode);
-    }
-    
-    return json_decode($response, true);
-}
-
-// Usage Example
-try {
-    $events = getJKT48Data('events');
-    echo implode(", ", array_column($events, 'title'));
-} catch (Exception $e) {
-    echo "Failed: " . $e->getMessage();
-}
-
-```
-
-### Practical Example: Displaying Theater Schedule in HTML
-
-Here is a practical implementation to render theater schedule details directly from a PHP backend into an HTML page.
+Because JKT48 standard APIs operate exclusively on query strings (`?apikey=`), utilizing the simpler standard file operations behaves completely valid securely.
 
 ```php
 <?php
-// (Make sure the getJKT48Data function is defined as above)
 
-$schedule = [];
-$error = '';
+$key = "J-LMNOP123";
+$json = file_get_contents("https://v2.jkt48connect.com/api/jkt48/theater?apikey={$key}");
 
-try {
-    $schedule = getJKT48Data('theater');
-} catch (Exception $e) {
-    $error = $e->getMessage();
+$upcomingPerformancesList = json_decode($json, true);
+
+if (!empty($upcomingPerformancesList)) {
+    echo count($upcomingPerformancesList) . " Performance(s) Fetched!";
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>JKT48 Theater Schedule</title>
-</head>
-<body>
-    <h1>Upcoming Theater Shows</h1>
-    
-    <?php if ($error): ?>
-        <p style="color:red;"><?php echo htmlspecialchars($error); ?></p>
-    <?php elseif (empty($schedule)): ?>
-        <p>No theater schedules at the moment.</p>
-    <?php else: ?>
-        <ul>
-            <?php foreach ($schedule as $show): ?>
-                <?php if (!empty($show['is_upcoming'])): ?>
-                    <li>
-                        <strong><?php echo htmlspecialchars($show['title']); ?></strong><br>
-                        Setlist: <?php echo htmlspecialchars($show['setlist']); ?><br>
-                        Date: <?php echo htmlspecialchars($show['date']); ?><br>
-                        Members: <?php echo htmlspecialchars(implode(', ', $show['members'] ?? [])); ?>
-                    </li>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
-</body>
-</html>
 ```

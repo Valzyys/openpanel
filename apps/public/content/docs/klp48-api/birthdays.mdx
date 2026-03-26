@@ -1,0 +1,54 @@
+---
+title: Birthdays Endpoint
+description: Find out which KLP48 members are celebrating their birthdays.
+---
+
+## Birthdays API
+
+Track data concerning members who are currently celebrating or will be celebrating their birthdays.
+
+### GET /klp48/birthdays
+
+By default, this endpoint will fetch and return all members who are celebrating their birthdays **this current active month**.
+
+**Route:**
+```
+GET https://your-api-domain.com/klp48/birthdays
+```
+
+**Example Request:**
+```http
+GET /klp48/birthdays
+x-priority-token: P-TOKENHERE
+```
+
+---
+
+### GET /klp48/birthdays/:month
+
+Alternatively, you could query members celebrating in a very specific, defined month.
+
+**Parameters:**
+- `month` *(Required)* — The integer representation of the month (ranging from `1` entirely to `12`).
+
+**Example Request for March (Month 3):**
+```http
+GET /klp48/birthdays/3
+x-priority-token: P-TOKENHERE
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "total": 1,
+  "data": [
+    {
+      "id": 45,
+      "name": "Maria",
+      "birthdate": "2000-03-22"
+    }
+  ],
+  "message": "Data retrieved successfully"
+}
+```
