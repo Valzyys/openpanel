@@ -1,16 +1,16 @@
 ---
-title: Format Response JSON
-description: Panduan mendalam tentang cara memproses struktur JSON yang dikembalikan oleh JKT48Connect API.
+title: JSON Response Format
+description: An in-depth guide on how to process the structured JSON returned by the JKT48Connect API.
 ---
 
-## Format Response JSON
+## JSON Response Format
 
-Setiap interaksi dengan endpoint JKT48Connect API akan mengembalikan representasi data berformat JSON (JavaScript Object Notation). Konsistensi format ini mempermudah parsing dan validasi data secara terpusat di aplikasimu.
+Every interaction with a JKT48Connect API endpoint will return a data representation formatted in JSON (JavaScript Object Notation). This consistent format simplifies parsing and data validation within your application.
 
-### Struktur Umum "Success"
+### General "Success" Structure
 
-Pada request yang valid dan berhasil dieksekusi, API akan mengirim status kode HTTP `200 OK`. 
-Format body JSON yang dikembalikan biasanya berbentuk **Array of Objects**:
+For valid and successfully executed requests, the API will return an HTTP status code of `200 OK`. 
+The returned JSON payload is typically structured as an **Array of Objects**:
 
 ```json
 [
@@ -25,29 +25,29 @@ Format body JSON yang dikembalikan biasanya berbentuk **Array of Objects**:
 ]
 ```
 
-Bergantung pada referensi masing-masing data dari website / IDN / Showroom, beberapa field bisa jadi kosong (empty string `""`), bersifat `null`, atau tersembunyi jika dirasa tak relevan. Selalu gunakan penanganan null saat melakukan parsing JSON. 
+Depending on the underlying data reference from official sources / IDN / Showroom, some fields might be empty strings (`""`), `null`, or omitted if deemed irrelevant. Always implement null-checks when parsing the JSON.
 
-### Variasi Array Kosong
+### Empty Array Variations
 
-Apabila parameter yang dimasukkan benar, namun sistem tak menemukan sekumpulan hasil (misalnya tidak ada member yang sedang live streaming), API akan mengirim **array kosong** ketimbang mengirimkan kode error:
+If the provided parameters are correct, but the system doesn't find a set of results (for instance, there are no members currently broadcasting live), the API will return an **empty array** rather than dispatching an error code:
 
 ```json
 []
 ```
 
-Contoh di JavaScript:
+Example in JavaScript:
 
 ```javascript
 const liveData = await response.json();
 
 if (!liveData.length) {
-    console.log("Saat ini tak ada member JKT48 yang sedang Live.");
+    console.log("There are no JKT48 members currently live at the moment.");
 }
 ```
 
-### Struktur Umum "Error"
+### General "Error" Structure
 
-Jika terjadi kesalahan client-side (seperti absennya param `apikey`, rate limit berlebih) atau kesalahan internal server, response yang dikembalikan biasanya berupa sebuah Object tunggal dengan field `status` dan `message`. API tidak akan mengembalikan bentuk *Array*, dan HTTP Headers akan merespon bukan `200 OK`.
+If a client-side error occurs (such as a missing `apikey` parameter, or exceeding rate limits) or an internal server error happens, the returned response will typically be a single Object containing `status` and `message` fields. The API will NOT return an Array, and the HTTP Headers will reflect a non-`200 OK` status.
 
 ```json
 {
@@ -56,10 +56,10 @@ Jika terjadi kesalahan client-side (seperti absennya param `apikey`, rate limit 
 }
 ```
 
-Contoh penerapan error-handling umum:
+Example of common client-side error-handling implementation:
 
 ```javascript
-fetch("https://v2.jkt48connect.com/api/jkt48/members?apikey=SALAH")
+fetch("https://v2.jkt48connect.com/api/jkt48/members?apikey=WRONGKEY")
   .then(response => {
      if (!response.ok) {
          return response.json().then(err => { throw new Error(err.message) });
@@ -67,20 +67,20 @@ fetch("https://v2.jkt48connect.com/api/jkt48/members?apikey=SALAH")
      return response.json();
   })
   .catch(error => {
-     console.error("Gagal mendapatkan data JKT48:", error.message);
+     console.error("Failed to retrieve JKT48 data:", error.message);
   });
 ```
 
-### Format Waktu 
+### Datetime Formatting
 
-Untuk data tanggal dan jam secara general dituliskan dalam format `YYYY-MM-DD` atau dalam format **ISO 8601 UTC Time**. 
+Date and time values are generally formatted as `YYYY-MM-DD` or use the **ISO 8601 UTC Time** standard.
 
-Data `started_at` dari list Live Streaming merupakan format ISO 8601 (`"2025-04-06T12:03:58.000Z"`), dengan akhiran Z mengacu kepada zona UTC. Kamu perlu menyesuaikan ke zona waktu Jakarta (WIB, UTC+7) pada saat proses rendering/formatting.
+The `started_at` data from the Live Streaming list utilizes the ISO 8601 format (`"2025-04-06T12:03:58.000Z"`), where the trailing 'Z' denotes the UTC timezone (Zero offset). You will need to adjust this to Jakarta local time (WIB, UTC+7) or your users' local timezone during rendering/formatting.
 
-**Format Lokal WIB via Javascript:**
+**Converting to Local Time via Javascript:**
 
 ```javascript
 const serverDate = new Date("2025-04-06T12:03:58.000Z");
-// Secara otomatis JavaScript akan mengkonversinya ke locale zona waktu perangkat user
-console.log(serverDate.toLocaleString('id-ID'));
+// JavaScript automatically converts this to the user's device locale timezone
+console.log(serverDate.toLocaleString());
 ```

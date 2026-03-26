@@ -1,83 +1,83 @@
 ---
-title: Apa itu JKT48Connect?
-description: JKT48Connect adalah REST API yang menyediakan data lengkap seputar JKT48. Akses data member, jadwal teater, live streaming, berita, event, dan lainnya dengan mudah melalui HTTP request sederhana.
+title: What is JKT48Connect?
+description: JKT48Connect is a REST API providing comprehensive data about JKT48. Easily access member profiles, theater schedules, live streams, news, events, and more through simple HTTP requests.
 ---
 
 import { KeyIcon, RocketIcon, CodeIcon, BookOpenIcon, ZapIcon, UsersIcon } from 'lucide-react'
 
-## ✨ Fitur Utama
+## ✨ Key Features
 
-- **👥 Data Member** — Profil lengkap semua member JKT48 aktif dan trainee
-- **🎭 Jadwal Teater** — Informasi jadwal pertunjukan teater terbaru
-- **📡 Live Streaming** — Data real-time member yang sedang live di IDN, Showroom, & YouTube
-- **📰 Berita & Pengumuman** — Berita terbaru langsung dari JKT48
-- **🎪 Event** — Daftar event dan off-air show JKT48
-- **🎂 Ulang Tahun** — Informasi ulang tahun para member
-- **🔑 Autentikasi Sederhana** — Cukup gunakan API key sebagai query parameter
-- **⚡ Respons Cepat** — JSON response yang terstruktur dan konsisten
-- **🌐 Platform Agnostic** — Bisa diakses dari bahasa pemrograman apapun
+- **👥 Member Data** — Complete profiles of all active JKT48 members and trainees
+- **🎭 Theater Schedule** — Latest theater performance schedules
+- **📡 Live Streaming** — Real-time data of members currently live on IDN, Showroom, & YouTube
+- **📰 News & Announcements** — Latest official news directly from JKT48
+- **🎪 Events** — List of upcoming JKT48 events and off-air shows
+- **🎂 Birthdays** — Member birthday information
+- **🔑 Simple Authentication** — Just provide your API key as a query parameter
+- **⚡ Fast Response** — Structured and consistent JSON responses
+- **🌐 Platform Agnostic** — Accessible from any programming language
 
-## 📊 Daftar Endpoint
+## 📊 Endpoints List
 
-| Endpoint | Deskripsi | Method |
-|----------|-----------|--------|
-| `/api/jkt48/members` | Daftar semua member JKT48 | GET |
-| `/api/jkt48/live` | Live streaming dari semua platform | GET |
-| `/api/jkt48/live/idn` | Live streaming dari IDN saja | GET |
-| `/api/jkt48/theater` | Jadwal pertunjukan teater | GET |
-| `/api/jkt48/news` | Berita dan pengumuman terbaru | GET |
-| `/api/jkt48/events` | Daftar event JKT48 | GET |
-| `/api/jkt48/birthday` | Ulang tahun member | GET |
+| Endpoint | Description | Method |
+|----------|-------------|--------|
+| `/api/jkt48/members` | List of all JKT48 members | GET |
+| `/api/jkt48/live` | Live streams from all platforms | GET |
+| `/api/jkt48/live/idn` | Live streams exclusively from IDN | GET |
+| `/api/jkt48/theater` | Theater performance schedules | GET |
+| `/api/jkt48/news` | Latest news and announcements | GET |
+| `/api/jkt48/events` | List of JKT48 events | GET |
+| `/api/jkt48/birthday` | Member birthdays | GET |
 
 ## 🚀 Quick Start
 
-Untuk mulai menggunakan JKT48Connect API, kamu perlu mendapatkan API key terlebih dahulu.
+To start using the JKT48Connect API, you need to obtain an API key first.
 
 <Cards>
   <Card
     href="/docs/get-started/quick-start"
-    title="Mulai Cepat"
+    title="Quick Start"
     icon={<RocketIcon />}
-    description="Dapatkan API key dan kirim request pertamamu"
+    description="Get your API key and send your first request"
   />
   <Card
     href="/docs/api/members"
     title="API Reference"
     icon={<BookOpenIcon />}
-    description="Dokumentasi lengkap semua endpoint"
+    description="Complete documentation for all endpoints"
   />
 </Cards>
 
-1. **[Dapatkan API Key](/docs/get-started/quick-start)** — Daftar dan dapatkan API key
-2. **[Autentikasi](/docs/get-started/authentication)** — Pelajari cara menggunakan API key
-3. **[Request Pertama](/docs/get-started/first-request)** — Kirim request pertamamu
-4. **[Contoh Kode](/docs/(tracking)/sdks)** — Lihat contoh di berbagai bahasa pemrograman
+1. **[Get an API Key](/docs/get-started/quick-start)** — Register and obtain your API key
+2. **[Authentication](/docs/get-started/authentication)** — Learn how to use your API key
+3. **[First Request](/docs/get-started/first-request)** — Send your first request
+4. **[Code Examples](/docs/code-examples/javascript)** — View examples in various programming languages
 
-## ⚡ Contoh Request Cepat
+## ⚡ Quick Request Examples
 
 ```bash
-# Ambil semua data member JKT48
+# Get all JKT48 member data
 curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
 
-# Cek siapa yang sedang live
+# Check who is currently live
 curl "https://v2.jkt48connect.com/api/jkt48/live?apikey=YOUR_API_KEY"
 
-# Lihat jadwal teater
+# Check the theater schedule
 curl "https://v2.jkt48connect.com/api/jkt48/theater?apikey=YOUR_API_KEY"
 ```
 
-## 🔑 Autentikasi
+## 🔑 Authentication
 
-Semua request ke JKT48Connect API memerlukan API key. Tambahkan API key sebagai query parameter:
+All requests to the JKT48Connect API require an API key. Add the API key as a query parameter:
 
 ```
 https://v2.jkt48connect.com/api/jkt48/{endpoint}?apikey=YOUR_API_KEY
 ```
 
-Dapatkan API key di [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi).
+Get your API key at [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi).
 
-## 💬 Butuh Bantuan?
+## 💬 Need Help?
 
-- Hubungi via [WhatsApp](https://wa.me/6285701479245)
-- Kunjungi [Dokumentasi Resmi](https://docs.jkt48connect.com)
-- Dibuat oleh **JKT48ConnectCORP — Valzyy** 🇮🇩
+- Contact us via [WhatsApp](https://wa.me/6285701479245)
+- Visit our [Official Documentation](https://docs.jkt48connect.com)
+- Created by **JKT48ConnectCORP — Valzyy** 🇮🇩

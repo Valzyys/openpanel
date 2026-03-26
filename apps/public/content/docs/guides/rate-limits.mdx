@@ -1,17 +1,17 @@
 ---
-title: Rate Limit & Best Practices
-description: Memahami batas maksimum request (rate limits) dan tips best practices saat memanggil API JKT48Connect untuk performa optimal.
+title: Rate Limits & Best Practices
+description: Understand maximum request thresholds (rate limits) and best practice tips when calling the JKT48Connect API for optimal performance.
 ---
 
-## Rate Limit dan Best Practices
+## Rate Limits and Best Practices
 
-Sistem JKT48Connect menerapkan proteksi Rate Limiting untuk menjaga performa server, stabilitas waktu respons, serta pengalaman setara bagi semua pengguna.
+The JKT48Connect system enforces Rate Limiting protection to maintain server performance, ensure response time stability, and provide an equitable experience for all users.
 
-### Konsep Dasar API Key & Throttle
+### Basic Concepts of API Keys & Throttling
 
-Setiap API key memiliki limit request maksimum yang tidak boleh ditembus secara rentetan cepat. Sistem secara otomatis mendeteksi dan dapat memberikan status respons HTTP `429 Too Many Requests` apabila kamu melewati kuota akses per hari atau mengakses query terlalu agresif secara konstan per-detiknya.
+Each API key has a maximum request quota that cannot be exceeded in rapid succession. The system automatically detects aggressive querying and will return an HTTP response status of `429 Too Many Requests` if you exceed your daily access limit or spam queries consecutively per second.
 
-**Tanda Melewati Limit:**
+**Exceeding the Limit Indicator:**
 
 ```json
 {
@@ -21,35 +21,35 @@ Setiap API key memiliki limit request maksimum yang tidak boleh ditembus secara 
 ```
 **HTTP Code:** `429`
 
-Jika menerima kode ini, fungsi integrasimu **harus menunda sesaat** jalannya aplikasi. Jangan memaksa hit query dalam perulangan tak wajar (while (true) tanpa break), karena akan berisiko penonaktifan akun beserta blacklist IP Address.
+If you encounter this code, your integration function **must temporarily sleep/delay** its execution. Never force queries inside an unnatural loop (`while (true)` without a break delay), as this runs the risk of account deactivation and IP Address blacklisting.
 
 
-### Praktik Terbaik Integrasi
+### Integration Best Practices
 
-Terapkan prosedur standard pemanggilan network call yang dioptimalkan untuk meminimalisasi hit backend server JKT48Connect:
+Implement standard, optimized network call procedures to minimize excessive hits against the JKT48Connect backend servers:
 
-#### 1. Implementasikan Caching Level Aplikasi (Server-side)
+#### 1. Implement Application-Level Caching (Server-side)
 
-Alih-alih membuat fungsi yang langsung memanggil API JKT48Connect setiap kali ada interaksi, simpan hasil API sementara dalam sebuah penampungan lokal memori (`memcached`, `redis`, atau sekedar variabel memory framework/server-state standar PHP/Node.JS) sebelum dirender massal.
+Instead of designing functions that call the JKT48Connect API directly every time there is a user interaction, temporarily store the API results in local memory (`memcached`, `redis`, or simply a standard memory variable within your framework like PHP/Node.JS) before rendering them en masse.
 
-*Contoh skema caching memori JS sederhana:*
+*Simple JS memory caching scheme example:*
 ```javascript
 let cacheMembers = null;
 let lastFetchTime = 0;
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 Jam. (Sangat direkomendasikan untuh membatasi traffic)
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 Hour. (Highly recommended to limit traffic)
 
 async function getMembersList() {
     const now = Date.now();
-    // Cache masih segar
+    // Cache is still fresh
     if (cacheMembers !== null && (now - lastFetchTime) < CACHE_TTL_MS) {
         return cacheMembers; 
     }
     
-    // Tarik fresh dari network API
+    // Pull fresh data from the API network
     const res = await fetch(`https://v2.jkt48connect.com/api/jkt48/members?apikey=${KEY}`);
     const data = await res.json();
     
-    // Perbarui Cache state
+    // Update Cache State
     cacheMembers = data;
     lastFetchTime = now;
     
@@ -57,12 +57,12 @@ async function getMembersList() {
 }
 ```
 
-#### 2. Hanya Ambil Resource Tertentu Saat Diperlukan
+#### 2. Fetch Specific Resources Only When Needed
 
-Banyak komponen situsmu tidak membutuhkan fresh live feed di tiap halaman. Hanya lakukan request get live `api/jkt48/live` jika end-user memang sedang mengunjungi screen/activity di mobile app bersangkutan, tidak secara pasif dan terulang terus menerus di back-ground kecuali dirancang khusus dengan cooldown / sleep per-menit.
+Most sections of your website do not require a fresh live feed on every page load. Only make a GET request to `api/jkt48/live` if the end-user is actively visiting the relevant screen/activity in your mobile app, not passively running it continuously in the background unless specifically designed with a per-minute sleep cooldown.
 
-#### 3. Simpan API Key sebagai Rahasia (No Exposure)
+#### 3. Keep Your API Key Secret (No Exposure)
 
-Meskipun JKT48Connect tidak mencegahmu memanggil *Request Fetch Frontend via Browser*, hal ini akan membongkar letak struktur rahasia `?apikey=` yang dapat dirampas user, dibajak, atau dipakai massal oleh bot spam script ke akun lain. 
+While JKT48Connect does not block you from executing a *Frontend Fetch Request via the Browser*, doing so exposes your secret query parameter `?apikey=`. This allows users to intercept, hijack, or mass-utilize your key on spam bots.
 
-Bangun rute *Proxy Backend Server* mu secara internal sendiri jika berniat membangun Website Static (React / Vue) untuk kemudian diarahkan dan disaring dahulu sebelum ditransformasi kembali ke pengguna awam.
+Build your own internal *Backend Proxy Server* if you intend to create a static website (like React / Vue), directing frontend requests to your proxy first, where your real API keys are securely filtered and appended.

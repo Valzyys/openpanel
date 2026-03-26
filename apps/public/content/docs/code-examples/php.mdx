@@ -1,15 +1,15 @@
 ---
 title: PHP
-description: Contoh integrasi dan penggunaan JKT48Connect API menggunakan bahasa PHP dasar maupun dengan CURL.
+description: Examples of integrating and using the JKT48Connect API using basic PHP and cURL.
 ---
 
 ## PHP
 
-PHP adalah salah satu bahasa server-side tertua yang masih banyak digunakan. Berinteraksi dengan JKT48Connect API bisa dilakukan minimalis melalui fungsi standar atau `cURL` untuk opsi yang lebih advanced.
+PHP is one of the oldest and most widely used server-side languages. Interacting with the JKT48Connect API can be done minimally using standard functions or robustly through `cURL` for more advanced setups.
 
-### Menggunakan `file_get_contents` (Cara Mudah)
+### Using `file_get_contents` (The Easy Way)
 
-Cara termudah dan tercepat di PHP adalah menggunakan `file_get_contents()`. Pastikan fitur `allow_url_fopen` diaktifkan di konfigurasi `php.ini`.
+The quickest way in PHP is to use `file_get_contents()`. Ensure that `allow_url_fopen` is enabled in your `php.ini` configuration.
 
 ```php
 <?php
@@ -18,32 +18,32 @@ $apiKey = 'YOUR_API_KEY';
 $endpoint = 'members';
 $url = "https://v2.jkt48connect.com/api/jkt48/{$endpoint}?apikey={$apiKey}";
 
-// Ambil data
+// Fetch data
 $jsonResponse = file_get_contents($url);
 
 if ($jsonResponse === false) {
-    die('Gagal mengambil data dari API.');
+    die('Failed to fetch data from the API.');
 }
 
-// Ubah JSON string menjadi associative string array
+// Decode the JSON string into an associative array
 $data = json_decode($jsonResponse, true);
 
 if (json_last_error() !== JSON_ERROR_NONE) {
-    die('Gagal parsing JSON: ' . json_last_error_msg());
+    die('JSON parsing failed: ' . json_last_error_msg());
 }
 
 $total = count($data);
-echo "Berhasil mengambil {$total} member.\n";
+echo "Successfully fetched {$total} members.\n";
 
-// Menampilkan nama
+// Display names
 foreach ($data as $member) {
     echo "- " . $member['name'] . "\n";
 }
 ```
 
-### Menggunakan `cURL` (Cara Direkomendasikan)
+### Using `cURL` (Recommended Approach)
 
-Jika kamu membuat aplikasi serius, sangat disarankan menggunakan ekstensi cURL yang lebih tangguh menangani request dan respon HTTP:
+If you are building a serious application, it is highly recommended to use the cURL extension, which handles HTTP requests and responses more robustly:
 
 ```php
 <?php
@@ -55,21 +55,21 @@ function getJKT48Data($endpoint) {
 
     $ch = curl_init();
     
-    // Set opsi CURL
+    // Set cURL options
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     
-    // Eksekusi CURL
+    // Execute cURL request
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $errorInfo = curl_error($ch);
     
-    // Tutup koneksi
+    // Close the connection
     curl_close($ch);
     
     if ($response === false) {
-        throw new Exception("CURL Error: " . $errorInfo);
+        throw new Exception("cURL Error: " . $errorInfo);
     }
     
     if ($httpCode !== 200) {
@@ -79,29 +79,29 @@ function getJKT48Data($endpoint) {
     return json_decode($response, true);
 }
 
-// Pemakaian
+// Usage Example
 try {
     $events = getJKT48Data('events');
     echo implode(", ", array_column($events, 'title'));
 } catch (Exception $e) {
-    echo "Gagal: " . $e->getMessage();
+    echo "Failed: " . $e->getMessage();
 }
 
 ```
 
-### Contoh Sederhana: Menampilkan Profil Member di HTML
+### Practical Example: Displaying Theater Schedule in HTML
 
-Berikut adalah implementasi praktis untuk merender detail jadwal teater secara langsung dari backend PHP ke halaman HTML.
+Here is a practical implementation to render theater schedule details directly from a PHP backend into an HTML page.
 
 ```php
 <?php
-// (Pastikan method getJKT48Data sudah didefinisikan seperti di atas)
+// (Make sure the getJKT48Data function is defined as above)
 
-$jadwal = [];
+$schedule = [];
 $error = '';
 
 try {
-    $jadwal = getJKT48Data('theater');
+    $schedule = getJKT48Data('theater');
 } catch (Exception $e) {
     $error = $e->getMessage();
 }
@@ -109,24 +109,24 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jadwal Teater JKT48</title>
+    <title>JKT48 Theater Schedule</title>
 </head>
 <body>
-    <h1>Jadwal Teater Terdekat</h1>
+    <h1>Upcoming Theater Shows</h1>
     
     <?php if ($error): ?>
         <p style="color:red;"><?php echo htmlspecialchars($error); ?></p>
-    <?php elseif (empty($jadwal)): ?>
-        <p>Tidak ada jadwal teater saat ini.</p>
+    <?php elseif (empty($schedule)): ?>
+        <p>No theater schedules at the moment.</p>
     <?php else: ?>
         <ul>
-            <?php foreach ($jadwal as $show): ?>
+            <?php foreach ($schedule as $show): ?>
                 <?php if (!empty($show['is_upcoming'])): ?>
                     <li>
                         <strong><?php echo htmlspecialchars($show['title']); ?></strong><br>
                         Setlist: <?php echo htmlspecialchars($show['setlist']); ?><br>
-                        Tanggal: <?php echo htmlspecialchars($show['date']); ?><br>
-                        Member: <?php echo htmlspecialchars(implode(', ', $show['members'] ?? [])); ?>
+                        Date: <?php echo htmlspecialchars($show['date']); ?><br>
+                        Members: <?php echo htmlspecialchars(implode(', ', $show['members'] ?? [])); ?>
                     </li>
                 <?php endif; ?>
             <?php endforeach; ?>

@@ -1,11 +1,11 @@
 ---
-title: Endpoint Members
-description: Dokumentasi lengkap endpoint /api/jkt48/members untuk mengambil data profil semua member JKT48.
+title: Members Endpoint
+description: Comprehensive documentation for the /api/jkt48/members endpoint to fetch all JKT48 member profile data.
 ---
 
 ## GET /api/jkt48/members
 
-Endpoint ini mengembalikan daftar lengkap semua member JKT48, termasuk member aktif, trainee, dan member yang sudah graduate.
+This endpoint returns a complete list of all JKT48 members, including active members, trainees, and graduated members.
 
 ### Request
 
@@ -13,17 +13,17 @@ Endpoint ini mengembalikan daftar lengkap semua member JKT48, termasuk member ak
 GET https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY
 ```
 
-| Parameter | Tipe | Wajib | Deskripsi |
-|-----------|------|-------|-----------|
-| `apikey` | string | ✅ | API key untuk autentikasi |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `apikey` | string | ✅ | API key for authentication |
 
-### Contoh Request
+### Example Request
 
 ```bash
 curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
 ```
 
-### Contoh Response
+### Example Response
 
 ```json
 [
@@ -51,17 +51,17 @@ curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
 ]
 ```
 
-### Struktur Response
+### Response Structure
 
-| Field | Tipe | Deskripsi |
-|-------|------|-----------|
-| `name` | string | Nama lengkap member |
-| `img` | string | URL foto profil member |
-| `generation` | string | Generasi member (mis: "JKT48 Gen 12") |
-| `status` | string | Status member: `active`, `trainee`, `graduated` |
-| `is_graduate` | boolean | `true` jika member sudah graduate |
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Full name of the member |
+| `img` | string | URL of the member's profile picture |
+| `generation` | string | Member's generation (e.g., "JKT48 Gen 12") |
+| `status` | string | Member's status: `active`, `trainee`, `graduated` |
+| `is_graduate` | boolean | `true` if the member has graduated |
 
-### Contoh Penggunaan
+### Usage Examples
 
 #### JavaScript
 
@@ -74,9 +74,9 @@ async function getMembers() {
   );
   const members = await response.json();
   
-  // Filter hanya member aktif
+  // Filter for active members only
   const activeMembers = members.filter(m => !m.is_graduate);
-  console.log(`Total member aktif: ${activeMembers.length}`);
+  console.log(`Total active members: ${activeMembers.length}`);
   
   activeMembers.forEach(member => {
     console.log(`${member.name} (${member.generation})`);
@@ -100,9 +100,9 @@ def get_members():
     response.raise_for_status()
     members = response.json()
     
-    # Filter hanya member aktif
+    # Filter for active members only
     active = [m for m in members if not m.get('is_graduate', False)]
-    print(f"Total member aktif: {len(active)}")
+    print(f"Total active members: {len(active)}")
     
     for member in active:
         print(f"{member['name']} ({member.get('generation', 'N/A')})")
@@ -120,12 +120,12 @@ $url = "https://v2.jkt48connect.com/api/jkt48/members?apikey={$apiKey}";
 $response = file_get_contents($url);
 $members = json_decode($response, true);
 
-// Filter member aktif
+// Filter active members
 $activeMembers = array_filter($members, function($m) {
     return !$m['is_graduate'];
 });
 
-echo "Total member aktif: " . count($activeMembers) . "\n";
+echo "Total active members: " . count($activeMembers) . "\n";
 
 foreach ($activeMembers as $member) {
     echo "{$member['name']} ({$member['generation']})\n";
@@ -135,6 +135,6 @@ foreach ($activeMembers as $member) {
 
 ### Tips
 
-- Data member di-update secara berkala mengikuti informasi resmi dari JKT48
-- Gunakan field `is_graduate` untuk memfilter member aktif dan alumni
-- Response berupa array JSON, jadi pastikan parsing-mu mendukung array
+- Member data is updated periodically following official announcements from JKT48
+- Use the `is_graduate` field to filter between active members and alumni
+- The response is a JSON array, so ensure your parsing logic supports array iteration

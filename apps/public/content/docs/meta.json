@@ -2,15 +2,15 @@
   "pages": [
     "---Introduction---",
     "index",
-    "---Memulai---",
+    "---Getting Started---",
     "...get-started",
     "---API Reference---",
     "...api",
-    "---Contoh Kode---",
+    "---Code Examples---",
     "...code-examples",
-    "---Panduan---",
+    "---Guides---",
     "...guides",
-    "---FAQ & Lainnya---",
+    "---FAQ & Support---",
     "...support"
   ]
 }

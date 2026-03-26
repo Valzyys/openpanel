@@ -2,7 +2,10 @@
   "pages": [
     "javascript",
     "python",
-    "php"
+    "php",
+    "go",
+    "java",
+    "csharp"
   ],
-  "title": "Contoh Kode"
+  "title": "Code Examples"
 }

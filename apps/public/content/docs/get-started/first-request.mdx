@@ -1,36 +1,36 @@
 ---
-title: Request Pertama
-description: Panduan mendetail membuat request pertama ke JKT48Connect API dan memproses response JSON yang dikembalikan.
+title: First Request
+description: A detailed guide to making your first request to the JKT48Connect API and processing the returned JSON response.
 ---
 
-## Membuat Request Pertama
+## Making Your First Request
 
-Setelah mendapatkan API key, saatnya membuat request pertamamu ke JKT48Connect API.
+After obtaining your API key, it's time to make your first request to the JKT48Connect API.
 
-### Struktur Request
+### Request Structure
 
-Semua request ke JKT48Connect API menggunakan format berikut:
+All requests to the JKT48Connect API use the following format:
 
 ```
 GET https://v2.jkt48connect.com/api/jkt48/{endpoint}?apikey=YOUR_API_KEY
 ```
 
-| Komponen | Deskripsi |
-|----------|-----------|
+| Component | Description |
+|-----------|-------------|
 | `https://v2.jkt48connect.com` | Base URL |
-| `/api/jkt48/` | Prefix semua endpoint |
-| `{endpoint}` | Nama endpoint (misalnya `members`, `live`) |
-| `?apikey=` | Query parameter untuk autentikasi |
+| `/api/jkt48/` | Prefix for all endpoints |
+| `{endpoint}` | Endpoint name (e.g., `members`, `live`) |
+| `?apikey=` | Query parameter for authentication |
 
-### Contoh: Mengambil Data Member
+### Example: Fetching Member Data
 
-#### Menggunakan cURL
+#### Using cURL
 
 ```bash
 curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
 ```
 
-#### Menggunakan JavaScript (Fetch)
+#### Using JavaScript (Fetch)
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -47,21 +47,21 @@ async function getMembers() {
     
     const members = await response.json();
     
-    // Tampilkan nama semua member
+    // Display all member names
     members.forEach(member => {
       console.log(`${member.name} - ${member.generation}`);
     });
     
     return members;
   } catch (error) {
-    console.error('Gagal mengambil data:', error.message);
+    console.error('Failed to fetch data:', error.message);
   }
 }
 
 getMembers();
 ```
 
-#### Menggunakan Python
+#### Using Python
 
 ```python
 import requests
@@ -77,20 +77,20 @@ def get_members():
         
         members = response.json()
         
-        # Tampilkan nama semua member
+        # Display all member names
         for member in members:
             print(f"{member['name']} - {member.get('generation', 'N/A')}")
         
         return members
     except requests.exceptions.RequestException as e:
-        print(f"Gagal mengambil data: {e}")
+        print(f"Failed to fetch data: {e}")
 
 get_members()
 ```
 
-### Memahami Response
+### Understanding the Response
 
-JKT48Connect API selalu mengembalikan data dalam format **JSON**. Berikut contoh response dari endpoint `/api/jkt48/members`:
+The JKT48Connect API always returns data in **JSON** format. Here is an example response from the `/api/jkt48/members` endpoint:
 
 ```json
 [
@@ -109,7 +109,7 @@ JKT48Connect API selalu mengembalikan data dalam format **JSON**. Berikut contoh
 ]
 ```
 
-### Contoh: Cek Member yang Sedang Live
+### Example: Checking Who is Live
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -121,11 +121,11 @@ async function checkLive() {
   const liveData = await response.json();
   
   if (liveData.length === 0) {
-    console.log('Tidak ada member yang sedang live saat ini.');
+    console.log('No members are currently live right now.');
   } else {
     liveData.forEach(member => {
-      console.log(`🔴 ${member.name} sedang live di ${member.type}`);
-      console.log(`   Mulai: ${member.started_at}`);
+      console.log(`🔴 ${member.name} is live on ${member.type}`);
+      console.log(`   Started at: ${member.started_at}`);
     });
   }
 }
@@ -133,17 +133,17 @@ async function checkLive() {
 checkLive();
 ```
 
-### Menangani Error
+### Handling Errors
 
-Pastikan untuk selalu menangani kemungkinan error:
+Make sure to always handle potential errors:
 
-| HTTP Status | Deskripsi |
-|-------------|-----------|
-| `200` | Sukses — data berhasil dikembalikan |
-| `403` | Forbidden — API key tidak valid |
-| `404` | Not Found — endpoint tidak ditemukan |
-| `429` | Too Many Requests — rate limit terlampaui |
-| `500` | Server Error — coba lagi nanti |
+| HTTP Status | Description |
+|-------------|-------------|
+| `200` | Success — data returned successfully |
+| `403` | Forbidden — Invalid API key |
+| `404` | Not Found — Endpoint does not exist |
+| `429` | Too Many Requests — Rate limit exceeded |
+| `500` | Server Error — Try again later |
 
 ```javascript
 async function safeRequest(endpoint) {
@@ -153,11 +153,11 @@ async function safeRequest(endpoint) {
     );
     
     if (response.status === 403) {
-      throw new Error('API key tidak valid. Periksa kembali API key-mu.');
+      throw new Error('Invalid API key. Check your API key again.');
     }
     
     if (response.status === 429) {
-      throw new Error('Terlalu banyak request. Tunggu sebentar lalu coba lagi.');
+      throw new Error('Too many requests. Please wait a moment and try again.');
     }
     
     if (!response.ok) {
@@ -171,8 +171,8 @@ async function safeRequest(endpoint) {
 }
 ```
 
-### Langkah Selanjutnya
+### Next Steps
 
-- [Referensi Endpoint Members](/docs/api/authentication)
-- [Referensi Endpoint Live](/docs/api/track)
-- [Contoh Kode Lengkap](/docs/(tracking)/sdks)
+- [Members Endpoint Reference](/docs/api/members)
+- [Live Endpoint Reference](/docs/api/live)
+- [Full Code Examples](/docs/code-examples/javascript)

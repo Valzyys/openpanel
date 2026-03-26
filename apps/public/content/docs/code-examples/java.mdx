@@ -1,0 +1,129 @@
+---
+title: Java
+description: Examples of using the JKT48Connect API with Java.
+---
+
+## Java
+
+Using Java to connect to the JKT48Connect API can be done easily via `java.net.http.HttpClient` (available since Java 11) or utilizing libraries like `OkHttp` or `Retrofit`.
+
+### Using Java 11+ HttpClient
+
+No external libraries are needed if you use Java 11's built-in `HttpClient`. However, you will likely need JSON processing tools like `Jackson` or `Gson` to parse the responses automatically. In this basic example, we will just print the raw JSON response.
+
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+
+public class JKT48ConnectExample {
+
+    private static final String API_KEY = "YOUR_API_KEY";
+    private static final String BASE_URL = "https://v2.jkt48connect.com/api/jkt48";
+
+    public static void main(String[] args) {
+        String endpoint = "/live";
+        
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+                
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + endpoint + "?apikey=" + API_KEY))
+                .GET()
+                .build();
+                
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            
+            if (response.statusCode() == 200) {
+                System.out.println("Success! JSON payload:");
+                System.out.println(response.body());
+            } else {
+                System.out.println("HTTP Error: " + response.statusCode());
+                System.out.println("Message: " + response.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Using OkHttp & Gson
+
+If you want a more robust setup for parsing objects directly, using `OkHttp` for the networking and `Gson` for the object mapping is highly recommended in Java projects (or Android).
+
+**1. Dependencies (Maven):**
+
+```xml
+<dependency>
+    <groupId>com.squareup.okhttp3</groupId>
+    <artifactId>okhttp</artifactId>
+    <version>4.11.0</version>
+</dependency>
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.10.1</version>
+</dependency>
+```
+
+**2. Example Implementation:**
+
+```java
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+
+public class JKT48ApiClient {
+
+    // Define object structure
+    static class Member {
+        String name;
+        String generation;
+        boolean is_graduate;
+    }
+
+    public static void main(String[] args) {
+        OkHttpClient client = new OkHttpClient();
+        Gson gson = new Gson();
+        
+        String url = "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY";
+        
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            }
+            
+            // Parse array string into List of Member objects
+            String responseData = response.body().string();
+            Type listType = new TypeToken<List<Member>>(){}.getType();
+            List<Member> members = gson.fromJson(responseData, listType);
+            
+            System.out.println("Successfully fetched " + members.size() + " members.");
+            
+            for (int i = 0; i < Math.min(3, members.size()); i++) {
+                Member m = members.get(i);
+                System.out.println("- " + m.name + " (" + m.generation + ")");
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```

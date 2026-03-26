@@ -1,11 +1,11 @@
 ---
-title: Endpoint Theater
-description: Dokumentasi endpoint /api/jkt48/theater untuk mengakses jadwal pertunjukan teater JKT48.
+title: Theater Endpoint
+description: Documentation for the /api/jkt48/theater endpoint to fetch the JKT48 theater performance schedule.
 ---
 
 ## GET /api/jkt48/theater
 
-Endpoint ini mengembalikan data jadwal pertunjukan teater JKT48 yang akan datang dan yang sudah berlalu.
+This endpoint returns data regarding upcoming and past JKT48 theater performance schedules.
 
 ### Request
 
@@ -13,17 +13,17 @@ Endpoint ini mengembalikan data jadwal pertunjukan teater JKT48 yang akan datang
 GET https://v2.jkt48connect.com/api/jkt48/theater?apikey=YOUR_API_KEY
 ```
 
-| Parameter | Tipe | Wajib | Deskripsi |
-|-----------|------|-------|-----------|
-| `apikey` | string | ✅ | API key untuk autentikasi |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `apikey` | string | ✅ | API key for authentication |
 
-### Contoh Request
+### Example Request
 
 ```bash
 curl "https://v2.jkt48connect.com/api/jkt48/theater?apikey=YOUR_API_KEY"
 ```
 
-### Contoh Response
+### Example Response
 
 ```json
 [
@@ -43,19 +43,19 @@ curl "https://v2.jkt48connect.com/api/jkt48/theater?apikey=YOUR_API_KEY"
 ]
 ```
 
-### Struktur Response
+### Response Structure
 
-| Field | Tipe | Deskripsi |
-|-------|------|-----------|
-| `title` | string | Judul pertunjukan |
-| `setlist` | string | Nama setlist yang ditampilkan |
-| `date` | string | Tanggal pertunjukan (YYYY-MM-DD) |
-| `time` | string | Waktu mulai pertunjukan |
-| `venue` | string | Lokasi pertunjukan |
-| `members` | array | Daftar nama member yang tampil |
-| `is_upcoming` | boolean | `true` jika pertunjukan belum berlangsung |
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Performance title |
+| `setlist` | string | Name of the performed setlist |
+| `date` | string | Performance date (YYYY-MM-DD) |
+| `time` | string | Start time |
+| `venue` | string | Location of the performance |
+| `members` | array | List of member names participating in the show |
+| `is_upcoming` | boolean | `true` if the show has not occurred yet |
 
-### Contoh Penggunaan
+### Usage Examples
 
 #### JavaScript
 
@@ -68,10 +68,10 @@ async function getTheaterSchedule() {
   );
   const schedule = await response.json();
   
-  // Filter pertunjukan yang akan datang
+  // Filter for upcoming shows
   const upcoming = schedule.filter(show => show.is_upcoming);
   
-  console.log(`🎭 ${upcoming.length} pertunjukan yang akan datang:\n`);
+  console.log(`🎭 ${upcoming.length} upcoming shows:\n`);
   
   upcoming.forEach(show => {
     console.log(`📅 ${show.date} ${show.time}`);
@@ -98,10 +98,10 @@ def get_theater_schedule():
     response.raise_for_status()
     schedule = response.json()
     
-    # Filter pertunjukan yang akan datang
+    # Filter for upcoming shows
     upcoming = [s for s in schedule if s.get('is_upcoming', False)]
     
-    print(f"🎭 {len(upcoming)} pertunjukan yang akan datang:\n")
+    print(f"🎭 {len(upcoming)} upcoming shows:\n")
     
     for show in upcoming:
         print(f"📅 {show['date']} {show['time']}")
@@ -114,6 +114,6 @@ get_theater_schedule()
 
 ### Tips
 
-- Data jadwal teater diperbarui secara real-time
-- Gunakan field `is_upcoming` untuk memfilter pertunjukan yang akan datang
-- Field `members` berisi daftar nama member yang dijadwalkan tampil
+- Theater schedule data is updated in real-time
+- Use the `is_upcoming` boolean field to filter shows that will happen in the future
+- The `members` field provides an array of names representing the lineup scheduled for the performance

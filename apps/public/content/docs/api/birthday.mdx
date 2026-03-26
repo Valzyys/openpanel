@@ -1,11 +1,11 @@
 ---
-title: Endpoint Ulang Tahun
-description: Dokumentasi endpoint /api/jkt48/birthday untuk mengetahui jadwal ulang tahun para member JKT48.
+title: Birthday Endpoint
+description: Documentation for the /api/jkt48/birthday endpoint to track JKT48 member birthdays.
 ---
 
 ## GET /api/jkt48/birthday
 
-Endpoint ini mengembalikan informasi ulang tahun para member JKT48, termasuk daftar member yang berulang tahun dalam waktu dekat.
+This endpoint provides birthday information for JKT48 members, including a list of members with upcoming birthdays.
 
 ### Request
 
@@ -13,17 +13,17 @@ Endpoint ini mengembalikan informasi ulang tahun para member JKT48, termasuk daf
 GET https://v2.jkt48connect.com/api/jkt48/birthday?apikey=YOUR_API_KEY
 ```
 
-| Parameter | Tipe | Wajib | Deskripsi |
-|-----------|------|-------|-----------|
-| `apikey` | string | ✅ | API key untuk autentikasi |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `apikey` | string | ✅ | API key for authentication |
 
-### Contoh Request
+### Example Request
 
 ```bash
 curl "https://v2.jkt48connect.com/api/jkt48/birthday?apikey=YOUR_API_KEY"
 ```
 
-### Contoh Response
+### Example Response
 
 ```json
 [
@@ -44,17 +44,17 @@ curl "https://v2.jkt48connect.com/api/jkt48/birthday?apikey=YOUR_API_KEY"
 ]
 ```
 
-### Struktur Response
+### Response Structure
 
-| Field | Tipe | Deskripsi |
-|-------|------|-----------|
-| `name` | string | Nama member |
-| `date` | string | Tanggal lahir (YYYY-MM-DD) |
-| `generation` | string | Generasi member |
-| `is_today` | boolean | `true` jika hari ini adalah ulang tahunnya |
-| `days_until` | number | Jumlah hari menuju ulang tahun berikutnya |
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Member's name |
+| `date` | string | Birth date (YYYY-MM-DD) |
+| `generation` | string | Member's generation |
+| `is_today` | boolean | `true` if today is their birthday |
+| `days_until` | number | Number of days until their next birthday |
 
-### Contoh Penggunaan (JavaScript)
+### Usage Example (JavaScript)
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -71,13 +71,13 @@ async function getBirthdays() {
     .sort((a, b) => a.days_until - b.days_until);
     
   if (today.length > 0) {
-    console.log('🎉 Selamat Ulang Tahun Hari Ini:');
+    console.log('🎉 Celebrating Today:');
     today.forEach(m => console.log(`   🎂 ${m.name} (${m.generation})`));
   }
   
-  console.log('\n📅 Ulang Tahun Bulan Ini:');
+  console.log('\n📅 Birthdays This Month:');
   upcoming.forEach(m => {
-    console.log(`   🎁 ${m.name} — ${m.days_until} hari lagi`);
+    console.log(`   🎁 ${m.name} — in ${m.days_until} days`);
   });
 }
 

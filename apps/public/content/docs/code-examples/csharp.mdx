@@ -1,0 +1,96 @@
+---
+title: C# (.NET)
+description: Examples of using the JKT48Connect API with C# and the .NET Framework.
+---
+
+## C# (.NET)
+
+C# provides `HttpClient`, making it extremely easy to consume REST APIs in .NET applications, whether you are building a Console App, Windows Presentation Foundation (WPF), or ASP.NET Core backend.
+
+### Using HttpClient & System.Text.Json
+
+We use the built-in `System.Text.Json` to automatically deserialize the JSON response arrays into C# Object Lists.
+
+**Implementation Example: Fetching Live Streams**
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+namespace JKT48ConnectDemo
+{
+    // 1. Define classes to map JSON properties
+    public class LiveMember
+    {
+        public string name { get; set; }
+        public string type { get; set; }
+        public string started_at { get; set; }
+        public bool is_group { get; set; }
+        public List<StreamingUrl> streaming_url_list { get; set; }
+    }
+
+    public class StreamingUrl
+    {
+        public string label { get; set; }
+        public string url { get; set; }
+    }
+
+    class Program
+    {
+        // Reuse a single HttpClient instance for the application's lifetime
+        private static readonly HttpClient client = new HttpClient();
+        
+        static async Task Main(string[] args)
+        {
+            string apiKey = "YOUR_API_KEY";
+            string url = $"https://v2.jkt48connect.com/api/jkt48/live?apikey={apiKey}";
+
+            try
+            {
+                // Send GET Request
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                
+                // Read Response Body
+                string responseBody = await response.Content.ReadAsStringAsync();
+                
+                // Deserialize JSON securely
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                List<LiveMember> liveMembers = JsonSerializer.Deserialize<List<LiveMember>>(responseBody, options);
+
+                if (liveMembers == null || liveMembers.Count == 0)
+                {
+                    Console.WriteLine("No members are live right now.");
+                    return;
+                }
+
+                Console.WriteLine($"🔴 Found {liveMembers.Count} members broadcasting Live:\n");
+                
+                foreach (var member in liveMembers)
+                {
+                    string streamUrl = member.streaming_url_list?.Count > 0 
+                                      ? member.streaming_url_list[0].url 
+                                      : "No Link";
+                                      
+                    Console.WriteLine($"[{member.type.ToUpper()}] {member.name}");
+                    Console.WriteLine($"Started: {member.started_at}");
+                    Console.WriteLine($"Link: {streamUrl}\n");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine($"\nException Caught!");	
+                Console.WriteLine($"Message: {e.Message}");
+            }
+        }
+    }
+}
+```
+
+### Best Guidelines for .NET
+
+1. **HttpClient Lifetime:** As shown in the code above, instantiate `HttpClient` once and reuse it throughout the application lifetime rather than putting it in a `using` block to avoid socket exhaustion.
+2. **Options Case Insensitivity:** `PropertyNameCaseInsensitive = true` ensures that JSON keys like `started_at` bind smoothly to C# properties despite case styling differences. Usually, decorating properties with `[JsonPropertyName("started_at")]` is the safest way. 

@@ -1,0 +1,129 @@
+---
+title: Go (Golang)
+description: Examples of using the JKT48Connect API with Go.
+---
+
+## Go (Golang)
+
+Go's strong standard library makes processing JSON and making HTTP requests simple and efficient. Here is how you can integrate with the JKT48Connect API using standard Go packages.
+
+### Getting Started
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+)
+
+const (
+	APIKey  = "YOUR_API_KEY" // Or get from os.Getenv("JKT48_API_KEY")
+	BaseURL = "https://v2.jkt48connect.com/api/jkt48"
+)
+
+// Define the struct corresponding to the Member JSON response
+type Member struct {
+	Name       string `json:"name"`
+	Generation string `json:"generation"`
+	Status     string `json:"status"`
+	IsGraduate bool   `json:"is_graduate"`
+}
+
+func getMembers() ([]Member, error) {
+	url := fmt.Sprintf("%s/members?apikey=%s", BaseURL, APIKey)
+	
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("failed to make request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("API returned status code: %d", resp.StatusCode)
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read body: %w", err)
+	}
+
+	var members []Member
+	if err := json.Unmarshal(body, &members); err != nil {
+		return nil, fmt.Errorf("failed to parse JSON: %w", err)
+	}
+
+	return members, nil
+}
+
+func main() {
+	members, err := getMembers()
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Filter and print active members
+	activeCount := 0
+	fmt.Println("Recent Active Members:")
+	for _, m := range members {
+		if !m.IsGraduate {
+			if activeCount < 5 {
+				fmt.Printf("- %s (%s)\n", m.Name, m.Generation)
+			}
+			activeCount++
+		}
+	}
+	fmt.Printf("\nTotal Active Members Found: %d\n", activeCount)
+}
+```
+
+### Checking Live Streams
+
+Checking live streams is also easy. You map the required JSON fields to your Go struct.
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+)
+
+type LiveStream struct {
+	Name      string `json:"name"`
+	Type      string `json:"type"`
+	StartedAt string `json:"started_at"`
+}
+
+func checkLive() {
+	url := "https://v2.jkt48connect.com/api/jkt48/live?apikey=YOUR_API_KEY"
+	
+	resp, err := http.Get(url)
+	if err != nil {
+		fmt.Println("Error fetching data:", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	var streams []LiveStream
+	if err := json.NewDecoder(resp.Body).Decode(&streams); err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return
+	}
+
+	if len(streams) == 0 {
+		fmt.Println("No members are currently live.")
+		return
+	}
+
+	fmt.Printf("🔴 %d members are live right now:\n", len(streams))
+	for _, stream := range streams {
+		fmt.Printf("- %s is live on %s (Started at %s)\n", stream.Name, stream.Type, stream.StartedAt)
+	}
+}
+```

@@ -1,15 +1,15 @@
 ---
 title: JavaScript & Node.js
-description: Contoh penggunaan JKT48Connect API menggunakan JavaScript (Browser, Node.js, React).
+description: Examples of using the JKT48Connect API with JavaScript (Browser, Node.js, React).
 ---
 
 ## JavaScript / Node.js
 
-JavaScript adalah salah satu bahasa paling populer untuk berinteraksi dengan REST API. JKT48Connect API mudah diakses baik dari sisi klien (browser) maupun server (Node.js).
+JavaScript is one of the most popular languages for interacting with REST APIs. The JKT48Connect API is easy to access from both the client-side (browser) and the server-side (Node.js).
 
-### Menggunakan native `fetch` API
+### Using the native `fetch` API
 
-Ini adalah cara paling sederhana dan standar tanpa perlu library tambahan:
+This is the simplest, most standardized way, requiring no external libraries:
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -25,22 +25,22 @@ async function getJKT48Data(endpoint) {
     
     return await response.json();
   } catch (error) {
-    console.error('Terjadi kesalahan:', error.message);
+    console.error('An error occurred:', error.message);
     return null;
   }
 }
 
-// Pemanggilan fungsi
+// Executing the function
 (async () => {
-  // Ambil data member
+  // Fetch member data
   const members = await getJKT48Data('members');
-  console.log(`Ditemukan ${members?.length || 0} member.`);
+  console.log(`Found ${members?.length || 0} members.`);
 })();
 ```
 
-### Menggunakan `axios` (Node.js / React)
+### Using `axios` (Node.js / React)
 
-Jika kamu menggunakan library `axios`, caranya sangat mudah:
+If you use the `axios` library, the process is very straightforward:
 
 ```javascript
 // npm install axios
@@ -55,16 +55,16 @@ axios.get('https://v2.jkt48connect.com/api/jkt48/live', {
 })
 .then(response => {
   const liveMembers = response.data;
-  console.log('Member yang sedang live:', liveMembers.map(m => m.name));
+  console.log('Members currently live:', liveMembers.map(m => m.name));
 })
 .catch(error => {
   console.error('API Error:', error.response?.data?.message || error.message);
 });
 ```
 
-### Contoh di React.js
+### Example in React.js
 
-Berikut adalah contoh komponen React yang menampilkan data jadwal teater:
+Here is a sample React component that displays the theater schedule data:
 
 ```jsx
 import React, { useState, useEffect } from 'react';
@@ -79,7 +79,7 @@ export default function TheaterSchedule() {
     fetch(`https://v2.jkt48connect.com/api/jkt48/theater?apikey=${API_KEY}`)
       .then(res => res.json())
       .then(data => {
-        // Filter hanya yang akan datang
+        // Filter upcoming shows only
         setSchedule(data.filter(s => s.is_upcoming));
         setLoading(false);
       })
@@ -89,20 +89,20 @@ export default function TheaterSchedule() {
       });
   }, []);
 
-  if (loading) return <p>Memuat jadwal teater...</p>;
+  if (loading) return <p>Loading theater schedule...</p>;
 
   return (
     <div className="theater-schedule">
-      <h2>🎭 Jadwal Teater JKT48</h2>
+      <h2>🎭 JKT48 Theater Schedule</h2>
       {schedule.length === 0 ? (
-        <p>Belum ada jadwal yang diumumkan.</p>
+        <p>No schedules announced yet.</p>
       ) : (
         <ul>
           {schedule.map((show, idx) => (
             <li key={idx}>
               <strong>{show.title} ({show.setlist})</strong> - {show.date} {show.time}
               <br/>
-              Membawa: {show.members.join(', ')}
+              Performing: {show.members.join(', ')}
             </li>
           ))}
         </ul>
@@ -112,4 +112,4 @@ export default function TheaterSchedule() {
 }
 ```
 
-> **Catatan Keamanan**: Jika kamu memanggil API dari front-end React, API Key-mu berpotensi terekspos ke pengguna. Pastikan kamu memahami risikonya atau gunakan back-end sebagai perantara.
+> **Security Note**: If you call the API directly from a front-end React application, your API Key could be exposed to users. Ensure you understand the risks or use a back-end as a secure intermediary layer.

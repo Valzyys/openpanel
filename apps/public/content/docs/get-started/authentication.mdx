@@ -1,34 +1,34 @@
 ---
-title: Autentikasi
-description: Pelajari cara menggunakan API key untuk mengakses semua endpoint JKT48Connect REST API.
+title: Authentication
+description: Learn how to use an API key to authenticate and access all endpoints of the JKT48Connect REST API.
 ---
 
-## Autentikasi API
+## API Authentication
 
-Semua endpoint JKT48Connect API memerlukan autentikasi menggunakan API key. API key dikirim sebagai query parameter di setiap request.
+All endpoints of the JKT48Connect API require authentication using an API key. The API key is sent as a query parameter in every request.
 
-### Format Autentikasi
+### Authentication Format
 
-Tambahkan parameter `apikey` di URL request-mu:
+Append the `apikey` parameter to your request URL:
 
 ```
 https://v2.jkt48connect.com/api/jkt48/{endpoint}?apikey=YOUR_API_KEY
 ```
 
-### Contoh Request dengan Autentikasi
+### Examples with Authentication
 
 ```bash
-# Mengambil data member
+# Fetching member data
 curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
 
-# Mengambil data live streaming
+# Fetching live streaming data
 curl "https://v2.jkt48connect.com/api/jkt48/live?apikey=YOUR_API_KEY"
 
-# Mengambil jadwal teater
+# Fetching the theater schedule
 curl "https://v2.jkt48connect.com/api/jkt48/theater?apikey=YOUR_API_KEY"
 ```
 
-### Contoh dengan JavaScript
+### JavaScript Example
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -49,7 +49,7 @@ async function fetchMembers() {
 fetchMembers();
 ```
 
-### Contoh dengan Python
+### Python Example
 
 ```python
 import requests
@@ -67,9 +67,9 @@ def fetch_members():
 fetch_members()
 ```
 
-### Response Jika API Key Tidak Valid
+### Invalid API Key Response
 
-Jika API key yang diberikan tidak valid atau tidak disertakan, API akan mengembalikan error:
+If the provided API key is invalid or missing, the API will return an error:
 
 ```json
 {
@@ -80,33 +80,34 @@ Jika API key yang diberikan tidak valid atau tidak disertakan, API akan mengemba
 
 **HTTP Status Code**: `403 Forbidden`
 
-### Mendapatkan API Key
+### Obtaining an API Key
 
-Untuk mendapatkan API key:
+To get an API key:
 
-1. Kunjungi [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi)
-2. Pilih paket yang sesuai
-3. Selesaikan proses pembayaran
-4. API key akan dikirimkan kepadamu
+1. Visit [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi)
+2. Choose an appropriate package
+3. Complete the payment process
+4. Your API key will be delivered to you
 
-### Tips Keamanan
+### Security Tips
 
-- **Jangan hardcode** API key di kode yang dipublikasi (misalnya di GitHub)
-- Gunakan **environment variable** untuk menyimpan API key
-- **Jangan share** API key-mu ke orang lain
-- Jika API key bocor, segera hubungi support untuk penggantian
+- **Do not hardcode** your API key in public repositories (like GitHub)
+- Use **environment variables** to securely store your API key
+- **Do not share** your API key with anyone
+- If your API key is compromised, contact support immediately for a replacement
 
 ```bash
-# Gunakan environment variable
+# Using environment variables in bash
 export JKT48_API_KEY="your_actual_api_key_here"
 ```
 
 ```javascript
-// Akses dari environment variable
+// Accessing via environment variables in Node.js
 const API_KEY = process.env.JKT48_API_KEY;
 ```
 
 ```python
+# Accessing via environment variables in Python
 import os
 API_KEY = os.environ.get('JKT48_API_KEY')
 ```

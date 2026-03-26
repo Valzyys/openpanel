@@ -1,11 +1,11 @@
 ---
-title: Endpoint Live Streaming
-description: Dokumentasi lengkap endpoint live streaming JKT48Connect API untuk mengambil data member yang sedang live di IDN, Showroom, dan YouTube.
+title: Live Streaming Endpoint
+description: Comprehensive documentation for the JKT48Connect API live streaming endpoints to fetch live member data from IDN, Showroom, and YouTube.
 ---
 
 ## GET /api/jkt48/live
 
-Endpoint ini mengembalikan data semua member JKT48 yang sedang live streaming di semua platform yang didukung (IDN Live, Showroom, YouTube).
+This endpoint returns data for all JKT48 members who are currently broadcasting live streams across all supported platforms (IDN Live, Showroom, YouTube).
 
 ### Request
 
@@ -13,11 +13,11 @@ Endpoint ini mengembalikan data semua member JKT48 yang sedang live streaming di
 GET https://v2.jkt48connect.com/api/jkt48/live?apikey=YOUR_API_KEY
 ```
 
-| Parameter | Tipe | Wajib | Deskripsi |
-|-----------|------|-------|-----------|
-| `apikey` | string | ✅ | API key untuk autentikasi |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `apikey` | string | ✅ | API key for authentication |
 
-### Contoh Response
+### Example Response
 
 ```json
 [
@@ -44,36 +44,36 @@ GET https://v2.jkt48connect.com/api/jkt48/live?apikey=YOUR_API_KEY
 ]
 ```
 
-### Struktur Response
+### Response Structure
 
-| Field | Tipe | Deskripsi |
-|-------|------|-----------|
-| `name` | string | Nama member |
-| `img` | string | URL gambar utama/thumbnail |
-| `img_alt` | string | URL gambar alternatif/avatar |
-| `url_key` | string | Identifier unik untuk URL member |
-| `slug` | string | Slug dari live stream saat ini |
-| `room_id` | number | ID room streaming |
-| `is_graduate` | boolean | Apakah member sudah graduate |
-| `is_group` | boolean | Apakah ini live grup/bersama |
-| `chat_room_id` | string | ID chat room untuk live stream |
-| `started_at` | string | Waktu mulai live (format ISO 8601) |
-| `streaming_url_list` | array | Daftar URL streaming yang tersedia |
-| `type` | string | Platform: `"idn"`, `"showroom"`, atau `"youtube"` |
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Member's name |
+| `img` | string | Primary thumbnail/image URL |
+| `img_alt` | string | Alternative image/avatar URL |
+| `url_key` | string | Unique identifier for the member's URL |
+| `slug` | string | Current live stream slug |
+| `room_id` | number | Streaming room ID |
+| `is_graduate` | boolean | Whether the member has graduated |
+| `is_group` | boolean | Whether this is a group live stream |
+| `chat_room_id` | string | Chat room ID for the stream |
+| `started_at` | string | Stream start time (ISO 8601 format) |
+| `streaming_url_list` | array | List of available streaming URLs |
+| `type` | string | Platform: `"idn"`, `"showroom"`, or `"youtube"` |
 
 ### Streaming URL List Object
 
-| Field | Tipe | Deskripsi |
-|-------|------|-----------|
-| `label` | string | Label kualitas (mis: `"original"`, `"720p"`) |
-| `quality` | number | Level kualitas (1 = tertinggi) |
-| `url` | string | URL stream (biasanya HLS `.m3u8`) |
+| Field | Type | Description |
+|-------|------|-------------|
+| `label` | string | Quality label (e.g., `"original"`, `"720p"`) |
+| `quality` | number | Quality level (1 = highest) |
+| `url` | string | Stream URL (usually an HLS `.m3u8` link) |
 
 ---
 
 ## GET /api/jkt48/live/idn
 
-Endpoint khusus untuk mengambil data live streaming dari **IDN Live** saja.
+A dedicated endpoint to fetch live streaming data exclusively from **IDN Live**.
 
 ### Request
 
@@ -81,21 +81,21 @@ Endpoint khusus untuk mengambil data live streaming dari **IDN Live** saja.
 GET https://v2.jkt48connect.com/api/jkt48/live/idn?apikey=YOUR_API_KEY
 ```
 
-Response format sama dengan `/api/jkt48/live`, tetapi hanya mengembalikan data dari platform IDN.
+The response format is identical to `/api/jkt48/live`, but only returns members currently streaming on the IDN platform.
 
 ---
 
-## Platform yang Didukung
+## Supported Platforms
 
-| Platform | Type Value | Deskripsi |
-|----------|-----------|-----------|
-| IDN Live | `"idn"` | Platform live streaming Indonesia |
-| Showroom | `"showroom"` | Platform live streaming interaktif |
-| YouTube | `"youtube"` | Live stream dan premiere YouTube |
+| Platform | Type Value | Description |
+|----------|------------|-------------|
+| IDN Live | `"idn"` | Indonesian live streaming platform |
+| Showroom | `"showroom"` | Interactive live streaming platform |
+| YouTube | `"youtube"` | YouTube live streams and premieres |
 
-## Contoh Penggunaan
+## Usage Examples
 
-### JavaScript — Tampilkan Member yang Sedang Live
+### JavaScript — Show Members Currently Live
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -112,13 +112,13 @@ async function getLiveMembers() {
     const data = await response.json();
     
     if (data.length === 0) {
-      console.log('Tidak ada member yang sedang live saat ini.');
+      console.log('No members are currently live right now.');
       return;
     }
     
-    console.log(`🔴 ${data.length} member sedang live!\n`);
+    console.log(`🔴 ${data.length} members are live!\n`);
     
-    // Kelompokkan berdasarkan platform
+    // Group by platform
     const platforms = {};
     data.forEach(member => {
       if (!platforms[member.type]) platforms[member.type] = [];
@@ -126,10 +126,10 @@ async function getLiveMembers() {
     });
     
     Object.entries(platforms).forEach(([platform, members]) => {
-      console.log(`📺 ${platform.toUpperCase()} (${members.length} member):`);
+      console.log(`📺 ${platform.toUpperCase()} (${members.length} members):`);
       members.forEach(member => {
         const startedAt = new Date(member.started_at);
-        console.log(`   • ${member.name} — mulai ${startedAt.toLocaleTimeString()}`);
+        console.log(`   • ${member.name} — started at ${startedAt.toLocaleTimeString()}`);
       });
     });
     
@@ -142,7 +142,7 @@ async function getLiveMembers() {
 getLiveMembers();
 ```
 
-### Python — Monitor Live dengan Grouping per Platform
+### Python — Monitor Live Streams Grouped by Platform
 
 ```python
 import requests
@@ -158,12 +158,12 @@ def get_live_members():
         data = response.json()
         
         if not data:
-            print("Tidak ada member yang sedang live saat ini.")
+            print("No members are currently live right now.")
             return
         
-        print(f"🔴 {len(data)} member sedang live!\n")
+        print(f"🔴 {len(data)} members are live!\n")
         
-        # Kelompokkan berdasarkan platform
+        # Group by platform
         platforms = {}
         for member in data:
             platform = member['type']
@@ -172,12 +172,13 @@ def get_live_members():
             platforms[platform].append(member)
         
         for platform, members in platforms.items():
-            print(f"📺 {platform.upper()} ({len(members)} member):")
+            print(f"📺 {platform.upper()} ({len(members)} members):")
             for member in members:
+                # Parse the ISO time properly
                 started = datetime.fromisoformat(
                     member['started_at'].replace('Z', '+00:00')
                 )
-                print(f"   • {member['name']} — mulai {started.strftime('%H:%M:%S')}")
+                print(f"   • {member['name']} — started at {started.strftime('%H:%M:%S')}")
         
         return data
     except requests.exceptions.RequestException as e:
@@ -188,7 +189,7 @@ get_live_members()
 
 ### Tips
 
-- Response berupa **array kosong** `[]` jika tidak ada member yang sedang live
-- Gunakan field `type` untuk memfilter berdasarkan platform
-- Field `streaming_url_list` berisi URL HLS yang bisa diputar di video player
-- `started_at` dalam format ISO 8601 UTC
+- The response will be an **empty array** `[]` if no members are currently live
+- Use the `type` field to filter broadcasts by platform
+- The `streaming_url_list` field provides HLS URLs that can be played in supported video players
+- `started_at` uses the ISO 8601 UTC format

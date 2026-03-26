@@ -1,38 +1,38 @@
 ---
-title: FAQ (Pertanyaan Umum)
-description: Kumpulan pertanyaan (frequently asked questions) yang sering diajukan terkait JKT48Connect REST API.
+title: FAQ (Frequently Asked Questions)
+description: A collection of frequently asked questions regarding the JKT48Connect REST API.
 ---
 
 ## Frequently Asked Questions
 
-Temukan jawaban cepat untuk pertanyaan-pertanyaan yang sering diutarakan oleh komunitas pengguna API JKT48Connect.
+Find quick answers to questions frequently raised by the JKT48Connect API community of users.
 
-### 1. Bagaimana cara mendapatkan API Key?
+### 1. How do I obtain an API Key?
 
-Kamu bisa mendapatkan atau membeli struktur API Key dengan mengikuti tautan di website resmi registrasi pada [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi). Setelah mengisi formulir dan metode penyelesaian registrasi, kunci tersebut dapat digunakan tanpa durasi waktu spesifik per periode yang terbayar.
+You can generate or purchase an API Key structure by following the link to the official registration website at [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi). Upon filling out the form and completing the registration, the key can be utilized without any specific duration limit per paid period interval.
 
-### 2. Apakah hasil array respon bersifat Real Time?
+### 2. Are the array responses strictly Real-Time?
 
-Sebagian respons API seperti Live Streaming (`/api/jkt48/live`) bersifat sedekat mungkin (real time). Kami memiliki bot sistem yang aktif terus melihat perubahan stream baik Showroom, IDN Live atau YouTube dan melakukan perbandingan data API setiap detiknya. Sifat data endpoint statis seperti Members Profiles direfresh setiap beberapa jam jika mendeteksi adanya transisi Gen baru, Pengumuman kelulusan Graduate mendadak, atau perubahan dari situs web operasional utama.
+Some API responses, such as Live Streaming (`/api/jkt48/live`), operate as closely to real-time as possible. We possess bot systems that actively monitor stream changes across Showroom, IDN Live, or YouTube, running data comparisons against the API every second. Static endpoint data architectures, like Member Profiles, are refreshed every few hours, or immediately upon detecting sudden changes such as a new Generation debut, sudden graduation announcements, or operational changes from the main site.
 
-### 3. Bahasa Pemrograman apa yang bisa terintegrasi?
+### 3. Which programming languages can integrate with the API?
 
-Semuanya. Layanan JKT48Connect murni berbentuk REST API via parameter URL, maka seluruh framework yang sanggup merender HTTP GET Call dan Parse Array JSON seperti PHP Server, NodeJS `fetch`/`axios`, Kotlin Android Apps, Flutter Mobile, C#, Ruby, Python, maupun sekadar Bash Linux Curl akan bisa menerapkannya secara utuh dan mulus.
+All of them. The JKT48Connect service serves a pure REST API architecture triggered via URL parameters. Therefore, any operating framework capable of rendering an HTTP GET Call and parsing a JSON Array—such as PHP servers, NodeJS (`fetch`/`axios`), Kotlin Android native Apps, Flutter Mobile, C#, Ruby, Python, or simply a Linux Bash Curl—can seamlessly implement and process it.
 
-### 4. Mengapa muncul "Invalid API Key" di response saya?
+### 4. Why is an "Invalid API Key" error appearing in my response?
 
-Setiap memanggil URL ke REST endpoints, harap masukkan kode kamu dengan penulisan parameter `apikey=` secara spesifik dengan lowercase yang disusul oleh deretan angka rahasianya.
+Whenever making a request to the REST endpoints, please ensure that you literally include your code using the specific `apikey=` parameter typed in lowercase, followed securely by its sequence of secret characters.
 
 ```
 https://v2.jkt48connect.com/api/jkt48/live?apikey=xxxxx-xxxx-xxxx...
 ```
 
-Periksa spasi tambahan dan karakter kutip (" atau ') yang tanpa sengaja ikut terketik. Jika sudah dicek berulang dan tidak berhasil dengan pesan `403` kode kesalahan, besar kemungkinan API Key-mu hangus atau belum diaktifkan oleh admin; silahkan hubungi kontak Telegram admin yang terterra. 
+Double-check for any accidental whitespace and extra quote characters (" or ') that may have been mistyped. If you have repeatedly validated this and still encounter an HTTP `403` error code, it is highly likely that your API Key has expired or has not been activated by the admin; please contact the telegram support available.
 
-### 5. Apakah layanan API open-source ini Gratis?
+### 5. Is this open-source API service Free?
 
-Terdapat tingkatan layanan prioritas server yang dikelola secara eksklusif. JKT48Connect bertujuan menyajikan arsitektur yang kuat dalam volume massa besar, sehingga diberlakukan iuran donasi / berlangganan `buy api` kecil untuk kelangsungan daya tahan server (sewa CPU/RAM /Bandwidth), namun kodenya sebagian besar mengedepankan pendekatan komunitas secara inklusif. Info detailnya mengenai ketersediaan opsi bebas (free) ada di portal utama.
+We govern exclusive, prioritized server tiers. Given that JKT48Connect’s primary aim is to output rigorous architecture capable of sustaining vast user volume, a minor tiered donation/subscription (`buy api`) is instantiated to uphold server endurance and maintenance (CPU/RAM/Bandwidth). However, the foundational codebase largely embraces an inclusive community approach. Detailed information regarding the availability of free tiers is observable on our main portal.
 
-### 6. Endpoint yang saya butuhkan (Misal: TikTok Live terbaru), apakah belum mendukung?
+### 6. The endpoint I need (e.g., the latest TikTok Live data), is it supported yet?
 
-Sayangnya saat ini (pada iterasi versi terbaru) Live Streaming TikTok belum terekam dalam JSON Response Live kami, dan kami hanya melingkupi IDN Live (Bisa filter by keyword `idn`), Showroom (`showroom`), YouTube Live (`youtube`). Apabila terdapat tambahan platform lain dalam operasional resmi manajemen JKT48 kedepan, kami tentu mengusahakan penambahan field dan kapabilitas ekstra tanpa menghancurkan kode integrasimu yang kini berjalan.
+Regrettably, at this point in time (in the latest version iteration), TikTok Live streams are not logged in our streaming JSON Responses. Our coverage sphere is localized entirely to IDN Live (filterable by the keyword `idn`), Showroom (`showroom`), and YouTube Live (`youtube`). If any supplementary platforms are inaugurated into the official operational ecosystem of the JKT48 management moving forward, we will certainly prioritize integrating those extra fields and capabilities comprehensively without breaking your running code integrations.

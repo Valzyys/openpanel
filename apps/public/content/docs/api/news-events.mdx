@@ -1,11 +1,11 @@
 ---
-title: Endpoint News & Events
-description: Dokumentasi endpoint /api/jkt48/news dan /api/jkt48/events untuk mengambil berita dan informasi event JKT48.
+title: News & Events Endpoints
+description: Documentation for the /api/jkt48/news and /api/jkt48/events endpoints to fetch news and event information about JKT48.
 ---
 
 ## GET /api/jkt48/news
 
-Endpoint ini mengembalikan berita dan pengumuman terbaru dari JKT48.
+This endpoint returns the latest news and announcements from JKT48.
 
 ### Request
 
@@ -13,17 +13,17 @@ Endpoint ini mengembalikan berita dan pengumuman terbaru dari JKT48.
 GET https://v2.jkt48connect.com/api/jkt48/news?apikey=YOUR_API_KEY
 ```
 
-| Parameter | Tipe | Wajib | Deskripsi |
-|-----------|------|-------|-----------|
-| `apikey` | string | ✅ | API key untuk autentikasi |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `apikey` | string | ✅ | API key for authentication |
 
-### Contoh Response
+### Example Response
 
 ```json
 [
   {
     "title": "JKT48 11th Anniversary Concert",
-    "content": "JKT48 akan mengadakan konser ulang tahun ke-11...",
+    "content": "JKT48 will hold its 11th anniversary concert...",
     "date": "2025-04-01",
     "image": "https://jkt48.com/images/news/anniversary.jpg",
     "url": "https://jkt48.com/news/detail/id/1234"
@@ -31,17 +31,17 @@ GET https://v2.jkt48connect.com/api/jkt48/news?apikey=YOUR_API_KEY
 ]
 ```
 
-### Struktur Response
+### Response Structure
 
-| Field | Tipe | Deskripsi |
-|-------|------|-----------|
-| `title` | string | Judul berita |
-| `content` | string | Isi/ringkasan berita |
-| `date` | string | Tanggal publikasi |
-| `image` | string | URL gambar berita |
-| `url` | string | Link ke berita lengkap |
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | News headline |
+| `content` | string | News content/summary |
+| `date` | string | Publication date |
+| `image` | string | News image URL |
+| `url` | string | Link to the full article |
 
-### Contoh Penggunaan
+### Usage Examples
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -52,7 +52,7 @@ async function getLatestNews() {
   );
   const news = await response.json();
   
-  console.log('📰 Berita Terbaru JKT48:\n');
+  console.log('📰 Latest JKT48 News:\n');
   
   news.forEach(article => {
     console.log(`📌 ${article.title}`);
@@ -68,7 +68,7 @@ getLatestNews();
 
 ## GET /api/jkt48/events
 
-Endpoint ini mengembalikan daftar event dan off-air show JKT48.
+This endpoint returns a list of JKT48 events and off-air shows.
 
 ### Request
 
@@ -76,11 +76,11 @@ Endpoint ini mengembalikan daftar event dan off-air show JKT48.
 GET https://v2.jkt48connect.com/api/jkt48/events?apikey=YOUR_API_KEY
 ```
 
-| Parameter | Tipe | Wajib | Deskripsi |
-|-----------|------|-------|-----------|
-| `apikey` | string | ✅ | API key untuk autentikasi |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `apikey` | string | ✅ | API key for authentication |
 
-### Contoh Response
+### Example Response
 
 ```json
 [
@@ -88,23 +88,23 @@ GET https://v2.jkt48connect.com/api/jkt48/events?apikey=YOUR_API_KEY
     "title": "JKT48 HS Event",
     "date": "2025-04-15",
     "venue": "Mall Kota Kasablanka",
-    "description": "Handshake event bersama member JKT48",
+    "description": "Handshake event featuring JKT48 members",
     "members": ["Shani", "Fritzy", "Christy"]
   }
 ]
 ```
 
-### Struktur Response
+### Response Structure
 
-| Field | Tipe | Deskripsi |
-|-------|------|-----------|
-| `title` | string | Nama event |
-| `date` | string | Tanggal event |
-| `venue` | string | Lokasi event |
-| `description` | string | Deskripsi event |
-| `members` | array | Daftar member yang berpartisipasi |
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Event name |
+| `date` | string | Event date |
+| `venue` | string | Event location |
+| `description` | string | Event description |
+| `members` | array | List of participating members |
 
-### Contoh Penggunaan
+### Usage Examples
 
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
@@ -115,7 +115,7 @@ async function getEvents() {
   );
   const events = await response.json();
   
-  console.log('🎪 Event JKT48:\n');
+  console.log('🎪 JKT48 Events:\n');
   
   events.forEach(event => {
     console.log(`🎯 ${event.title}`);
@@ -140,7 +140,7 @@ def get_events():
     response.raise_for_status()
     events = response.json()
     
-    print("🎪 Event JKT48:\n")
+    print("🎪 JKT48 Events:\n")
     
     for event in events:
         print(f"🎯 {event['title']}")
@@ -153,6 +153,6 @@ get_events()
 
 ### Tips
 
-- Berita diurutkan dari yang terbaru
-- Event mencakup handshake event, konser, dan off-air show
-- Beberapa event mungkin memiliki field `members` yang berisi daftar member yang berpartisipasi
+- News articles are sorted starting from the newest
+- Events cover handshake events, concerts, and off-air shows
+- Some events may have a `members` field that lists participating members

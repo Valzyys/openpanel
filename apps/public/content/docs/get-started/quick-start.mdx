@@ -1,42 +1,42 @@
 ---
 title: Quick Start
-description: Panduan cepat untuk mulai menggunakan JKT48Connect REST API. Dapatkan API key dan kirim request pertamamu dalam hitungan menit.
+description: A quick guide to start using the JKT48Connect REST API. Get your API key and send your first request in minutes.
 ---
 
-## Mulai Menggunakan JKT48Connect API
+## Start Using JKT48Connect API
 
-JKT48Connect API menyediakan akses ke data JKT48 melalui endpoint REST yang sederhana. Ikuti langkah-langkah berikut untuk memulai.
+The JKT48Connect API provides access to JKT48 data through simple REST endpoints. Follow the steps below to get started.
 
-### Langkah 1: Dapatkan API Key
+### Step 1: Get an API Key
 
-Untuk mengakses semua endpoint JKT48Connect API, kamu memerlukan API key.
+To access all endpoints of the JKT48Connect API, you need an API key.
 
-1. Kunjungi [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi)
-2. Pilih paket yang sesuai kebutuhanmu
-3. Selesaikan proses pembelian
-4. Simpan API key yang diberikan
+1. Visit [jkt48connect.my.id/buyapi](https://www.jkt48connect.my.id/buyapi)
+2. Choose a package that suits your needs
+3. Complete the purchase process
+4. Save the API key provided to you
 
-> **Penting**: Jangan bagikan API key-mu kepada orang lain. API key bersifat rahasia dan terikat pada akunmu.
+> **Important**: Never share your API key with anyone else. API keys are confidential and tied to your account.
 
-### Langkah 2: Tentukan Base URL
+### Step 2: Set the Base URL
 
-Semua request ke JKT48Connect API menggunakan base URL berikut:
+All requests to the JKT48Connect API use the following base URL:
 
 ```
 https://v2.jkt48connect.com
 ```
 
-### Langkah 3: Kirim Request Pertamamu
+### Step 3: Send Your First Request
 
-Tambahkan API key sebagai query parameter `apikey` di setiap request:
+Add your API key as the `apikey` query parameter in every request:
 
 ```bash
 curl "https://v2.jkt48connect.com/api/jkt48/members?apikey=YOUR_API_KEY"
 ```
 
-### Langkah 4: Terima Response
+### Step 4: Receive the Response
 
-Semua response dikirim dalam format JSON yang terstruktur:
+All responses are sent in a structured JSON format:
 
 ```json
 [
@@ -53,20 +53,20 @@ Semua response dikirim dalam format JSON yang terstruktur:
 ]
 ```
 
-## Endpoint yang Tersedia
+## Available Endpoints
 
-| Endpoint | Deskripsi |
-|----------|-----------|
-| `GET /api/jkt48/members` | Data semua member |
-| `GET /api/jkt48/live` | Member yang sedang live streaming |
-| `GET /api/jkt48/live/idn` | Live streaming dari IDN saja |
-| `GET /api/jkt48/theater` | Jadwal pertunjukan teater |
-| `GET /api/jkt48/news` | Berita terbaru |
-| `GET /api/jkt48/events` | Daftar event |
-| `GET /api/jkt48/birthday` | Ulang tahun member |
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/jkt48/members` | All member data |
+| `GET /api/jkt48/live` | Members currently live streaming |
+| `GET /api/jkt48/live/idn` | Live streams exclusively from IDN |
+| `GET /api/jkt48/theater` | Theater performance schedules |
+| `GET /api/jkt48/news` | Latest news |
+| `GET /api/jkt48/events` | List of upcoming events |
+| `GET /api/jkt48/birthday` | Member birthdays |
 
-## Langkah Selanjutnya
+## Next Steps
 
-- [Pelajari autentikasi lebih detail](/docs/get-started/track-events)
-- [Buat request pertama secara lengkap](/docs/get-started/identify-users)
-- [Lihat referensi semua endpoint](/docs/api/authentication)
+- [Learn more about authentication](/docs/get-started/authentication)
+- [Make your first complete request](/docs/get-started/first-request)
+- [View the full API Reference](/docs/api/members)
