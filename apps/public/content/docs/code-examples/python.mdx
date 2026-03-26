@@ -1,0 +1,87 @@
+---
+title: Python
+description: Contoh penggunaan JKT48Connect API menggunakan bahasa Python.
+---
+
+## Python
+
+Python sangat cocok untuk mengolah data dari REST API. Disarankan menggunakan library `requests` untuk melakukan panggilan API dengan mudah.
+
+### Instalasi Library
+
+Pastikan kamu sudah menginstall modul `requests`:
+
+```bash
+pip install requests
+```
+
+### Contoh Sederhana: Get Members
+
+```python
+import requests
+import json
+
+API_KEY = 'YOUR_API_KEY'
+BASE_URL = 'https://v2.jkt48connect.com'
+
+def get_members():
+    url = f"{BASE_URL}/api/jkt48/members"
+    params = {'apikey': API_KEY}
+    
+    try:
+        response = requests.get(url, params=params)
+        
+        # Raise exception jika status != 200
+        response.raise_for_status()
+        
+        data = response.json()
+        print(f"Berhasil mengambil {len(data)} data member.")
+        
+        # Tampilkan 3 nama member pertama
+        for member in data[:3]:
+            print(f"- {member['name']} ({member.get('generation', '')})")
+            
+        return data
+        
+    except requests.exceptions.HTTPError as err:
+        print(f"HTTP Error: {err}")
+    except Exception as err:
+        print(f"Error lain: {err}")
+
+if __name__ == "__main__":
+    get_members()
+```
+
+### Contoh Lanjutan: Bot Telegram Sederhana
+
+Berikut adalah contoh potongan kode untuk mengecek apakah ada member yang sedang live dari bot (memerlukan `python-telegram-bot`):
+
+```python
+import requests
+
+API_KEY = 'YOUR_API_KEY'
+
+def get_live_status():
+    url = f"https://v2.jkt48connect.com/api/jkt48/live?apikey={API_KEY}"
+    try:
+        data = requests.get(url).json()
+        
+        if not data:
+            return "Tidak ada member yang sedang live saat ini."
+            
+        message = "🔴 Member JKT48 yang sedang Live:\n\n"
+        
+        for member in data:
+            platform = member.get('type', 'Unknown').upper()
+            urls = member.get('streaming_url_list', [])
+            link = urls[0]['url'] if urls else ""
+            message += f"📺 [{platform}] {member['name']}\nLink: {link}\n\n"
+            
+        return message
+    except:
+        return "Gagal mengambil data live."
+
+# Pemanggilan fungsi Telegram (contoh pseudo-code)
+# async def live_command(update, context):
+#     await update.message.reply_text(get_live_status())
+```

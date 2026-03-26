@@ -1,0 +1,56 @@
+---
+title: Troubleshooting
+description: Panduan memecahkan masalah umum (troubleshooting) ketika mengintegrasikan API JKT48Connect.
+---
+
+## Panduan Memecahkan Masalah (Troubleshooting)
+
+Apabila kamu menghadapi hambatan saat mengaplikasikan JKT48Connect API ke kodemu, berikut sejumlah kendala paling lumrah berserta solusi praktis untuk menyelesaikannya.
+
+### 1. Pesan Eror "CORS Missing Allow Origin" di Browser (Frontend)
+
+Jika kodemu ditulis langsung menggunakan JavaScript di dalam Framework Frontend murni (contoh: Vue.js, React SPA) tanpa layer pelindung Server:
+
+**Permasalahan:**
+API `v2.jkt48connect.com` akan menolak permintaan Cross-Origin secara murni dari peramban client side atas alasan keamanan dan menghindari peretasan API Key. Oleh karena itu akan muncul kesalahan `CORS Policy`.
+
+**Penyelesaian:**
+Kamu diharuskan menggunakan layer server atau backend mu sendiri sebagai *Proxy*. 
+Kirimlah *Request* (Fetch / Axios) dari UI/UX react-mu ke rute Next.JS/ Express.JS/ Laravel-mu, lalu backend kamulah yang bertugas menghubungi API JKT48Connect ini lalu mengembalikan responsnya berserta Header CORS yang sesuai ke end-user di sisi peramban.
+
+### 2. Error 403 Forbidden / Invalid API Key
+
+**Permasalahan:** 
+Pesan yang tampil adalah `"status": false` disertai keterangan `"message": "Invalid API Key"`.
+
+**Penyelesaian:**
+1. Pastikan URL endpoint ditambahkan secara harafiah parameter `?apikey=` yang hurufnya kecil (Huruf non-kapital). 
+2. Hindari kesalahan pengejaan nama variable: misal salah memanggil URL dengan `?api_key=` atau `?key=` atau `&apikey=` pada rute URL pertama.
+3. Apakah kamu sudah memperpanjang akses lisensi donatur mu? Hubungi Admin jika Key mu tiba-tiba dinonaktifkan meski dirasa tak ada kejanggalan.
+
+### 3. Error 429 Too Many Requests
+
+**Permasalahan:**
+Rate Limit berlebih. Kamu melakukan *hit query* berulang ratusan/ribuan kali tanpa delay dan di flag oleh Cloudflare atau Load Balancer JKT48Connect.
+
+**Penyelesaian:**
+1. Pasang sistem Caching Database (Memcached/Redis) berdurasi minimal 5 Menit atau 1 Jam untuk endpoint `members`. Panggil API sekadar sebagai mekanisme "Refresh" saat databasemu menganggap masa berlakunya kadaluwarsa.
+2. Atur waktu tunda (*Sleep*) pada Bot / Script Python yang melakukan perulangan CronJob untuk endpoint live `jkt48/live`. Sangat kami sarankan setidaknya jeda 30-detik hingga 60-detik (1-menit) sekali sebelum menarik status "Is member Live?". Hindari cronjob per 1 detik sekali.
+
+### 4. Respons Berhenti Separon / Tidak Komplit
+
+**Permasalahan:** 
+Format Array / String JSON yang ditarik tampak cacat atau terpotong tanpa penutup `]`.
+
+**Penyelesaian:** 
+Ini umumnya ditimbulkan memori aplikasi *Client*-mu yang tidak dikonfigurasikan untuk menerima JSON bervolume menengah hingga di atas `64kb`, atau timeout script. 
+Pada layanan hosting murahan, waktu eksekusi file `PHP` mungkin terkunci ke batas rendah. Perpanjang `set_time_limit(300);` pada PHP, atau atur Header `Accept-Encoding: gzip` agar mereduksi ukuran ukuran unduhan Payload mu dari Cloudflare.
+
+---
+
+### Perlu Dukungan Teknis Lanjutan?
+
+Temukan kami secara online untuk mendapatkan respons pertanyaan dari teknisi dan admin pengelola secara langsung:
+
+- 💬 [WhatsApp Admin JKT48Connect](https://wa.me/6285701479245)
+- 🐛 [Laporkan Bug di GitHub](https://github.com/JKT48Connect)

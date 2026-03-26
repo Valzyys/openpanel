@@ -1,0 +1,137 @@
+---
+title: PHP
+description: Contoh integrasi dan penggunaan JKT48Connect API menggunakan bahasa PHP dasar maupun dengan CURL.
+---
+
+## PHP
+
+PHP adalah salah satu bahasa server-side tertua yang masih banyak digunakan. Berinteraksi dengan JKT48Connect API bisa dilakukan minimalis melalui fungsi standar atau `cURL` untuk opsi yang lebih advanced.
+
+### Menggunakan `file_get_contents` (Cara Mudah)
+
+Cara termudah dan tercepat di PHP adalah menggunakan `file_get_contents()`. Pastikan fitur `allow_url_fopen` diaktifkan di konfigurasi `php.ini`.
+
+```php
+<?php
+
+$apiKey = 'YOUR_API_KEY';
+$endpoint = 'members';
+$url = "https://v2.jkt48connect.com/api/jkt48/{$endpoint}?apikey={$apiKey}";
+
+// Ambil data
+$jsonResponse = file_get_contents($url);
+
+if ($jsonResponse === false) {
+    die('Gagal mengambil data dari API.');
+}
+
+// Ubah JSON string menjadi associative string array
+$data = json_decode($jsonResponse, true);
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    die('Gagal parsing JSON: ' . json_last_error_msg());
+}
+
+$total = count($data);
+echo "Berhasil mengambil {$total} member.\n";
+
+// Menampilkan nama
+foreach ($data as $member) {
+    echo "- " . $member['name'] . "\n";
+}
+```
+
+### Menggunakan `cURL` (Cara Direkomendasikan)
+
+Jika kamu membuat aplikasi serius, sangat disarankan menggunakan ekstensi cURL yang lebih tangguh menangani request dan respon HTTP:
+
+```php
+<?php
+
+function getJKT48Data($endpoint) {
+    $apiKey = 'YOUR_API_KEY';
+    $baseUrl = 'https://v2.jkt48connect.com';
+    $url = "{$baseUrl}/api/jkt48/{$endpoint}?apikey={$apiKey}";
+
+    $ch = curl_init();
+    
+    // Set opsi CURL
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    
+    // Eksekusi CURL
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $errorInfo = curl_error($ch);
+    
+    // Tutup koneksi
+    curl_close($ch);
+    
+    if ($response === false) {
+        throw new Exception("CURL Error: " . $errorInfo);
+    }
+    
+    if ($httpCode !== 200) {
+        throw new Exception("HTTP Error Code: " . $httpCode);
+    }
+    
+    return json_decode($response, true);
+}
+
+// Pemakaian
+try {
+    $events = getJKT48Data('events');
+    echo implode(", ", array_column($events, 'title'));
+} catch (Exception $e) {
+    echo "Gagal: " . $e->getMessage();
+}
+
+```
+
+### Contoh Sederhana: Menampilkan Profil Member di HTML
+
+Berikut adalah implementasi praktis untuk merender detail jadwal teater secara langsung dari backend PHP ke halaman HTML.
+
+```php
+<?php
+// (Pastikan method getJKT48Data sudah didefinisikan seperti di atas)
+
+$jadwal = [];
+$error = '';
+
+try {
+    $jadwal = getJKT48Data('theater');
+} catch (Exception $e) {
+    $error = $e->getMessage();
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jadwal Teater JKT48</title>
+</head>
+<body>
+    <h1>Jadwal Teater Terdekat</h1>
+    
+    <?php if ($error): ?>
+        <p style="color:red;"><?php echo htmlspecialchars($error); ?></p>
+    <?php elseif (empty($jadwal)): ?>
+        <p>Tidak ada jadwal teater saat ini.</p>
+    <?php else: ?>
+        <ul>
+            <?php foreach ($jadwal as $show): ?>
+                <?php if (!empty($show['is_upcoming'])): ?>
+                    <li>
+                        <strong><?php echo htmlspecialchars($show['title']); ?></strong><br>
+                        Setlist: <?php echo htmlspecialchars($show['setlist']); ?><br>
+                        Tanggal: <?php echo htmlspecialchars($show['date']); ?><br>
+                        Member: <?php echo htmlspecialchars(implode(', ', $show['members'] ?? [])); ?>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</body>
+</html>
+```

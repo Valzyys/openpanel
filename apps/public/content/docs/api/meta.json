@@ -1,10 +1,10 @@
 {
   "pages": [
-    "authentication",
-    "track",
-    "insights",
-    "export",
-    "...manage"
+    "members",
+    "live",
+    "theater",
+    "news-events",
+    "birthday"
   ],
   "title": "API Reference"
 }

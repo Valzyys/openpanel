@@ -1,0 +1,115 @@
+---
+title: JavaScript & Node.js
+description: Contoh penggunaan JKT48Connect API menggunakan JavaScript (Browser, Node.js, React).
+---
+
+## JavaScript / Node.js
+
+JavaScript adalah salah satu bahasa paling populer untuk berinteraksi dengan REST API. JKT48Connect API mudah diakses baik dari sisi klien (browser) maupun server (Node.js).
+
+### Menggunakan native `fetch` API
+
+Ini adalah cara paling sederhana dan standar tanpa perlu library tambahan:
+
+```javascript
+const API_KEY = 'YOUR_API_KEY';
+const BASE_URL = 'https://v2.jkt48connect.com';
+
+async function getJKT48Data(endpoint) {
+  try {
+    const response = await fetch(`${BASE_URL}/api/jkt48/${endpoint}?apikey=${API_KEY}`);
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Terjadi kesalahan:', error.message);
+    return null;
+  }
+}
+
+// Pemanggilan fungsi
+(async () => {
+  // Ambil data member
+  const members = await getJKT48Data('members');
+  console.log(`Ditemukan ${members?.length || 0} member.`);
+})();
+```
+
+### Menggunakan `axios` (Node.js / React)
+
+Jika kamu menggunakan library `axios`, caranya sangat mudah:
+
+```javascript
+// npm install axios
+const axios = require('axios');
+
+const API_KEY = 'YOUR_API_KEY';
+
+axios.get('https://v2.jkt48connect.com/api/jkt48/live', {
+  params: {
+    apikey: API_KEY
+  }
+})
+.then(response => {
+  const liveMembers = response.data;
+  console.log('Member yang sedang live:', liveMembers.map(m => m.name));
+})
+.catch(error => {
+  console.error('API Error:', error.response?.data?.message || error.message);
+});
+```
+
+### Contoh di React.js
+
+Berikut adalah contoh komponen React yang menampilkan data jadwal teater:
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const API_KEY = process.env.REACT_APP_JKT48_API_KEY;
+
+export default function TheaterSchedule() {
+  const [schedule, setSchedule] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`https://v2.jkt48connect.com/api/jkt48/theater?apikey=${API_KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        // Filter hanya yang akan datang
+        setSchedule(data.filter(s => s.is_upcoming));
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>Memuat jadwal teater...</p>;
+
+  return (
+    <div className="theater-schedule">
+      <h2>🎭 Jadwal Teater JKT48</h2>
+      {schedule.length === 0 ? (
+        <p>Belum ada jadwal yang diumumkan.</p>
+      ) : (
+        <ul>
+          {schedule.map((show, idx) => (
+            <li key={idx}>
+              <strong>{show.title} ({show.setlist})</strong> - {show.date} {show.time}
+              <br/>
+              Membawa: {show.members.join(', ')}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
+
+> **Catatan Keamanan**: Jika kamu memanggil API dari front-end React, API Key-mu berpotensi terekspos ke pengguna. Pastikan kamu memahami risikonya atau gunakan back-end sebagai perantara.

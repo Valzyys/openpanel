@@ -1,0 +1,85 @@
+---
+title: Endpoint Ulang Tahun
+description: Dokumentasi endpoint /api/jkt48/birthday untuk mengetahui jadwal ulang tahun para member JKT48.
+---
+
+## GET /api/jkt48/birthday
+
+Endpoint ini mengembalikan informasi ulang tahun para member JKT48, termasuk daftar member yang berulang tahun dalam waktu dekat.
+
+### Request
+
+```
+GET https://v2.jkt48connect.com/api/jkt48/birthday?apikey=YOUR_API_KEY
+```
+
+| Parameter | Tipe | Wajib | Deskripsi |
+|-----------|------|-------|-----------|
+| `apikey` | string | ✅ | API key untuk autentikasi |
+
+### Contoh Request
+
+```bash
+curl "https://v2.jkt48connect.com/api/jkt48/birthday?apikey=YOUR_API_KEY"
+```
+
+### Contoh Response
+
+```json
+[
+  {
+    "name": "Zee",
+    "date": "2004-05-16",
+    "generation": "JKT48 Gen 7",
+    "is_today": false,
+    "days_until": 40
+  },
+  {
+    "name": "Muthe",
+    "date": "2004-07-12",
+    "generation": "JKT48 Gen 7",
+    "is_today": false,
+    "days_until": 97
+  }
+]
+```
+
+### Struktur Response
+
+| Field | Tipe | Deskripsi |
+|-------|------|-----------|
+| `name` | string | Nama member |
+| `date` | string | Tanggal lahir (YYYY-MM-DD) |
+| `generation` | string | Generasi member |
+| `is_today` | boolean | `true` jika hari ini adalah ulang tahunnya |
+| `days_until` | number | Jumlah hari menuju ulang tahun berikutnya |
+
+### Contoh Penggunaan (JavaScript)
+
+```javascript
+const API_KEY = 'YOUR_API_KEY';
+
+async function getBirthdays() {
+  const response = await fetch(
+    `https://v2.jkt48connect.com/api/jkt48/birthday?apikey=${API_KEY}`
+  );
+  const birthdays = await response.json();
+  
+  const today = birthdays.filter(m => m.is_today);
+  const upcoming = birthdays
+    .filter(m => m.days_until > 0 && m.days_until <= 30)
+    .sort((a, b) => a.days_until - b.days_until);
+    
+  if (today.length > 0) {
+    console.log('🎉 Selamat Ulang Tahun Hari Ini:');
+    today.forEach(m => console.log(`   🎂 ${m.name} (${m.generation})`));
+  }
+  
+  console.log('\n📅 Ulang Tahun Bulan Ini:');
+  upcoming.forEach(m => {
+    console.log(`   🎁 ${m.name} — ${m.days_until} hari lagi`);
+  });
+}
+
+getBirthdays();
+```
