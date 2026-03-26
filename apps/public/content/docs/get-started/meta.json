@@ -1,8 +1,8 @@
 {
   "pages": [
-    "install-openpanel",
-    "track-events",
-    "identify-users"
+    "quick-start",
+    "authentication",
+    "first-request"
   ],
   "title": "Memulai"
 }
