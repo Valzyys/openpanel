@@ -36,7 +36,7 @@ const images = [
   {
     name: 'Maxineiu',
     url: '#',
-    logo: 'https://files.catbox.moe/p0c7zv.png',
+    logo: 'https://files.catbox.moe/xrxnfj.png',
   },
 ];
 
