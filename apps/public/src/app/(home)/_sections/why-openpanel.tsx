@@ -34,9 +34,9 @@ const images = [
     logo: 'https://files.catbox.moe/usad8o.png',
   },
   {
-    name: 'comingsoon',
+    name: 'Maxineiu',
     url: '#',
-    logo: 'https://files.catbox.moe/rguv3l.png',
+    logo: 'https://files.catbox.moe/p0c7zv.png',
   },
 ];
 
